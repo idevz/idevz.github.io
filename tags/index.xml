@@ -22,7 +22,7 @@
     </item>
     
     <item>
-      <title>servicemesh</title>
+      <title>ServiceMesh</title>
       <link>https://idevz.github.io/tags/servicemesh/</link>
       <pubDate>Tue, 13 Nov 2018 22:11:56 +0800</pubDate>
       
@@ -54,6 +54,15 @@
       <pubDate>Tue, 27 Mar 2018 15:08:51 +0800</pubDate>
       
       <guid>https://idevz.github.io/tags/top/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>https://idevz.github.io/tags/k8s/</link>
+      <pubDate>Wed, 13 Dec 2017 12:13:21 +0800</pubDate>
+      
+      <guid>https://idevz.github.io/tags/k8s/</guid>
       <description></description>
     </item>
     
@@ -180,24 +189,6 @@
       <pubDate>Fri, 17 Nov 2017 17:05:23 +0800</pubDate>
       
       <guid>https://idevz.github.io/tags/vscode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Proxifier</title>
-      <link>https://idevz.github.io/tags/proxifier/</link>
-      <pubDate>Sun, 12 Nov 2017 08:16:54 +0800</pubDate>
-      
-      <guid>https://idevz.github.io/tags/proxifier/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>shadowsocksr</title>
-      <link>https://idevz.github.io/tags/shadowsocksr/</link>
-      <pubDate>Sun, 12 Nov 2017 08:16:54 +0800</pubDate>
-      
-      <guid>https://idevz.github.io/tags/shadowsocksr/</guid>
       <description></description>
     </item>
     

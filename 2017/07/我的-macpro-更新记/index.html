@@ -13,7 +13,7 @@ on alfred_script(q) if application &#34;iTerm2&#34; is running or application &#
 on alfred_script(q) if application &#34;iTerm2&#34; is running or application &#34;iTerm&#34; is running then run script &#34; on run {q} tell application \&#34;:Applications:iTerm.app\&#34; activate try select first window set onlywindow to false on error create window with default profile select first window set onlywindow to true end try tell the first window if onlywindow is false then create tab with default profile end if tell current session to write text q end tell end tell end run &#34; with parameters {q} else run script &#34; on run {q} tell application \&#34;:Applications:iTerm.'>
 <meta property='og:url' content='https://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
-<meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='装机'><meta property='article:published_time' content='2017-07-30T15:43:50&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T10:39:29&#43;08:00'/><meta name='twitter:card' content='summary'>
+<meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='装机'><meta property='article:published_time' content='2017-07-30T15:43:50&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T13:41:04&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
@@ -176,15 +176,12 @@ end alfred_script</code></pre></div>
 
 <p><strong>Mac 安装 shadowsocks</strong>：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo pip install shadowsocks
-
 <span style="color:#75715e"># 验证安装:</span>
 $ which sslocal
 /usr/local/bin/sslocal</code></pre></div>
 <p><strong>shadowsocks 配置</strong>:：</p>
 
-<p>编辑 shadowsocks 配置文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo vim /etc/shadowsocks.json</code></pre></div>
-<p>输入以下内容:</p>
+<p>编辑 shadowsocks 配置文件 <code>sudo vim /etc/shadowsocks.json</code>，并输入以下内容:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
 <span style="color:#f92672">&#34;server&#34;</span>:<span style="color:#e6db74">&#34;服务端地址&#34;</span>,
 <span style="color:#f92672">&#34;server_port&#34;</span>:<span style="color:#960050;background-color:#1e0010">端口号</span>,
@@ -193,9 +190,7 @@ $ which sslocal
 <span style="color:#f92672">&#34;timeout&#34;</span>:<span style="color:#ae81ff">600</span>,
 <span style="color:#f92672">&#34;method&#34;</span>:<span style="color:#e6db74">&#34;aes-256-cfb&#34;</span>
 }</code></pre></div>
-<p>编辑 Mac 服务管理脚本:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-base" data-lang="base">$ sudo vim /Library/LaunchDaemons/com.shadowsocks.plist</code></pre></div>
-<p>输入以下内容:</p>
+<p>编辑 Mac 服务管理脚本 <code>$ sudo vim /Library/LaunchDaemons/com.shadowsocks.plist</code>，输入以下内容:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
 <span style="color:#75715e">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
 <span style="color:#f92672">&lt;plist</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span><span style="color:#f92672">&gt;</span>
@@ -219,16 +214,12 @@ $ which sslocal
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># shadowsocks 开机自启</span>
 <span style="color:#75715e"># 自动启动：</span>
 $ sudo launchctl load /Library/LaunchDaemons/com.shadowsocks.plist
-
 <span style="color:#75715e"># 取消自动启动：</span>
 $ sudo launchctl unload /Library/LaunchDaemons/com.shadowsocks.plist
-
 <span style="color:#75715e"># 立即启动：</span>
 $ sudo launchctl start com.shadowsocks.plist
-
 <span style="color:#75715e"># 立即停止：</span>
 $ sudo launchctl stop com.shadowsocks.plist
-
 <span style="color:#75715e"># 查看：</span>
 $ sudo launchctl list</code></pre></div>
 <p><strong>Mac 安装 privoxy</strong>:</p>
@@ -237,7 +228,9 @@ $ sudo launchctl list</code></pre></div>
 Or, <span style="color:#66d9ef">if</span> you don<span style="color:#960050;background-color:#1e0010">&#39;</span>t want/need a background service you can just run:
   privoxy /usr/local/etc/privoxy/config</code></pre></div>
 <p>privoxy 相关管理命令：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew services start privoxy
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 启动</span>
+$ brew services start privoxy
+<span style="color:#75715e"># 重启</span>
 $ brew services restart privoxy</code></pre></div>
 <p><strong>Mac Chrome 安装 Proxy SwitchyOmega</strong>：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 在连接 shadowsocks 打开的情况下 Chrome</span>

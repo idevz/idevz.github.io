@@ -24,6 +24,17 @@ What is Service Mesh and Where Did it Come From? Over the past few months, you m
     </item>
     
     <item>
+      <title>本地 k8s 集群搭建</title>
+      <link>https://idevz.github.io/2017/12/%E6%9C%AC%E5%9C%B0-k8s-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Wed, 13 Dec 2017 12:13:21 +0800</pubDate>
+      
+      <guid>https://idevz.github.io/2017/12/%E6%9C%AC%E5%9C%B0-k8s-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</guid>
+      <description>如果只是希望学习 Kubernetes 的使用，比如基于 Kubernetes 运行一些测试，那最简单的方式就是使用 minikube， 只需要保证有一个可用的 HTTP_PROXY 可用保证其依赖的容器运行时（比如 Docker）可以正常下载 Google 相应的镜像文件，一条命令即可拥有一个单机版 Kubernetes 环境。
+minikube start \  --docker-env HTTP_PROXY=${http_proxy} \  --docker-env HTTPS_PROXY=${https_proxy} \  --docker-env NO_PROXY=192.168.99.0/24 在有代理的情况下，先把需要的镜像下载完成，然后在去除环境变量中的代理，来部署 k8s 服务。
+但是，如果想更进一步的深入了解 Kubernetes 的更多细节，则需要手动部署，甚至是从源码编译来部署 Kubernetes，我应邀在极客时间做了一个小视频， 并配套了一个部署项目 k8s-start，来说明这个问题，感兴趣的同学可以先看看这个项目，后续有空我会把相关的文字稿整理到这里。</description>
+    </item>
+    
+    <item>
       <title>微服务的服务网格</title>
       <link>https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</link>
       <pubDate>Mon, 18 Sep 2017 22:11:56 +0800</pubDate>

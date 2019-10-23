@@ -33,17 +33,6 @@ gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运�
     </item>
     
     <item>
-      <title>shadowsocksr proxifier</title>
-      <link>https://idevz.github.io/2017/11/shadowsocksr-proxifier/</link>
-      <pubDate>Sun, 12 Nov 2017 08:16:54 +0800</pubDate>
-      
-      <guid>https://idevz.github.io/2017/11/shadowsocksr-proxifier/</guid>
-      <description>如何安装 shadowsocksr wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh chmod +x shadowsocksR.sh ./shadowsocksR.sh 2&amp;gt;&amp;amp;1 | tee shadowsocksR.log 安装iptabl systemctl stop firewalld.service systemctl disable firewalld.service systemctl start iptables.service /sbin/iptables -I INPUT -p tcp --dport 8000 -j ACCEPT 执行以上安装命令，即可 安装 shadowsocksr，然后配置相关的 代理服务器，即可实现翻墙。
-如何使用 proxifier 来指定某些 APP 通过 ssocks 翻墙 浏览器比如 Chrome 可以通过安装 MyShadowSocks 这样的浏览器插件来实现科学上网，其他 APP 呢？或者全局上网代理控制呢？ 这就需要使用 proxifier 来进行设置.
-点击 Proxies 给 Proxifier 添加 代理服务器， 点击 Roules 给 Proxifier 添加请求规则 设置 Proxifier 的 DNS 为 “Resolve hostnames through proxy” 直接使用代理服务器的 DNS 解析，否则仍然不可用。 这样就可以实现科学上网了。</description>
-    </item>
-    
-    <item>
       <title>gdb</title>
       <link>https://idevz.github.io/2017/08/gdb/</link>
       <pubDate>Sun, 06 Aug 2017 11:49:27 +0800</pubDate>
