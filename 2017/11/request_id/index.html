@@ -11,19 +11,18 @@
 <meta property='og:description' content='缘起：请求调用中，有个 bigint 的 Request_id 需要传递，在 Lua 中也需要使用。 这个 Request_id 在 Java、C 或者 Golang 类似的强类型语言中是 int64 的一个无符号整数，在其他语言比如 PHP 或者 Lua 中，作为字符串使用。 需要解决的问题： 当一个请求到 Lua 后，CoSocket 接收到的是一个字节数组。 1.接收到请求后，需要把这个字节数组转化为 字符串。 2.响应请求的时候，需要把这个字符串转化为字节数组，返回去。 以上两步操作都是大端序。
 因为 Lua 只有 Number 类型，而 Number 是双精度浮点型，能处理的最大 Int 小于 int64 的最大值 2^64 -1，所以需要把这部分操作用 C 语言实现，保证在 Lua 中处理的都是字符串。
 实现以下 2 个功能： 1.Lua cosokect receive 一个 8 个字节的字节数组，将此数组传递给 C 函数，C 函数将这个字节数组转换为 int64 的整型，再转换成对应的字符串返回。 2.接收一个 Request_id 的字符串，将这个字符串转换成 int64 的整数，再转换成一个 8 个字节的字符串返回给 Lua，Lua 将这个 id TCP 返回给调用方。'>
-<meta property='og:url' content='http://idevz.github.io/2017/11/request_id/'>
+<meta property='og:url' content='https://idevz.github.io/2017/11/request_id/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='字节数组'><meta property='article:published_time' content='2017-11-21T13:16:39&#43;08:00'/><meta property='article:modified_time' content='2017-12-03T23:24:49&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
-  <meta name="referrer" content="no-referrer" />
   <title>request_id • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.github.io/2017/11/request_id/'>
+  <link rel='canonical' href='https://idevz.github.io/2017/11/request_id/'>
   
   
-  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='https://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='https://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -46,15 +45,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.github.io/'>idevz.org</a>
+        <a href='https://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.github.io/tech/'>技术</a>
+        <a href='https://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.github.io/tools/'>工具</a>
+        <a href='https://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.github.io/life/'>Life</a>
+        <a href='https://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.github.io/page/about/'>关于</a>
+        <a href='https://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -235,14 +234,14 @@ memmove(s,intMoney,sizeof(int));
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.github.io/categories/c-%E8%BD%AC%E6%8D%A2/'>C 转换</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.github.io/categories/c-%E8%BD%AC%E6%8D%A2/'>C 转换</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.github.io/tags/%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84/'>字节数组</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.github.io/tags/%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84/'>字节数组</a></div>
 
   </div>
 </footer>
@@ -252,7 +251,7 @@ memmove(s,intMoney,sizeof(int));
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.github.io/2017/10/start-motan/'>
+      <a href='https://idevz.github.io/2017/10/start-motan/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -262,7 +261,7 @@ memmove(s,intMoney,sizeof(int));
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>start motan</a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.github.io/2017/11/ffi-debug/'>
+      <a href='https://idevz.github.io/2017/11/ffi-debug/'>
         <span class='screen-reader-text'>Next post: </span>ffi debug<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -288,9 +287,9 @@ memmove(s,intMoney,sizeof(int));
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
+  </div><script>window.__assets_js_src="https://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
+<script src='https://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

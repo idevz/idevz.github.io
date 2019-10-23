@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>测试 on 做一个善于思考的学习者</title>
-    <link>http://idevz.github.io/tags/%E6%B5%8B%E8%AF%95/</link>
+    <link>https://idevz.github.io/tags/%E6%B5%8B%E8%AF%95/</link>
     <description>Recent content in 测试 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Mon, 19 Jun 2017 18:04:30 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.github.io/tags/%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.github.io/tags/%E6%B5%8B%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>golang testing</title>
-      <link>http://idevz.github.io/2017/06/golang-testing/</link>
+      <link>https://idevz.github.io/2017/06/golang-testing/</link>
       <pubDate>Mon, 19 Jun 2017 18:04:30 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/06/golang-testing/</guid>
+      <guid>https://idevz.github.io/2017/06/golang-testing/</guid>
       <description></description>
     </item>
     

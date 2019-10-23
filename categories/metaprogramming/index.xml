@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>metaprogramming on 做一个善于思考的学习者</title>
-    <link>http://idevz.github.io/categories/metaprogramming/</link>
+    <link>https://idevz.github.io/categories/metaprogramming/</link>
     <description>Recent content in metaprogramming on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Mon, 04 Dec 2017 19:27:27 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.github.io/categories/metaprogramming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.github.io/categories/metaprogramming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>元编程</title>
-      <link>http://idevz.github.io/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</link>
+      <link>https://idevz.github.io/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Mon, 04 Dec 2017 19:27:27 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</guid>
+      <guid>https://idevz.github.io/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</guid>
       <description>https://en.wikipedia.org/wiki/Metaprogramming</description>
     </item>
     

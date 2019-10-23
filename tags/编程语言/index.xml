@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>编程语言 on 做一个善于思考的学习者</title>
-    <link>http://idevz.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
+    <link>https://idevz.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</link>
     <description>Recent content in 编程语言 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Mon, 19 Jun 2017 18:04:30 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>golang testing</title>
-      <link>http://idevz.github.io/2017/06/golang-testing/</link>
+      <link>https://idevz.github.io/2017/06/golang-testing/</link>
       <pubDate>Mon, 19 Jun 2017 18:04:30 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/06/golang-testing/</guid>
+      <guid>https://idevz.github.io/2017/06/golang-testing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>golang pprof</title>
-      <link>http://idevz.github.io/2017/06/golang-pprof/</link>
+      <link>https://idevz.github.io/2017/06/golang-pprof/</link>
       <pubDate>Mon, 19 Jun 2017 18:02:34 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/06/golang-pprof/</guid>
+      <guid>https://idevz.github.io/2017/06/golang-pprof/</guid>
       <description>Golang 性能分析工具 http://studygolang.com/articles/9340
 Pprof pprof 起初是谷歌性能工具 gperftools 中的一个组件。Golang 中实现了 runtime/pprof，net/http/pprof 两个包来实现相关的支持，而 net/http/pprof 包则是对 runtime/pprof 的封装，暴露一个 http 服务来方便的进行性能分析。
 Golang pprof 用法 Golang HTTP Web 服务 基于 net/http 包开发的 Web 服务，只需在入口导入包 import _ &amp;quot;net/http/pprof&amp;quot; 即可通过访问 http://host:port/debug/pprof/ 查看当前服务的各种 profiling 数据。

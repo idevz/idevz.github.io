@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Motan-OpenResty on 做一个善于思考的学习者</title>
-    <link>http://idevz.github.io/categories/motan-openresty/</link>
+    <link>https://idevz.github.io/categories/motan-openresty/</link>
     <description>Recent content in Motan-OpenResty on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Thu, 30 Nov 2017 16:31:20 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.github.io/categories/motan-openresty/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.github.io/categories/motan-openresty/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>定制化属于你的Motan-OpenResty</title>
-      <link>http://idevz.github.io/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</link>
+      <link>https://idevz.github.io/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</link>
       <pubDate>Thu, 30 Nov 2017 16:31:20 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</guid>
+      <guid>https://idevz.github.io/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</guid>
       <description></description>
     </item>
     

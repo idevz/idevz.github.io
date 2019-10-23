@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>工具 on 做一个善于思考的学习者</title>
-    <link>http://idevz.github.io/categories/%E5%B7%A5%E5%85%B7/</link>
+    <link>https://idevz.github.io/categories/%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 工具 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Tue, 27 Mar 2018 15:08:51 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.github.io/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.github.io/categories/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>我们应该知道的 Top</title>
-      <link>http://idevz.github.io/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</link>
+      <link>https://idevz.github.io/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</link>
       <pubDate>Tue, 27 Mar 2018 15:08:51 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</guid>
+      <guid>https://idevz.github.io/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</guid>
       <description>Top 不止有 top（启动默认选项） 全局默认值    选项 - 意义 默认值     A - Alt display Off (full-screen)   * d - Delay time 1.5 seconds   * H - Threads mode Off (summarize as tasks)   I - Irix mode On (no, `solaris&amp;rsquo; smp)   * p - PID monitoring Off (show all processes)   * s - Secure mode Off (unsecured)   B - Bold enable On (yes, bold globally)    概要区默认值    选项 - 意义 默认值     l - Load Avg/Uptime On (thus program name)   t - Task/Cpu states On (1+1 lines, see `1&amp;rsquo;)   m - Mem/Swap usage On (2 lines worth)   1 - Single Cpu Off (thus multiple cpus)    任务区默认值    选项 - 意义 默认值     b - Bold hilite Off (use `reverse&amp;rsquo;)   * c - Command line Off (name, not cmdline)   * i - Idle tasks On (show all tasks)   J - Num align right On (not left justify)   j - Str align right Off (not right justify)   R - Reverse sort On (pids high-to-low)   * S - Cumulative time Off (no, dead children)   * u - User filter Off (show euid only)   * U - User filter Off (show any uid)   V - Forest view On (show as branches)   x - Column hilite Off (no, sort field)   y - Row hilite On (yes, running tasks)   z - color/mono On (show colors)    不一样的启动 ❯ top -h z@master1 procps-ng version 3.</description>
     </item>
     
     <item>
       <title>Mac OSX Vscode GDB 调试环境搭建</title>
-      <link>http://idevz.github.io/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>https://idevz.github.io/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Fri, 17 Nov 2017 17:05:23 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>https://idevz.github.io/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>gdb 在 Mac OSX 使用 GDB 配合 Vscode 来开发简直是强强联合，不能赞更多。 通过常规的 brew install gdb 安装最新的 GDB，编译一个简单的测试文件 start.c 来进行测试：
 gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运行 r 指令启动一个 GDB debug session
 (gdb) r Starting program: /Users/idevz/code/clang/start Unable to find Mach task port for process-id 627: (os/kern) failure (0x5). (please check gdb is codesigned - see taskgated(8)) 报错分析 找不到 Mach Task 进程 ID，来自 OSX 内核的错误，需要检查 gdb 的 codesigned，Mach 是苹果从 NeXTSTEP 带来的微内核，是 OSX 和 IOS 的核心。 从报错来看，应该是由于新安装的 GDB 没有进行 codesigned 签名认证，没有权限开启 Debug。所以我们需要给 GDB 程序添加 codesigned 签名认证。 详细的了解可以参考苹果的开发手册，如下。</description>
@@ -34,10 +34,10 @@ gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运�
     
     <item>
       <title>shadowsocksr proxifier</title>
-      <link>http://idevz.github.io/2017/11/shadowsocksr-proxifier/</link>
+      <link>https://idevz.github.io/2017/11/shadowsocksr-proxifier/</link>
       <pubDate>Sun, 12 Nov 2017 08:16:54 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/11/shadowsocksr-proxifier/</guid>
+      <guid>https://idevz.github.io/2017/11/shadowsocksr-proxifier/</guid>
       <description>如何安装 shadowsocksr wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh chmod +x shadowsocksR.sh ./shadowsocksR.sh 2&amp;gt;&amp;amp;1 | tee shadowsocksR.log 安装iptabl systemctl stop firewalld.service systemctl disable firewalld.service systemctl start iptables.service /sbin/iptables -I INPUT -p tcp --dport 8000 -j ACCEPT 执行以上安装命令，即可 安装 shadowsocksr，然后配置相关的 代理服务器，即可实现翻墙。
 如何使用 proxifier 来指定某些 APP 通过 ssocks 翻墙 浏览器比如 Chrome 可以通过安装 MyShadowSocks 这样的浏览器插件来实现科学上网，其他 APP 呢？或者全局上网代理控制呢？ 这就需要使用 proxifier 来进行设置.
 点击 Proxies 给 Proxifier 添加 代理服务器， 点击 Roules 给 Proxifier 添加请求规则 设置 Proxifier 的 DNS 为 “Resolve hostnames through proxy” 直接使用代理服务器的 DNS 解析，否则仍然不可用。 这样就可以实现科学上网了。</description>
@@ -45,19 +45,19 @@ gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运�
     
     <item>
       <title>gdb</title>
-      <link>http://idevz.github.io/2017/08/gdb/</link>
+      <link>https://idevz.github.io/2017/08/gdb/</link>
       <pubDate>Sun, 06 Aug 2017 11:49:27 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/08/gdb/</guid>
+      <guid>https://idevz.github.io/2017/08/gdb/</guid>
       <description>https://wizardforcel.gitbooks.io/100-gdb-tips/attach-process.html</description>
     </item>
     
     <item>
       <title>我的 MacPro 更新记</title>
-      <link>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</link>
+      <link>https://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</link>
       <pubDate>Sun, 30 Jul 2017 15:43:50 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</guid>
+      <guid>https://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</guid>
       <description>好记性不如烂笔头，要是让我写出自己的开发环境是如何搞的，可能还真写不全，长年累月的演变，实在记不住，用了快 5 年的 MacPro 终于要更新了，借此机会记录下自己装机折腾记。
 常用软件安装 新机开苞后，先是各种软件各种装，有了之前折腾软件的经验，无用软件一概不再装。下面是我平时做后端架构开发、技术调研等工作时，常用的一些软件列表：
 开发工具 编程软件 sublimeText  安装 package control，现在已经很方便了，直接参考官网，Sublime 命令行安装 packageControl 指令：
@@ -66,10 +66,10 @@ import urllib.request,os,hashlib; h = &#39;df21e130d211cfc94d9b0905775a7c0f&#39;
     
     <item>
       <title></title>
-      <link>http://idevz.github.io/1/01/</link>
+      <link>https://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.github.io/1/01/</guid>
+      <guid>https://idevz.github.io/1/01/</guid>
       <description>https://www.ansible.com/resources/webinars-training/introduction-to-ansible
 使用Ansible部署Kubernetes 1.6高可用集群 https://blog.frognew.com/2017/06/kubernetes-1.6-ha-cluster-by-ansible.html
 HOW-TO Deploy Kubernetes on Openstack with Ansible http://superuser.openstack.org/articles/deploy-kubernetes-openstack-ansible/
@@ -79,19 +79,19 @@ Ansible用命令管理主机(doc) http://getansible.com/begin/ansibleyong_ming_l
     
     <item>
       <title></title>
-      <link>http://idevz.github.io/1/01/</link>
+      <link>https://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.github.io/1/01/</guid>
+      <guid>https://idevz.github.io/1/01/</guid>
       <description>ip vs ifconfig https://linux.cn/article-4326-1.html</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://idevz.github.io/1/01/</link>
+      <link>https://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.github.io/1/01/</guid>
+      <guid>https://idevz.github.io/1/01/</guid>
       <description>Iptables详解 http://blog.csdn.net/reyleon/article/details/12976341
 关于iptables的四表五链 http://blog.51cto.com/godben/1693903 iptables只是Linux防火墙的管理工具而已，位于/sbin/iptables。真正实现防火墙功能的是netfilter，它是Linux内核中实现包过滤的内部结构。
 iptables包含4个表，5个链。其中表是按照对数据包的操作区分的，链是按照不同的Hook点来区分的，表和链实际上是netfilter的两个维度。 4个表:filter,nat,mangle,raw 默认表是filter（没有指定表的时候就是filter表）。表的处理优先级：raw&amp;gt;mangle&amp;gt;nat&amp;gt;filter。 filter：一般的过滤功能 nat:用于nat功能（端口映射，地址映射等） mangle:用于对特定数据包的修改 raw:有限级最高，设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能 5个链：PREROUTING,INPUT,FORWARD,OUTPUT,POSTROUTING。 PREROUTING:数据包进入路由表之前 INPUT:通过路由表后目的地为本机 FORWARDING:通过路由表后，目的地不为本机 OUTPUT:由本机产生，向外转发 POSTROUTIONG:发送到网卡接口之前。  规则表： 1.filter表——三个链：INPUT、FORWARD、OUTPUT 作用：过滤数据包 内核模块：iptables_filter. 2.Nat表——三个链：PREROUTING、POSTROUTING、OUTPUT 作用：用于网络地址转换（IP、端口） 内核模块：iptable_nat 3.Mangle表——五个链：PREROUTING、POSTROUTING、INPUT、OUTPUT、FORWARD 作用：修改数据包的服务类型、TTL、并且可以配置路由实现QOS内核模块：iptable_mangle(别看这个表这么麻烦，咱们设置策略时几乎都不会用到它) 4.Raw表——两个链：OUTPUT、PREROUTING 作用：决定数据包是否被状态跟踪机制处理 内核模块：iptable_raw (这个是REHL4没有的，不过不用怕，用的不多)
@@ -108,10 +108,10 @@ Iptables命令的管理控制选项：
     
     <item>
       <title></title>
-      <link>http://idevz.github.io/1/01/</link>
+      <link>https://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.github.io/1/01/</guid>
+      <guid>https://idevz.github.io/1/01/</guid>
       <description>MAC networksetup -listallhardwareports networksetup -listallnetworkservices spoof-mac list
 lo 回环接口(loop back) 或者 本地主机(localhost) gif 通用 IP-in-IP隧道(RFC2893) stf 6to4连接(RFC3056) en 以太网或802.11接口 fw IP over FireWire(IEEE-1394), macOS特有 p2p Point-to-Point 协议 awdl airdrop peer to peer(一种mesh network), apple airdrop设备特有 bridge 第2层桥接 vlan 虚拟局域网络
 在iOS设备(支持cellular)上还能看到 pdp_ip 蜂窝数据连接
@@ -121,10 +121,10 @@ en1 = Ethernet 1 vmnet8 = Virtual Interface vmnet1 = Virtual Interface
     
     <item>
       <title></title>
-      <link>http://idevz.github.io/1/01/</link>
+      <link>https://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.github.io/1/01/</guid>
+      <guid>https://idevz.github.io/1/01/</guid>
       <description>systemd wiki https://wiki.archlinux.org/index.php/systemd_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 journalctl可以根据特定字段过滤输出。如果过滤的字段比较多，需要较长时间才能显示出来。
 示例：

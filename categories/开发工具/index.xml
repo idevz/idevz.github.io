@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>开发工具 on 做一个善于思考的学习者</title>
-    <link>http://idevz.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
+    <link>https://idevz.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 开发工具 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Thu, 15 Jun 2017 16:01:08 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>优雅的使用 Mac</title>
-      <link>http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</link>
+      <link>https://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</link>
       <pubDate>Thu, 15 Jun 2017 16:01:08 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</guid>
+      <guid>https://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</guid>
       <description>起头 MacOSX 是平时工作生活所使用的系统，从 Windows 走过来，乐不思蜀
 lsof Mac 上使用（netstat -an -ptcp）来查看端口使用情况，也可以用 lsof 来查看， 这里是几个基本用法，来自于这篇博文，感谢博主。
 lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&amp;gt; ipv4 or ipv6 protocol --&amp;gt; tcp or udp hostname --&amp;gt; internet host name hostaddr --&amp;gt; ipv4地址 service --&amp;gt; /etc/service中的 service name (可以不只一个) port --&amp;gt; 端口号 (可以不只一个) lsof 查看端口占用 lsof -i:9100 lsof 查看文件被什么进程占用 lsof /etc/hosts COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME Gas\x20Ma 39968 zhoujing2 5r REG 1,4 301 22679474 /private/etc/hosts Google 41670 zhoujing2 25r REG 1,4 301 22679474 /private/etc/hosts Gas Mask 一直报有其他的进程在改 hosts 文件，之前一直不知道为什么，今天用这个命令找到了，居然是 Chrome 。</description>
@@ -25,10 +25,10 @@ lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&amp;gt; ipv4 or 
     
     <item>
       <title>优雅的使用 Linux</title>
-      <link>http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</link>
+      <link>https://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</link>
       <pubDate>Thu, 15 Jun 2017 16:01:02 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</guid>
+      <guid>https://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</guid>
       <description>起头 Linux 是我最喜欢的操作系统之一，平时用的最多的是 CentOS，Linux 的强悍不是我只言片语能描述清楚的，这篇博文将以事件记录的形式随时收集记录我平时所遇到的一些工具、命令、故障等。
 网络工具包 host、nslookup、dig 等 平时经常用的几个命令 host，nslookup，dig 等，新装的 CentOS 虚拟机运行 host 命令既然报 “找不到这个命令”
 sudo yum install host，并没有这个包的安装，谷歌后发现 host 命令属于网络工具包中的一个。

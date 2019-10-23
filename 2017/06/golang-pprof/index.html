@@ -15,19 +15,18 @@ Pprof pprof 起初是谷歌性能工具 gperftools 中的一个组件。Golang �
 Golang pprof 用法 Golang HTTP Web 服务 基于 net/http 包开发的 Web 服务，只需在入口导入包 import _ &quot;net/http/pprof&quot; 即可通过访问 http://host:port/debug/pprof/ 查看当前服务的各种 profiling 数据。
 Golang 后端服务 基于 Golang 开发的后端服务进程也可以通过导入包 import &quot;net/http&quot; 开启 HTTP 服务端口（比如：http.ListenAndServe(&quot;localhost:6060&quot;, nil)），同时导入包 import _ &quot;net/http/pprof&quot; 同样可以通过访问 http://host:6060/debug/pprof/ 来查看各种 profiling 数据。
 Golang 应用程序 如果只是想对某段 Golang 应用程序代码进行调优，无法使用 net/http/pprof 包来通过 HTTP 服务查看，这时我们就需要使用更底层的 runtime/pprof 包。下面引用 Golang Blog 中的例子来看下 runtime/pprof 包的使用。'>
-<meta property='og:url' content='http://idevz.github.io/2017/06/golang-pprof/'>
+<meta property='og:url' content='https://idevz.github.io/2017/06/golang-pprof/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='编程语言'><meta property='article:tag' content='性能'><meta property='article:tag' content='性能工具'><meta property='article:published_time' content='2017-06-19T18:02:34&#43;08:00'/><meta property='article:modified_time' content='2018-04-16T08:00:33&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
-  <meta name="referrer" content="no-referrer" />
   <title>golang pprof • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.github.io/2017/06/golang-pprof/'>
+  <link rel='canonical' href='https://idevz.github.io/2017/06/golang-pprof/'>
   
   
-  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='https://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='https://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -50,15 +49,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.github.io/'>idevz.org</a>
+        <a href='https://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.github.io/tech/'>技术</a>
+        <a href='https://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.github.io/tools/'>工具</a>
+        <a href='https://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.github.io/life/'>Life</a>
+        <a href='https://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.github.io/page/about/'>关于</a>
+        <a href='https://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -357,14 +356,14 @@ Total: <span style="color:#ae81ff">2525</span> samples
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.github.io/categories/golang/'>Golang</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.github.io/categories/golang/'>Golang</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/'>编程语言</a>, <a class='tag' href='http://idevz.github.io/tags/%E6%80%A7%E8%83%BD/'>性能</a>, <a class='tag' href='http://idevz.github.io/tags/%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7/'>性能工具</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.github.io/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/'>编程语言</a>, <a class='tag' href='https://idevz.github.io/tags/%E6%80%A7%E8%83%BD/'>性能</a>, <a class='tag' href='https://idevz.github.io/tags/%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7/'>性能工具</a></div>
 
   </div>
 </footer>
@@ -374,7 +373,7 @@ Total: <span style="color:#ae81ff">2525</span> samples
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.github.io/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/'>
+      <a href='https://idevz.github.io/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -384,7 +383,7 @@ Total: <span style="color:#ae81ff">2525</span> samples
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>使用Sublime&#43;Xdebug开发调试PHP</a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.github.io/2017/06/golang-testing/'>
+      <a href='https://idevz.github.io/2017/06/golang-testing/'>
         <span class='screen-reader-text'>Next post: </span>golang testing<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -410,9 +409,9 @@ Total: <span style="color:#ae81ff">2525</span> samples
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
+  </div><script>window.__assets_js_src="https://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
+<script src='https://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

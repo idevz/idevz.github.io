@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ServiceMesh on 做一个善于思考的学习者</title>
-    <link>http://idevz.github.io/categories/servicemesh/</link>
-    <description>Recent content in ServiceMesh on 做一个善于思考的学习者</description>
+    <title>servicemesh on 做一个善于思考的学习者</title>
+    <link>https://idevz.github.io/categories/servicemesh/</link>
+    <description>Recent content in servicemesh on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Tue, 13 Nov 2018 22:11:56 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.github.io/categories/servicemesh/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.github.io/categories/servicemesh/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Service mesh — 一种新的模式而不是新技术</title>
-      <link>http://idevz.github.io/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
+      <link>https://idevz.github.io/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Tue, 13 Nov 2018 22:11:56 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
+      <guid>https://idevz.github.io/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
       <description>原著信息： Service Mesh – A New Pattern, Not A New Technology?
 by:Marco Palladino
 What is Service Mesh and Where Did it Come From? Over the past few months, you may have noticed the explosion of industry chatter and articles surrounding service mesh and the future of software architecture. These discussions have been highly polarizing, with tribes forming around specific vendors. While this partisan trend is to be expected, the common thread among these discussions is the rapid transformation of how APIs are used in the enterprise, and what this means for the topology of our traffic.</description>
@@ -25,10 +25,10 @@ What is Service Mesh and Where Did it Come From? Over the past few months, you m
     
     <item>
       <title>微服务的服务网格</title>
-      <link>http://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</link>
+      <link>https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</link>
       <pubDate>Mon, 18 Sep 2017 22:11:56 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</guid>
+      <guid>https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</guid>
       <description>原著信息： Service Mesh for Microservices
 by:Kasun Indrasiri
 Microservices architecture has been evolving a lot during the last couple of years and there are quite a few new concepts and patterns are emerging. ‘Service Mesh’ concept is getting quite popular. In this post, I’m planning to cover the key concepts related to Service Mesh and how it is used in real-world microservices implementations.
@@ -38,10 +38,10 @@ Why ‘Service Mesh’?</description>
     
     <item>
       <title>Service mesh — 一种新的模式而不是新技术</title>
-      <link>http://idevz.github.io/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
+      <link>https://idevz.github.io/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Wed, 13 Nov 2013 22:11:56 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
+      <guid>https://idevz.github.io/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
       <description>原著信息： How to Make Your Open Source Project Really Awesome
 by:Clojure Werkz
 https://www.iteye.com/news/27656</description>

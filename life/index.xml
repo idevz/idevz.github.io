@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Life on 做一个善于思考的学习者</title>
-    <link>http://idevz.github.io/life/</link>
+    <link>https://idevz.github.io/life/</link>
     <description>Recent content in Life on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     
-	<atom:link href="http://idevz.github.io/life/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.github.io/life/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>我的技术学习之路</title>
-      <link>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
+      <link>https://idevz.github.io/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
       <pubDate>Wed, 19 Jul 2017 14:38:32 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
+      <guid>https://idevz.github.io/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
       <description>PHP Lua OR Golang 虽然写 PHP 时间最长，但是写 PHP 的感觉就是各种 API 各种函数用法的 PHP Doc 查阅，完成功能，并没有更多的思考
 从 OR 开始写 Lua 里面有很多功能，需要自己动手实现，逼着自己思考很多机制的实现，所以做的相对深入
 逼着自己更多的去思考，所以有了上面这些感悟 其实，为什么要等需求来了，才逼着自己的思考呢？为什么在平时学习的时候就往深入写去思考，去刨根问底，去查个水落石出呢？
@@ -25,10 +25,10 @@
     
     <item>
       <title>confront the life</title>
-      <link>http://idevz.github.io/2017/06/confront-the-life/</link>
+      <link>https://idevz.github.io/2017/06/confront-the-life/</link>
       <pubDate>Mon, 19 Jun 2017 15:00:19 +0800</pubDate>
       
-      <guid>http://idevz.github.io/2017/06/confront-the-life/</guid>
+      <guid>https://idevz.github.io/2017/06/confront-the-life/</guid>
       <description>直面人生 安逸，忘却，解决不了现实问题，放纵过后依然必须面对人生，该解决的问题，一个都不会少
 慢慢走着走着就迷路了 可以出去当 CTO 的时候，我跟皓哥说我要在技术上，继续沉淀。沉得住气。
 不要什么都想做 做自己擅长的东西，做到极致，善于发现并利用自己的长处
