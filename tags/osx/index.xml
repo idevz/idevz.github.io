@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OSX on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/tags/osx/</link>
+    <description>Recent content in OSX on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Fri, 17 Nov 2017 17:05:23 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/tags/osx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac OSX Vscode GDB 调试环境搭建</title>
+      <link>http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Fri, 17 Nov 2017 17:05:23 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>gdb 在 Mac OSX 使用 GDB 配合 Vscode 来开发简直是强强联合，不能赞更多。 通过常规的 brew install gdb 安装最新的 GDB，编译一个简单的测试文件 start.c 来进行测试：
+gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运行 r 指令启动一个 GDB debug session
+(gdb) r Starting program: /Users/idevz/code/clang/start Unable to find Mach task port for process-id 627: (os/kern) failure (0x5). (please check gdb is codesigned - see taskgated(8)) 报错分析 找不到 Mach Task 进程 ID，来自 OSX 内核的错误，需要检查 gdb 的 codesigned，Mach 是苹果从 NeXTSTEP 带来的微内核，是 OSX 和 IOS 的核心。 从报错来看，应该是由于新安装的 GDB 没有进行 codesigned 签名认证，没有权限开启 Debug。所以我们需要给 GDB 程序添加 codesigned 签名认证。 详细的了解可以参考苹果的开发手册，如下。</description>
+    </item>
+    
+  </channel>
+</rss>

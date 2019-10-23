@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='复现 在 &ldquo;init_worker_by_lua&rdquo; 阶段定义方法 init_vanilla，在 content_by_lua 阶段来调用，使用 local registry = debug.getregistry(); print_r(registry.ngx_lua_ctx_tables) 查看当前存储的所有 key，发现前后两个请求的数据会同时保存在 ngx.ctx 中，按理说 ngx.ctx 表就是用来共享请求内变量的，应该是每个请求有自己的一份，为什么在一个请求中能获取到其他请求的 ngx.ctx ？这个需要细节了解下 ngx.ctx 的实现机制，再回来解析这个问题。
+init_vanilla 函数的实现
+init_vanilla = function (ngx) Registry.namespace = ngx_var.APP_NAME local REQ_Registry = require(&#39;registry&#39;):new() REQ_Registry[&#39;REQ_URI&#39;] = ngx_var.uri REQ_Registry[&#39;REQ_ARGS&#39;] = ngx_var.args REQ_Registry[&#39;REQ_ARGS_ARR&#39;] = ngx_req.get_uri_args() REQ_Registry[&#39;REQ_HEADERS&#39;] = ngx_req.get_headers() REQ_Registry[&#39;APP_CACHE_PURGE&#39;] = REQ_Registry[&#39;REQ_ARGS_ARR&#39;][&#39;vapurge&#39;] ngx.ctx.REQ_Registry = REQ_Registry if Registry[&#39;VANILLA_INIT&#39;] then return end Registry[&#39;VA_ENV&#39;] = ngx_var.VA_ENV Registry[&#39;APP_NAME&#39;] = Registry.namespace Registry[&#39;APP_ROOT&#39;] = ngx_var.document_root Registry[&#39;APP_HOST&#39;] = ngx_var.'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='ngx ctx bug • 做一个善于思考的学习者'>
+<meta property='og:description' content='复现 在 &ldquo;init_worker_by_lua&rdquo; 阶段定义方法 init_vanilla，在 content_by_lua 阶段来调用，使用 local registry = debug.getregistry(); print_r(registry.ngx_lua_ctx_tables) 查看当前存储的所有 key，发现前后两个请求的数据会同时保存在 ngx.ctx 中，按理说 ngx.ctx 表就是用来共享请求内变量的，应该是每个请求有自己的一份，为什么在一个请求中能获取到其他请求的 ngx.ctx ？这个需要细节了解下 ngx.ctx 的实现机制，再回来解析这个问题。
+init_vanilla 函数的实现
+init_vanilla = function (ngx) Registry.namespace = ngx_var.APP_NAME local REQ_Registry = require(&#39;registry&#39;):new() REQ_Registry[&#39;REQ_URI&#39;] = ngx_var.uri REQ_Registry[&#39;REQ_ARGS&#39;] = ngx_var.args REQ_Registry[&#39;REQ_ARGS_ARR&#39;] = ngx_req.get_uri_args() REQ_Registry[&#39;REQ_HEADERS&#39;] = ngx_req.get_headers() REQ_Registry[&#39;APP_CACHE_PURGE&#39;] = REQ_Registry[&#39;REQ_ARGS_ARR&#39;][&#39;vapurge&#39;] ngx.ctx.REQ_Registry = REQ_Registry if Registry[&#39;VANILLA_INIT&#39;] then return end Registry[&#39;VA_ENV&#39;] = ngx_var.VA_ENV Registry[&#39;APP_NAME&#39;] = Registry.namespace Registry[&#39;APP_ROOT&#39;] = ngx_var.document_root Registry[&#39;APP_HOST&#39;] = ngx_var.'>
+<meta property='og:url' content='http://idevz.org/2017/07/ngx-ctx-bug/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='ngx.ctx'><meta property='article:tag' content='请求内变量共享'><meta property='article:published_time' content='2017-07-12T14:55:29&#43;08:00'/><meta property='article:modified_time' content='2018-04-16T08:00:33&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>ngx ctx bug • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/07/ngx-ctx-bug/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>ngx ctx bug</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-07-12T14:55:29&#43;08:00'>2017, Jul 12</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+3 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h1 id="复现">复现</h1>
+
+<p>在 &ldquo;init_worker_by_lua&rdquo; 阶段定义方法 init_vanilla，在 content_by_lua 阶段来调用，使用 <code>local registry = debug.getregistry(); print_r(registry.ngx_lua_ctx_tables)</code> 查看当前存储的所有 key，发现前后两个请求的数据会同时保存在 <code>ngx.ctx</code> 中，按理说 <code>ngx.ctx</code> 表就是用来共享请求内变量的，应该是每个请求有自己的一份，为什么在一个请求中能获取到其他请求的 <code>ngx.ctx</code> ？这个需要细节了解下 <code>ngx.ctx</code> 的实现机制，再回来解析这个问题。</p>
+
+<p><em><code>init_vanilla</code> 函数的实现</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">	init_vanilla <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (ngx)
+    Registry.namespace <span style="color:#f92672">=</span> ngx_var.APP_NAME
+
+    <span style="color:#66d9ef">local</span> REQ_Registry <span style="color:#f92672">=</span> require(<span style="color:#e6db74">&#39;registry&#39;</span>):new()
+
+    REQ_Registry[<span style="color:#e6db74">&#39;REQ_URI&#39;</span>] <span style="color:#f92672">=</span> ngx_var.uri
+    REQ_Registry[<span style="color:#e6db74">&#39;REQ_ARGS&#39;</span>] <span style="color:#f92672">=</span> ngx_var.args
+    REQ_Registry[<span style="color:#e6db74">&#39;REQ_ARGS_ARR&#39;</span>] <span style="color:#f92672">=</span> ngx_req.get_uri_args()
+    REQ_Registry[<span style="color:#e6db74">&#39;REQ_HEADERS&#39;</span>] <span style="color:#f92672">=</span> ngx_req.get_headers()
+    REQ_Registry[<span style="color:#e6db74">&#39;APP_CACHE_PURGE&#39;</span>] <span style="color:#f92672">=</span> REQ_Registry[<span style="color:#e6db74">&#39;REQ_ARGS_ARR&#39;</span>][<span style="color:#e6db74">&#39;vapurge&#39;</span>]
+    ngx.ctx.REQ_Registry <span style="color:#f92672">=</span> REQ_Registry
+
+
+    <span style="color:#66d9ef">if</span> Registry[<span style="color:#e6db74">&#39;VANILLA_INIT&#39;</span>] <span style="color:#66d9ef">then</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">end</span>
+    Registry[<span style="color:#e6db74">&#39;VA_ENV&#39;</span>] <span style="color:#f92672">=</span> ngx_var.VA_ENV
+    Registry[<span style="color:#e6db74">&#39;APP_NAME&#39;</span>] <span style="color:#f92672">=</span> Registry.namespace
+    Registry[<span style="color:#e6db74">&#39;APP_ROOT&#39;</span>] <span style="color:#f92672">=</span> ngx_var.document_root
+    Registry[<span style="color:#e6db74">&#39;APP_HOST&#39;</span>] <span style="color:#f92672">=</span> ngx_var.host
+    Registry[<span style="color:#e6db74">&#39;APP_PORT&#39;</span>] <span style="color:#f92672">=</span> ngx_var.server_port
+    Registry[<span style="color:#e6db74">&#39;VANILLA_ROOT&#39;</span>] <span style="color:#f92672">=</span> ngx_var.VANILLA_ROOT
+    Registry[<span style="color:#e6db74">&#39;VANILLA_VERSION&#39;</span>] <span style="color:#f92672">=</span> ngx_var.VANILLA_VERSION
+
+    Registry[<span style="color:#e6db74">&#39;VANILLA_APPLICATION&#39;</span>] <span style="color:#f92672">=</span> LoadV <span style="color:#e6db74">&#39;vanilla.v.application&#39;</span>
+    Registry[<span style="color:#e6db74">&#39;VANILLA_UTILS&#39;</span>] <span style="color:#f92672">=</span> LoadV <span style="color:#e6db74">&#39;vanilla.v.libs.utils&#39;</span>
+    Registry[<span style="color:#e6db74">&#39;VANILLA_CACHE_LIB&#39;</span>] <span style="color:#f92672">=</span> LoadV <span style="color:#e6db74">&#39;vanilla.v.cache&#39;</span>
+    Registry[<span style="color:#e6db74">&#39;VANILLA_COOKIE_LIB&#39;</span>] <span style="color:#f92672">=</span> LoadV <span style="color:#e6db74">&#39;vanilla.v.libs.cookie&#39;</span>
+
+    Registry[<span style="color:#e6db74">&#39;APP_CONF&#39;</span>] <span style="color:#f92672">=</span> LoadApp <span style="color:#e6db74">&#39;config.application&#39;</span>
+    Registry[<span style="color:#e6db74">&#39;APP_BOOTS&#39;</span>] <span style="color:#f92672">=</span> LoadApp <span style="color:#e6db74">&#39;application.bootstrap&#39;</span>
+    Registry[<span style="color:#e6db74">&#39;APP_PAGE_CACHE_CONF&#39;</span>] <span style="color:#f92672">=</span> Registry[<span style="color:#e6db74">&#39;APP_CONF&#39;</span>][<span style="color:#e6db74">&#39;page_cache&#39;</span>]
+    LoadSysConf()
+    Registry[<span style="color:#e6db74">&#39;VANILLA_INIT&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+<span style="color:#66d9ef">end</span></code></pre></div>
+<p><em>相关数据的打印</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">    <span style="color:#66d9ef">local</span> REQ_Registry <span style="color:#f92672">=</span> ngx.ctx.REQ_Registry
+    <span style="color:#66d9ef">local</span> redis_instance <span style="color:#f92672">=</span> redis()
+
+    <span style="color:#66d9ef">local</span> debug <span style="color:#f92672">=</span> require <span style="color:#e6db74">&#34;debug&#34;</span>
+    <span style="color:#66d9ef">local</span> registry <span style="color:#f92672">=</span> debug.getregistry()
+    print_r(<span style="color:#e6db74">&#39;------x1x-------&#39;</span>)
+    print_r(REQ_Registry[<span style="color:#e6db74">&#39;REQ_ARGS_ARR&#39;</span>])
+    ngx.sleep(<span style="color:#ae81ff">5</span>)
+    print_r(REQ_Registry[<span style="color:#e6db74">&#39;REQ_ARGS_ARR&#39;</span>])
+    print_r(REQ_Registry[<span style="color:#e6db74">&#39;APP_PAGE_CACHE_KEY&#39;</span>])
+    print_r(registry.ngx_lua_ctx_tables)
+    print_r(<span style="color:#e6db74">&#39;------x2x-------&#39;</span>)</code></pre></div>
+<p><em>对应的结果打印</em></p>
+
+<p><code>curl   -m 20 --no-keepalive  -i 'http://10.211.55.15:9110/?uid=1'</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#e6db74">&#34;------x1x-------&#34;</span>
+<span style="color:#f92672">{</span>
+  uid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">{</span>
+  uid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#e6db74">&#34;/uid=1&#34;</span>
+<span style="color:#f92672">{</span>
+  <span style="color:#f92672">{</span>
+    REQ_Registry <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+      APP_PAGE_CACHE_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/uid=1&#34;</span>,
+      _data <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+      <span style="color:#f92672">}</span>,
+      REQ_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/&#34;</span>,
+      USE_PAGE_CACHE <span style="color:#f92672">=</span> true,
+      COOKIES <span style="color:#f92672">=</span> false,
+      set <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e118&#34;</span>,
+      has <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0f8&#34;</span>,
+      REQ_HEADERS <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+        host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.211.55.15:9110&#34;</span>,
+        accept <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*/*&#34;</span>,
+        <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;user-agent&#34;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;curl/7.29.0&#34;</span>
+      <span style="color:#f92672">}</span>,
+      REQ_ARGS_ARR <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+        uid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1&#34;</span>
+      <span style="color:#f92672">}</span>,
+      REQ_ARGS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;uid=1&#34;</span>,
+      dump <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e138&#34;</span>,
+      namespace <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vanilla_app&#34;</span>,
+      del <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0b8&#34;</span>,
+      get <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0d8&#34;</span>
+    <span style="color:#f92672">}</span>,
+    xxxxxxxxx <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxxxxxxxxx&#34;</span>,
+    zhou <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxx---&gt;3&lt;-----xxx0000-----19902&#34;</span>,
+    xxxxxdddddxxxx <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxxxxxxxxx&#34;</span>
+  <span style="color:#f92672">}</span>,
+  <span style="color:#f92672">{</span>
+    REQ_Registry <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+      APP_PAGE_CACHE_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/uid=2&#34;</span>,
+      _data <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+      <span style="color:#f92672">}</span>,
+      REQ_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/&#34;</span>,
+      USE_PAGE_CACHE <span style="color:#f92672">=</span> true,
+      COOKIES <span style="color:#f92672">=</span> false,
+      set <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e118&#34;</span>,
+      has <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0f8&#34;</span>,
+      REQ_HEADERS <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+        host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.211.55.15:9110&#34;</span>,
+        accept <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*/*&#34;</span>,
+        <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;user-agent&#34;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;curl/7.29.0&#34;</span>
+      <span style="color:#f92672">}</span>,
+      REQ_ARGS_ARR <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+        uid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2&#34;</span>
+      <span style="color:#f92672">}</span>,
+      REQ_ARGS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;uid=2&#34;</span>,
+      dump <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e138&#34;</span>,
+      namespace <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vanilla_app&#34;</span>,
+      del <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0b8&#34;</span>,
+      get <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0d8&#34;</span>
+    <span style="color:#f92672">}</span>,
+    xxxxxxxxx <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxxxxxxxxx&#34;</span>,
+    zhou <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxx---&gt;3&lt;-----xxx0000-----19902&#34;</span>,
+    xxxxxdddddxxxx <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxxxxxxxxx&#34;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#e6db74">&#34;------x2x-------&#34;</span></code></pre></div>
+<p><code>curl   -m 20 --no-keepalive  -i 'http://10.211.55.15:9110/?uid=2'</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#e6db74">&#34;------x1x-------&#34;</span>
+<span style="color:#f92672">{</span>
+  uid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2&#34;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">{</span>
+  uid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2&#34;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#e6db74">&#34;/uid=2&#34;</span>
+<span style="color:#f92672">{</span>
+  <span style="color:#f92672">[</span><span style="color:#ae81ff">0</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>,
+  <span style="color:#f92672">[</span><span style="color:#ae81ff">2</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+    REQ_Registry <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+      APP_PAGE_CACHE_KEY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/uid=2&#34;</span>,
+      _data <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+      <span style="color:#f92672">}</span>,
+      REQ_URI <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/&#34;</span>,
+      USE_PAGE_CACHE <span style="color:#f92672">=</span> true,
+      COOKIES <span style="color:#f92672">=</span> false,
+      set <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e118&#34;</span>,
+      has <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0f8&#34;</span>,
+      REQ_HEADERS <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+        host <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.211.55.15:9110&#34;</span>,
+        accept <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*/*&#34;</span>,
+        <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;user-agent&#34;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;curl/7.29.0&#34;</span>
+      <span style="color:#f92672">}</span>,
+      REQ_ARGS_ARR <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
+        uid <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;2&#34;</span>
+      <span style="color:#f92672">}</span>,
+      REQ_ARGS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;uid=2&#34;</span>,
+      dump <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e138&#34;</span>,
+      namespace <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;vanilla_app&#34;</span>,
+      del <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0b8&#34;</span>,
+      get <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;function: 0x4100e0d8&#34;</span>
+    <span style="color:#f92672">}</span>,
+    xxxxxxxxx <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxxxxxxxxx&#34;</span>,
+    zhou <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxx---&gt;3&lt;-----xxx0000-----19902&#34;</span>,
+    xxxxxdddddxxxx <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;xxxxxxxxxxx&#34;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#e6db74">&#34;------x2x-------&#34;</span></code></pre></div>
+<h1 id="关于-ngx-ctx">关于 <code>ngx.ctx</code></h1>
+
+<p><em><code>ngx.ctx</code> 表主要用来存放每个请求共享的 Lua 上下文变量，它跟 Nginx 变量一样有与当前请求一致的生命周期</em>
+<em><code>ngx.ctx</code> 表在请求各个阶段（rewrite、access、content 等）是共享的，每个请求，包括子请求都有自己的一份 <code>ngx.ctx</code> 拷贝，对子请求 <code>ngx.ctx</code> 表的修改不会影响“父请求” 中的数据，他们有相互独立的 <code>ngx.ctx</code> 表</em>
+<em>内部重定(<code>ngx.exec</code>)向会销毁 <code>ngx.ctx</code>，新的请求将会有一个全新的 <code>ngx.ctx</code> 表，例如：</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"> location <span style="color:#f92672">/</span>new {
+     content_by_lua_block {
+         ngx.say(ngx.ctx.foo)
+     }
+ }
+
+ location <span style="color:#f92672">/</span>orig {
+     content_by_lua_block {
+         ngx.ctx.foo <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello&#34;</span>
+         ngx.exec(<span style="color:#e6db74">&#34;/new&#34;</span>)
+     }
+ }</code></pre></div>
+<p><em>上面 GET 请求 <code>/orig</code> 返回结果 <code>nil</code>，而不是 <code>hello</code></em>
+<em>任意的值，包括 Lua 闭包、嵌套表等都可以放入 <code>ngx.ctx</code>，同样支持注册自定义的元方法，也可以使用 Lua table 来覆盖 <code>ngx.ctx</code>，例如：<code>ngx.ctx = { foo = 32, bar = 54 }</code></em>
+<em>当在 <code>init_worker_by_lua*</code> 中使用 <code>ngx.ctx</code> 时，<code>ngx.ctx</code> 的生命周期与当前 Lua 句柄一致，在其他阶段将无法引用到这些值</em>
+<em>对 <code>ngx.ctx</code> 的检索需要相对昂贵的元方法调用，这比通过用户自己的函数参数直接传递基于请求的数据要慢得多。所以不要为了节约用户函数参数而滥用此 API，因为它可能对性能有明显影响。</em>
+<em>因为 metamethod magic，永远都不要在 Lua 模块的 Lua 方法范围外来试图 &ldquo;local&rdquo; &ldquo;ngx.ctx&rdquo;，因为 Lua 模块是 &ldquo;worker-level data sharing&rdquo; 的，例如下面的做法是不可取的（无形中错误的扩展到了 &ldquo;per-nginx-worker&rdquo; 共享）：</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"> <span style="color:#75715e">-- mymodule.lua</span>
+ <span style="color:#66d9ef">local</span> _M <span style="color:#f92672">=</span> {}
+
+ <span style="color:#75715e">-- the following line is bad since ngx.ctx is a per-request</span>
+ <span style="color:#75715e">-- data while this &lt;code&gt;ctx&lt;/code&gt; variable is on the Lua module level</span>
+ <span style="color:#75715e">-- and thus is per-nginx-worker.</span>
+ <span style="color:#66d9ef">local</span> ctx <span style="color:#f92672">=</span> ngx.ctx
+
+ <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">_M</span>.<span style="color:#a6e22e">main</span>()
+     ctx.foo <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bar&#34;</span>
+ <span style="color:#66d9ef">end</span>
+
+ <span style="color:#66d9ef">return</span> _M</code></pre></div>
+<p><em>下面是推荐的使用方式（调用方显示的传递 <code>ctx</code> 表）</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"> <span style="color:#75715e">-- mymodule.lua</span>
+ <span style="color:#66d9ef">local</span> _M <span style="color:#f92672">=</span> {}
+
+ <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">_M</span>.<span style="color:#a6e22e">main</span>(ctx)
+     ctx.foo <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bar&#34;</span>
+ <span style="color:#66d9ef">end</span>
+
+ <span style="color:#66d9ef">return</span> _M</code></pre></div>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/openresty/'>OpenResty</a>, <a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span>, <a class='tag' href='http://idevz.org/tags/%E8%AF%B7%E6%B1%82%E5%86%85%E5%8F%98%E9%87%8F%E5%85%B1%E4%BA%AB/'>请求内变量共享</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Lua 实现面向对象</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/'>
+        <span class='screen-reader-text'>Next post: </span>深入理解 Lua 元表<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

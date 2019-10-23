@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='起头 MacOSX 是平时工作生活所使用的系统，从 Windows 走过来，乐不思蜀
+lsof Mac 上使用（netstat -an -ptcp）来查看端口使用情况，也可以用 lsof 来查看， 这里是几个基本用法，来自于这篇博文，感谢博主。
+lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&gt; ipv4 or ipv6 protocol --&gt; tcp or udp hostname --&gt; internet host name hostaddr --&gt; ipv4地址 service --&gt; /etc/service中的 service name (可以不只一个) port --&gt; 端口号 (可以不只一个) lsof 查看端口占用 lsof -i:9100 lsof 查看文件被什么进程占用 lsof /etc/hosts COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME Gas\x20Ma 39968 zhoujing2 5r REG 1,4 301 22679474 /private/etc/hosts Google 41670 zhoujing2 25r REG 1,4 301 22679474 /private/etc/hosts Gas Mask 一直报有其他的进程在改 hosts 文件，之前一直不知道为什么，今天用这个命令找到了，居然是 Chrome 。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='优雅的使用 Mac • 做一个善于思考的学习者'>
+<meta property='og:description' content='起头 MacOSX 是平时工作生活所使用的系统，从 Windows 走过来，乐不思蜀
+lsof Mac 上使用（netstat -an -ptcp）来查看端口使用情况，也可以用 lsof 来查看， 这里是几个基本用法，来自于这篇博文，感谢博主。
+lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&gt; ipv4 or ipv6 protocol --&gt; tcp or udp hostname --&gt; internet host name hostaddr --&gt; ipv4地址 service --&gt; /etc/service中的 service name (可以不只一个) port --&gt; 端口号 (可以不只一个) lsof 查看端口占用 lsof -i:9100 lsof 查看文件被什么进程占用 lsof /etc/hosts COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME Gas\x20Ma 39968 zhoujing2 5r REG 1,4 301 22679474 /private/etc/hosts Google 41670 zhoujing2 25r REG 1,4 301 22679474 /private/etc/hosts Gas Mask 一直报有其他的进程在改 hosts 文件，之前一直不知道为什么，今天用这个命令找到了，居然是 Chrome 。'>
+<meta property='og:url' content='http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='程序员'><meta property='article:tag' content='开发工具'><meta property='article:published_time' content='2017-06-15T16:01:08&#43;08:00'/><meta property='article:modified_time' content='2018-04-16T08:00:33&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>优雅的使用 Mac • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tools'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>优雅的使用 Mac</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-06-15T16:01:08&#43;08:00'>2017, Jun 15</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+One min read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h1 id="起头">起头</h1>
+
+<p><em>MacOSX 是平时工作生活所使用的系统，从 Windows 走过来，乐不思蜀</em></p>
+
+<h1 id="lsof">lsof</h1>
+
+<p><em>Mac 上使用（<code>netstat -an -ptcp</code>）来查看端口使用情况，也可以用 <code>lsof</code> 来查看， 这里是几个基本用法，来自于<a href="http://www.cnblogs.com/ayseeing/p/4097686.html">这篇博文</a>，感谢博主。</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lsof -i<span style="color:#f92672">[</span><span style="color:#ae81ff">46</span><span style="color:#f92672">]</span> <span style="color:#f92672">[</span>protocol<span style="color:#f92672">][</span>@hostname|hostaddr<span style="color:#f92672">][</span>:service|port<span style="color:#f92672">]</span>
+           <span style="color:#ae81ff">46</span> --&gt; ipv4 or ipv6
+           protocol --&gt; tcp or udp
+           hostname --&gt; internet host name
+           hostaddr --&gt; ipv4地址
+           service --&gt; /etc/service中的 service name <span style="color:#f92672">(</span>可以不只一个<span style="color:#f92672">)</span>
+           port --&gt; 端口号 <span style="color:#f92672">(</span>可以不只一个<span style="color:#f92672">)</span></code></pre></div>
+<h2 id="lsof-查看端口占用">lsof 查看端口占用</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lsof -i:9100</code></pre></div>
+<h2 id="lsof-查看文件被什么进程占用">lsof 查看文件被什么进程占用</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lsof /etc/hosts
+
+COMMAND     PID      USER   FD   TYPE DEVICE SIZE/OFF     NODE NAME
+Gas<span style="color:#ae81ff">\x</span>20Ma <span style="color:#ae81ff">39968</span> zhoujing2    5r   REG    <span style="color:#ae81ff">1</span>,4      <span style="color:#ae81ff">301</span> <span style="color:#ae81ff">22679474</span> /private/etc/hosts
+Google    <span style="color:#ae81ff">41670</span> zhoujing2   25r   REG    <span style="color:#ae81ff">1</span>,4      <span style="color:#ae81ff">301</span> <span style="color:#ae81ff">22679474</span> /private/etc/hosts</code></pre></div>
+<p><em>Gas Mask 一直报有其他的进程在改 hosts 文件，之前一直不知道为什么，今天用这个命令找到了，居然是 Chrome 。</em></p>
+
+<h2 id="lsof-常用参数列表">lsof 常用参数列表</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lsof filename 显示打开指定文件的所有进程
+lsof -a 表示两个参数都必须满足时才显示结果
+lsof -c string   显示command列中包含指定字符的进程所有打开的文件
+lsof -u username 显示所属user进程打开的文件
+lsof -g gid 显示归属gid的进程情况
+lsof +d /dir/ 显示目录下被进程打开的文件
+lsof +d /dir/ 同上，但是会搜索目录下的所有目录，时间相对较长
+lsof -d fd 显示指定文件描述符的进程
+lsof -n 不将ip转换为hostname，缺省是不加上-n参数
+lsof -i 用以显示符合条件的进程情况</code></pre></div>
+<h2 id="lsof-分页显示">lsof 分页显示</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">lsof | less</code></pre></div>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/'>开发工具</a>, <a class='category' href='http://idevz.org/categories/mac/'>Mac</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/'>程序员</a>, <a class='tag' href='http://idevz.org/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/'>开发工具</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>优雅的使用 Linux</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/07/git/'>
+        <span class='screen-reader-text'>Next post: </span>git<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

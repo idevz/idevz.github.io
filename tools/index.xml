@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具箱 on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/tools/</link>
+    <description>Recent content in 工具箱 on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    
+	<atom:link href="http://idevz.org/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>我们应该知道的 Top</title>
+      <link>http://idevz.org/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</link>
+      <pubDate>Tue, 27 Mar 2018 15:08:51 +0800</pubDate>
+      
+      <guid>http://idevz.org/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</guid>
+      <description>Top 不止有 top（启动默认选项） 全局默认值    选项 - 意义 默认值     A - Alt display Off (full-screen)   * d - Delay time 1.5 seconds   * H - Threads mode Off (summarize as tasks)   I - Irix mode On (no, `solaris&amp;rsquo; smp)   * p - PID monitoring Off (show all processes)   * s - Secure mode Off (unsecured)   B - Bold enable On (yes, bold globally)    概要区默认值    选项 - 意义 默认值     l - Load Avg/Uptime On (thus program name)   t - Task/Cpu states On (1+1 lines, see `1&amp;rsquo;)   m - Mem/Swap usage On (2 lines worth)   1 - Single Cpu Off (thus multiple cpus)    任务区默认值    选项 - 意义 默认值     b - Bold hilite Off (use `reverse&amp;rsquo;)   * c - Command line Off (name, not cmdline)   * i - Idle tasks On (show all tasks)   J - Num align right On (not left justify)   j - Str align right Off (not right justify)   R - Reverse sort On (pids high-to-low)   * S - Cumulative time Off (no, dead children)   * u - User filter Off (show euid only)   * U - User filter Off (show any uid)   V - Forest view On (show as branches)   x - Column hilite Off (no, sort field)   y - Row hilite On (yes, running tasks)   z - color/mono On (show colors)    不一样的启动 ❯ top -h z@master1 procps-ng version 3.</description>
+    </item>
+    
+    <item>
+      <title>Mac OSX Vscode GDB 调试环境搭建</title>
+      <link>http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Fri, 17 Nov 2017 17:05:23 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>gdb 在 Mac OSX 使用 GDB 配合 Vscode 来开发简直是强强联合，不能赞更多。 通过常规的 brew install gdb 安装最新的 GDB，编译一个简单的测试文件 start.c 来进行测试：
+gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运行 r 指令启动一个 GDB debug session
+(gdb) r Starting program: /Users/idevz/code/clang/start Unable to find Mach task port for process-id 627: (os/kern) failure (0x5). (please check gdb is codesigned - see taskgated(8)) 报错分析 找不到 Mach Task 进程 ID，来自 OSX 内核的错误，需要检查 gdb 的 codesigned，Mach 是苹果从 NeXTSTEP 带来的微内核，是 OSX 和 IOS 的核心。 从报错来看，应该是由于新安装的 GDB 没有进行 codesigned 签名认证，没有权限开启 Debug。所以我们需要给 GDB 程序添加 codesigned 签名认证。 详细的了解可以参考苹果的开发手册，如下。</description>
+    </item>
+    
+    <item>
+      <title>shadowsocksr proxifier</title>
+      <link>http://idevz.org/2017/11/shadowsocksr-proxifier/</link>
+      <pubDate>Sun, 12 Nov 2017 08:16:54 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/11/shadowsocksr-proxifier/</guid>
+      <description>如何安装 shadowsocksr wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh chmod +x shadowsocksR.sh ./shadowsocksR.sh 2&amp;gt;&amp;amp;1 | tee shadowsocksR.log 安装iptabl systemctl stop firewalld.service systemctl disable firewalld.service systemctl start iptables.service /sbin/iptables -I INPUT -p tcp --dport 8000 -j ACCEPT 执行以上安装命令，即可 安装 shadowsocksr，然后配置相关的 代理服务器，即可实现翻墙。
+如何使用 proxifier 来指定某些 APP 通过 ssocks 翻墙 浏览器比如 Chrome 可以通过安装 MyShadowSocks 这样的浏览器插件来实现科学上网，其他 APP 呢？或者全局上网代理控制呢？ 这就需要使用 proxifier 来进行设置.
+点击 Proxies 给 Proxifier 添加 代理服务器， 点击 Roules 给 Proxifier 添加请求规则 设置 Proxifier 的 DNS 为 “Resolve hostnames through proxy” 直接使用代理服务器的 DNS 解析，否则仍然不可用。 这样就可以实现科学上网了。</description>
+    </item>
+    
+    <item>
+      <title>gdb</title>
+      <link>http://idevz.org/2017/08/gdb/</link>
+      <pubDate>Sun, 06 Aug 2017 11:49:27 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/gdb/</guid>
+      <description>https://wizardforcel.gitbooks.io/100-gdb-tips/attach-process.html</description>
+    </item>
+    
+    <item>
+      <title>我的 MacPro 更新记</title>
+      <link>http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</link>
+      <pubDate>Sun, 30 Jul 2017 15:43:50 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</guid>
+      <description>好记性不如烂笔头，要是让我写出自己的开发环境是如何搞的，可能还真写不全，长年累月的演变，实在记不住，用了快 5 年的 MacPro 终于要更新了，借此机会记录下自己装机折腾记。
+常用软件安装 新机开苞后，先是各种软件各种装，有了之前折腾软件的经验，无用软件一概不再装。下面是我平时做后端架构开发、技术调研等工作时，常用的一些软件列表：
+开发工具 编程软件 sublimeText  安装 package control，现在已经很方便了，直接参考官网，Sublime 命令行安装 packageControl 指令：
+import urllib.request,os,hashlib; h = &#39;df21e130d211cfc94d9b0905775a7c0f&#39; + &#39;1e3d39e33b79698005270310898eea76&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; + pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %s instead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; ).</description>
+    </item>
+    
+    <item>
+      <title>mac apps</title>
+      <link>http://idevz.org/2017/07/mac-apps/</link>
+      <pubDate>Thu, 06 Jul 2017 11:05:32 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/mac-apps/</guid>
+      <description>Filezilla http://i.idevz.org/filezilla.png</description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>http://idevz.org/2017/07/git/</link>
+      <pubDate>Tue, 04 Jul 2017 11:01:34 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/git/</guid>
+      <description> 起头 Git 是
+错误搜集 Permission denied (publickey) 错误信息：  /Path/ [master] git pull Permission denied (publickey). fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists. 处理方法： git config remote.origin.url http://xxxx.php.git # 将 ssh 协议地址更新为 http 地址</description>
+    </item>
+    
+    <item>
+      <title>优雅的使用 Mac</title>
+      <link>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</link>
+      <pubDate>Thu, 15 Jun 2017 16:01:08 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</guid>
+      <description>起头 MacOSX 是平时工作生活所使用的系统，从 Windows 走过来，乐不思蜀
+lsof Mac 上使用（netstat -an -ptcp）来查看端口使用情况，也可以用 lsof 来查看， 这里是几个基本用法，来自于这篇博文，感谢博主。
+lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&amp;gt; ipv4 or ipv6 protocol --&amp;gt; tcp or udp hostname --&amp;gt; internet host name hostaddr --&amp;gt; ipv4地址 service --&amp;gt; /etc/service中的 service name (可以不只一个) port --&amp;gt; 端口号 (可以不只一个) lsof 查看端口占用 lsof -i:9100 lsof 查看文件被什么进程占用 lsof /etc/hosts COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME Gas\x20Ma 39968 zhoujing2 5r REG 1,4 301 22679474 /private/etc/hosts Google 41670 zhoujing2 25r REG 1,4 301 22679474 /private/etc/hosts Gas Mask 一直报有其他的进程在改 hosts 文件，之前一直不知道为什么，今天用这个命令找到了，居然是 Chrome 。</description>
+    </item>
+    
+    <item>
+      <title>优雅的使用 Linux</title>
+      <link>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</link>
+      <pubDate>Thu, 15 Jun 2017 16:01:02 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</guid>
+      <description>起头 Linux 是我最喜欢的操作系统之一，平时用的最多的是 CentOS，Linux 的强悍不是我只言片语能描述清楚的，这篇博文将以事件记录的形式随时收集记录我平时所遇到的一些工具、命令、故障等。
+网络工具包 host、nslookup、dig 等 平时经常用的几个命令 host，nslookup，dig 等，新装的 CentOS 虚拟机运行 host 命令既然报 “找不到这个命令”
+sudo yum install host，并没有这个包的安装，谷歌后发现 host 命令属于网络工具包中的一个。
+下面列出各个发行版对应的包安装方式：
+Ubuntu:# sudo apt-get install dnsutils Debian: # apt-get install dnsutils Fedora / Centos: # yum install bind-utils tcpdump 抓包分析 Vanilla 单次请求 sudo tcpdump -i any port 9110 -X -s 0 -S
+ -X表明当分析和打印时, tcpdump 会打印每个包的头部数据, 同时会以16进制和ASCII码形式打印出每个包的数据(但不包括连接层的头部)。 -S表明打印TCP 数据包的顺序号时, 使用绝对的顺序号, 而不是相对的顺序号.比如我第一次用tcpdump查看tcp的三次握手时发现第三次握手的ack=1,这个ack就是相对的，因为tcpdump只在SYN包中显示绝对顺序号，而非SYN包则显示相对的，为了便于观察，在抓包时都采用来绝对的顺序号。  http://www2.meps.tp.edu.tw/documents/memo/TCP%EF%BC%8FIP%E6%A6%82%E8%AB%96/index.htm http://xstarcd.github.io/wiki/shell/tcpdump_TCP_three-way_handshake.html http://linuxwiki.github.io/NetTools/tcpdump.html json 命令行解析工具 jq 来自 IBM 的文档 项目 官方文档</description>
+    </item>
+    
+    <item>
+      <title>静态网站生成器hugo使用</title>
+      <link>http://idevz.org/2017/06/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8hugo%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Tue, 13 Jun 2017 19:20:38 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/06/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8hugo%E4%BD%BF%E7%94%A8/</guid>
+      <description>快速入门 hugo 是一个入门特别简单的静态网站生成器，基本跟着 QuickStart 文档 一步步做就行，这里主要简要阐述下过程中遇到的问题</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://idevz.org/1/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://idevz.org/1/01/</guid>
+      <description>https://www.ansible.com/resources/webinars-training/introduction-to-ansible
+使用Ansible部署Kubernetes 1.6高可用集群 https://blog.frognew.com/2017/06/kubernetes-1.6-ha-cluster-by-ansible.html
+HOW-TO Deploy Kubernetes on Openstack with Ansible http://superuser.openstack.org/articles/deploy-kubernetes-openstack-ansible/
+CentOS 7 使用 ansible 搭建 kubernetes https://github.com/xizhibei/blog/issues/47
+Ansible用命令管理主机(doc) http://getansible.com/begin/ansibleyong_ming_ling_guan_li_zhu_ji</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://idevz.org/1/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://idevz.org/1/01/</guid>
+      <description>ip vs ifconfig https://linux.cn/article-4326-1.html</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://idevz.org/1/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://idevz.org/1/01/</guid>
+      <description>Iptables详解 http://blog.csdn.net/reyleon/article/details/12976341
+关于iptables的四表五链 http://blog.51cto.com/godben/1693903 iptables只是Linux防火墙的管理工具而已，位于/sbin/iptables。真正实现防火墙功能的是netfilter，它是Linux内核中实现包过滤的内部结构。
+iptables包含4个表，5个链。其中表是按照对数据包的操作区分的，链是按照不同的Hook点来区分的，表和链实际上是netfilter的两个维度。 4个表:filter,nat,mangle,raw 默认表是filter（没有指定表的时候就是filter表）。表的处理优先级：raw&amp;gt;mangle&amp;gt;nat&amp;gt;filter。 filter：一般的过滤功能 nat:用于nat功能（端口映射，地址映射等） mangle:用于对特定数据包的修改 raw:有限级最高，设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能 5个链：PREROUTING,INPUT,FORWARD,OUTPUT,POSTROUTING。 PREROUTING:数据包进入路由表之前 INPUT:通过路由表后目的地为本机 FORWARDING:通过路由表后，目的地不为本机 OUTPUT:由本机产生，向外转发 POSTROUTIONG:发送到网卡接口之前。  规则表： 1.filter表——三个链：INPUT、FORWARD、OUTPUT 作用：过滤数据包 内核模块：iptables_filter. 2.Nat表——三个链：PREROUTING、POSTROUTING、OUTPUT 作用：用于网络地址转换（IP、端口） 内核模块：iptable_nat 3.Mangle表——五个链：PREROUTING、POSTROUTING、INPUT、OUTPUT、FORWARD 作用：修改数据包的服务类型、TTL、并且可以配置路由实现QOS内核模块：iptable_mangle(别看这个表这么麻烦，咱们设置策略时几乎都不会用到它) 4.Raw表——两个链：OUTPUT、PREROUTING 作用：决定数据包是否被状态跟踪机制处理 内核模块：iptable_raw (这个是REHL4没有的，不过不用怕，用的不多)
+规则链： 1.INPUT——进来的数据包应用此规则链中的策略 2.OUTPUT——外出的数据包应用此规则链中的策略 3.FORWARD——转发数据包时应用此规则链中的策略 4.PREROUTING——对数据包作路由选择前应用此链中的规则 （记住！所有的数据包进来的时侯都先由这个链处理） 5.POSTROUTING——对数据包作路由选择后应用此链中的规则 （所有的数据包出来的时侯都先由这个链处理）
+规则表之间的优先顺序： Raw——mangle——nat——filter 规则链之间的优先顺序（分三种情况）：
+第一种情况：入站数据流向 从外界到达防火墙的数据包，先被PREROUTING规则链处理（是否修改数据包地址等），之后会进行路由选择（判断该数据包应该发往何处），如果数据包的目标主机是防火墙本机（比如说Internet用户访问防火墙主机中的web服务器的数据包），那么内核将其传给INPUT链进行处理（决定是否允许通过等），通过以后再交给系统上层的应用程序（比如Apache服务器）进行响应。
+第二冲情况：转发数据流向 来自外界的数据包到达防火墙后，首先被PREROUTING规则链处理，之后会进行路由选择，如果数据包的目标地址是其它外部地址（比如局域网用户通过网关访问QQ站点的数据包），则内核将其传递给FORWARD链进行处理（是否转发或拦截），然后再交给POSTROUTING规则链（是否修改数据包的地址等）进行处理。
+第三种情况：出站数据流向
+ 防火墙本机向外部地址发送的数据包（比如在防火墙主机中测试公网DNS服务器时），首先被OUTPUT规则链处理，之后进行路由选择，然后传递给POSTROUTING规则链（是否修改数据包的地址等）进行处理。  管理和设置iptables规则
+Iptables的基本语法格式： Iptables [-t 表名] 命令选项 ［链名］ ［条件匹配］ ［-j 目标动作或跳转］ 说明：表名、链名用于指定iptables命令所操作的表和链，命令选项用于指定管理iptables规则的方式（比如：插入、增加、删除、查看等；条件匹配用于指定对符合什么样条件的数据包进行处理；目标动作或跳转用于指定数据包的处理方式（比如允许通过、拒绝、丢弃、跳转（Jump）给其它链处理。
+Iptables命令的管理控制选项：
+-A 在指定链的末尾添加（append）一条新的规则 -D删除（delete）指定链中的某一条规则，可以按规则序号和内容删除 -I在指定链中插入（insert）一条新的规则，默认在第一行添加 -R修改、替换（replace）指定链中的某一条规则，可以按规则序号和内容替换 -L列出（list）指定链中所有的规则进行查看 -F清空（flush） -N新建（new-chain）一条用户自己定义的规则链 -X删除指定表中用户自定义的规则链（delete-chain） -P设置指定链的默认策略（policy） -n使用数字形式（numeric）显示输出结果 -v查看规则表详细信息（verbose）的信息 -V查看版本(version) -h获取帮助（help）</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://idevz.org/1/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://idevz.org/1/01/</guid>
+      <description>MAC networksetup -listallhardwareports networksetup -listallnetworkservices spoof-mac list
+lo 回环接口(loop back) 或者 本地主机(localhost) gif 通用 IP-in-IP隧道(RFC2893) stf 6to4连接(RFC3056) en 以太网或802.11接口 fw IP over FireWire(IEEE-1394), macOS特有 p2p Point-to-Point 协议 awdl airdrop peer to peer(一种mesh network), apple airdrop设备特有 bridge 第2层桥接 vlan 虚拟局域网络
+在iOS设备(支持cellular)上还能看到 pdp_ip 蜂窝数据连接
+en1 = Ethernet 1 vmnet8 = Virtual Interface vmnet1 = Virtual Interface
+==&amp;gt; idevz-kube-node1: Available bridged network interfaces: 1) en0 2) awdl0 3) en5 ==&amp;gt; idevz-kube-node1: When choosing an interface, it is usually the one that is ==&amp;gt; idevz-kube-node1: being used to connect to the internet.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://idevz.org/1/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://idevz.org/1/01/</guid>
+      <description>systemd wiki https://wiki.archlinux.org/index.php/systemd_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+journalctl可以根据特定字段过滤输出。如果过滤的字段比较多，需要较长时间才能显示出来。
+示例：
+显示本次启动后的所有日志：
+journalctl -b 不过，一般大家更关心的不是本次启动后的日志，而是上次启动时的（例如，刚刚系统崩溃了）。可以使用 -b 参数：
+journalctl -b -0 显示本次启动的信息 journalctl -b -1 显示上次启动的信息 journalctl -b -2 显示上上次启动的信息 journalctl -b -2 只显示错误、冲突和重要告警信息
+journalctl -p err..alert 也可以使用数字， journalctl -p 3..1。If single number/keyword used, journalctl -p 3 - all higher priority levels also included. 显示从某个日期 ( 或时间 ) 开始的消息:
+journalctl &amp;ndash;since=&amp;ldquo;2012-10-30 18:17:16&amp;rdquo; 显示从某个时间 ( 例如 20分钟前 ) 的消息:
+journalctl &amp;ndash;since &amp;ldquo;20 min ago&amp;rdquo; 显示最新信息
+journalctl -f 显示特定程序的所有消息:</description>
+    </item>
+    
+  </channel>
+</rss>

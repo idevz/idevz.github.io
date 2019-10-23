@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>读书笔记 on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in 读书笔记 on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Sun, 23 Jul 2017 12:36:20 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Netty in action 学习笔记</title>
+      <link>http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 23 Jul 2017 12:36:20 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>Netty 的概念及体系结构 框架详解，涵盖了 Netty 的设计、组件及编程接口
+阻塞和非阻塞的网络 概述阻塞和非阻塞的网络 API，以及对应的 JDK 接口，引入 Netty 作为构建高度可伸缩性、异步、事件驱动的网络编程工具包，首先领略一下 Netty 的基础构建快：Channel、回调、Future、事件及 ChannelHandler。
+如何配置系统以构建运行示例代码 通过一个简单的回送从连接的客户端接收到消息的服务器应用程序来测试系统的运行，介绍 Bootstrap 在运行时组装和配置一个应用的所有组件的过程。
+Netty 技术以及体系结构 介绍 Netty 的核心组件：Channel、EventLoop、ChannelHandler 以及 ChannelPipeline，最后解释了引导服务器和客户端之间的差异。
+网络传输 对比了通过 JDK API 和 Netty 使用阻塞和非阻塞传输的用法。研究了 Netty 的传输 API 的底层接口的层次关系以及它们所支持的传输类型。
+Netty 的数据处理 API &amp;ndash; ByteBuf 描述了 Netty 的字节容器 ByteBuf 相对于 JDK 的 ByteBuffer 的优势，以及如何分配和访问由 ByteBuf 所使用的内存。展示了如何通过引用计数来管理内存资源。
+Netty 核心组件 重点介绍 ChannelHandler 和 ChannelPipeline 负责应用程序的处理逻辑，并驱动数据和事件经过网络层。另外介绍了在实现高级用例的时候 ChannelHandlerContext 的角色，以及在多个 ChannelPipeline 之间共享 ChannelHandler 的缘由。最后说明了如何处理由入站事件和出站事件所触发的异常。
+Netty 的线程模型 提供了关于线程模型的一般概述，并详细介绍了 Netty 的线程模型。研究了 interfaceEventLoop，他是 Netty 并发 API 的主要部分，并解释了 interfaceEventLoop 和线程以及 Channel 的关系。这些对理解 Netty 如何实现异步、事件驱动的网络编程模型来说至关重要。并展示了如何通过 EventLoop 进行任务调度。</description>
+    </item>
+    
+    <item>
+      <title>Spring in action 学习笔记</title>
+      <link>http://idevz.org/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Sun, 23 Jul 2017 08:59:22 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>Spring 核心  Spring 容器 依赖注入（dependency injection，DI） 面向切面编程（aspect-oriented programming）  Spring 概览 Spring 最早由 Rod Johnson 创建，并在《Expert One-On-One：J2EE Design and Development》中进行了介绍，起初 Spring 的诞生主要是为了替代更加重量级的企业级 JAVA 技术，尤其是 EJB， 相对于 EJB 来说，Spring 提供了更加轻量级和简单的编程模型，Spring 增强了简单老式 JAVA 对象（Plain Old JAVA Object，POJO）的功能，使其具备了之前只有 EJB 和其他企业级 JAVA 规范才有的功能。其最根本的使命就是：简化 JAVA 开发。
+Spring 采取了以下 4 种关键策略来降低 JAVA 开发的复杂性：
+ 基于 POJO 的轻量级和最小侵入性编程。 通过依赖注入和面向接口实现松耦合。 基于切面和惯例进行声明式编程。 通过切面和模板减少样板式代码。  DI 和 AOP 样例 SPring 竭力避免因自身的 API 而弄乱你的应用代码，Spring 不会强迫你实现 Spring 规范的接口，或继承 Spring 规范的类。非侵入式的编程。最坏的场景是一个类或许会使用 Spring 的注解，但依旧是 POJO。而 Spring 通过 DI 来装配 POJO，帮助应用对象彼此之间保持松散耦合。</description>
+    </item>
+    
+  </channel>
+</rss>

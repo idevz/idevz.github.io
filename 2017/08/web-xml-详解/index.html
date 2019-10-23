@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='context-param 声明应用范围(整个WEB项目)内的上下文初始化参数。 param-name 设定上下文的参数名称。必须是唯一名称 param-value 设定的参数名称的值
+&lt;context-param&gt; &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt; &lt;param-value&gt;contextConfigLocationValue&gt;&lt;/param-value&gt; &lt;/context-param&gt;  Web 项目的初始化  Web 项目启动时，Servlet 容器（TomCat）会读取 web.xml 文件中的 &lt;listen&gt; 和 &lt;context-param&gt; 配置。 Servlet 容易会创建一个 ServletContext，整个应用范围都将使用这个上下文。 然后 Servlet 容器会将从 &lt;context-param&gt; 读取的配置转化为键值对交给 ServletContext。 Servlet 容器创建 &lt;listener&gt; 中配置的实例，创建相关的事件监听（listener 定义的类可以是自定义的类但必须需要继承 ServletContextListener）。 在监听的类中会有一个 contextInitialized(ServletContextEvent event) 初始化方法，在这个方法中可以通过 event.getServletContext().getInitParameter(&quot;contextConfigLocation&quot;) 来得到 context-param 设定的值。在这个类中还必须有一个 contextDestroyed(ServletContextEvent event) 销毁方法.用于关闭应用前释放资源，比如说数据库连接的关闭。 得到这个 context-param 的值之后,你就可以做一些操作了。注意,这个时候你的 Web 项目还没有完全启动完成。这个动作会比所有的 Servlet 都要早。  Servlet 容器对 Web.xml 的加载过程是 Context-param -&gt; listener -&gt; filter -&gt; Servlet。
+对 Context 的引用  页面中 ${initParam.'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='web xml 详解 • 做一个善于思考的学习者'>
+<meta property='og:description' content='context-param 声明应用范围(整个WEB项目)内的上下文初始化参数。 param-name 设定上下文的参数名称。必须是唯一名称 param-value 设定的参数名称的值
+&lt;context-param&gt; &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt; &lt;param-value&gt;contextConfigLocationValue&gt;&lt;/param-value&gt; &lt;/context-param&gt;  Web 项目的初始化  Web 项目启动时，Servlet 容器（TomCat）会读取 web.xml 文件中的 &lt;listen&gt; 和 &lt;context-param&gt; 配置。 Servlet 容易会创建一个 ServletContext，整个应用范围都将使用这个上下文。 然后 Servlet 容器会将从 &lt;context-param&gt; 读取的配置转化为键值对交给 ServletContext。 Servlet 容器创建 &lt;listener&gt; 中配置的实例，创建相关的事件监听（listener 定义的类可以是自定义的类但必须需要继承 ServletContextListener）。 在监听的类中会有一个 contextInitialized(ServletContextEvent event) 初始化方法，在这个方法中可以通过 event.getServletContext().getInitParameter(&quot;contextConfigLocation&quot;) 来得到 context-param 设定的值。在这个类中还必须有一个 contextDestroyed(ServletContextEvent event) 销毁方法.用于关闭应用前释放资源，比如说数据库连接的关闭。 得到这个 context-param 的值之后,你就可以做一些操作了。注意,这个时候你的 Web 项目还没有完全启动完成。这个动作会比所有的 Servlet 都要早。  Servlet 容器对 Web.xml 的加载过程是 Context-param -&gt; listener -&gt; filter -&gt; Servlet。
+对 Context 的引用  页面中 ${initParam.'>
+<meta property='og:url' content='http://idevz.org/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='Web.xml'><meta property='article:published_time' content='2017-08-13T10:26:18&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>web xml 详解 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>web xml 详解</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-08-13T10:26:18&#43;08:00'>2017, Aug 13</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+One min read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h2 id="context-param">context-param</h2>
+
+<p>声明应用范围(整个WEB项目)内的上下文初始化参数。
+param-name 设定上下文的参数名称。必须是唯一名称
+param-value 设定的参数名称的值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;context-param&gt;</span>  
+<span style="color:#f92672">&lt;param-name&gt;</span>contextConfigLocation<span style="color:#f92672">&lt;/param-name&gt;</span>  
+<span style="color:#f92672">&lt;param-value&gt;</span>contextConfigLocationValue&gt;<span style="color:#f92672">&lt;/param-value&gt;</span>  
+<span style="color:#f92672">&lt;/context-param&gt;</span> </code></pre></div>
+<h3 id="web-项目的初始化">Web 项目的初始化</h3>
+
+<ol>
+<li>Web 项目启动时，Servlet 容器（TomCat）会读取 web.xml 文件中的 <code>&lt;listen&gt;</code> 和 <code>&lt;context-param&gt;</code> 配置。</li>
+<li>Servlet 容易会创建一个 ServletContext，整个应用范围都将使用这个上下文。</li>
+<li>然后 Servlet 容器会将从 <code>&lt;context-param&gt;</code> 读取的配置转化为键值对交给 ServletContext。</li>
+<li>Servlet 容器创建 <code>&lt;listener&gt;</code> 中配置的实例，创建相关的事件监听（listener 定义的类可以是自定义的类但必须需要继承 ServletContextListener）。</li>
+<li>在监听的类中会有一个 contextInitialized(ServletContextEvent event) 初始化方法，在这个方法中可以通过 <code>event.getServletContext().getInitParameter(&quot;contextConfigLocation&quot;)</code>  来得到 context-param 设定的值。在这个类中还必须有一个 contextDestroyed(ServletContextEvent event) 销毁方法.用于关闭应用前释放资源，比如说数据库连接的关闭。</li>
+<li>得到这个 context-param 的值之后,你就可以做一些操作了。注意,这个时候你的 Web 项目还没有完全启动完成。这个动作会比所有的 Servlet 都要早。</li>
+</ol>
+
+<p>Servlet 容器对 Web.xml 的加载过程是 Context-param -&gt; listener -&gt; filter -&gt; Servlet。</p>
+
+<h3 id="对-context-的引用">对 Context 的引用</h3>
+
+<ol>
+<li>页面中 <code>${initParam.contextConfigLocation}</code></li>
+<li>Servlet 中 <code>String paramValue=getServletContext().getInitParameter(&quot;contextConfigLocation&quot;)</code></li>
+</ol>
+
+<h2 id="listener">listener</h2>
+
+<p>用来注册一个监听器类。可以收到事件什么时候发生以及用什么作为响应的通知。事件监听程序在建立、修改和删除会话或 servlet 环境变更时得到通知。常与 context-param 联合使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;listener&gt;</span>  
+<span style="color:#f92672">&lt;listen-class&gt;</span>com.myapp.MyListener<span style="color:#f92672">&lt;/listen-class&gt;</span>  
+<span style="color:#f92672">&lt;/listener&gt;</span>  </code></pre></div>
+<p>listen-class 指定监听类，该类继承 ServletContextListener 包含初始化方法 <code>contextInitialized(ServletContextEvent event)</code> 和 销毁方法 <code>contextDestoryed(ServletContextEvent event)</code></p>
+
+<h2 id="filter">filter</h2>
+
+<p>用于指定WEB容器的过滤器，在请求和响应对象在 Servlet 处理之前和之后，可以通过此过滤器对这两个对象进行处理。</p>
+
+<p>filter-class 中指定的过滤器类须继承 javax.servlet.Filter 具有须有以下三种方法</p>
+
+<ul>
+<li>init(FilterConfig filterConfig)：初始化，一般情况下时读取配置文件中的 init-param 参数值 如 filterConfig.getInitParameter(&ldquo;encoding&rdquo;)</li>
+<li>doFilter(&hellip;)：用于对 request，response进行处理，并能过 chain.doFilter(&hellip;) 交过下一个控制器</li>
+<li>destroy()：资源销毁</li>
+</ul>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/java/'>Java</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/08/effective-go/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>effective go</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/08/do-performance-test/'>
+        <span class='screen-reader-text'>Next post: </span>do performance test<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

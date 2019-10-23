@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test::Nginx on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/categories/testnginx/</link>
+    <description>Recent content in Test::Nginx on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Wed, 29 Nov 2017 07:25:54 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/categories/testnginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OpenResty 自动化测试框架 Test::Nginx 详解</title>
+      <link>http://idevz.org/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Wed, 29 Nov 2017 07:25:54 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/</guid>
+      <description>https://openresty.gitbooks.io/programming-openresty/content/testing/
+数据驱动的自动化测试 自动化测试在软件开发和维护过程中扮演着一个至关重要的角色，OpenResty 为编写直观的声明式测试用例基于 Test::Nginx 提供了一个数据驱动的测试框架，使我们可以方便的为 Lua 包、Nginx 模块、OpenResty 应用等编写测试用例。 数据驱动的方式使得我们可以使用不同方式来运行相同的测试用例，从而帮助我们在不同场景下或者使用不同的扩展工具发现各种问题。测试驱动开发（TDD）是 OpenResty 保障高代码质量的基石。
+源自 Perl 世界 Test::Base 的 Test::Nginx Test::Nginx 所使用说明文档格式、或者语言的测试用例其实更像一种来自于 Perl 世界 Test::Base 测试框架所提供更通用的测试语言的一种方言。从面向对象编程这个场景来看，Test::Nginx 仅仅是 Test::Base 的一个子类，也正因为如此，所以 Test::Nginx 继承了 Test::Base 框架所提供的所有特性。外加 Test::Nginx 提供了更方便的原语和符号集合来简化在 Nginx 和 OpenResty 上下文中做测试。Test::Nginx 通过 Perl 世界的 CPAN 进行发布。
+Test::Nginx 为不同的测试需求提供了各种不一样的测试类，大致列举如下：
+Test::Base Test::Nginx Test::Nginx::Socket Test::Nginx::Socket::Lua Test::Nginx::Socket::Lua::Stream 不同于 Nginx 官方维护的 Test::Nginx 要注意的一点，OpenResty 提供的 Test::Nginx 与由 Maxim Dounin 创建 和 Nginx 官方维护的 Test::Nginx 套件没有任何关系，Nginx 官方所维护的 Test::Nginx 要求用户通过直接编写 Perl 代码来完成相关的测试，所以这跟 OpenResty 提供的 Test::Nginx 有本质的不同在于首先，它不再是数据驱动的测试，其次他需要用户具有 Perl 语言开发的能力。</description>
+    </item>
+    
+  </channel>
+</rss>

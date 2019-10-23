@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='如何安装 shadowsocksr wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh chmod &#43;x shadowsocksR.sh ./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log 安装iptabl systemctl stop firewalld.service systemctl disable firewalld.service systemctl start iptables.service /sbin/iptables -I INPUT -p tcp --dport 8000 -j ACCEPT 执行以上安装命令，即可 安装 shadowsocksr，然后配置相关的 代理服务器，即可实现翻墙。
+如何使用 proxifier 来指定某些 APP 通过 ssocks 翻墙 浏览器比如 Chrome 可以通过安装 MyShadowSocks 这样的浏览器插件来实现科学上网，其他 APP 呢？或者全局上网代理控制呢？ 这就需要使用 proxifier 来进行设置.
+点击 Proxies 给 Proxifier 添加 代理服务器， 点击 Roules 给 Proxifier 添加请求规则 设置 Proxifier 的 DNS 为 “Resolve hostnames through proxy” 直接使用代理服务器的 DNS 解析，否则仍然不可用。 这样就可以实现科学上网了。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='shadowsocksr proxifier • 做一个善于思考的学习者'>
+<meta property='og:description' content='如何安装 shadowsocksr wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh chmod &#43;x shadowsocksR.sh ./shadowsocksR.sh 2&gt;&amp;1 | tee shadowsocksR.log 安装iptabl systemctl stop firewalld.service systemctl disable firewalld.service systemctl start iptables.service /sbin/iptables -I INPUT -p tcp --dport 8000 -j ACCEPT 执行以上安装命令，即可 安装 shadowsocksr，然后配置相关的 代理服务器，即可实现翻墙。
+如何使用 proxifier 来指定某些 APP 通过 ssocks 翻墙 浏览器比如 Chrome 可以通过安装 MyShadowSocks 这样的浏览器插件来实现科学上网，其他 APP 呢？或者全局上网代理控制呢？ 这就需要使用 proxifier 来进行设置.
+点击 Proxies 给 Proxifier 添加 代理服务器， 点击 Roules 给 Proxifier 添加请求规则 设置 Proxifier 的 DNS 为 “Resolve hostnames through proxy” 直接使用代理服务器的 DNS 解析，否则仍然不可用。 这样就可以实现科学上网了。'>
+<meta property='og:url' content='http://idevz.org/2017/11/shadowsocksr-proxifier/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='shadowsocksr'><meta property='article:tag' content='Proxifier'><meta property='article:published_time' content='2017-11-12T08:16:54&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T09:23:40&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>shadowsocksr proxifier • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/11/shadowsocksr-proxifier/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tools'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>shadowsocksr proxifier</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-11-12T08:16:54&#43;08:00'>2017, Nov 12</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+One min read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h2 id="如何安装-shadowsocksr">如何安装 shadowsocksr</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
+
+chmod +x shadowsocksR.sh
+
+./shadowsocksR.sh <span style="color:#ae81ff">2</span>&gt;&amp;<span style="color:#ae81ff">1</span> | tee shadowsocksR.log
+
+安装iptabl
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+systemctl start iptables.service
+/sbin/iptables -I INPUT -p tcp --dport <span style="color:#ae81ff">8000</span> -j ACCEPT</code></pre></div>
+<p>执行以上安装命令，即可 安装 shadowsocksr，然后配置相关的 代理服务器，即可实现翻墙。</p>
+
+<h2 id="如何使用-proxifier-来指定某些-app-通过-ssocks-翻墙">如何使用 proxifier 来指定某些 APP 通过 ssocks 翻墙</h2>
+
+<p>浏览器比如 Chrome 可以通过安装 MyShadowSocks 这样的浏览器插件来实现科学上网，其他 APP 呢？或者全局上网代理控制呢？
+这就需要使用 proxifier 来进行设置.</p>
+
+<h3 id="点击-proxies-给-proxifier-添加-代理服务器">点击 Proxies 给 Proxifier 添加 代理服务器，</h3>
+
+<p><img src="http://i.idevz.org/proxifier-add-proxies.png-k49.pic" alt="Proxifier-add-proxies" /></p>
+
+<h3 id="点击-roules-给-proxifier-添加请求规则">点击 Roules 给 Proxifier 添加请求规则</h3>
+
+<p><img src="http://i.idevz.org/proxifier-add-rule.png-k49.pic" alt="Proxifier-add-Rule" /></p>
+
+<h3 id="设置-proxifier-的-dns-为-resolve-hostnames-through-proxy-直接使用代理服务器的-dns-解析-否则仍然不可用">设置 Proxifier 的 DNS 为 “Resolve hostnames through proxy” 直接使用代理服务器的 DNS 解析，否则仍然不可用。</h3>
+
+<p><img src="http://i.idevz.org/proxifier-set-dns.png-k49.pic" alt="Proxifier-set-DNS" /></p>
+
+<p>这样就可以实现科学上网了。</p>
+
+<p><img src="http://i.idevz.org/Proxifier-Tweet-deck.png-k49.pic" alt="Proxifier-Tweet-Deck" /></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E5%B7%A5%E5%85%B7/'>工具</a>, <a class='category' href='http://idevz.org/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/'>科学上网</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/shadowsocksr/'>shadowsocksr</a>, <a class='tag' href='http://idevz.org/tags/proxifier/'>Proxifier</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/08/gdb/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>gdb</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/'>
+        <span class='screen-reader-text'>Next post: </span>Mac OSX Vscode GDB 调试环境搭建<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

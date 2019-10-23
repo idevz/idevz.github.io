@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='gdb 在 Mac OSX 使用 GDB 配合 Vscode 来开发简直是强强联合，不能赞更多。 通过常规的 brew install gdb 安装最新的 GDB，编译一个简单的测试文件 start.c 来进行测试：
+gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运行 r 指令启动一个 GDB debug session
+(gdb) r Starting program: /Users/idevz/code/clang/start Unable to find Mach task port for process-id 627: (os/kern) failure (0x5). (please check gdb is codesigned - see taskgated(8)) 报错分析 找不到 Mach Task 进程 ID，来自 OSX 内核的错误，需要检查 gdb 的 codesigned，Mach 是苹果从 NeXTSTEP 带来的微内核，是 OSX 和 IOS 的核心。 从报错来看，应该是由于新安装的 GDB 没有进行 codesigned 签名认证，没有权限开启 Debug。所以我们需要给 GDB 程序添加 codesigned 签名认证。 详细的了解可以参考苹果的开发手册，如下。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='Mac OSX Vscode GDB 调试环境搭建 • 做一个善于思考的学习者'>
+<meta property='og:description' content='gdb 在 Mac OSX 使用 GDB 配合 Vscode 来开发简直是强强联合，不能赞更多。 通过常规的 brew install gdb 安装最新的 GDB，编译一个简单的测试文件 start.c 来进行测试：
+gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运行 r 指令启动一个 GDB debug session
+(gdb) r Starting program: /Users/idevz/code/clang/start Unable to find Mach task port for process-id 627: (os/kern) failure (0x5). (please check gdb is codesigned - see taskgated(8)) 报错分析 找不到 Mach Task 进程 ID，来自 OSX 内核的错误，需要检查 gdb 的 codesigned，Mach 是苹果从 NeXTSTEP 带来的微内核，是 OSX 和 IOS 的核心。 从报错来看，应该是由于新安装的 GDB 没有进行 codesigned 签名认证，没有权限开启 Debug。所以我们需要给 GDB 程序添加 codesigned 签名认证。 详细的了解可以参考苹果的开发手册，如下。'>
+<meta property='og:url' content='http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='OSX'><meta property='article:tag' content='Vscode'><meta property='article:tag' content='GDB'><meta property='article:published_time' content='2017-11-17T17:05:23&#43;08:00'/><meta property='article:modified_time' content='2018-04-16T08:00:33&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>Mac OSX Vscode GDB 调试环境搭建 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tools'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Mac OSX Vscode GDB 调试环境搭建</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-11-17T17:05:23&#43;08:00'>2017, Nov 17</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h1 id="gdb">gdb</h1>
+
+<p>在 Mac OSX 使用 GDB 配合 Vscode 来开发简直是强强联合，不能赞更多。
+通过常规的 <code>brew install gdb</code> 安装最新的 GDB，编译一个简单的测试文件 <code>start.c</code> 来进行测试：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gcc -g start.c -o start
+gdb start</code></pre></div>
+<p><em>运行 gdb 命令进入 GDB交互界面，运行 r 指令启动一个 GDB debug session</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> r
+Starting program: /Users/idevz/code/clang/start
+Unable to find Mach task port <span style="color:#66d9ef">for</span> process-id <span style="color:#ae81ff">627</span>: <span style="color:#f92672">(</span>os/kern<span style="color:#f92672">)</span> failure <span style="color:#f92672">(</span>0x5<span style="color:#f92672">)</span>.
+ <span style="color:#f92672">(</span>please check gdb is codesigned - see taskgated<span style="color:#f92672">(</span><span style="color:#ae81ff">8</span><span style="color:#f92672">))</span></code></pre></div>
+<h6 id="报错分析">报错分析</h6>
+
+<p>找不到 Mach Task 进程 ID，来自 OSX 内核的错误，需要检查 gdb 的 <code>codesigned</code>，Mach 是苹果从 NeXTSTEP 带来的微内核，是 OSX 和 IOS 的核心。
+从报错来看，应该是由于新安装的 GDB 没有进行 codesigned 签名认证，没有权限开启 Debug。所以我们需要给 GDB 程序添加 codesigned 签名认证。
+详细的了解可以参考苹果的开发手册，如下。</p>
+
+<p><a href="https://developer.apple.com/library/content/documentation/Darwin/Conceptual/KernelProgramming/Mach/Mach.html">Mach</a></p>
+
+<p><a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/taskgated.8.html">taskgated</a></p>
+
+<h1 id="签名创建">签名创建</h1>
+
+<h6 id="1-打开-mac-钥匙串访问-在菜单中如下点击-create-a-certificate">1.打开 Mac 钥匙串访问，在菜单中如下点击 <code>create-a-certificate</code></h6>
+
+<p><img src="http://i.idevz.org/create-a-certificate.png-k49.pic" alt="Creat a  certificate" /></p>
+
+<h6 id="2-在窗口-下拉点选-code-signing-代码签名">2.在窗口，下拉点选 <code>code signing(代码签名)</code></h6>
+
+<p><img src="http://i.idevz.org/code-signing.png-k49.pic" alt="code signing" /></p>
+
+<h6 id="3-一路下一步-直到创建成功后-在签名列表找到刚刚创建的签名-查看详情-getinfo-将信任选项设置为永远信任">3.一路下一步，直到创建成功后，在签名列表找到刚刚创建的签名，查看详情（getinfo），将信任选项设置为永远信任</h6>
+
+<p><img src="http://i.idevz.org/always-trust.png-k49.pic" alt="always-trust" /></p>
+
+<h1 id="对-gdb-执行程序设置-codesign">对 gdb 执行程序设置 codesign</h1>
+
+<p>执行以下命令即可，如果认证不成功需要重复操作，可以添加上 <code>-f</code> 参数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">codesign -s gdb_codesign /usr/local/bin/gdb</code></pre></div>
+<p>下面是一些常用的参数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">codesign --remove-signature /usr/local/bin/gdb 		<span style="color:#75715e"># 删除签名</span>
+codesign -vv -d /usr/local/bin/gdb            		<span style="color:#75715e"># 查看</span>
+codesign -f  -s gdb_codesign /usr/local/bin/gdb 	<span style="color:#75715e"># -f</span>
+security find-identity -v -p codesigning 			<span style="color:#75715e"># 查看 codesigning 操作是否成功</span></code></pre></div>
+<h1 id="重启-taskgated">重启 taskgated</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo killall taskgated</code></pre></div>
+<p>至此，GDB 签名就ok了，下面开始使用，如果遇到下面的错。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> <span style="color:#f92672">(</span>gdb<span style="color:#f92672">)</span> r
+Starting program: /Users/idevz/code/clang/start
+During startup program terminated with signal ?, Unknown signal.</code></pre></div>
+<p>则需要对 gdb 设置 <code>set startup-with-shell off</code>， 推荐将此配置加入 init 文件，一劳永逸</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo <span style="color:#e6db74">&#34;set startup-with-shell off&#34;</span>&gt;~/.gdbinit</code></pre></div>
+<h6 id="然后就可以在-vscode-里面设置-gdb-调试了">然后就可以在 Vscode 里面设置 GDB 调试了</h6>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">Use</span> <span style="color:#960050;background-color:#1e0010">IntelliSense</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">learn</span> <span style="color:#960050;background-color:#1e0010">about</span> <span style="color:#960050;background-color:#1e0010">possible</span> <span style="color:#960050;background-color:#1e0010">attributes.</span>
+    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">Hover</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">view</span> <span style="color:#960050;background-color:#1e0010">descriptions</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">existing</span> <span style="color:#960050;background-color:#1e0010">attributes.</span>
+    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">For</span> <span style="color:#960050;background-color:#1e0010">more</span> <span style="color:#960050;background-color:#1e0010">information,</span> <span style="color:#960050;background-color:#1e0010">visit:</span> <span style="color:#960050;background-color:#1e0010">https://go.microsoft.com/fwlink/?linkid=830387</span>
+    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.2.0&#34;</span>,
+    <span style="color:#f92672">&#34;configurations&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;start&#34;</span>,
+            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;gdb&#34;</span>,
+            <span style="color:#f92672">&#34;request&#34;</span>: <span style="color:#e6db74">&#34;launch&#34;</span>,
+            <span style="color:#f92672">&#34;target&#34;</span>: <span style="color:#e6db74">&#34;./start&#34;</span>,
+            <span style="color:#f92672">&#34;cwd&#34;</span>: <span style="color:#e6db74">&#34;${workspaceRoot}&#34;</span>
+        }
+    ]
+}</code></pre></div>
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E5%B7%A5%E5%85%B7/'>工具</a>, <a class='category' href='http://idevz.org/categories/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/'>Mac OSX Vscode GDB 调试环境搭建</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/osx/'>OSX</a>, <a class='tag' href='http://idevz.org/tags/vscode/'>Vscode</a>, <a class='tag' href='http://idevz.org/tags/gdb/'>GDB</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/11/shadowsocksr-proxifier/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>shadowsocksr proxifier</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/'>
+        <span class='screen-reader-text'>Next post: </span>我们应该知道的 Top<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

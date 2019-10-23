@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lua 技巧 on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/tags/lua-%E6%8A%80%E5%B7%A7/</link>
+    <description>Recent content in Lua 技巧 on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Tue, 11 Jul 2017 16:38:42 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/tags/lua-%E6%8A%80%E5%B7%A7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lua 实现面向对象</title>
+      <link>http://idevz.org/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
+      <pubDate>Tue, 11 Jul 2017 16:38:42 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</guid>
+      <description>http://blog.csdn.net/q312998164/article/details/39402771 http://blog.sina.com.cn/s/blog_6b9d508001015qd3.html</description>
+    </item>
+    
+  </channel>
+</rss>

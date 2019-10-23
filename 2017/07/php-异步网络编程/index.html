@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='http://www.huyanping.cn/php%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0/
+加上STREAM_CLIENT_ASYNC_CONNECT 后stream_socket_client会立刻返回，不会阻塞等待。 等tcp链接建立完成后，可以调用io复用接口的到链接建立的通知
+#define EV_TIMEOUT 0x01 #define EV_READ 0x02 #define EV_WRITE 0x04 #define EV_SIGNAL 0x08 #define EV_PERSIST 0x10 #define EV_ET 0x20 #define EVLOOP_ONCE 0x01 #define EVLOOP_NONBLOCK 0x02    值 常量名 含义     1 EV_TIMEOUT 超过时间后事件成为激活状态   2 EV_READ FD就绪，可以读取的时候 ，事件成为激活状态   4 EV_WRITE FD就绪，可以写入的时候 ，事件成为激活状态   8 EV_SIGNAL 用于实现信号检测   16 EV_PERSIST 表示事件是持久的   32 EV_ET 表示底层是否支持边沿触发事件   1 EVLOOP_ONCE 如果设置了EVLOOP_ONCE，循环将等待某些事件成为激活的，执行激活的事件直到没有更多的事件可以执行，然会返回。   2 EVLOOP_NONBLOCK 如果设置了EVLOOP_NONBLOCK，循环不会等待事件被触发：循环将仅仅检测是否有事件已经就绪，可以立即触发，如果有，则执行事件的回调。    event_base_free() 释放资源，这不能销毁绑定事件 event_base_loop() 处理事件，根据指定的base来处理事件循环 event_base_loopbreak() 立即取消事件循环，行为各break语句相同 event_base_loopexit() 在指定的时间后退出循环 event_base_new() 创建并且初始事件 event_base_priority_init() 设定事件的优先级 event_base_set() 关联事件到事件base event_buffer_base_set() 关联缓存的事件到event_base event_buffer_disable() 禁用一个缓存的事件 event_buffer_enable() 启用一个指定的缓存的事件 event_buffer_fd_set() 改变一个缓存的文件系统描述 event_buffer_free() 释放缓存事件 event_buffer_new() 建立一个新的缓存事件 event_buffer_priority_set() 缓存事件的优先级设定 event_buffer_read() 读取缓存事件中的数据 event_buffer_set_callback() 给缓存的事件设置或重置回调hansh函数 event_buffer_timeout_set() 给一个缓存的事件设定超时的读写时间 event_buffer_watermark_set 设置读写事件的水印标记 event_buffer_write() 向缓存事件中写入数据 event_add() 向指定的设置中添加一个执行事件 event_del() 从设置的事件中移除事件 event_free() 清空事件句柄 event_new() 创建一个新的事件 event_set() 准备想要在event_add中添加事件 http://www.'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='PHP 异步网络编程 • 做一个善于思考的学习者'>
+<meta property='og:description' content='http://www.huyanping.cn/php%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0/
+加上STREAM_CLIENT_ASYNC_CONNECT 后stream_socket_client会立刻返回，不会阻塞等待。 等tcp链接建立完成后，可以调用io复用接口的到链接建立的通知
+#define EV_TIMEOUT 0x01 #define EV_READ 0x02 #define EV_WRITE 0x04 #define EV_SIGNAL 0x08 #define EV_PERSIST 0x10 #define EV_ET 0x20 #define EVLOOP_ONCE 0x01 #define EVLOOP_NONBLOCK 0x02    值 常量名 含义     1 EV_TIMEOUT 超过时间后事件成为激活状态   2 EV_READ FD就绪，可以读取的时候 ，事件成为激活状态   4 EV_WRITE FD就绪，可以写入的时候 ，事件成为激活状态   8 EV_SIGNAL 用于实现信号检测   16 EV_PERSIST 表示事件是持久的   32 EV_ET 表示底层是否支持边沿触发事件   1 EVLOOP_ONCE 如果设置了EVLOOP_ONCE，循环将等待某些事件成为激活的，执行激活的事件直到没有更多的事件可以执行，然会返回。   2 EVLOOP_NONBLOCK 如果设置了EVLOOP_NONBLOCK，循环不会等待事件被触发：循环将仅仅检测是否有事件已经就绪，可以立即触发，如果有，则执行事件的回调。    event_base_free() 释放资源，这不能销毁绑定事件 event_base_loop() 处理事件，根据指定的base来处理事件循环 event_base_loopbreak() 立即取消事件循环，行为各break语句相同 event_base_loopexit() 在指定的时间后退出循环 event_base_new() 创建并且初始事件 event_base_priority_init() 设定事件的优先级 event_base_set() 关联事件到事件base event_buffer_base_set() 关联缓存的事件到event_base event_buffer_disable() 禁用一个缓存的事件 event_buffer_enable() 启用一个指定的缓存的事件 event_buffer_fd_set() 改变一个缓存的文件系统描述 event_buffer_free() 释放缓存事件 event_buffer_new() 建立一个新的缓存事件 event_buffer_priority_set() 缓存事件的优先级设定 event_buffer_read() 读取缓存事件中的数据 event_buffer_set_callback() 给缓存的事件设置或重置回调hansh函数 event_buffer_timeout_set() 给一个缓存的事件设定超时的读写时间 event_buffer_watermark_set 设置读写事件的水印标记 event_buffer_write() 向缓存事件中写入数据 event_add() 向指定的设置中添加一个执行事件 event_del() 从设置的事件中移除事件 event_free() 清空事件句柄 event_new() 创建一个新的事件 event_set() 准备想要在event_add中添加事件 http://www.'>
+<meta property='og:url' content='http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='PHP 异步编程'><meta property='article:published_time' content='2017-07-18T14:55:31&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>PHP 异步网络编程 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>PHP 异步网络编程</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-07-18T14:55:31&#43;08:00'>2017, Jul 18</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+4 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  <p><a href="http://www.huyanping.cn/php%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0/">http://www.huyanping.cn/php%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0/</a></p>
+
+<p>加上STREAM_CLIENT_ASYNC_CONNECT 后stream_socket_client会立刻返回，不会阻塞等待。
+等tcp链接建立完成后，可以调用io复用接口的到链接建立的通知</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">#define EV_TIMEOUT      0x01
+#define EV_READ         0x02
+#define EV_WRITE        0x04
+#define EV_SIGNAL       0x08
+#define EV_PERSIST      0x10
+#define EV_ET           0x20
+#define EVLOOP_ONCE     0x01
+#define EVLOOP_NONBLOCK 0x02</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left">值</th>
+<th align="left">常量名</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">1</td>
+<td align="left">EV_TIMEOUT</td>
+<td align="left">超过时间后事件成为激活状态</td>
+</tr>
+
+<tr>
+<td align="left">2</td>
+<td align="left">EV_READ</td>
+<td align="left">FD就绪，可以读取的时候 ，事件成为激活状态</td>
+</tr>
+
+<tr>
+<td align="left">4</td>
+<td align="left">EV_WRITE</td>
+<td align="left">FD就绪，可以写入的时候 ，事件成为激活状态</td>
+</tr>
+
+<tr>
+<td align="left">8</td>
+<td align="left">EV_SIGNAL</td>
+<td align="left">用于实现信号检测</td>
+</tr>
+
+<tr>
+<td align="left">16</td>
+<td align="left">EV_PERSIST</td>
+<td align="left">表示事件是持久的</td>
+</tr>
+
+<tr>
+<td align="left">32</td>
+<td align="left">EV_ET</td>
+<td align="left">表示底层是否支持边沿触发事件</td>
+</tr>
+
+<tr>
+<td align="left">1</td>
+<td align="left">EVLOOP_ONCE</td>
+<td align="left">如果设置了EVLOOP_ONCE，循环将等待某些事件成为激活的，执行激活的事件直到没有更多的事件可以执行，然会返回。</td>
+</tr>
+
+<tr>
+<td align="left">2</td>
+<td align="left">EVLOOP_NONBLOCK</td>
+<td align="left">如果设置了EVLOOP_NONBLOCK，循环不会等待事件被触发：循环将仅仅检测是否有事件已经就绪，可以立即触发，如果有，则执行事件的回调。</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">event_base_free() 释放资源，这不能销毁绑定事件
+event_base_loop() 处理事件，根据指定的base来处理事件循环
+event_base_loopbreak() 立即取消事件循环，行为各break语句相同
+event_base_loopexit() 在指定的时间后退出循环
+event_base_new() 创建并且初始事件
+event_base_priority_init() 设定事件的优先级
+event_base_set() 关联事件到事件base
+event_buffer_base_set() 关联缓存的事件到event_base
+event_buffer_disable() 禁用一个缓存的事件
+event_buffer_enable() 启用一个指定的缓存的事件
+event_buffer_fd_set() 改变一个缓存的文件系统描述
+event_buffer_free() 释放缓存事件
+event_buffer_new() 建立一个新的缓存事件
+event_buffer_priority_set() 缓存事件的优先级设定
+event_buffer_read() 读取缓存事件中的数据
+event_buffer_set_callback() 给缓存的事件设置或重置回调hansh函数
+event_buffer_timeout_set() 给一个缓存的事件设定超时的读写时间
+event_buffer_watermark_set 设置读写事件的水印标记
+event_buffer_write() 向缓存事件中写入数据
+event_add() 向指定的设置中添加一个执行事件
+event_del() 从设置的事件中移除事件
+event_free() 清空事件句柄
+event_new() 创建一个新的事件
+event_set() 准备想要在event_add中添加事件</code></pre></div>
+<p><a href="http://www.wangafu.net/~nickm/libevent-book/Ref4_event.html">http://www.wangafu.net/~nickm/libevent-book/Ref4_event.html</a></p>
+
+<p><a href="http://courages.us/archives/613">http://courages.us/archives/613</a>
+最近在学习PHP的系统事件驱动（event-base）开发，发现PHP有好几个event扩展，根据底层库依赖分为两类：libevent和libev。libevent可以为文件描述符、信号、超时设定等事件提供了监听回调，支持poll/kqueue/event port/select/epoll。libevent 库的其他组件提供其他功能，包括缓冲的事件系统（用于缓冲发送到客户端/从客户端接收的数据）以及 HTTP、DNS 和 RPC 系统的核心实现。libev提供了各种监听器，包括子进程监听，超时设定，定时器，IO监听，信号监听，文件监视等，支持epoll/kqueue/event ports/inotify/eventfd/signalfd，更快的时钟管理，时间变化检测和修正。PHP依赖libevent扩展有libevent，event，PHP依赖libev扩展则有Ev，libev。</p>
+
+<p>libevent在PHP事件驱动开发上应用广泛，比如workerman，phpDaemon，ReactPHP，Kellner。CentOS上PHP 5.4安装libevent扩展</p>
+
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+sudo yum install libevent-devel</p>
+
+<p>wget <a href="https://pecl.php.net/get/libevent-0.1.0.tgz">https://pecl.php.net/get/libevent-0.1.0.tgz</a>
+tar -zxvf libevent-0.1.0.tgz
+cd libevent-0.1.0
+phpize
+./configure
+sudo make
+sudo make install</p>
+
+<p>#增加libevent.so
+sudo vim /etc/php.ini</p>
+
+<p>#是否安装成功
+php -m | grep libevent
+前面介绍过使用ticks和pcntl_signal来做定时器，然而tick运行机制是PHP解释器每执行 N 条可计时的低级语句就会发生的事件，如果tick值设置小了，会产生频繁的系统调用，设置大了又不能保证及时。使用libevent来设置一个定时器</p>
+
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+&lt;?php
+function print_dot(){
+    echo &ldquo;.&rdquo;;
+}</p>
+
+<p>class Timer{
+    protected  $pEventBase;
+    protected $pEvent;
+    public $nInterval = 1;
+    public function __construct(){
+        $this-&gt;pEventBase = event_base_new();
+    }
+    public function addEvent($p_pFunc, $p_mxArgs = null){
+        $this-&gt;pEvent = event_new();
+        event_set($this-&gt;pEvent, 0, EV_TIMEOUT, $p_pFunc, $p_mxArgs);
+        event_base_set($this-&gt;pEvent, $this-&gt;pEventBase);
+    }
+    public function loop(){
+        event_add($this-&gt;pEvent, $this-&gt;nInterval*1000000);
+        event_base_loop($this-&gt;pEventBase);
+    }
+}</p>
+
+<p>$pTimer = new Timer();
+$pTimer-&gt;addEvent(&ldquo;print_dot&rdquo;);
+while(1){
+    $pTimer-&gt;loop();
+}
+libevent使用也很简单：</p>
+
+<p>使用event_base_new和event_new分别创建event_base和event
+使用event_set为event设置要监听文件描述符fd，比如文件、socke、信号，超时则fd为0，事件类型和回调函数
+使用event_base_set关联event_base和event
+使用event_add将设置好的event加入事件监听器
+调用event_base_loop开始处理事件
+官网上有个例子用来做socket监听处理</p>
+
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+&lt;?php
+$socket = stream_socket_server (&lsquo;tcp://0.0.0.0:2000&rsquo;, $errno, $errstr);
+stream_set_blocking($socket, 0);
+$base = event_base_new();
+$event = event_new();
+event_set($event, $socket, EV_READ | EV_PERSIST, &lsquo;ev_accept&rsquo;, $base);
+event_base_set($event, $base);
+event_add($event);
+event_base_loop($base);</p>
+
+<p>$GLOBALS[&lsquo;connections&rsquo;] = array();
+$GLOBALS[&lsquo;buffers&rsquo;] = array();</p>
+
+<p>function ev_accept($socket, $flag, $base) {
+    static $id = 0;</p>
+
+<pre><code>$connection = stream_socket_accept($socket);
+stream_set_blocking($connection, 0);
+
+$id += 1;
+
+$buffer = event_buffer_new($connection, 'ev_read', NULL, 'ev_error', $id);
+event_buffer_base_set($buffer, $base);
+event_buffer_timeout_set($buffer, 30, 30);
+event_buffer_watermark_set($buffer, EV_READ, 0, 0xffffff);
+event_buffer_priority_set($buffer, 10);
+event_buffer_enable($buffer, EV_READ | EV_PERSIST);
+
+// we need to save both buffer and connection outside
+$GLOBALS['connections'][$id] = $connection;
+$GLOBALS['buffers'][$id] = $buffer;
+</code></pre>
+
+<p>}</p>
+
+<p>function ev_error($buffer, $error, $id) {
+    event_buffer_disable($GLOBALS[&lsquo;buffers&rsquo;][$id], EV_READ | EV_WRITE);
+    event_buffer_free($GLOBALS[&lsquo;buffers&rsquo;][$id]);
+    fclose($GLOBALS[&lsquo;connections&rsquo;][$id]);
+    unset($GLOBALS[&lsquo;buffers&rsquo;][$id], $GLOBALS[&lsquo;connections&rsquo;][$id]);
+}</p>
+
+<p>function ev_read($buffer, $id) {
+    while ($read = event_buffer_read($buffer, 256)) {
+        var_dump($read);
+    }
+}
+相比libevent，event扩展提供了面向对象的方法，支持libevent 2+ 的特性，对HTTP，DNS，OpenSSL等协议操作进行封装。Kellner框架比较有意思，在PHP的libevent扩展基础上将http请求处理封装成了扩展，使用cli模式处理http请求，并给出了基于Zend Framework 2的示例。</p>
+
+<p>libev自称libevent的替代者，克服了libevent的一些不利影响，开销更小，Node JS便是利用它来做事件驱动。相比基于libeventd的扩展，基于libev的ev扩展更新比较积极，支持设置各种的监听器，为感兴趣的事件注册回调，比如文件变化，超时。CentOS上PHP 5.4安装ev扩展</p>
+
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+wget <a href="https://pecl.php.net/get/ev-0.2.15.tgz">https://pecl.php.net/get/ev-0.2.15.tgz</a>
+tar -zxvf ev-0.2.15
+cd ev-0.2.15
+phpize
+./configure
+sudo make
+sudo make install</p>
+
+<p>#增加ev.so
+sudo vim /etc/php.ini</p>
+
+<p>#是否安装成功
+php -m | grep ev
+libev封装了各种监视器，操作也比较简单。</p>
+
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+&lt;?php
+/**
+ * 延迟1秒后执行，不重复
+ */
+$pDelay = new EvTimer(1, 0, function () {
+    echo &ldquo;1 delay \n&rdquo;;
+});
+/**
+ * 每隔一秒执行一次的定时器，0秒后执行
+ */
+$pTimer = new EvTimer(0, 1, function () {
+    echo &ldquo;1 seconds \n&rdquo;;
+});
+/**
+ * 如果没有其他更高等级的监视器，那么就执行EvIdle，处于低优先级则不执行
+ */
+$pIdle = new EvIdle(function(){
+    sleep(1);
+    echo &ldquo;idle timer \n&rdquo;;
+},0,2);
+/**
+ * 每一次loop开始都会执行
+ */
+$pPrepare = new EvPrepare(function(){
+    echo &ldquo;before timer \n&rdquo;;
+},0);
+/**
+ * 每一次loop都会执行，可以通过优先级调整执行顺序
+ */
+$c = new EvCheck(function(){
+    echo &ldquo;after timer \n&rdquo;;
+},0,-1);
+/**
+ * 定时器，每隔1.5秒后执行一次，0秒后开始
+ */
+$pPeriod = new EvPeriodic(0., 1.5, NULL, function ($w, $revents) {
+    echo time(), PHP_EOL;
+});
+/**
+ * IO输入事件监听，可以拿去监听socket的Ev::WRITE和Ev::READ事件
+ */
+$pReadWatcher = new EvIo(STDIN, Ev::READ, function ($watcher, $revents) {
+    echo &ldquo;STDIN is readable\n&rdquo;;
+});</p>
+
+<p>/**
+ * 注册监听感兴趣的信号
+ */
+$pSignal = new EvSignal(SIGTERM, function ($watcher) {
+    echo &ldquo;SIGTERM received\n&rdquo;;
+    $watcher-&gt;stop();
+});
+/**
+ * 文件变化监听器，10秒监测一次
+ */
+$pStatWatcher = new EvStat(&ldquo;/var/log/messages&rdquo;, 10, function ($w) {
+    echo &ldquo;/var/log/messages changed\n&rdquo;;</p>
+
+<pre><code>$attr = $pStatWatcher-&gt;attr();
+
+if ($attr['nlink']) {
+    printf(&quot;Current size: %ld\n&quot;, $attr['size']);
+    printf(&quot;Current atime: %ld\n&quot;, $attr['atime']);
+    printf(&quot;Current mtime: %ld\n&quot;, $attr['mtime']);
+} else {
+    fprintf(STDERR, &quot;`messages` file is not there!&quot;);
+    $pStatWatcher-&gt;stop();
+}
+</code></pre>
+
+<p>});</p>
+
+<p>/**
+ * 开始执行Ev::RUN_ONCE则立即执行Ev::RUN_NOWAIT则非阻塞执行
+ */
+Ev::run();
+也可以监听子进程</p>
+
+<p>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+$pid = pcntl_fork();</p>
+
+<p>if ($pid == -1) {
+    fprintf(STDERR, &ldquo;pcntl_fork failed\n&rdquo;);
+} elseif ($pid) {
+    $w = new EvChild($pid, FALSE, function ($w, $revents) {
+        $w-&gt;stop();</p>
+
+<pre><code>    printf(&quot;Process %d exited with status %d\n&quot;, $w-&gt;rpid, $w-&gt;rstatus);
+});
+
+Ev::run();
+
+// Protect against Zombies
+pcntl_wait($status);
+</code></pre>
+
+<p>} else {
+    //Forked child
+    exit(2);
+}
+php的libev扩展也实现了libev的所有监视器，提供类似的用法，但比较久没更新了。</p>
+
+<p>在网络编程中，使用事件驱动模型监听感兴趣的事件，结合异步处理，能够大大提高服务器性能。传统服务器模型如Apache为每一个请求生成一个子进程。当用户连接到服务器的一个子进程就产生，并处理连接。每个连接获得一个单独的线程和子进程。当用户请求数据返回时，子进程开始等待数据库操作返回。如果此时另一个用户也请求返回数据，这时就产生了阻塞。以下引用自《使用事件驱动模型实现高效稳定的网络服务器程序》</p>
+
+<p>简单网络编程模型里面，服务器与客户端都是一应一答，大部分的 socket 接口都是阻塞型的。在面对多个客户端的请求时候，最简单的解决方式是在服务器端使用多线程（或多进程）。如果要同时响应成百上千路的连接请求，则无论多线程还是多进程都会严重占据系统资源，降低系统对外界响应效率，而线程与进程本身也更容易进入假死状态。
+于是便有了“线程池”或“连接池”。“线程池”旨在减少创建和销毁线程的频率，其维持一定合理数量的线程，并让空闲的线程重新承担新的执行任务。“连接池”维持连接的缓存池，尽量重用已有的连接、减少创建和关闭连接的频率。
+但是，“线程池”和“连接池”技术也只是在一定程度上缓解了频繁调用 IO 接口带来的资源占用。而且，所谓“池”始终有其上限，当请求大大超过上限时，“池”构成的系统对外界的响应并不比没有池的时候效果好多少。所以使用“池”必须考虑其面临的响应规模，并根据响应规模调整“池”的大小。对付可能同时出现的上千甚至上万次的客户端请求，“线程池”或“连接池”或许可以缓解部分压力，但是不能解决所有问题。
+于是便有了基于事件驱动的非阻塞型服务器，比如Nginx，Node.js。Nginx采用事件驱动，使用epoll事件模型，充分使用异步逻辑，削减了上下文调度开销，并发服务能力更强。Node.js 的异步机制是基于事件的，所有的磁盘 I/O、网络通信、数据库查询都以非阻塞的方式请求，返回的结果由事件循环来处理。Node.js 在执行的过程中会维护一个事件队列，程序在执行时进入事件循环等待下一个事件到来，每个异步式 I/O 请求完成后会被推送到事件队列，等待程序进程进行处理。</p>
+
+<p>参考链接：
+libev – a high performance full-featured event loop written in C
+Working with events
+使用 libevent 和 libev 提高网络应用性能
+为什么事件驱动服务器这么火
+Asynchronous PHP and Real-time Messaging
+react.php 中的异步实现</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/php/'>PHP</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/php-%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/'>PHP 异步编程</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Vanilla 开发日志</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/'>
+        <span class='screen-reader-text'>Next post: </span>Nginx 性能优化<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

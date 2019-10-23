@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TCP on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/tags/tcp/</link>
+    <description>Recent content in TCP on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Tue, 25 Jul 2017 14:59:48 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/tags/tcp/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>tcp</title>
+      <link>http://idevz.org/2017/07/tcp/</link>
+      <pubDate>Tue, 25 Jul 2017 14:59:48 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/tcp/</guid>
+      <description>http://blog.csdn.net/hguisu/article/details/12521597 http://www.cnblogs.com/phpgo/tag/Socket%E7%BC%96%E7%A8%8B/ http://www.cnblogs.com/kakawater/p/6088948.html</description>
+    </item>
+    
+  </channel>
+</rss>

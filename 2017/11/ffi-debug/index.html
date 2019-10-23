@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='FFI 包调用，Lua C 交互报错，没有任何信息，只能想法 Debug。
+ltrace 转储一个给定 trace 编号（起始为 1）的 LuaJIT trace 对象的内容。 获取 LuaJIT trace 对象机器码的开始和结束地址区间可以用来转储该 LuaJIT trace 对象的机器码。
+```gdb (gdb)set disassembly-flavor intel (gdb)disas start_addr end_addr
+ltracebymcode 通过 LuaJIT trace 对象的机器码所包含的指定地址为唯一参数，在所有的 LuaJIT trace 对象中检索该 LuaJIT trace 对象。
+lir 通过 trace 编号来转储 LuaJIT trace 对象的 IR Code（CPU 寄存器和快照详细） 信息。 输出格式与 LuaJIT 自己的 -jdump=&#43;rs 一样。
+lmainL 打印 主 LuaJIT 虚拟机的 lua_State 指针值。
+lcurL 打印当前运行的 Lua 线程 lua_State 的指针值。
+lg 打印给定 lua_State 指针值所对应 VM 的 global_State 指针值，默认打印当前运行 VM 的 global_State 指针值。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='ffi debug • 做一个善于思考的学习者'>
+<meta property='og:description' content='FFI 包调用，Lua C 交互报错，没有任何信息，只能想法 Debug。
+ltrace 转储一个给定 trace 编号（起始为 1）的 LuaJIT trace 对象的内容。 获取 LuaJIT trace 对象机器码的开始和结束地址区间可以用来转储该 LuaJIT trace 对象的机器码。
+```gdb (gdb)set disassembly-flavor intel (gdb)disas start_addr end_addr
+ltracebymcode 通过 LuaJIT trace 对象的机器码所包含的指定地址为唯一参数，在所有的 LuaJIT trace 对象中检索该 LuaJIT trace 对象。
+lir 通过 trace 编号来转储 LuaJIT trace 对象的 IR Code（CPU 寄存器和快照详细） 信息。 输出格式与 LuaJIT 自己的 -jdump=&#43;rs 一样。
+lmainL 打印 主 LuaJIT 虚拟机的 lua_State 指针值。
+lcurL 打印当前运行的 Lua 线程 lua_State 的指针值。
+lg 打印给定 lua_State 指针值所对应 VM 的 global_State 指针值，默认打印当前运行 VM 的 global_State 指针值。'>
+<meta property='og:url' content='http://idevz.org/2017/11/ffi-debug/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='xxxxx'><meta property='article:published_time' content='2017-11-22T15:07:58&#43;08:00'/><meta property='article:modified_time' content='2017-12-04T19:56:59&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>ffi debug • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/11/ffi-debug/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>ffi debug</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-11-22T15:07:58&#43;08:00'>2017, Nov 22</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p>FFI 包调用，Lua C 交互报错，没有任何信息，只能想法 Debug。</p>
+
+<h2 id="ltrace">ltrace</h2>
+
+<p>转储一个给定 trace 编号（起始为 1）的 LuaJIT trace 对象的内容。
+获取 LuaJIT trace 对象机器码的开始和结束地址区间可以用来转储该 LuaJIT trace 对象的机器码。</p>
+
+<p>```gdb
+(gdb)set disassembly-flavor intel
+(gdb)disas start_addr end_addr</p>
+
+<h2 id="ltracebymcode">ltracebymcode</h2>
+
+<p>通过 LuaJIT trace 对象的机器码所包含的指定地址为唯一参数，在所有的 LuaJIT trace 对象中检索该 LuaJIT trace 对象。</p>
+
+<h2 id="lir">lir</h2>
+
+<p>通过 trace 编号来转储 LuaJIT trace 对象的 IR Code（CPU 寄存器和快照详细） 信息。
+输出格式与 LuaJIT 自己的 <code>-jdump=+rs</code> 一样。</p>
+
+<h2 id="lmainl">lmainL</h2>
+
+<p>打印 主 LuaJIT 虚拟机的 lua_State 指针值。</p>
+
+<h2 id="lcurl">lcurL</h2>
+
+<p>打印当前运行的 Lua 线程 lua_State 的指针值。</p>
+
+<h2 id="lg">lg</h2>
+
+<p>打印给定 lua_State 指针值所对应 VM 的 global_State 指针值，默认打印当前运行 VM 的 global_State 指针值。</p>
+
+<h2 id="lglobtab">lglobtab</h2>
+
+<p>打印指定 Lua 线程的全局变量表，默认打印当前线程的全局变量表（GCtab 指针）。</p>
+
+<h2 id="ltabgets">ltabgets</h2>
+
+<p>打印 <code>TValue</code> 或者 <code>GCtab</code> 指针指定 Lua 表中 指定字段的信息。（通过 <code>lval</code> 命令获取字段信息）</p>
+
+<h2 id="lpc">lpc</h2>
+
+<p>Prints out the Lua prototype (GCproto object) whose bytecode contains the PC value specified as the BCIns pointer value. The Lua source line&rsquo;s location (file name and line number) will also be printed out.</p>
+
+<p>PC ？
+BCIns ？</p>
+
+<h2 id="lproto">lproto</h2>
+
+<p>Lua prototype objects？
+GCproto pointer values</p>
+
+<h2 id="lfunc">lfunc</h2>
+
+<p>GCfunc pointer values</p>
+
+<h2 id="luv">luv</h2>
+
+<p>打印与给定 <code>GCfunc</code> 指针值相关所有 Upvalues 的所有字段的名称与值。</p>
+
+<h2 id="lbc">lbc</h2>
+
+<p>lval 从 <code>GCproto</code> <code>GCfunc</code> 中都能取到 字节地址的区间 range</p>
+
+<p>转储 bytecode</p>
+
+<h2 id="lgc">lgc</h2>
+
+<p>打印当前由 LuaJIT GC 分配的总内存大小。非常有用，来检查 LuaJIT 虚拟机是否在 Lua 层面耗费了大量的内存。</p>
+
+<h2 id="lgcstat">lgcstat</h2>
+
+<p>打印 GC 对象的统计汇总，包括活体的，和死了还没被回收的。</p>
+
+<h2 id="lgcpath">lgcpath</h2>
+
+<p>找出大小大于指定阈值的活体 LuaJIT GC 对象。
+同时打印出从 GC roots 到该对象被匹配这一条引用路径。</p>
+
+<h2 id="lthreadpc">lthreadpc</h2>
+
+<p>Prints out the next PC to be executed for a yielded Lua thread.</p>
+
+<p>(gdb) lthreadpc (lua_State<em>)0x4169ece0
+next PC: (BCIns</em>)0x40c5d8f0
+proto: (GCproto*)0x40c5d898
+BC pos: 5
+source line: @/opt/app/dummy/lua/exit.lua:131
+proto first line: 127</p>
+
+<h2 id="lb">lb</h2>
+
+<p>设置 Lua 断点。通过文件名以及 函数原型声明的行号。</p>
+
+<h2 id="ldumpstack">ldumpstack</h2>
+
+<p>Shows the stack content of the given lua_State struct
+不生效？</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/ffi-%E8%B0%83%E8%AF%95/'>FFI 调试</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/xxxxx/'>xxxxx</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/11/request_id/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>request_id</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/11/luajit/'>
+        <span class='screen-reader-text'>Next post: </span>LuaJIT<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/categories/golang/</link>
+    <description>Recent content in Golang on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Tue, 15 Aug 2017 11:23:55 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/categories/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>monitoring golang gc</title>
+      <link>http://idevz.org/2017/08/monitoring-golang-gc/</link>
+      <pubDate>Tue, 15 Aug 2017 11:23:55 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/monitoring-golang-gc/</guid>
+      <description>http://holys.im/2016/07/01/monitor-golang-gc/</description>
+    </item>
+    
+    <item>
+      <title>effective go</title>
+      <link>http://idevz.org/2017/08/effective-go/</link>
+      <pubDate>Sun, 06 Aug 2017 11:48:01 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/effective-go/</guid>
+      <description>https://golang.org/doc/effective_go.html</description>
+    </item>
+    
+    <item>
+      <title>go at google</title>
+      <link>http://idevz.org/2017/08/go-at-google/</link>
+      <pubDate>Sun, 06 Aug 2017 11:46:50 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/go-at-google/</guid>
+      <description>https://talks.golang.org/2012/splash.article</description>
+    </item>
+    
+    <item>
+      <title>使用 GDB 调试 Golang 程序</title>
+      <link>http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Fri, 28 Jul 2017 10:12:31 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
+      <description>/usr/local/go/src/runtime/runtime-gdb.py
+♧ save breakpoints ~/idevz.motan-go.gdb.brks Saved to file &amp;lsquo;/root/idevz.motan-go.gdb.brks&amp;rsquo;.
+Golang 调试编译相关参数 删除调试符号：go build -ldflags “-s -w”
+-s: 去掉符号信息。 -w: 去掉DWARF调试信息。 关闭内联优化：go build -gcflags “-N -l”
+不能直接对 go run 的进程 GDB 调试 go run 命令创建的二进制文件，没有带 debuginfo，所以不能对他使用 GDB 进行调试。 虽然说在 GDB 运行过程中，可以通过 file 指令来载入要调试的程序，但是前提是待调试的程序有 debuginfo。
+全局变量操作  info variables 变量名 p &amp;lsquo;上一步的结果&amp;rsquo;  断点操作 # 添加断点 b # 删除断点 d breakpoints 断点编号 # 查看断点信息 i b (gdb) info goroutines // 查看 goroutines 信息。 (gdb) goroutine 1 bt // 当前 goroutine 调用堆栈。 (gdb) bt // 查看当前调⽤堆栈，可以与当前 goroutine 调用堆栈对比。 (gdb) info frame // 堆栈帧信息。 (gdb) info locals // 查看局部变量。 (gdb) p $len(s) // 获取对象长度($cap) (gdb) whatis i // 查看对象类型。 (gdb) c // 继续执行，触发 breakpoint() 断点。 (gdb) n // 从 breakpoint() 中出来，执行源码下一行代码。 (gdb) info args // 从参数信息中，我们可以看到命名返回参数的值。 (gdb) x/3xw &amp;amp;r // 查看 r 内存数据。(指针 8 + 长度 4) (gdb) x/15xb 0×42121240 // 查看字符串字节数组</description>
+    </item>
+    
+    <item>
+      <title>Golang 包管理</title>
+      <link>http://idevz.org/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Thu, 27 Jul 2017 11:16:48 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
+      <description>Glide 是 Golang 的 Vendor 包管理器，方便你管理 vendor 和 verdor 包。类似 Java 的 Maven，PHP 的 Composer。 Github：https://github.com/Masterminds/glide 在线文档：http://glide.readthedocs.io/en/stable 主要特性： 简单管理依赖 支持 versioning packages，包括 Semantic Versioning 2.0.0 支持 支持 aliasing packages (e.g. for working with github forks) Remove the need for munging import statements 支持所有 go 工具 支持 VCS 工具和 Go 支持：git、bzr、hg、svn 支持定制本地和全局插件 (see docs/plugins.md) 仓库缓存 结构： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 - $GOPATH/src/myProject (Your project) | |&amp;ndash; glide.</description>
+    </item>
+    
+    <item>
+      <title>golang testing</title>
+      <link>http://idevz.org/2017/06/golang-testing/</link>
+      <pubDate>Mon, 19 Jun 2017 18:04:30 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/06/golang-testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang pprof</title>
+      <link>http://idevz.org/2017/06/golang-pprof/</link>
+      <pubDate>Mon, 19 Jun 2017 18:02:34 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/06/golang-pprof/</guid>
+      <description>Golang 性能分析工具 http://studygolang.com/articles/9340
+Pprof pprof 起初是谷歌性能工具 gperftools 中的一个组件。Golang 中实现了 runtime/pprof，net/http/pprof 两个包来实现相关的支持，而 net/http/pprof 包则是对 runtime/pprof 的封装，暴露一个 http 服务来方便的进行性能分析。
+Golang pprof 用法 Golang HTTP Web 服务 基于 net/http 包开发的 Web 服务，只需在入口导入包 import _ &amp;quot;net/http/pprof&amp;quot; 即可通过访问 http://host:port/debug/pprof/ 查看当前服务的各种 profiling 数据。
+Golang 后端服务 基于 Golang 开发的后端服务进程也可以通过导入包 import &amp;quot;net/http&amp;quot; 开启 HTTP 服务端口（比如：http.ListenAndServe(&amp;quot;localhost:6060&amp;quot;, nil)），同时导入包 import _ &amp;quot;net/http/pprof&amp;quot; 同样可以通过访问 http://host:6060/debug/pprof/ 来查看各种 profiling 数据。
+Golang 应用程序 如果只是想对某段 Golang 应用程序代码进行调优，无法使用 net/http/pprof 包来通过 HTTP 服务查看，这时我们就需要使用更底层的 runtime/pprof 包。下面引用 Golang Blog 中的例子来看下 runtime/pprof 包的使用。</description>
+    </item>
+    
+  </channel>
+</rss>

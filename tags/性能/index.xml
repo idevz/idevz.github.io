@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>性能 on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/tags/%E6%80%A7%E8%83%BD/</link>
+    <description>Recent content in 性能 on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Mon, 19 Jun 2017 18:02:34 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/tags/%E6%80%A7%E8%83%BD/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>golang pprof</title>
+      <link>http://idevz.org/2017/06/golang-pprof/</link>
+      <pubDate>Mon, 19 Jun 2017 18:02:34 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/06/golang-pprof/</guid>
+      <description>Golang 性能分析工具 http://studygolang.com/articles/9340
+Pprof pprof 起初是谷歌性能工具 gperftools 中的一个组件。Golang 中实现了 runtime/pprof，net/http/pprof 两个包来实现相关的支持，而 net/http/pprof 包则是对 runtime/pprof 的封装，暴露一个 http 服务来方便的进行性能分析。
+Golang pprof 用法 Golang HTTP Web 服务 基于 net/http 包开发的 Web 服务，只需在入口导入包 import _ &amp;quot;net/http/pprof&amp;quot; 即可通过访问 http://host:port/debug/pprof/ 查看当前服务的各种 profiling 数据。
+Golang 后端服务 基于 Golang 开发的后端服务进程也可以通过导入包 import &amp;quot;net/http&amp;quot; 开启 HTTP 服务端口（比如：http.ListenAndServe(&amp;quot;localhost:6060&amp;quot;, nil)），同时导入包 import _ &amp;quot;net/http/pprof&amp;quot; 同样可以通过访问 http://host:6060/debug/pprof/ 来查看各种 profiling 数据。
+Golang 应用程序 如果只是想对某段 Golang 应用程序代码进行调优，无法使用 net/http/pprof 包来通过 HTTP 服务查看，这时我们就需要使用更底层的 runtime/pprof 包。下面引用 Golang Blog 中的例子来看下 runtime/pprof 包的使用。</description>
+    </item>
+    
+  </channel>
+</rss>

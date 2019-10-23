@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Spring 核心  Spring 容器 依赖注入（dependency injection，DI） 面向切面编程（aspect-oriented programming）  Spring 概览 Spring 最早由 Rod Johnson 创建，并在《Expert One-On-One：J2EE Design and Development》中进行了介绍，起初 Spring 的诞生主要是为了替代更加重量级的企业级 JAVA 技术，尤其是 EJB， 相对于 EJB 来说，Spring 提供了更加轻量级和简单的编程模型，Spring 增强了简单老式 JAVA 对象（Plain Old JAVA Object，POJO）的功能，使其具备了之前只有 EJB 和其他企业级 JAVA 规范才有的功能。其最根本的使命就是：简化 JAVA 开发。
+Spring 采取了以下 4 种关键策略来降低 JAVA 开发的复杂性：
+ 基于 POJO 的轻量级和最小侵入性编程。 通过依赖注入和面向接口实现松耦合。 基于切面和惯例进行声明式编程。 通过切面和模板减少样板式代码。  DI 和 AOP 样例 SPring 竭力避免因自身的 API 而弄乱你的应用代码，Spring 不会强迫你实现 Spring 规范的接口，或继承 Spring 规范的类。非侵入式的编程。最坏的场景是一个类或许会使用 Spring 的注解，但依旧是 POJO。而 Spring 通过 DI 来装配 POJO，帮助应用对象彼此之间保持松散耦合。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='Spring in action 学习笔记 • 做一个善于思考的学习者'>
+<meta property='og:description' content='Spring 核心  Spring 容器 依赖注入（dependency injection，DI） 面向切面编程（aspect-oriented programming）  Spring 概览 Spring 最早由 Rod Johnson 创建，并在《Expert One-On-One：J2EE Design and Development》中进行了介绍，起初 Spring 的诞生主要是为了替代更加重量级的企业级 JAVA 技术，尤其是 EJB， 相对于 EJB 来说，Spring 提供了更加轻量级和简单的编程模型，Spring 增强了简单老式 JAVA 对象（Plain Old JAVA Object，POJO）的功能，使其具备了之前只有 EJB 和其他企业级 JAVA 规范才有的功能。其最根本的使命就是：简化 JAVA 开发。
+Spring 采取了以下 4 种关键策略来降低 JAVA 开发的复杂性：
+ 基于 POJO 的轻量级和最小侵入性编程。 通过依赖注入和面向接口实现松耦合。 基于切面和惯例进行声明式编程。 通过切面和模板减少样板式代码。  DI 和 AOP 样例 SPring 竭力避免因自身的 API 而弄乱你的应用代码，Spring 不会强迫你实现 Spring 规范的接口，或继承 Spring 规范的类。非侵入式的编程。最坏的场景是一个类或许会使用 Spring 的注解，但依旧是 POJO。而 Spring 通过 DI 来装配 POJO，帮助应用对象彼此之间保持松散耦合。'>
+<meta property='og:url' content='http://idevz.org/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='Spring in action'><meta property='article:published_time' content='2017-07-23T08:59:22&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>Spring in action 学习笔记 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Spring in action 学习笔记</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-07-23T08:59:22&#43;08:00'>2017, Jul 23</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h1 id="spring-核心">Spring 核心</h1>
+
+<ul>
+<li>Spring 容器</li>
+<li>依赖注入（dependency injection，DI）</li>
+<li>面向切面编程（aspect-oriented programming）</li>
+</ul>
+
+<h2 id="spring-概览">Spring 概览</h2>
+
+<p>Spring 最早由 Rod Johnson 创建，并在《Expert One-On-One：J2EE Design and Development》中进行了介绍，起初 Spring 的诞生主要是为了替代更加重量级的企业级 JAVA 技术，尤其是 EJB， 相对于 EJB 来说，Spring 提供了更加轻量级和简单的编程模型，Spring 增强了简单老式 JAVA 对象（Plain Old JAVA Object，POJO）的功能，使其具备了之前只有 EJB 和其他企业级 JAVA 规范才有的功能。其最根本的使命就是：简化 JAVA 开发。</p>
+
+<p>Spring 采取了以下 4 种关键策略来降低 JAVA 开发的复杂性：</p>
+
+<ul>
+<li>基于 POJO 的轻量级和最小侵入性编程。</li>
+<li>通过依赖注入和面向接口实现松耦合。</li>
+<li>基于切面和惯例进行声明式编程。</li>
+<li>通过切面和模板减少样板式代码。</li>
+</ul>
+
+<h3 id="di-和-aop-样例">DI 和 AOP 样例</h3>
+
+<p>SPring 竭力避免因自身的 API 而弄乱你的应用代码，Spring 不会强迫你实现 Spring 规范的接口，或继承 Spring 规范的类。非侵入式的编程。最坏的场景是一个类或许会使用 Spring 的注解，但依旧是 POJO。而 Spring 通过 DI 来装配 POJO，帮助应用对象彼此之间保持松散耦合。</p>
+
+<h3 id="spring-生态系统的整体情况">Spring 生态系统的整体情况</h3>
+
+<h2 id="di-详解-基于-xml-基于-java以及自动装配-bean">DI 详解 &amp; 基于 XML、基于 JAVA以及自动装配 bean</h2>
+
+<h2 id="几种高级的装配技术">几种高级的装配技术</h2>
+
+<p>如何发挥 Spring 容器最强大的威力</p>
+
+<h2 id="spring-aop-与解耦">Spring AOP 与解耦</h2>
+
+<p>如何使用 Spring 的 AOP 来为对象解耦那些对其提供服务的横切性关注点。为后面使用 AOP 来提供声明式服务，如事物、安全和缓存。</p>
+
+<h1 id="如何使用-spring-构建-web-应用">如何使用 Spring 构建 Web 应用</h1>
+
+<h2 id="spring-mvc">Spring MVC</h2>
+
+<p>Spring 中的基础 Web 框架，如何编写控制器来处理请求，并使用模型数据产生响应。</p>
+
+<h2 id="spring-中可使用的各种视图技术">Spring 中可使用的各种视图技术</h2>
+
+<p>JSP、Apache Tiles 以及 Thymeleaf</p>
+
+<h2 id="如何-spring-mvc-进阶">如何 Spring MVC 进阶</h2>
+
+<p>自定义 Spring MVC 配置、处理 multipart 类型的文件上传、处理再控制器中可能会出现的异常并且通过 flash 属性在请求之间传递数据。</p>
+
+<h2 id="spring-web-flow">Spring Web Flow</h2>
+
+<p>如何基于 Spring Web Flow 这个 Spring MVC 扩展来开发特定流程的会话式 web 应用程序。</p>
+
+<h2 id="spring-security">Spring Security</h2>
+
+<p>如何使用 Spring Security 为自己的应用程序 Web 层实现安全性。</p>
+
+<h1 id="如何在应用程序的后端使用-spring">如何在应用程序的后端使用 Spring</h1>
+
+<p>关注如何处理和持久化数据</p>
+
+<h2 id="spring-实现数据持久化">Spring 实现数据持久化</h2>
+
+<p>如何使用 Spring 对 JDBC 的抽象实现关系型数据库中的数据持久化。</p>
+
+<h2 id="jpa-数据持久化">JPA 数据持久化</h2>
+
+<p>使用 JAVA 持久化 API（JPA）存储关系型数据库中的数据。</p>
+
+<h2 id="spring-与非关系型数据库结合">Spring 与非关系型数据库结合</h2>
+
+<p>MongoDB 和 Neo4j。</p>
+
+<h2 id="spring-对声明式缓存的支持">Spring 对声明式缓存的支持</h2>
+
+<h2 id="spring-security-进阶">Spring Security 进阶</h2>
+
+<p>如何通过 AOP 将安全性应用到方法级别。</p>
+
+<h1 id="如何使用-spring-与其他的应用和服务进行集成">如何使用 Spring 与其他的应用和服务进行集成</h1>
+
+<h2 id="如何创建与使用远程服务">如何创建与使用远程服务</h2>
+
+<p>包括 RMI、Hessian、Burlap 以及基于 SOAP 的服务。</p>
+
+<h2 id="基于-spring-mvc-创建-restful-服务">基于 Spring MVC 创建 RESTful 服务</h2>
+
+<h2 id="spring-对异步消息的支持">Spring 对异步消息的支持</h2>
+
+<p>Java 消息服务 （Java Message Service，JMS）以及高级消息队列协议（Advanced Message Queuing Protocol，AMQP）。</p>
+
+<h2 id="服务端与客户端的异步通信">服务端与客户端的异步通信</h2>
+
+<p>如何将 Spring 与 WebSocket 和 STOMP 结合起来，实现服务端与客户端的异步通信。</p>
+
+<h2 id="用-spring-发送-e-mail">用 Spring 发送 E-mail</h2>
+
+<h2 id="spring-与-jmx">Spring 与 JMX</h2>
+
+<p>Spring 对 Java 管理扩展（Java Management Extensions，JMX）功能的支持，以及借助这项功能可以对 Spring 应用程序进行监控和修改运行时配置。</p>
+
+<h2 id="spring-boot">Spring Boot</h2>
+
+<p>全新的，并且会改变游戏规则的 Spring 使用方式，Spring Boot 如何将 Spring 应用中的样板式的配置移除，让用户更加专注业务功能。</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/java/'>Java</a>, <a class='category' href='http://idevz.org/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/'>读书笔记</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/spring-in-action/'>Spring in action</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Nginx 性能优化</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+        <span class='screen-reader-text'>Next post: </span>Netty in action 学习笔记<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

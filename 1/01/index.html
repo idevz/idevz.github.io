@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='This document helps you get started developing code for Istio. If you follow this guide and find some problem, please take a few minutes to update this page.
+本文档帮助你开始为 Istio 开发代码。如果你依照本文档发现一些问题，请花几分钟的时间更新本页内容。
+ Prerequisites 预先准备  Setting up Go 安装 Go Setting up Docker 安装 Docker Setting up fpm 安装 FPM Other dependencies 其他依赖 Setting up Kubernetes 部署 Kubernetes IBM Cloud Container Service IBM 云容器服务 Google Kubernetes Engine Google Kubernetes 引擎 Minikube 迷你 Kube Setting up environment variables 设置环境变量 Setting up personal access token 设置个人访问令牌  Using the code base 使用代码库  Building the code 构建代码 Building and pushing the containers 构建、推送容器 Building and pushing a specific container 构建、推送一个特定的容器 Building the Istio manifests 构建 Istio 清单 Cleaning outputs 清理输出 Debug an Istio container with Delve 使用 Delve 调试 Istio 容器 Running tests 运行单元测试 Health of tests 健康的测试 Getting coverage numbers 获取覆盖率 Auto-formatting source code 自动格式化源码 Running the linters 运行检测工具 Running race detection tests 运行竞态探测用例 Adding dependencies 添加依赖 About testing 关于单元测试  Working with CircleCI 使用 Circle CI Writing shell scripts 编写 shell 脚本  ShellCheck Shell 检查 Dealing with spaces and arrays 处理空白和数组 Style Guide 类型指导  Writing reference docs 编写引用文档  About proto documentation 关于 proto 文档  Git workflow Git 工作流  Fork the main repository Fork 主仓库 Clone your fork Clone 你的 Fork Enable pre commit hook 激活预提交钩子 Create a branch and make changes 创建分支并做出修改 Keeping your fork in sync 保持你的 Fork 同步(与主仓库) Committing changes to your fork 提交变更到你的 Fork Creating a pull request 创建一个 PR Getting a code review 获得一个代码 Review When to retain commits and when to squash 何时保留提交何时squash  Develop on Feature Branch 在特性分支上开发  This document is intended to be relative to the branch in which it is found.'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content=' • 做一个善于思考的学习者'>
+<meta property='og:description' content='This document helps you get started developing code for Istio. If you follow this guide and find some problem, please take a few minutes to update this page.
+本文档帮助你开始为 Istio 开发代码。如果你依照本文档发现一些问题，请花几分钟的时间更新本页内容。
+ Prerequisites 预先准备  Setting up Go 安装 Go Setting up Docker 安装 Docker Setting up fpm 安装 FPM Other dependencies 其他依赖 Setting up Kubernetes 部署 Kubernetes IBM Cloud Container Service IBM 云容器服务 Google Kubernetes Engine Google Kubernetes 引擎 Minikube 迷你 Kube Setting up environment variables 设置环境变量 Setting up personal access token 设置个人访问令牌  Using the code base 使用代码库  Building the code 构建代码 Building and pushing the containers 构建、推送容器 Building and pushing a specific container 构建、推送一个特定的容器 Building the Istio manifests 构建 Istio 清单 Cleaning outputs 清理输出 Debug an Istio container with Delve 使用 Delve 调试 Istio 容器 Running tests 运行单元测试 Health of tests 健康的测试 Getting coverage numbers 获取覆盖率 Auto-formatting source code 自动格式化源码 Running the linters 运行检测工具 Running race detection tests 运行竞态探测用例 Adding dependencies 添加依赖 About testing 关于单元测试  Working with CircleCI 使用 Circle CI Writing shell scripts 编写 shell 脚本  ShellCheck Shell 检查 Dealing with spaces and arrays 处理空白和数组 Style Guide 类型指导  Writing reference docs 编写引用文档  About proto documentation 关于 proto 文档  Git workflow Git 工作流  Fork the main repository Fork 主仓库 Clone your fork Clone 你的 Fork Enable pre commit hook 激活预提交钩子 Create a branch and make changes 创建分支并做出修改 Keeping your fork in sync 保持你的 Fork 同步(与主仓库) Committing changes to your fork 提交变更到你的 Fork Creating a pull request 创建一个 PR Getting a code review 获得一个代码 Review When to retain commits and when to squash 何时保留提交何时squash  Develop on Feature Branch 在特性分支上开发  This document is intended to be relative to the branch in which it is found.'>
+<meta property='og:url' content='http://idevz.org/1/01/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title> • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/1/01/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'></h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='0001-01-01T00:00:00Z'>0001, Jan 01</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+21 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p>This document helps you get started developing code for Istio.
+If you follow this guide and find some problem, please take
+a few minutes to update this page.</p>
+
+<p>本文档帮助你开始为 Istio 开发代码。如果你依照本文档发现一些问题，请花几分钟的时间更新本页内容。</p>
+
+<ul>
+<li><a href="#prerequisites">Prerequisites</a> 预先准备
+
+<ul>
+<li><a href="#setting-up-go">Setting up Go</a> 安装 Go</li>
+<li><a href="#setting-up-docker">Setting up Docker</a> 安装 Docker</li>
+<li><a href="#setting-up-fpm">Setting up fpm</a> 安装 FPM</li>
+<li><a href="#other-dependencies">Other dependencies</a> 其他依赖</li>
+<li><a href="#setting-up-kubernetes">Setting up Kubernetes</a> 部署 Kubernetes</li>
+<li><a href="#ibm-cloud-container-service">IBM Cloud Container Service</a> IBM 云容器服务</li>
+<li><a href="#google-kubernetes-engine">Google Kubernetes Engine</a> Google Kubernetes 引擎</li>
+<li><a href="#minikube">Minikube</a> 迷你 Kube</li>
+<li><a href="#setting-up-environment-variables">Setting up environment variables</a> 设置环境变量</li>
+<li><a href="#setting-up-a-personal-access-token">Setting up personal access token</a> 设置个人访问令牌</li>
+</ul></li>
+<li><a href="#using-the-code-base">Using the code base</a> 使用代码库
+
+<ul>
+<li><a href="#building-the-code">Building the code</a> 构建代码</li>
+<li><a href="#building-and-pushing-the-containers">Building and pushing the containers</a> 构建、推送容器</li>
+<li><a href="#building-and-pushing-a-container">Building and pushing a specific container</a> 构建、推送一个特定的容器</li>
+<li><a href="#building-the-istio-manifests">Building the Istio manifests</a> 构建 Istio 清单</li>
+<li><a href="#cleaning-outputs">Cleaning outputs</a> 清理输出</li>
+<li><a href="#debug-an-istio-container-with-delve">Debug an Istio container with Delve</a> 使用 Delve 调试 Istio 容器</li>
+<li><a href="#running-tests">Running tests</a> 运行单元测试</li>
+<li><a href="#health-of-tests">Health of tests</a> 健康的测试</li>
+<li><a href="#getting-coverage-numbers">Getting coverage numbers</a> 获取覆盖率</li>
+<li><a href="#auto-formatting-source-code">Auto-formatting source code</a> 自动格式化源码</li>
+<li><a href="#running-the-linters">Running the linters</a> 运行检测工具</li>
+<li><a href="#running-race-detection-tests">Running race detection tests</a> 运行竞态探测用例</li>
+<li><a href="#adding-dependencies">Adding dependencies</a> 添加依赖</li>
+<li><a href="#about-testing">About testing</a> 关于单元测试</li>
+</ul></li>
+<li><a href="#working-with-circleci">Working with CircleCI</a> 使用 Circle CI</li>
+<li><a href="#writing-shell-scripts">Writing shell scripts</a> 编写 shell 脚本
+
+<ul>
+<li><a href="#shellcheck">ShellCheck</a> Shell 检查</li>
+<li><a href="#dealing-with-spaces-and-arrays">Dealing with spaces and arrays</a> 处理空白和数组</li>
+<li><a href="#style-guide">Style Guide</a> 类型指导</li>
+</ul></li>
+<li><a href="#writing-reference-docs">Writing reference docs</a> 编写引用文档
+
+<ul>
+<li><a href="#about-proto-documentation">About proto documentation</a> 关于 proto 文档</li>
+</ul></li>
+<li><a href="#git-workflow">Git workflow</a> Git 工作流
+
+<ul>
+<li><a href="#fork-the-main-repository">Fork the main repository</a> Fork 主仓库</li>
+<li><a href="#clone-your-fork">Clone your fork</a> Clone 你的 Fork</li>
+<li><a href="#enable-pre-commit-hook">Enable pre commit hook</a> 激活预提交钩子</li>
+<li><a href="#create-a-branch-and-make-changes">Create a branch and make changes</a> 创建分支并做出修改</li>
+<li><a href="#keeping-your-fork-in-sync">Keeping your fork in sync</a> 保持你的 Fork 同步(与主仓库)</li>
+<li><a href="#committing-changes-to-your-fork">Committing changes to your fork</a> 提交变更到你的 Fork</li>
+<li><a href="#creating-a-pull-request">Creating a pull request</a> 创建一个 PR</li>
+<li><a href="#getting-a-code-review">Getting a code review</a> 获得一个代码 Review</li>
+<li><a href="#when-to-retain-commits-and-when-to-squash">When to retain commits and when to squash</a> 何时保留提交何时squash</li>
+</ul></li>
+<li><a href="#develop-on-feature-branch">Develop on Feature Branch</a> 在特性分支上开发</li>
+</ul>
+
+<p>This document is intended to be relative to the branch in which it is found.
+It is guaranteed that requirements will change over time for the development
+branch, but release branches should not change.</p>
+
+<p>本文档旨在与其所在的分支相关。
+保证需求会随着时间的推移而发生变化
+分支，但发布分支不应该改变。</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Istio components only have few external dependencies you
+need to set up before being able to build and run the code.</p>
+
+<p>##先决条件</p>
+
+<p>Istio组件只有很少的外部依赖关系
+需要在能够构建和运行代码之前进行设置。</p>
+
+<h3 id="setting-up-go">Setting up Go</h3>
+
+<p>Many Istio components are written in the <a href="https://golang.org">Go</a> programming language.
+To build, you&rsquo;ll need a Go development environment. If you haven&rsquo;t set up a Go development
+environment, please follow <a href="https://golang.org/doc/install">these instructions</a>
+to install the Go tools.</p>
+
+<p>Istio currently builds with Go 1.11</p>
+
+<p>###设置Go</p>
+
+<p>许多Istio组件都是用[Go]（<a href="https://golang.org）编程语言编写的。">https://golang.org）编程语言编写的。</a>
+要构建，您需要一个Go开发环境。如果您还没有设置Go开发
+环境，请按照[这些说明]（<a href="https://golang.org/doc/install）">https://golang.org/doc/install）</a>
+安装Go工具。</p>
+
+<p>Istio目前使用Go 1.11构建</p>
+
+<h3 id="setting-up-docker">Setting up Docker</h3>
+
+<p>Istio has a Docker build system for creating and publishing Docker images.
+To leverage that you will need:</p>
+
+<ul>
+<li><strong>Docker platform:</strong> To download and install Docker follow <a href="https://docs.docker.com/install/">these instructions</a>.</li>
+<li><strong>Docker Hub ID:</strong> If you do not yet have a Docker ID account you can follow <a href="https://docs.docker.com/docker-id/">these steps</a> to create one. This ID will be used in a later step when setting up the environment variables.</li>
+</ul>
+
+<p>###设置Docker</p>
+
+<p>Istio有一个Docker构建系统，用于创建和发布Docker镜像。
+要利用它，您将需要：</p>
+
+<ul>
+<li>** Docker平台：**要下载并安装Docker，请按照[这些说明]（<a href="https://docs.docker.com/install/）进行操作。">https://docs.docker.com/install/）进行操作。</a></li>
+<li>** Docker Hub ID：**如果您还没有Docker ID帐户，可以按照[这些步骤]（<a href="https://docs.docker.com/docker-id/）创建一个帐户。设置环境变量时，将在稍后的步骤中使用此ID。">https://docs.docker.com/docker-id/）创建一个帐户。设置环境变量时，将在稍后的步骤中使用此ID。</a></li>
+</ul>
+
+<h3 id="setting-up-fpm">Setting up fpm</h3>
+
+<p>Istio uses <a href="https://fpm.readthedocs.io/en/latest/">fpm</a> to build some packages. You will need to follow <a href="http://fpm.readthedocs.io/en/latest/installing.html">fpm install instructions</a> to setup it.</p>
+
+<p>###设置fpm</p>
+
+<p>Istio使用[fpm]（<a href="https://fpm.readthedocs.io/en/latest/）构建一些包。您需要按照[fpm安装说明]（http://fpm.readthedocs.io/en/latest/installing.html）进行设置。">https://fpm.readthedocs.io/en/latest/）构建一些包。您需要按照[fpm安装说明]（http://fpm.readthedocs.io/en/latest/installing.html）进行设置。</a></p>
+
+<h3 id="other-dependencies">Other Dependencies</h3>
+
+<p>The Istio GitHub repository contains an up-to-date <code>vendor</code> directory, which contains all of the dependencies for Istio. See the <a href="https://github.com/istio/istio/wiki/Vendor-FAQ">Vendor FAQ</a> for questions related to dependencies.</p>
+
+<p>###其他依赖项</p>
+
+<p>Istio GitHub存储库包含一个最新的<code>vendor</code>目录，其中包含Istio的所有依赖项。有关依赖性的问题，请参阅[供应商常见问题解答]（<a href="https://github.com/istio/istio/wiki/Vendor-FAQ）。">https://github.com/istio/istio/wiki/Vendor-FAQ）。</a></p>
+
+<h3 id="setting-up-kubernetes">Setting up Kubernetes</h3>
+
+<p>If you are working on Istio in a Kubernetes environment, we require
+Kubernetes version 1.7.3 or higher. Follow the steps outlined in the
+<em>prerequisites</em> section in the
+<a href="https://istio.io/docs/setup/kubernetes/quick-start.html">Istio Quick Start</a>
+to setup a Kubernetes cluster with Minikube, or launch a cluster in IBM
+Cloud Container Service, Google Kubernetes Engine or OpenShift.</p>
+
+<p>###设置Kubernetes</p>
+
+<p>如果您正在Kubernetes环境中使用Istio，我们需要
+Kubernetes版本1.7.3或更高版本。按照中列出的步骤操作
+_prerequisites_节中的
+[Istio快速入门]（<a href="https://istio.io/docs/setup/kubernetes/quick-start.html）">https://istio.io/docs/setup/kubernetes/quick-start.html）</a>
+使用Minikube设置Kubernetes集群，或在IBM中启动集群
+云容器服务，Google Kubernetes引擎或OpenShift。</p>
+
+<h4 id="additional-steps-for-gke">Additional steps for GKE</h4>
+
+<ul>
+<li>Add <code>--no-enable-legacy-authorization</code> to the list of gcloud flags to fully
+enable RBAC in GKE.</li>
+
+<li><p>Update your kubeconfig file with appropriate credentials to point kubectl
+to the cluster created in GKE.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gcloud container clusters get-credentials NAME --zone<span style="color:#f92672">=</span>ZONE</code></pre></div></li>
+
+<li><p>Make sure you are using static client certificates before fetching cluster
+credentials:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">gcloud config set container/use_client_certificate True</code></pre></div></li>
+</ul>
+
+<h4 id="gke的附加步骤">GKE的附加步骤</h4>
+
+<ul>
+<li>将“&ndash;no-enable-legacy-authorization”添加到gcloud标志列表中
+ 在GKE中启用RBAC。</li>
+
+<li><p>使用适当的凭据更新您的kubeconfig文件以指向kubectl
+ 到GKE中创建的集群。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">gcloud容器集群获取凭据NAME --zone = ZONE</code></pre></div></li>
+
+<li><p>确保在获取群集之前使用静态客户端证书
+ 证书：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">gcloud config set container / use_client_certificate是的</code></pre></div></li>
+</ul>
+
+<h4 id="additional-notes-for-minikube">Additional notes for Minikube</h4>
+
+<p>Minikube version &gt;= v0.25.0 is required for proper certificate
+configuration for GenericAdmissionWebhook feature. Get the latest version
+from
+<a href="https://github.com/kubernetes/minikube/releases">minikube release page</a>
+for your platform.</p>
+
+<p>If you are using kubernetes with version &gt;= v1.8.0 for kubeadm, the
+extra-config and RBAC flags will be enabled by default. Explicitly
+enabling them will actually cause errors. Please run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube start --bootstrapper kubeadm</code></pre></div>
+<p>If you are using kubernetes with version &lt; v1.8.0, you need to specify
+the extra-config and RBAC flags explicitly. Please run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube start <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	--extra-config<span style="color:#f92672">=</span>controller-manager.ClusterSigningCertFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/var/lib/localkube/certs/ca.crt&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	--extra-config<span style="color:#f92672">=</span>controller-manager.ClusterSigningKeyFile<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/var/lib/localkube/certs/ca.key&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	--extra-config<span style="color:#f92672">=</span>apiserver.Admission.PluginNames<span style="color:#f92672">=</span>NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>	--kubernetes-version<span style="color:#f92672">=</span>v1.9.0</code></pre></div>
+<p>To enable RBAC, add <code>--bootstrapper kubeadm --extra-config=apiserver.Authorization.Mode=RBAC</code> to <code>minikube start</code> command, in addition to the flags above.</p>
+
+<h4 id="minikube的附加说明">Minikube的附加说明</h4>
+
+<p>正确的证书需要Minikube版本&gt; = v0.25.0
+GenericAdmissionWebhook功能的配置。获取最新版本
+从
+[minikube发布页面]（<a href="https://github.com/kubernetes/minikube/releases）">https://github.com/kubernetes/minikube/releases）</a>
+为您的平台。</p>
+
+<p>如果你使用版本&gt; = v1.8.0的kubernetes用于kubeadm，那么
+默认情况下将启用extra-config和RBAC标志。明确地
+启用它们实际上会导致错误。请运行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-庆典" data-lang="庆典">minikube start --bootstrapper kubeadm</code></pre></div>
+<p>如果您使用版本&lt;v1.8.0的kubernetes，则需要指定
+显式的extra-config和RBAC标志。请运行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-庆典" data-lang="庆典">迷你开始
+--extra-config = controller-manager.ClusterSigningCertFile =“/ var / lib / localkube / certs / ca.crt”\
+--extra-config = controller-manager.ClusterSigningKeyFile =“/ var / lib / localkube / certs / ca.key”\
+--extra-config = apiserver.Admission.PluginNames = NamespaceLifecycle，LimitRanger，ServiceAccount，PersistentVolumeLabel，DefaultStorageClass，DefaultTolerationSeconds，MutatingAdmissionWebhook，ValidatingAdmissionWebhook，ResourceQuota \
+--kubernetes版本= v1.9.0</code></pre></div>
+<p>要启用RBAC，除了上面的标志之外，还要将<code>--bootstrapper kubeadm --extra-config = apiserver.Authorization.Mode = RBAC</code>添加到<code>minikube start</code>命令。</p>
+
+<h3 id="setting-up-environment-variables">Setting up environment variables</h3>
+
+<p>Set up your GOPATH, add a path entry for Go binaries to your PATH, set the ISTIO
+path, and set your GITHUB_USER used later in this document. These exports are
+typically added to your ~/.profile:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">export GOPATH<span style="color:#f92672">=</span>~/go
+export PATH<span style="color:#f92672">=</span>$PATH:$GOPATH/bin
+export ISTIO<span style="color:#f92672">=</span>$GOPATH/src/istio.io <span style="color:#75715e"># eg. ~/go/src/istio.io</span>
+
+<span style="color:#75715e"># Please change HUB to the desired HUB for custom docker container</span>
+<span style="color:#75715e"># builds.</span>
+export HUB<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;docker.io/</span>$USER<span style="color:#e6db74">&#34;</span>
+
+<span style="color:#75715e"># The Istio Docker build system will build images with a tag composed of</span>
+<span style="color:#75715e"># $USER and timestamp. The codebase doesn&#39;t consistently use the same timestamp</span>
+<span style="color:#75715e"># tag. To simplify development the development process when later using</span>
+<span style="color:#75715e"># updateVersion.sh you may find it helpful to set TAG to something consistent</span>
+<span style="color:#75715e"># such as $USER.</span>
+export TAG<span style="color:#f92672">=</span>$USER
+
+<span style="color:#75715e"># If your github username is not the same as your local user name (saved in the</span>
+<span style="color:#75715e"># shell variable $USER), then replace &#34;$USER&#34; below with your github username</span>
+export GITHUB_USER<span style="color:#f92672">=</span>$USER
+
+<span style="color:#75715e"># Specify which Kube config you&#39;ll use for testing. This depends on whether</span>
+<span style="color:#75715e"># you&#39;re using Minikube or your own Kubernetes cluster for local testing</span>
+<span style="color:#75715e"># For a GKE cluster:</span>
+export KUBECONFIG<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span>/.kube/config
+<span style="color:#75715e"># Alternatively, for Minikube:</span>
+<span style="color:#75715e"># export KUBECONFIG=${GOPATH}/src/istio.io/istio/.circleci/config</span></code></pre></div>
+<p>Execute once, to create a directory for the Istio source trees.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir -p $ISTIO</code></pre></div>
+<p>As the steps recommended in this section change the $PATH and environment,
+you will need to reload the environment.</p>
+
+<p>###设置环境变量</p>
+
+<p>设置GOPATH，将Go二进制文件的路径条目添加到PATH，设置ISTIO
+路径，并设置您在本文档后面使用的GITHUB_USER。这些出口是
+通常添加到你的〜/ .profile：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">导出GOPATH =〜/ go
+export PATH = $ PATH：$ GOPATH / bin
+export ISTIO = $ GOPATH / src / istio.io＃eg。 〜/去/ src目录/ istio.io
+
+＃请将HUB更改为所需的HUB以用于自定义docker容器
+#build。
+export HUB =“docker.io/$USER”
+
+#Iftio Docker构建系统将构建带有标记的图像
+＃$ USER和时间戳。代码库不会始终使用相同的时间戳
+＃ 标签。在以后使用时简化开发过程
+＃updateVersion.sh您可能会发现将TAG设置为一致的有用
+＃例如$ USER。
+export TAG = $ USER
+
+＃如果您的github用户名与您的本地用户名不同（保存在
+#hell variable $ USER），然后用你的github用户名替换下面的“$ USER”
+export GITHUB_USER = $ USER
+
+＃指定您将用于测试的Kube配置。这取决于是否
+＃您正在使用Minikube或您自己的Kubernetes集群进行本地测试
+＃对于GKE集群：
+export KUBECONFIG = $ {HOME} /.kube / config
+＃或者，对于Minikube：
+#export KUBECONFIG = $ {GOPATH} /src/istio.io/istio/.circleci/config</code></pre></div>
+<p>执行一次，为Istio源树创建一个目录。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">mkdir -p $ ISTIO</code></pre></div>
+<p>正如本节中建议的步骤更改$ PATH和环境，
+你需要重新加载环境。</p>
+
+<h3 id="setting-up-a-personal-access-token">Setting up a personal access token</h3>
+
+<p>This is only necessary for core contributors in order to push changes to the main repos.
+You can make pull requests without two-factor authentication
+but the additional security is recommended for everyone.</p>
+
+<p>To be part of the Istio organization, we require two-factor authentication, and
+you must setup a personal access token to enable push via HTTPS. Please follow
+<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/">these instructions</a>
+for how to create a token.
+Alternatively you can <a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">add your SSH keys</a>.</p>
+
+<p>###设置个人访问令牌</p>
+
+<p>这仅对核心贡献者来说是必要的，以便将更改推送到主要回购。
+您可以在没有双因素身份验证的情况下发出请求
+但建议每个人都使用额外的安全性。</p>
+
+<p>要成为Istio组织的一部分，我们需要双因素身份验证，以及
+您必须设置个人访问令牌才能通过HTTPS启用推送。请关注
+[这些说明]（<a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/）">https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/）</a>
+如何创建令牌。
+或者，您可以[添加SSH密钥]（<a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/）。">https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/）。</a></p>
+
+<h2 id="using-the-code-base">Using the code base</h2>
+
+<h3 id="building-the-code">Building the code</h3>
+
+<p>To build Pilot, Mixer, and Istio CA for your host architecture, run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make</code></pre></div>
+<p>This build command figures out what it needs to do and does not need any
+input from you.</p>
+
+<p>To build those components with debugger information so that a debugger such as
+<a href="https://github.com/derekparker/delve">Delve</a> can be used to debug them, run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make DEBUG<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span></code></pre></div>
+<p><em>TIP</em>: To speed up consecutive builds of the project, run the following
+command instead:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">GOBUILDFLAGS<span style="color:#f92672">=</span>-i make</code></pre></div>
+<p><code>GOBUILDFLAGS=-i</code> causes our build system to build with <code>go build -i</code>, that
+results in significant improvements of the overall build time. Note that
+the use of <code>-i</code> flag causes Go to cache intermediate results in
+<code>$GOPATH/pkg/</code>. Depending on the situation, this behaviour may be
+undesirable as Golang may not erase out of date artifacts from the
+cache. In such a situation, erase the contents of <code>$GOPATH/pkg/</code> manually
+before rebuilding the code.</p>
+
+<p>##使用代码库</p>
+
+<p>###构建代码</p>
+
+<p>要为您的主机架构构建Pilot，Mixer和Istio CA，请运行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">使</code></pre></div>
+<p>此构建命令可以确定它需要执行的操作，而不需要执行任何操作
+你的输入。</p>
+
+<p>使用调试器信息构建这些组件，以便调试器如
+[Delve]（<a href="https://github.com/derekparker/delve）可用于调试它们，运行">https://github.com/derekparker/delve）可用于调试它们，运行</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">make DEBUG = 1</code></pre></div>
+<p>*提示*：要加速项目的连续构建，请运行以下命令
+命令改为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">GOBUILDFLAGS = -i make</code></pre></div>
+<p><code>GOBUILDFLAGS = -i</code>导致我们的构建系统用<code>go build -i</code>构建
+从而显着改善整体构建时间。注意
+使用<code>-i</code>标志会导致Go缓存中间结果
+<code>$ GOPATH /包装/</code>。根据具体情况，可能会出现这种情况
+因为Golang可能不会删除过时的过时文物
+缓存。在这种情况下，手动擦除<code>$ GOPATH / pkg /</code>的内容
+在重建代码之前。</p>
+
+<h3 id="building-and-pushing-the-containers">Building and pushing the containers</h3>
+
+<p>Build the containers in your local docker cache:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make docker</code></pre></div>
+<p>To build the containers with the debugger information so that they can be
+debugged with a debugger such as <a href="https://github.com/derekparker">Delve</a>, run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make DEBUG<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> docker</code></pre></div>
+<p>Push the containers to your registry:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make push</code></pre></div>
+<p>###建造并推动容器</p>
+
+<p>在本地docker缓存中构建容器：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">做码头工人</code></pre></div>
+<p>使用调试器信息构建容器，以便它们可以
+使用调试器调试，如[Delve]（<a href="https://github.com/derekparker），运行">https://github.com/derekparker），运行</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">make DEBUG = 1泊坞窗</code></pre></div>
+<p>将容器推送到您的注册表：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">推动</code></pre></div>
+<h3 id="building-and-pushing-a-specific-container">Building and pushing a specific container.</h3>
+
+<p>If you want to make a local change and test some component, say citadel, you
+could do:</p>
+
+<p>Under istio/istio repo</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pwd</code></pre></div>
+<p>The path should be</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">.../src/istio.io/istio</code></pre></div>
+<p>Set up environment variables HUB and TAG by</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">export HUB<span style="color:#f92672">=</span>docker.io/yourrepo
+export TAG<span style="color:#f92672">=</span>citadel</code></pre></div>
+<p>Make some local change of CA code, then build citadel</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bin/gobuild.sh istio_ca istio.io/istio/pkg/version ./security/cmd/istio_ca</code></pre></div>
+<p>Note: for other images, check Makefile for more info.</p>
+
+<p>And move this file to docker_temp repo</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cp istio_ca $GOPATH/out/linux_amd64/release/docker_temp</code></pre></div>
+<p>Push docker image</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make push.docker.citadel</code></pre></div>
+<p>###构建并推送特定容器。</p>
+
+<p>如果您想进行本地更改并测试某个组件，请说Citadel
+能做：</p>
+
+<p>在istio / istio repo</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">PWD</code></pre></div>
+<p>路径应该是</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">... / src目录/ istio.io / istio</code></pre></div>
+<p>设置环境变量HUB和TAG</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">export HUB = docker.io / yourrepo
+出口标签=城堡</code></pre></div>
+<p>对CA代码进行一些本地更改，然后构建城堡</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">bin / gobuild.sh istio_ca istio.io/istio/pkg/version ./security/cmd/istio_ca</code></pre></div>
+<p>注意：对于其他图像，请查看Makefile以获取更多信息。</p>
+
+<p>并将此文件移动到docker_temp repo</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">cp istio_ca $ GOPATH / out / linux_amd64 / release / docker_temp</code></pre></div>
+<p>推泊坞图像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">make push.docker.citadel</code></pre></div>
+<h3 id="building-the-istio-manifests">Building the Istio manifests</h3>
+
+<p>Use the following command to build the yaml files:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make generate_yaml</code></pre></div>
+<p>###构建Istio清单</p>
+
+<p>使用以下命令构建yaml文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">make generate_yaml</code></pre></div>
+<h3 id="cleaning-outputs">Cleaning outputs</h3>
+
+<p>You can delete any build artifacts with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make clean</code></pre></div>
+<p>###清洁输出</p>
+
+<p>您可以删除任何构建工件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">干净</code></pre></div>
+<h3 id="debug-an-istio-container-with-delve">Debug an Istio container with Delve</h3>
+
+<p>To debug an Istio container with Delve in a Kubernetes environment:</p>
+
+<ul>
+<li>Locate the Kubernetes node on which your container is running.</li>
+<li>Make sure that the node has Go tool installed as described in above.</li>
+<li>Make sure the node has <a href="https://github.com/derekparker/delve/tree/master/Documentation/installation">Delve installed</a>.</li>
+<li>Clone the Istio repo from which your debuggable executables
+have been built onto the node.</li>
+<li>Log on to the node and find out the process id that you&rsquo;d like to debug. For
+example, if you want to debug Pilot, the process name is pilot-discovery.
+Issue command <code>ps -ef | grep pilot-discovery</code> to find the process id.</li>
+<li>Issue the command <code>sudo dlv attach &lt;pilot-pid&gt;</code> to start the debug
+session.</li>
+</ul>
+
+<p>You may find this <a href="http://blog.ralch.com/tutorial/golang-debug-with-delve/">Delve tutorial</a> is useful.</p>
+
+<p>Alternatively, you can use <a href="https://github.com/solo-io/squash">Squash</a> with
+Delve to debug your container. You may need to modify the Istio Dockerfile to
+use a base image such as alpine (versus scratch in Pilot Dockerfiles). One of
+the benefits of using Squash is that you don&rsquo;t need to install Go tool and Delve
+on every Kubernetes nodes.</p>
+
+<p>###使用Delve调试Istio容器</p>
+
+<p>要在Kubernetes环境中使用Delve调试Istio容器：</p>
+
+<ul>
+<li>找到运行容器的Kubernetes节点。</li>
+<li>确保节点已安装Go工具，如上所述。</li>
+<li>确保节点已安装[Delve]（<a href="https://github.com/derekparker/delve/tree/master/Documentation/installation）。">https://github.com/derekparker/delve/tree/master/Documentation/installation）。</a></li>
+<li>克隆可调试可执行文件的Istio repo
+ 已经构建到节点上。</li>
+<li>登录到节点并找出您要调试的进程ID。对于
+ 例如，如果要调试Pilot，则进程名称为pilot-discovery。
+   发出命令<code>ps -ef | grep pilot-discovery</code>找到进程ID。</li>
+<li>发出命令<code>sudo dlv attach &lt;pilot-pid&gt;</code>开始调试
+ 会话。</li>
+</ul>
+
+<p>你可能会发现这个[Delve教程]（<a href="http://blog.ralch.com/tutorial/golang-debug-with-delve/）很有用。">http://blog.ralch.com/tutorial/golang-debug-with-delve/）很有用。</a></p>
+
+<p>或者，您可以使用[Squash]（<a href="https://github.com/solo-io/squash）">https://github.com/solo-io/squash）</a>
+深入调试您的容器。您可能需要将Istio Dockerfile修改为
+使用像阿尔卑斯山这样的基础图像（与Pilot Dockerfiles中的划痕相比）。之一
+使用Squash的好处是您不需要安装Go工具和Delve
+在每个Kubernetes节点上。</p>
+
+<h3 id="running-tests">Running tests</h3>
+
+<p>You can run all the available tests with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make test</code></pre></div>
+<p><em>Note on Pilot unit tests:</em> The envoy related tests may fail on MacOS due to envoy binary being out of date.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make pilot-test</code></pre></div>
+<p>###运行测试</p>
+
+<p>您可以运行所有可用的测试：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">做测试</code></pre></div>
+<p>*关于试验单元测试的注意事项：*由于特使二进制文件已过期，特使相关测试可能因MacOS而失败。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-庆典" data-lang="庆典">进行试验</code></pre></div>
+<h3 id="health-of-tests">Health of tests</h3>
+
+<p>You can watch the health of different tests at <a href="https://testgrid.k8s.io/istio-postsubmits">https://testgrid.k8s.io/istio-postsubmits</a>.</p>
+
+<p>###健康测试</p>
+
+<p>您可以在<a href="https://testgrid.k8s.io/istio-postsubmits上查看不同测试的健康状况。">https://testgrid.k8s.io/istio-postsubmits上查看不同测试的健康状况。</a></p>
+
+<h3 id="getting-coverage-numbers">Getting coverage numbers</h3>
+
+<p>You can get the current unit test coverage numbers on your local repo by going to the top of the repo and entering:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make coverage</code></pre></div>
+<p>###获取覆盖数量</p>
+
+<p>您可以通过转到回购顶部并输入以下内容来获取当地仓库中的当前单位测试覆盖率数字：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">做好报道</code></pre></div>
+<h3 id="auto-formatting-source-code">Auto-formatting source code</h3>
+
+<p>You can automatically format the source code to follow our conventions by going to the
+top of the repo and entering:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make format</code></pre></div>
+<p>###自动格式化源代码</p>
+
+<p>您可以通过转到自动格式化源代码以遵循我们的约定
+回购顶部并进入：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">制作格式</code></pre></div>
+<h3 id="running-the-linters">Running the linters</h3>
+
+<p>You can run all the linters we require on your local repo by going to the top of the repo and entering:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make lint
+<span style="color:#75715e"># To run only on your local changes</span>
+bin/linters.sh -s HEAD^</code></pre></div>
+<p>###运行短绒裤</p>
+
+<p>您可以通过转到仓库顶部并输入以下命令来运行我们在本地仓库中所需的所有直线：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">做棉绒
+＃仅对您的本地更改运行
+bin / linters.sh -s HEAD ^</code></pre></div>
+<h3 id="race-detection-tests">Race detection tests</h3>
+
+<p>You can run the test suite using the Go race detection tools using:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">make racetest</code></pre></div>
+<p>###种族检测测试</p>
+
+<p>您可以使用Go竞赛检测工具运行测试套件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">进行比赛</code></pre></div>
+<h3 id="adding-dependencies">Adding dependencies</h3>
+
+<p>Please see <a href="https://github.com/istio/istio/wiki/Vendor-FAQ#how-do-i-add--change-a-dependency">the Vendor FAQ</a></p>
+
+<p>###添加依赖项</p>
+
+<p>请参阅[供应商常见问题]（</p>
+
+<h3 id="about-testing">About testing</h3>
+
+<p>Before sending pull requests you should at least make sure your changes have
+passed both unit and integration tests. We only merge pull requests when
+<strong>all</strong> tests are passing.</p>
+
+<ul>
+<li>Unit tests should be fully hermetic
+
+<ul>
+<li>Only access resources in the test binary.</li>
+</ul></li>
+<li>All packages and any significant files require unit tests.</li>
+<li>Unit tests are written using the standard Go testing package.</li>
+<li>The preferred method of testing multiple scenarios or input is
+<a href="https://github.com/golang/go/wiki/TableDrivenTests">table driven testing</a></li>
+<li>Concurrent unit test runs must pass.</li>
+</ul>
+
+<p>###关于测试</p>
+
+<p>在发送拉取请求之前，您至少应该确保您的更改
+通过了单元测试和集成测试。我们只在合并拉请求时
+<strong>所有</strong>测试都在通过。</p>
+
+<ul>
+<li>单元测试应完全密封
+
+<ul>
+<li>仅访问测试二进制文件中的资源。</li>
+</ul></li>
+<li>所有包和任何重要文件都需要单元测试。</li>
+<li>使用标准Go测试包编写单元测试。</li>
+<li>测试多个场景或输入的首选方法是
+ [表驱动测试]（<a href="https://github.com/golang/go/wiki/TableDrivenTests）">https://github.com/golang/go/wiki/TableDrivenTests）</a></li>
+<li>并行单元测试运行必须通过。</li>
+</ul>
+
+<h2 id="working-with-circleci">Working with CircleCI</h2>
+
+<p>We use CircleCI as one of the systems for continuous integration. Any PR
+will have to pass all CircleCI tests (in addition to Prow tests) before
+being ready to merge. When you fork the Istio repository, you will
+automatically inherit the CircleCI testing environment as well, allowing
+you to fully reproduce our testing infrastructure. If you have already
+signed up for CircleCI, you can test your code changes in your fork against
+the full suite of tests that we run for every PR.</p>
+
+<p>Please refer to the
+<a href="https://github.com/istio/istio/wiki/Working-with-CircleCI">wiki</a> for a
+detailed guide on using CircleCI with Istio.</p>
+
+<p>##使用CircleCI</p>
+
+<p>我们使用CircleCI作为持续集成的系统之一。任何PR
+之前必须通过所有CircleCI测试（除了Prow测试）
+准备合并。当您分叉Istio存储库时，您将
+允许自动继承CircleCI测试环境
+您要完全重现我们的测试基础架构。如果你已经
+注册了CircleCI，您可以在fork中测试代码更改
+我们为每个PR运行的全套测试。</p>
+
+<p>请参考
+[wiki]（<a href="https://github.com/istio/istio/wiki/Working-with-CircleCI）">https://github.com/istio/istio/wiki/Working-with-CircleCI）</a>
+使用CircleCI和Istio的详细指南。</p>
+
+<h2 id="writing-shell-scripts">Writing shell scripts</h2>
+
+<p>Follow <a href="https://google.github.io/styleguide/shell.xml">Google&rsquo;s shell style guide</a> and all <a href="https://www.shellcheck.net">ShellCheck</a> rules documented on <a href="https://github.com/koalaman/shellcheck/wiki">the wiki</a>.</p>
+
+<h3 id="shellcheck">ShellCheck</h3>
+
+<p><a href="https://www.shellcheck.net">ShellCheck</a> is a static analysis tool for shell scripts.</p>
+
+<p>CircleCI is configured to <a href="https://github.com/istio/istio/blob/master/tools/run_shellcheck.sh">run the tool against all shell scripts</a> in the istio/istio repository.</p>
+
+<p>Locally, you can run via docker:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run -tv <span style="color:#e6db74">&#34;</span>$PWD<span style="color:#e6db74">:/mnt&#34;</span> koalaman/shellcheck-alpine:v0.5.0 /mnt/tools/run_shellcheck.sh</code></pre></div>
+<p>Or <a href="https://github.com/koalaman/shellcheck#installing">install</a> ShellCheck (<strong>v0.5.0</strong>) and run it against all shell scripts:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bin/check_shell_scripts.sh</code></pre></div>
+<h4 id="dealing-with-spaces-and-arrays">Dealing with spaces and arrays</h4>
+
+<p>Many ShellCheck advice is intuitive but fixing violations concerned with implicit space splitting is a common difficulty.</p>
+
+<p>ShellCheck restricts you from expanding any string variable that could <em>possibly</em> have a space in it. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Johnny Bravo&#34;</span>
+ARGS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-o ./file -q&#34;</span>
+./main $ARGS $NAME
+       ^---^ SC2086: Double quote to prevent globbing and word splitting.
+             ^---^ SC2086: Double quote to prevent globbing and word splitting.<span style="color:#e6db74">```</span></code></pre></div>
+<p>Above, <code>NAME</code> is intended to be a single argument while <code>ARGS</code> is intended to be multiple arguments. However, the third line expands into <code>./main -o ./file -q Johnny Bravo</code>; the <code>NAME</code> argument became multiple arguments.</p>
+
+<p>The proper action is to add double quotes to <code>NAME</code> to make it a single argument and represent <code>ARGS</code> with an array:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Johnny Bravo&#34;</span>
+ARGS<span style="color:#f92672">=(</span>
+  -o
+  ./file
+  -q
+<span style="color:#f92672">)</span>
+./main <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>ARGS[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$NAME<span style="color:#e6db74">&#34;</span></code></pre></div>
+<p>Now the line properly expands to <code>./main -o ./file -q &quot;Johnny Bravo&quot;</code>.</p>
+
+<p>The invocation has the advantage that <code>NAME</code> is a single argument. The code has the advantage that <code>ARGS</code> is obviously used as a collection. ShellCheck ensures that you do not forget about the error-prone and sometimes misleading implicit space splitting.</p>
+
+<p>For more details and guidance, see ShellCheck&rsquo;s own advice and rationale:</p>
+
+<ul>
+<li><a href="https://github.com/koalaman/shellcheck/wiki/SC2124">SC2124</a></li>
+<li><a href="https://github.com/koalaman/shellcheck/wiki/SC2046">SC2046</a></li>
+<li><a href="https://github.com/koalaman/shellcheck/wiki/SC2206">SC2206</a></li>
+<li><a href="https://github.com/koalaman/shellcheck/wiki/SC2086">SC2086</a></li>
+</ul>
+
+<h3 id="style-guide">Style Guide</h3>
+
+<p>Many scripts do not currently adhere to <a href="https://google.github.io/styleguide/shell.xml">Google&rsquo;s shell style guide</a> but future changes should do their best to follow it.</p>
+
+<p>##编写shell脚本</p>
+
+<p>按照[Google的shell样式指南]（<a href="https://google.github.io/styleguide/shell.xml）和[wiki]上记录的所有[ShellCheck]（https://www.shellcheck.net）规则进行操作（https：">https://google.github.io/styleguide/shell.xml）和[wiki]上记录的所有[ShellCheck]（https://www.shellcheck.net）规则进行操作（https：</a> //github.com/koalaman/shellcheck/wiki）。</p>
+
+<h3 id="shellcheck-1">ShellCheck</h3>
+
+<p>[ShellCheck]（<a href="https://www.shellcheck.net）是一个用于shell脚本的静态分析工具。">https://www.shellcheck.net）是一个用于shell脚本的静态分析工具。</a></p>
+
+<p>CircleCI配置为[运行针对所有shell脚本的工具]（<a href="https://github.com/istio/istio/blob/master/tools/run_shellcheck.sh）在istio">https://github.com/istio/istio/blob/master/tools/run_shellcheck.sh）在istio</a> / istio存储库中。</p>
+
+<p>在本地，您可以通过docker运行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-庆典" data-lang="庆典">docker run -tv“$ PWD：/ mnt”koalaman / shellcheck-alpine：v0.5.0 /mnt/tools/run_shellcheck.sh</code></pre></div>
+<p>或[安装]（<a href="https://github.com/koalaman/shellcheck#installing）ShellCheck（__">https://github.com/koalaman/shellcheck#installing）ShellCheck（__</a> v0.5.0__）并针对所有shell脚本运行它：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-庆典" data-lang="庆典">斌/ check_shell_scripts.sh</code></pre></div>
+<p>####处理空格和数组</p>
+
+<p>许多ShellCheck建议是直观的，但修复违反隐式空间分裂的违规是一个常见的难题。</p>
+
+<p>ShellCheck限制您扩展任何可能_possibly_在其中有空格的字符串变量。例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-庆典" data-lang="庆典">NAME =“Johnny Bravo”
+ARGS =“ -  o ./file -q”
+./main $ ARGS $ NAME
+       ^ --- ^ SC2086：双引号以防止通配和分词。
+             ^ --- ^ SC2086：双引号以防止通配和单词分裂.``</code></pre></div>
+<p>上面，<code>NAME</code>旨在成为单个参数，而<code>ARGS</code>旨在成为多个参数。但是，第三行扩展为<code>./main -o ./file -q Johnny Bravo</code>; <code>NAME</code>参数成为多个参数。</p>
+
+<p>正确的操作是将“双引号”添加到“NAME”以使其成为单个参数并使用数组表示“ARGS”：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-庆典" data-lang="庆典">NAME =“Johnny Bravo”
+ARGS =（
+  -o
+  。/文件
+  -q
+）
+./main“$ {ARGS [@]}”“$ NAME”</code></pre></div>
+<p>现在该行适当扩展为`./main -o ./file -q“Johnny Bravo”。</p>
+
+<p>调用的优点是<code>NAME</code>是一个参数。该代码的优点是“ARGS”显然被用作集合。 ShellCheck确保您不会忘记容易出错且有时误导性的隐式空间拆分。</p>
+
+<p>有关更多详细信息和指导，请参阅ShellCheck自己的建议和理由：</p>
+
+<ul>
+<li>[SC2124]（<a href="https://github.com/koalaman/shellcheck/wiki/SC2124）">https://github.com/koalaman/shellcheck/wiki/SC2124）</a></li>
+<li>[SC2046]（<a href="https://github.com/koalaman/shellcheck/wiki/SC2046）">https://github.com/koalaman/shellcheck/wiki/SC2046）</a></li>
+<li>[SC2206]（<a href="https://github.com/koalaman/shellcheck/wiki/SC2206）">https://github.com/koalaman/shellcheck/wiki/SC2206）</a></li>
+<li>[SC2086]（<a href="https://github.com/koalaman/shellcheck/wiki/SC2086）">https://github.com/koalaman/shellcheck/wiki/SC2086）</a></li>
+</ul>
+
+<p>＃＃＃ 时尚指南</p>
+
+<p>许多脚本目前不符合[Google的shell样式指南]（<a href="https://google.github.io/styleguide/shell.xml），但未来的更改应尽力遵循它。">https://google.github.io/styleguide/shell.xml），但未来的更改应尽力遵循它。</a></p>
+
+<h2 id="writing-reference-docs">Writing reference docs</h2>
+
+<p>Our users depend on having quality documentation for our product. In addition to the prose
+you should be creating in the <code>istio/istio.github.io</code> repo, you need to also write quality reference documentation
+throughout the product.</p>
+
+<p>Our reference documentation comes from two places:</p>
+
+<ul>
+<li>Comments on proto files for our config formats and API definitions. The various
+protos in the <code>istio/api</code> repo, the Mixer adapter configuration protos, and the Mixer
+template definitions are all examples of this.</li>
+<li>Cobra commands for our CLI docs. The various CLI commands we build generally use the
+Cobra framework to parse our command-lines. Cobra is also used to produce
+reference documentation for the individual commands.</li>
+</ul>
+
+<p>Here&rsquo;s how this works:</p>
+
+<ul>
+<li>Developers comment every element in proto files they author</li>
+<li>Developers provide quality help &amp; usage text in Cobra command definitions.</li>
+<li>Whenever we compile protos, in addition to producing <code>.pb.go</code> files, our build system
+also produces <code>.pb.html</code> files which hold the documentation for the particular proto package.</li>
+<li>Within the <code>istio/istio.github.io</code> repo, the script file
+<a href="https://github.com/istio/istio.github.io/blob/master/scripts/grab_reference_docs.sh">scripts/grab_reference_docs.sh</a>
+does the work necessary to harvest all the generated <code>.pb.html</code> files from the <code>istio/api</code>
+and <code>istio/istio</code> repos and installs them in the right place in the website hierarchy.
+The script also builds and runs the various CLI commands we have in order to extract their
+documentation, and copies their docs to the right place in the website hierarchy. Once the
+script is done running, the changes to the website just need to be pushed and istio.io will
+shortly thereafter reflect the changes.</li>
+</ul>
+
+<p>##编写参考文档</p>
+
+<p>我们的用户依赖于我们产品的质量文档。除了散文
+你应该在<code>istio / istio.github.io</code> repo中创建，你还需要编写质量参考文档
+整个产品。</p>
+
+<p>我们的参考文档来自两个地方：</p>
+
+<ul>
+<li>对我们的配置格式和API定义的proto文件的评论。各种种类
+ <code>istio / api</code> repo中的protos，Mixer适配器配置protos和Mixer
+   模板定义就是这样的例子。</li>
+<li>我们的CLI文档的Cobra命令。我们构建的各种CLI命令通常使用
+ Cobra框架解析我们的命令行。眼镜蛇也用于生产
+   各个命令的参考文档。</li>
+</ul>
+
+<p>这是如何工作的：</p>
+
+<ul>
+<li>开发人员评论他们创作的proto文件中的每个元素</li>
+<li>开发人员在Cobra命令定义中提供高质量的帮助和使用文本。</li>
+<li>每当我们编译protos时，除了生成<code>.pb.go</code>文件之外，我们的构建系统
+ 还生成<code>.pb.html</code>文件，其中包含特定proto包的文档。</li>
+<li>在<code>istio / istio.github.io</code> repo中，脚本文件
+ [脚本/ grab_reference_docs.sh]（<a href="https://github.com/istio/istio.github.io/blob/master/scripts/grab_reference_docs.sh）">https://github.com/istio/istio.github.io/blob/master/scripts/grab_reference_docs.sh）</a>
+   是否需要从<code>istio / api</code>中获取所有生成的<code>.pb.html</code>文件
+   和<code>istio / istio</code> repos并将它们安装在网站层次结构中的正确位置。
+   该脚本还构建并运行我们拥有的各种CLI命令以便提取它们
+   文档，并将其文档复制到网站层次结构中的正确位置。一旦
+   脚本运行完毕，只需要推送对网站的更改，istio.io即可
+   此后不久反映了这些变化。</li>
+</ul>
+
+<h3 id="about-proto-documentation">About proto documentation</h3>
+
+<p>Writing proto documentation is a simple matter of adding comments to elements
+within the input proto files. You can put comments directly above individual elements, or to the
+right. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="color:#75715e">// A package-level comment
+</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> pkg;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">// This documents the message as a whole
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">MyMsg</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#75715e">// This documents this field
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// It can contain many lines.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int32</span> field1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">int32</span> field2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;       <span style="color:#75715e">// This documents field2
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>Comments are treated as markdown. You can thus embed classic markdown annotations within any comment.</p>
+
+<p>###关于proto文档</p>
+
+<p>编写原型文档是向元素添加注释的简单问题
+在输入原型文件中。您可以将注释直接放在单个元素上方，也可以放在
+对。例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-原" data-lang="原">//包级别的评论
+包pkg;
+
+//这记录了整个消息
+消息MyMsg {
+    //这是该字段的记录
+    //它可以包含很多行。
+    int32 field1 = 1;
+
+    int32 field2 = 2; //这个文件字段2
+}</code></pre></div>
+<p>评论被视为降价。因此，您可以在任何评论中嵌入经典的降价注释。</p>
+
+<h4 id="linking-to-types-and-elements">Linking to types and elements</h4>
+
+<p>In addition to normal markdown links, you can also use special proto links within any comment. Proto
+links are used to create a link to other types or elements within the set of protos. You specify proto links
+using two pairs of square brackets such as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="color:#75715e">// This is a comment that links to another type: [MyOtherType][MyPkg.MyOtherType]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">MyMsg</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>}</code></pre></div>
+<p>The first square brackets contain the name of the type to display in the resulting documentation. The second
+square brackets contain the fully qualified name of the type or element being referenced, including the
+package name.</p>
+
+<p>####链接到类型和元素</p>
+
+<p>除了正常的降价链接，您还可以在任何评论中使用特殊的原型链接。原
+链接用于创建到protos集中的其他类型或元素的链接。您指定原型链接
+使用两对方括号，例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-原" data-lang="原">//这是一个链接到另一种类型的注释：[MyOtherType] [MyPkg.MyOtherType]
+消息MyMsg {
+
+}</code></pre></div>
+<p>第一个方括号包含要在结果文档中显示的类型的名称。第二
+方括号包含要引用的类型或元素的完全限定名称，包括
+包裹名字。</p>
+
+<h4 id="annotations">Annotations</h4>
+
+<p>Within a proto file, you should insert special comments which provide additional metadata to
+use in producing quality documentation. Within a package, include an unattached
+comment of the form:</p>
+
+<pre><code>// $title: My Title
+// $overview: My Overview
+// $location: https://mysite.com/mypage.html
+</code></pre>
+
+<p><code>$title</code> provides a title for the generated package documentation. This is used for things like the
+title of the generated HTML. <code>$overview</code> is a one-line description of the package, useful for
+tables of contents or indexes. Finally, <code>$location</code> indicates the expected URL for the generated
+documentation. This is used to help downstream processing tools to know where to copy
+the documentation, and is used when creating documentation links from other packages to this one.</p>
+
+<p>You can also use the $front_matter annotation to introduce new Jekyll front matter which can be useful
+for special tuning of the output. For example:</p>
+
+<pre><code>// $front_matter: order: 10
+</code></pre>
+
+<p>The above will include the front matter <code>order: 10</code> in the generated Jekyll HTML document.</p>
+
+<p>If a comment for an element contains the annotation <code>$hide_from_docs</code>,
+then the associated element will be omitted from the output. This is useful when staging the
+introduction of new features that aren&rsquo;t quite ready for use yet. The annotation can appear
+anywhere in the comment for the element. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">MyMsg</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">int32</span> field1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// $hide_from_docs
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>The comment for any element can contain the annotation <code>$class: &lt;foo&gt;</code> which is used
+to insert a specific HTML class around the generated element. This is useful to give
+particular styling to particular elements. Common examples of useful classes include</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-proto" data-lang="proto"><span style="color:#66d9ef">message</span> <span style="color:#a6e22e">MyMsg</span> {<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">int32</span> field1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// $class: alpha
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int32</span> field2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; <span style="color:#75715e">// $class: beta
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int32</span> field3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; <span style="color:#75715e">// $class: experimental
+</span><span style="color:#75715e"></span>}</code></pre></div>
+<p>The specific class used can be used to control the rendering of the element. At the moment, Istio
+doesn&rsquo;t provide any specific rendering controls for these classes, but it would be easy to add some.
+As shown in the example, we could readily have different rendering for alpha elements vs. beta vs.
+experimental. If you find this would be a useful feature, file an issue in <code>istio/istio.github.io</code>
+to introduce the CSS necessary to support the particular class you want to use.</p>
+
+<p>####注释</p>
+
+<p>在proto文件中，您应插入提供其他元数据的特殊注释
+用于制作高质量的文件。在一个包中，包括一个单独的
+表格评论：</p>
+
+<pre><code>// $ title：我的头衔
+// $概述：我的概述
+// $ location：https：//mysite.com/mypage.html
+</code></pre>
+
+<p><code>$ title</code>为生成的包文档提供标题。这用于像
+生成的HTML的标题。 <code>$ overview</code>是包的一行描述，对于有用
+目录或索引。最后，<code>$ location</code>表示生成的预期URL
+文档。这用于帮助下游处理工具知道复制位置
+文档，用于创建从其他包到此文件的文档链接。</p>
+
+<p>您还可以使用$ front_matter注释来介绍可能有用的新Jekyll前端问题
+用于特殊调整输出。例如：</p>
+
+<pre><code>// $ front_matter：订单：10
+</code></pre>
+
+<p>以上内容将包括生成的Jekyll HTML文档中的前端<code>order：10</code>。</p>
+
+<p>如果元素的注释包含注释<code>$ hide_from_docs</code>，
+然后将从输出中省略关联的元素。这在暂存时非常有用
+引入尚未准备好使用的新功能。注释可以出现
+元素评论中的任何位置。例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-原" data-lang="原">消息MyMsg {
+    int32 field1 = 1; // $ hide_from_docs
+}</code></pre></div>
+<p>任何元素的注释都可以包含使用的注释<code>$ class：&lt;foo&gt;</code>
+在生成的元素周围插入特定的HTML类。这很有用
+特定元素的特定样式。有用类的常见示例包括</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-原" data-lang="原">消息MyMsg {
+    int32 field1 = 1; // $ class：alpha
+    int32 field2 = 2; // $ class：beta
+    int32 field3 = 3; // $ class：experimental
+}</code></pre></div>
+<p>使用的特定类可用于控制元素的呈现。目前，Istio
+没有为这些类提供任何特定的渲染控件，但添加一些很容易。
+如示例中所示，我们可以轻松地为alpha元素与beta vs.
+实验。如果您发现这将是一个有用的功能，请在<code>istio / istio.github.io</code>中提出问题
+介绍支持您要使用的特定类所必需的CSS。</p>
+
+<h4 id="proto-doc-checklist">Proto doc checklist</h4>
+
+<ul>
+<li>Ensure each package contains the appropriate <code>$title</code>, <code>$overview</code>, and <code>$location</code> annotations such
+that your package&rsquo;s docs are properly published to istio.io.</li>
+<li>Ensure each package contains exactly one package-level comment. This comment is displayed at the top of the
+documentation page.</li>
+<li>Ensure each element (message, enum, message field, enum value, etc) has good operator-centric documentation.</li>
+</ul>
+
+<h4 id="proto-doc清单">Proto doc清单</h4>
+
+<ul>
+<li>确保每个包都包含相应的<code>$ title</code>，<code>$ overview</code>和<code>$ location</code>注释
+ 您的包的文档已正确发布到istio.io。</li>
+<li>确保每个包只包含一个包级别注释。此评论显示在顶部
+ 文档页面。</li>
+<li>确保每个元素（消息，枚举，消息字段，枚举值等）具有良好的以操作员为中心的文档。</li>
+</ul>
+
+<h2 id="git-workflow">Git workflow</h2>
+
+<p>Below, we outline one of the more common Git workflows that core developers use.
+Other Git workflows are also valid.</p>
+
+<h2 id="git工作流程">Git工作流程</h2>
+
+<p>下面，我们概述了核心开发人员使用的一种比较常见的Git工作流程。
+其他Git工作流程也有效。</p>
+
+<h3 id="fork-the-main-repository">Fork the main repository</h3>
+
+<ol>
+<li>Go to <a href="https://github.com/istio/istio">https://github.com/istio/istio</a></li>
+<li>Click the &ldquo;Fork&rdquo; button (at the top right)</li>
+</ol>
+
+<h3 id="clone-your-fork">Clone your fork</h3>
+
+<p>The commands below require that you have $GOPATH set (<a href="https://golang.org/doc/code.html#GOPATH">$GOPATH
+docs</a>). We highly recommend you put
+Istio&rsquo;s code into your GOPATH. Note: the commands below will not work if
+there is more than one directory in your <code>$GOPATH</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cd $ISTIO
+git clone https://github.com/$GITHUB_USER/istio
+cd istio
+git remote add upstream <span style="color:#e6db74">&#39;https://github.com/istio/istio&#39;</span>
+git config --global --add http.followRedirects <span style="color:#ae81ff">1</span></code></pre></div>
+<p>###分叉主存储库</p>
+
+<p>1.转到<a href="https://github.com/istio/istio">https://github.com/istio/istio</a>
+2.单击“Fork”按钮（位于右上角）</p>
+
+<p>###克隆你的叉子</p>
+
+<p>下面的命令要求你设置$ GOPATH（[$ GOPATH
+文档（<a href="https://golang.org/doc/code.html#GOPATH））。我们强烈建议你放">https://golang.org/doc/code.html#GOPATH））。我们强烈建议你放</a>
+Istio的代码进入你的GOPATH。注意：如果以下命令不起作用
+你的<code>$ GOPATH</code>中有多个目录。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">cd $ ISTIO
+git clone https://github.com/$GITHUB_USER/istio
+cd istio
+git remote添加上游&#39;https://github.com/istio/istio&#39;
+git config --global --add http.followRedirects 1</code></pre></div>
+<h3 id="enable-pre-commit-hook">Enable pre-commit hook</h3>
+
+<p>NOTE: The precommit hook is not functional as of 11/08/2017 following the repo
+reorganization. It should come back alive shortly.</p>
+
+<p>Istio uses a local pre-commit hook to ensure that the code
+passes local tests before being committed.</p>
+
+<p>Run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">./bin/pre-commit
+Installing pre-commit hook</code></pre></div>
+<p>This hook is invoked every time you commit changes locally.
+The commit is allowed to proceed only if the hook succeeds.</p>
+
+<h3 id="create-a-branch-and-make-changes">Create a branch and make changes</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git checkout -b my-feature
+<span style="color:#75715e"># Make your code changes</span></code></pre></div>
+<h3 id="keeping-your-fork-in-sync">Keeping your fork in sync</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git fetch upstream
+git rebase upstream/master</code></pre></div>
+<p>Note: If you have write access to the main repositories
+(e.g. github.com/istio/istio), you should modify your Git configuration so
+that you can&rsquo;t accidentally push to upstream:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git remote set-url --push upstream no_push</code></pre></div>
+<p>###启用预提交挂钩</p>
+
+<p>注意：在回购之后，截止日期为11/08/2017，预先挂钩不起作用
+重组。它应该很快就会恢复活力。</p>
+
+<p>Istio使用本地预提交钩子来确保代码
+在提交之前传递本地测试。</p>
+
+<p>跑</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">./bin/pre-commit
+安装预提交挂钩</code></pre></div>
+<p>每次在本地提交更改时都会调用此挂接。
+只有在钩子成功时才允许提交。</p>
+
+<p>###创建分支并进行更改</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">git checkout -b my-feature
+＃更改代码</code></pre></div>
+<p>###保持你的前叉同步</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">上游git fetch
+git rebase upstream / master</code></pre></div>
+<p>注意：如果您具有对主存储库的写入权限
+（例如github.com/istio/istio），你应该修改你的Git配置
+你不能不小心推到上游：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">git remote set-url --push upstream no_push</code></pre></div>
+<h3 id="committing-changes-to-your-fork">Committing changes to your fork</h3>
+
+<p>When you&rsquo;re happy with some changes, you can commit them to your repo:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git add .
+git commit</code></pre></div>
+<p>Then push the change to your fork (typically called <code>origin</code>). When prompted for authentication, use your
+GitHub username as usual but the personal access token as your password if you
+have not setup ssh keys. Please
+follow <a href="https://help.github.com/articles/caching-your-github-password-in-git/#platform-linux">these instructions</a>
+if you want to cache the token.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git push origin my-feature</code></pre></div>
+<h3 id="creating-a-pull-request">Creating a pull request</h3>
+
+<ol>
+<li>Visit <a href="https://github.com/$GITHUB_USER/istio">https://github.com/$GITHUB_USER/istio</a> if you created a fork in your own github repository, or <a href="https://github.com/istio/istio">https://github.com/istio/istio</a> and navigate to your branch (e.g. &ldquo;my-feature&rdquo;).</li>
+<li>Click the &ldquo;Compare&rdquo; button to compare the change, and then the &ldquo;Pull request&rdquo; button next to your &ldquo;my-feature&rdquo; branch.</li>
+</ol>
+
+<h3 id="getting-a-code-review">Getting a code review</h3>
+
+<p>Once your pull request has been opened it will be assigned to one or more
+reviewers. Those reviewers will do a thorough code review, looking for
+correctness, bugs, opportunities for improvement, documentation and comments,
+and style.</p>
+
+<p>Very small PRs are easy to review. Very large PRs are very difficult to
+review. GitHub has a built-in code review tool, which is what most people use.</p>
+
+<p>###提交对fork的更改</p>
+
+<p>如果您对某些更改感到满意，可以将它们提交到您的仓库：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">git add。
+git commit</code></pre></div>
+<p>然后将更改推送到您的fork（通常称为<code>origin</code>）。提示进行身份验证时，请使用您的
+像往常一样使用GitHub用户名，但是如果您使用个人访问令牌作为密码
+没有设置ssh密钥。请
+按照[这些说明]（<a href="https://help.github.com/articles/caching-your-github-password-in-git/#platform-linux）">https://help.github.com/articles/caching-your-github-password-in-git/#platform-linux）</a>
+如果要缓存令牌。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-壳" data-lang="壳">git push origin my-feature</code></pre></div>
+<p>###创建拉取请求</p>
+
+<p>1.如果您在自己的github存储库中创建了一个fork，或访问<a href="https://github.com/istio/istio并导航到您的分支（例如“my-feature”），请访问https://github.com/$GITHUB_USER/istio">https://github.com/istio/istio并导航到您的分支（例如“my-feature”），请访问https://github.com/$GITHUB_USER/istio</a> ）。
+2.单击“比较”按钮以比较更改，然后单击“我的功能”分支旁边的“拉取请求”按钮。</p>
+
+<p>###获取代码审查</p>
+
+<p>一旦您的拉取请求被打开，它将被分配给一个或多个
+评审。这些评审员将进行彻底的代码审查，寻找
+正确性，错误，改进机会，文档和评论，
+和风格。</p>
+
+<p>非常小的PR很容易审查。非常大的PR很难
+评论。 GitHub有一个内置的代码审查工具，这是大多数人使用的。</p>
+
+<h3 id="when-to-retain-commits-and-when-to-squash">When to retain commits and when to squash</h3>
+
+<p>Upon merge, all Git commits should represent meaningful milestones or units of
+work. Use commits to add clarity to the development and review process.</p>
+
+<p>Before merging a PR, squash any &ldquo;fix review feedback&rdquo;, &ldquo;typo&rdquo;, and &ldquo;rebased&rdquo;
+sorts of commits. It is not imperative that every commit in a PR compile and
+pass tests independently, but it is worth striving for. For mass automated
+fixups (e.g. automated doc formatting), use one or more commits for the
+changes to tooling and a final commit to apply the fixup en masse. This makes
+reviews much easier.</p>
+
+<p>Please do not use force push after submitting a PR to resolve review
+feedback. Doing so results in an inability to see what has changed between
+revisions of the PR. Instead submit additional commits until the PR is
+suitable for merging. Once the PR is suitable for merging, the commits will
+be squashed to simplify the commit.</p>
+
+<p>###何时保留提交以及何时压缩</p>
+
+<p>合并后，所有Git提交应代表有意义的里程碑或单位
+工作。使用提交可以增加开发和审核过程的清晰度。</p>
+
+<p>在合并PR之前，压制任何“修复评论反馈”，“拼写错误”和“重新定位”
+各种提交。 PR中的每个提交都不是必须编译和
+独立通过测试，但值得努力。用于大规模自动化
+修正（例如自动文档格式化），使用一个或多个提交
+更改工具和最终提交以集中应用修复。这使得
+评论更容易。</p>
+
+<p>提交PR以解决审核后请不要使用强制推送
+反馈。这样做会导致无法查看之间发生了哪些变化
+PR的修订。而是提交额外的提交，直到PR为止
+适合合并。一旦PR适合合并，提交就会
+被压扁以简化提交。</p>
+
+<h2 id="develop-on-feature-branch">Develop on Feature Branch</h2>
+
+<p>Feature branch for collaboration is recommended for experimental features or changes that can significantly destabilize master. Please observe the following guidelines.</p>
+
+<ol>
+<li>Create a branch with name <code>collab-&lt;feature-name&gt;</code> as a convention. E.g. collab-test-framework. Use the same branch name in case the feature spans multiple repositories.</li>
+<li>If branch protection and test gating is needed, contact @hklai or other <a href="https://github.com/orgs/istio/teams/repo-admins/members">repo admins</a>. By default, new feature branch is not protected.</li>
+<li>Merge from master branch regularly.
+Significant divergence with master makes merging the feature branch back to master very difficult later.
+When checking this sync-up PR, do not use squash merge, instead, <strong>use <a href="https://help.github.com/articles/merging-a-pull-request/#merging-a-pull-request-on-github">commit merge</a> to preserve all the commit history</strong>. Add @hklai or other <a href="https://github.com/orgs/istio/teams/repo-admins/members">repo admins</a> as reviewer to perform the merge.</li>
+</ol>
+
+<p>##开发功能分支</p>
+
+<p>建议将用于协作的功能分支用于可能会严重破坏主站稳定性的实验性功能或更改。请遵守以下准则。</p>
+
+<p>1.创建一个名为<code>collab- &lt;feature-name&gt;</code>的分支作为约定。例如。协同合作测试框架。如果功能跨多个存储库，请使用相同的分支名称。
+2.如果需要分支保护和测试门控，请联系@hklai或其他[repo admins]（<a href="https://github.com/orgs/istio/teams/repo-admins/members）。默认情况下，新功能分支不受保护。">https://github.com/orgs/istio/teams/repo-admins/members）。默认情况下，新功能分支不受保护。</a>
+3.定期从主分公司合并。
+   与master的显着差异使得稍后将特征分支合并回到master非常困难。
+   检查此同步PR时，不要使用squash merge，而是使用[commit merge]（<a href="https://help.github.com/articles/merging-a-pull-request/#merging-a-pull">https://help.github.com/articles/merging-a-pull-request/#merging-a-pull</a> -request-on-github）保存所有提交历史**。添加@hklai或其他[repo admins]（<a href="https://github.com/orgs/istio/teams/repo-admins/members）作为审阅者以执行合并。">https://github.com/orgs/istio/teams/repo-admins/members）作为审阅者以执行合并。</a></p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'>
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/1/01/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span></a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/1/01/'>
+        <span class='screen-reader-text'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

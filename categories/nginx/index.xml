@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nginx on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/categories/nginx/</link>
+    <description>Recent content in Nginx on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Thu, 20 Jul 2017 10:14:50 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/categories/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Nginx 性能优化</title>
+      <link>http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+      <pubDate>Thu, 20 Jul 2017 10:14:50 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+      <description>Nginx 性能优化 群里有同学发了一篇 《Nginx 性能优化》 的文章，春哥看后，提出以下几点，非常有技术高度的观点，个人认为，这才是技术，才是技术人应该追求的高度。 下面把春哥的原话摘录于此，与君共勉：
+居然不提火焰图 gzip 也居然不提 CPU 损耗 另外，不提 Openfile Cache 和共享内存的锁，也是缺憾 另外，高并发下不提请求内存池的配置，也是缺憾 另外，error log 刷得太猛，也是常见的性能瓶颈 而 error log 是不带 buffer 的，比 access log 会更严重 SSL 的优化也完全没提及 性能优化是一个系统化的学问 不是简单的奇技淫巧的列表 火焰图应该作为总纲 然后分门别类 见招拆招 性能优化是一个系统化的学问 不是简单的奇技淫巧的列表</description>
+    </item>
+    
+  </channel>
+</rss>

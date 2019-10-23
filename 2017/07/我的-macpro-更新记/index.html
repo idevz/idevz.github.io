@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='好记性不如烂笔头，要是让我写出自己的开发环境是如何搞的，可能还真写不全，长年累月的演变，实在记不住，用了快 5 年的 MacPro 终于要更新了，借此机会记录下自己装机折腾记。
+常用软件安装 新机开苞后，先是各种软件各种装，有了之前折腾软件的经验，无用软件一概不再装。下面是我平时做后端架构开发、技术调研等工作时，常用的一些软件列表：
+开发工具 编程软件 sublimeText  安装 package control，现在已经很方便了，直接参考官网，Sublime 命令行安装 packageControl 指令：
+import urllib.request,os,hashlib; h = &#39;df21e130d211cfc94d9b0905775a7c0f&#39; &#43; &#39;1e3d39e33b79698005270310898eea76&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; &#43; pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %s instead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; ).'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='我的 MacPro 更新记 • 做一个善于思考的学习者'>
+<meta property='og:description' content='好记性不如烂笔头，要是让我写出自己的开发环境是如何搞的，可能还真写不全，长年累月的演变，实在记不住，用了快 5 年的 MacPro 终于要更新了，借此机会记录下自己装机折腾记。
+常用软件安装 新机开苞后，先是各种软件各种装，有了之前折腾软件的经验，无用软件一概不再装。下面是我平时做后端架构开发、技术调研等工作时，常用的一些软件列表：
+开发工具 编程软件 sublimeText  安装 package control，现在已经很方便了，直接参考官网，Sublime 命令行安装 packageControl 指令：
+import urllib.request,os,hashlib; h = &#39;df21e130d211cfc94d9b0905775a7c0f&#39; &#43; &#39;1e3d39e33b79698005270310898eea76&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; &#43; pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %s instead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; ).'>
+<meta property='og:url' content='http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='装机'><meta property='article:published_time' content='2017-07-30T15:43:50&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T10:39:29&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>我的 MacPro 更新记 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tools'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>我的 MacPro 更新记</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-07-30T15:43:50&#43;08:00'>2017, Jul 30</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+8 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p>好记性不如烂笔头，要是让我写出自己的开发环境是如何搞的，可能还真写不全，长年累月的演变，实在记不住，用了快 5 年的 MacPro 终于要更新了，借此机会记录下自己装机折腾记。</p>
+
+<h1 id="常用软件安装">常用软件安装</h1>
+
+<p>新机开苞后，先是各种软件各种装，有了之前折腾软件的经验，无用软件一概不再装。下面是我平时做后端架构开发、技术调研等工作时，常用的一些软件列表：</p>
+
+<h2 id="开发工具">开发工具</h2>
+
+<h3 id="编程软件">编程软件</h3>
+
+<h4 id="sublimetext">sublimeText</h4>
+
+<ol>
+<li><p>安装 package control，现在已经很方便了，直接参考<a href="https://packagecontrol.io/installation">官网</a>，Sublime 命令行安装 packageControl 指令：</p>
+
+<pre><code>import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+</code></pre></li>
+
+<li><p><code>command + ,</code> 调出老电脑的 sublime 相关配置，直接加入到新电脑的 sublime 配置</p>
+
+<pre><code>{
+	&quot;always_show_minimap_viewport&quot;: true,
+	&quot;bold_folder_labels&quot;: false,
+	&quot;color_scheme&quot;: &quot;Packages/Enki Theme/scheme/Enki.tmTheme&quot;,
+	&quot;default_line_ending&quot;: &quot;unix&quot;,
+	&quot;enki_theme_accent_blue&quot;: true,
+	&quot;enki_theme_accent_bluegray&quot;: true,
+	&quot;enki_theme_accent_cyan&quot;: true,
+	&quot;enki_theme_accent_fuschia&quot;: true,
+	&quot;enki_theme_accent_green&quot;: true,
+	&quot;enki_theme_accent_indigo&quot;: true,
+	&quot;enki_theme_accent_lime&quot;: true,
+	&quot;enki_theme_accent_orange&quot;: true,
+	&quot;enki_theme_accent_pink&quot;: true,
+	&quot;enki_theme_accent_purple&quot;: true,
+	&quot;enki_theme_accent_red&quot;: true,
+	&quot;enki_theme_accent_samon&quot;: true,
+	&quot;enki_theme_accent_teal&quot;: true,
+	&quot;enki_theme_accent_white&quot;: true,
+	&quot;enki_theme_accent_yellow&quot;: true,
+	&quot;enki_theme_color_expanded_folder&quot;: true,
+	&quot;enki_theme_compact_sidebar&quot;: true,
+	&quot;enki_theme_panel_separator&quot;: true,
+	&quot;enki_theme_small_statusbar&quot;: true,
+	&quot;enki_theme_small_tab&quot;: true,
+	&quot;enki_theme_tabs_autowidth&quot;: true,
+	&quot;enki_theme_tree_headings&quot;: false,
+	&quot;font_size&quot;: 12,
+	&quot;ignored_packages&quot;:
+	[
+		&quot;phpfmt&quot;,
+		&quot;Vintage&quot;
+	],
+	&quot;indent_guide_options&quot;:
+	[
+		&quot;draw_normal&quot;,
+		&quot;draw_active&quot;
+	],
+	&quot;line_padding_bottom&quot;: 0,
+	&quot;line_padding_top&quot;: 0,
+	&quot;overlay_scroll_bars&quot;: &quot;enabled&quot;,
+	&quot;theme&quot;: &quot;Enki-Theme.sublime-theme&quot;
+}
+</code></pre></li>
+</ol>
+
+<h4 id="jetbrains-公司相关开发-ide-安装">Jetbrains 公司相关开发 IDE 安装</h4>
+
+<p>intelliJ IDEA、PHPStorm、CLion，很好，很强大也很贵，所以网上找了激活服务器，本次安装激活使用的 <code>注册服务器:http://idea.iteblog.com/key.php</code>，先这么用着。</p>
+
+<h4 id="iterm">iTerm</h4>
+
+<h4 id="安装-zsh">安装 zsh</h4>
+
+<h3 id="服务器软件安装">服务器软件安装</h3>
+
+<h4 id="php">PHP</h4>
+
+<p>在 Mac 上重头折腾 PHP 环境，是比较痛苦的，因为新的 Mac 上，缺少很多 PHP 安装的依赖，虽然安装依赖，甚至是 PHP 的安装，我们都可以通过 brew 来搞定，但是通常 brew 不便于定制化安装 PHP，而且 brew 安装所支持的扩展也有限，比如 PHP7.2 版本所支持的扩展列表为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> ~/ brew search <span style="color:#e6db74">&#39;php72&#39;</span>
+homebrew/php/php72                 homebrew/php/php72-pspell          homebrew/php/php72-rdkafka
+homebrew/php/php72-redis           homebrew/php/php72-snmp            homebrew/php/php72-ev
+homebrew/php/php72-couchbase       homebrew/php/php72-tidy            homebrew/php/php72-grpc
+homebrew/php/php72-phalcon         homebrew/php/php72-uv              homebrew/php/php72-event
+homebrew/php/php72-swoole          homebrew/php/php72-libsodium       homebrew/php/php72-lz4
+homebrew/php/php72-gmp             homebrew/php/php72-oauth           homebrew/php/php72-blitz
+homebrew/php/php72-opcache         homebrew/php/php72-stats           homebrew/php/php72-mecab
+homebrew/php/php72-pcntl           homebrew/php/php72-geos            homebrew/php/php72-lua
+homebrew/php/php72-pdo-dblib       homebrew/php/php72-ssh2            homebrew/php/php72-igbinary
+homebrew/php/php72-pdo-pgsql       homebrew/php/php72-amqp            homebrew/php/php72-hprose</code></pre></div>
+<p>诸如此类，所以对于 PHP 定制化的安装需求，源码安装将是不二之选。
+但是如果只需要一个 PHP 某个版本的运行环境，而不 care 调试或者某些特殊扩展的安装的话，brew 是个很好的选择。下面记录下两种安装的方式。</p>
+
+<h5 id="源码安装-php">源码安装 PHP</h5>
+
+<p>源码安装 PHP 的过程可以说比较痛苦，尤其是在全新的环境来安装。所以我一般的安装方式就是安装 PHP 前，先针对我计划使用的编译参数，使用 brew 安装一些必须的依赖，
+以下先贴出我所用的 configure 参数：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure  --prefix<span style="color:#f92672">=</span>/usr/local/php-7.1.7 --enable-phpdbg --enable-phpdbg-debug --enable-phpdbg-webhelper --enable-debug --enable-fpm  --with-mysqli --with-zlib --enable-mbstring<span style="color:#f92672">=</span>all --enable-sockets --with-pear --enable-ftp --with-libxml-dir --with-mcrypt --with-pdo-mysql --with-freetype-dir --enable-pcntl --with-ldap --with-curl --enable-soap --with-openssl --enable-shmop --enable-sysvsem --enable-sysvshm --enable-sysvmsg</code></pre></div>
+<p>可能需要依赖的包有 libmcrypt、 openssl@1.1</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install libmcrypt openssl@1.1</code></pre></div>
+<p>安装完以上依赖后，运行 configure，在这个过程中根据报错缺啥补啥，下面是本次安装过程中遇到的一些错误，以及处理方式：</p>
+
+<ol>
+<li><p>找不到 OpenSSL
+<code>configure: error: Cannot find OpenSSL's &lt;evp.h&gt;</code>
+问题及解法：没有指定 OpenSSL 的安装目录，<code>--with-openssl=/usr/local/openssl-1.1.0f/</code>，我本机使用源码安装的方式将 <code>openssl</code> 安装到了 <code>/usr/local/openssl-1.1.0f/</code> 目录。</p></li>
+
+<li><p>找不到 OpenSSL&rsquo;s libraries
+<code>configure: error: Cannot find OpenSSL's libraries</code>
+问题及解法：我编译参数中多了一个 <code>--with-libdir=lib64</code>，因为我的编译参数是之前 CentOS 虚拟机中使用的，当时加了这个参数，所以导致在编译的时候找不到 <code>OpenSSL's libraries</code>，Mac 的路径与 CentOS 不一样。将这个参数去掉即可。</p></li>
+</ol>
+
+<h5 id="brew-安装-php5-4">brew 安装 PHP5.4</h5>
+
+<p>可能由于测试或者其他需求，我们需要多个 PHP 运行环境，而这些版本往往不是我们研习的主要方向，这时我们可以使用 brew 来方便的安装。这里以 brew 安装 PHP5.4 为例。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> // brew search <span style="color:#e6db74">&#39;php54&#39;</span>
+homebrew/php/php54                           homebrew/php/php54-magickwand                homebrew/php/php54-solr
+homebrew/php/php54-amqp ...
+... ...
+
+ ~/ brew install homebrew/php/php54 --with-fpm --with-gmp --with-imap --with-tidy --with-debug --with-mysql --with-libmysql
+<span style="color:#f92672">==</span>&gt; Tapping homebrew/php</code></pre></div>
+<h5 id="关于-brew-安装">关于 brew 安装</h5>
+
+<p>后面专门有个段落说明在 Mac 上安装 brew，这里主要说明几个使用 brew 关注的点。</p>
+
+<ol>
+<li>brew 默认将包安装到 <code>/usr/local/Cellar/</code> 路径下。</li>
+<li>brew 安装的包，会自动的在 <code>/usr/local/opt</code> 路径下建立软连接，所以上面 <code>--with-openssl</code> 可以指定到 <code>/usr/local/opt/openssl</code> 路径。</li>
+<li>会根据具体安装包的情况，同样也会在相应的系统目录建上相关的连接，比如：<code>/usr/local/sbin</code>、<code>/usr/local/bin</code>、<code>/usr/local/lib</code>、<code>/usr/local/share</code>、<code>/usr/local/include</code>。</li>
+</ol>
+
+<h3 id="其他">其他</h3>
+
+<p>这些软件都是这么些年来觉得很不错的软件，价钱不太贵，收费方式比较合理的，我都买了正版支持，所以下面这些软件我也忘了哪些是买过的，反正 APPStore 能直接安装。如何安装不了，可以到网上搜索盗版，推荐 <code>7do.net、soft.macx.cn 等</code></p>
+
+<h4 id="regexrx">RegExRx</h4>
+
+<p>正则表达式检查软件，方便调试正则表达式。</p>
+
+<h4 id="markdown-plus">Markdown Plus</h4>
+
+<p>很早之前买的一款 MD 编辑器，还行挺方便。</p>
+
+<h4 id="keka">Keka</h4>
+
+<p>解压软件，常用的一些都能解压，够用了。</p>
+
+<h4 id="brew">brew</h4>
+
+<p>brew MacX 的包管理工具。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> ~/ /usr/bin/ruby -e <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+
+-e:161: warning: Insecure world writable dir /Volumes/g/idevz/code/z/git/go/bin in PATH, mode 040777
+<span style="color:#f92672">==</span>&gt; This script will install:
+/usr/local/bin/brew
+/usr/local/share/doc/homebrew
+/usr/local/share/man/man1/brew.1
+/usr/local/share/zsh/site-functions/_brew
+/usr/local/etc/bash_completion.d/brew
+/usr/local/Homebrew
+<span style="color:#f92672">==</span>&gt; The following existing directories will be made group writable:
+/usr/local/bin
+/usr/local/share
+/usr/local/share/man
+/usr/local/share/man/man8
+<span style="color:#f92672">==</span>&gt; The following existing directories will have their owner set to zhoujing2:
+/usr/local/bin
+/usr/local/share
+/usr/local/share/man
+/usr/local/share/man/man8
+<span style="color:#f92672">==</span>&gt; The following existing directories will have their group set to admin:
+/usr/local/bin
+/usr/local/share
+/usr/local/share/man
+/usr/local/share/man/man8
+<span style="color:#f92672">==</span>&gt; The following new directories will be created:
+/usr/local/Cellar
+/usr/local/Homebrew
+/usr/local/Frameworks
+/usr/local/etc
+/usr/local/include
+/usr/local/lib
+/usr/local/opt
+/usr/local/sbin
+/usr/local/share/zsh
+/usr/local/share/zsh/site-functions
+/usr/local/var
+
+Press RETURN to <span style="color:#66d9ef">continue</span> or any other key to abort
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/chmod u+rwx /usr/local/bin /usr/local/share /usr/local/share/man /usr/local/share/man/man8
+Password:
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/chmod g+rwx /usr/local/bin /usr/local/share /usr/local/share/man /usr/local/share/man/man8
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /usr/sbin/chown zhoujing2 /usr/local/bin /usr/local/share /usr/local/share/man /usr/local/share/man/man8
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /usr/bin/chgrp admin /usr/local/bin /usr/local/share /usr/local/share/man /usr/local/share/man/man8
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/mkdir -p /usr/local/Cellar /usr/local/Homebrew /usr/local/Frameworks /usr/local/etc /usr/local/include /usr/local/lib /usr/local/opt /usr/local/sbin /usr/local/share/zsh /usr/local/share/zsh/site-functions /usr/local/var
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/chmod g+rwx /usr/local/Cellar /usr/local/Homebrew /usr/local/Frameworks /usr/local/etc /usr/local/include /usr/local/lib /usr/local/opt /usr/local/sbin /usr/local/share/zsh /usr/local/share/zsh/site-functions /usr/local/var
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/chmod <span style="color:#ae81ff">755</span> /usr/local/share/zsh /usr/local/share/zsh/site-functions
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /usr/sbin/chown zhoujing2 /usr/local/Cellar /usr/local/Homebrew /usr/local/Frameworks /usr/local/etc /usr/local/include /usr/local/lib /usr/local/opt /usr/local/sbin /usr/local/share/zsh /usr/local/share/zsh/site-functions /usr/local/var
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /usr/bin/chgrp admin /usr/local/Cellar /usr/local/Homebrew /usr/local/Frameworks /usr/local/etc /usr/local/include /usr/local/lib /usr/local/opt /usr/local/sbin /usr/local/share/zsh /usr/local/share/zsh/site-functions /usr/local/var
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/mkdir -p /Users/idevz/Library/Caches/Homebrew
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/chmod g+rwx /Users/idevz/Library/Caches/Homebrew
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /usr/sbin/chown zhoujing2 /Users/idevz/Library/Caches/Homebrew
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/mkdir -p /Library/Caches/Homebrew
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /bin/chmod g+rwx /Library/Caches/Homebrew
+<span style="color:#f92672">==</span>&gt; /usr/bin/sudo /usr/sbin/chown zhoujing2 /Library/Caches/Homebrew
+<span style="color:#f92672">==</span>&gt; Downloading and installing Homebrew...
+remote: Counting objects: <span style="color:#ae81ff">6819</span>, <span style="color:#66d9ef">done</span>.
+remote: Compressing objects: <span style="color:#ae81ff">100</span>% <span style="color:#f92672">(</span><span style="color:#ae81ff">4074</span>/4074<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+remote: Total <span style="color:#ae81ff">6819</span> <span style="color:#f92672">(</span>delta <span style="color:#ae81ff">4052</span><span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">4488</span> <span style="color:#f92672">(</span>delta <span style="color:#ae81ff">2535</span><span style="color:#f92672">)</span>, pack-reused <span style="color:#ae81ff">0</span>
+Receiving objects: <span style="color:#ae81ff">100</span>% <span style="color:#f92672">(</span><span style="color:#ae81ff">6819</span>/6819<span style="color:#f92672">)</span>, <span style="color:#ae81ff">3</span>.63 MiB | <span style="color:#ae81ff">1</span>.14 MiB/s, <span style="color:#66d9ef">done</span>.
+Resolving deltas: <span style="color:#ae81ff">100</span>% <span style="color:#f92672">(</span><span style="color:#ae81ff">4052</span>/4052<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+From https://github.com/Homebrew/brew
+ * <span style="color:#f92672">[</span>new branch<span style="color:#f92672">]</span>      master     -&gt; origin/master
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.1        -&gt; <span style="color:#ae81ff">0</span>.1
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.2        -&gt; <span style="color:#ae81ff">0</span>.2
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.3        -&gt; <span style="color:#ae81ff">0</span>.3
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.4        -&gt; <span style="color:#ae81ff">0</span>.4
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.5        -&gt; <span style="color:#ae81ff">0</span>.5
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.6        -&gt; <span style="color:#ae81ff">0</span>.6
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.7        -&gt; <span style="color:#ae81ff">0</span>.7
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.7.1      -&gt; <span style="color:#ae81ff">0</span>.7.1
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.8        -&gt; <span style="color:#ae81ff">0</span>.8
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.8.1      -&gt; <span style="color:#ae81ff">0</span>.8.1
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.9        -&gt; <span style="color:#ae81ff">0</span>.9
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.9.1      -&gt; <span style="color:#ae81ff">0</span>.9.1
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.9.2      -&gt; <span style="color:#ae81ff">0</span>.9.2
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.9.3      -&gt; <span style="color:#ae81ff">0</span>.9.3
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.9.4      -&gt; <span style="color:#ae81ff">0</span>.9.4
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.9.5      -&gt; <span style="color:#ae81ff">0</span>.9.5
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.9.8      -&gt; <span style="color:#ae81ff">0</span>.9.8
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">0</span>.9.9      -&gt; <span style="color:#ae81ff">0</span>.9.9
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.0      -&gt; <span style="color:#ae81ff">1</span>.0.0
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.1      -&gt; <span style="color:#ae81ff">1</span>.0.1
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.2      -&gt; <span style="color:#ae81ff">1</span>.0.2
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.3      -&gt; <span style="color:#ae81ff">1</span>.0.3
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.4      -&gt; <span style="color:#ae81ff">1</span>.0.4
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.5      -&gt; <span style="color:#ae81ff">1</span>.0.5
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.6      -&gt; <span style="color:#ae81ff">1</span>.0.6
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.7      -&gt; <span style="color:#ae81ff">1</span>.0.7
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.8      -&gt; <span style="color:#ae81ff">1</span>.0.8
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.0.9      -&gt; <span style="color:#ae81ff">1</span>.0.9
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.0      -&gt; <span style="color:#ae81ff">1</span>.1.0
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.1      -&gt; <span style="color:#ae81ff">1</span>.1.1
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.10     -&gt; <span style="color:#ae81ff">1</span>.1.10
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.11     -&gt; <span style="color:#ae81ff">1</span>.1.11
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.12     -&gt; <span style="color:#ae81ff">1</span>.1.12
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.13     -&gt; <span style="color:#ae81ff">1</span>.1.13
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.2      -&gt; <span style="color:#ae81ff">1</span>.1.2
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.3      -&gt; <span style="color:#ae81ff">1</span>.1.3
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.4      -&gt; <span style="color:#ae81ff">1</span>.1.4
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.5      -&gt; <span style="color:#ae81ff">1</span>.1.5
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.6      -&gt; <span style="color:#ae81ff">1</span>.1.6
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.7      -&gt; <span style="color:#ae81ff">1</span>.1.7
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.8      -&gt; <span style="color:#ae81ff">1</span>.1.8
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.1.9      -&gt; <span style="color:#ae81ff">1</span>.1.9
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.2.0      -&gt; <span style="color:#ae81ff">1</span>.2.0
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.2.1      -&gt; <span style="color:#ae81ff">1</span>.2.1
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.2.2      -&gt; <span style="color:#ae81ff">1</span>.2.2
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.2.3      -&gt; <span style="color:#ae81ff">1</span>.2.3
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.2.4      -&gt; <span style="color:#ae81ff">1</span>.2.4
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.2.5      -&gt; <span style="color:#ae81ff">1</span>.2.5
+ * <span style="color:#f92672">[</span>new tag<span style="color:#f92672">]</span>         <span style="color:#ae81ff">1</span>.2.6      -&gt; <span style="color:#ae81ff">1</span>.2.6
+HEAD is now at af463a0 formula_installer: never build dependency bottles.
+<span style="color:#f92672">==</span>&gt; Tapping homebrew/core
+Cloning into <span style="color:#e6db74">&#39;/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core&#39;</span>...
+remote: Counting objects: <span style="color:#ae81ff">4495</span>, <span style="color:#66d9ef">done</span>.
+remote: Compressing objects: <span style="color:#ae81ff">100</span>% <span style="color:#f92672">(</span><span style="color:#ae81ff">4286</span>/4286<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+remote: Total <span style="color:#ae81ff">4495</span> <span style="color:#f92672">(</span>delta <span style="color:#ae81ff">34</span><span style="color:#f92672">)</span>, reused <span style="color:#ae81ff">467</span> <span style="color:#f92672">(</span>delta <span style="color:#ae81ff">13</span><span style="color:#f92672">)</span>, pack-reused <span style="color:#ae81ff">0</span>
+Receiving objects: <span style="color:#ae81ff">100</span>% <span style="color:#f92672">(</span><span style="color:#ae81ff">4495</span>/4495<span style="color:#f92672">)</span>, <span style="color:#ae81ff">3</span>.57 MiB | <span style="color:#ae81ff">107</span>.00 KiB/s, <span style="color:#66d9ef">done</span>.
+Resolving deltas: <span style="color:#ae81ff">100</span>% <span style="color:#f92672">(</span><span style="color:#ae81ff">34</span>/34<span style="color:#f92672">)</span>, <span style="color:#66d9ef">done</span>.
+Tapped <span style="color:#ae81ff">4284</span> formulae <span style="color:#f92672">(</span><span style="color:#ae81ff">4</span>,540 files, <span style="color:#ae81ff">11</span>.1MB<span style="color:#f92672">)</span>
+<span style="color:#f92672">==</span>&gt; Cleaning up /Library/Caches/Homebrew...
+<span style="color:#f92672">==</span>&gt; Migrating /Library/Caches/Homebrew to /Users/idevz/Library/Caches/Homebrew...
+<span style="color:#f92672">==</span>&gt; Deleting /Library/Caches/Homebrew...
+Already up-to-date.
+<span style="color:#f92672">==</span>&gt; Installation successful!
+
+<span style="color:#f92672">==</span>&gt; Homebrew has enabled anonymous aggregate user behaviour analytics.
+Read the analytics documentation <span style="color:#f92672">(</span>and how to opt-out<span style="color:#f92672">)</span> here:
+  http://docs.brew.sh/Analytics.html
+
+<span style="color:#f92672">==</span>&gt; Next steps:
+- Run <span style="color:#e6db74">`</span>brew help<span style="color:#e6db74">`</span> to get started
+- Further documentation:
+    http://docs.brew.sh</code></pre></div>
+<h2 id="效率工具">效率工具</h2>
+
+<h3 id="alfred-3">Alfred 3</h3>
+
+<p>虽然 MacX 本身其实就支持 workflow 的定制，也能通过 <code>Spotlight Search</code> 来达到快速启动 APP 的作用，但是我个人还是喜欢 Alfred 的高可定制，强大的社区，多样的 workflow。本次安装是直接用了之前的 workflow。</p>
+
+<h4 id="安装-alfred">安装 Alfred</h4>
+
+<ol>
+<li>Alfred 的 workflow 功能是需要单独购买 PowerPack 才能启用的，但是我一直都是用的破解版，7do 下载。</li>
+<li>导入之前收集的 workflow（chrome、dev doctor、GoogleSearch、New File、Youdao），在导入 Youdao 的时候，报了系统兼容性错误，不过跟着错误提示进行了修正，很简单就解决了（安装 Fixum workflow，运行后，自动修复）。</li>
+
+<li><p>修改 <code>&gt;</code> 打开的终端，默认是系统默认的 <code>Terminal</code>，通过修改脚本，改成我习惯的 ITerm</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">on alfred_script<span style="color:#f92672">(</span>q<span style="color:#f92672">)</span>
+	<span style="color:#66d9ef">if</span> application <span style="color:#e6db74">&#34;iTerm2&#34;</span> is running or application <span style="color:#e6db74">&#34;iTerm&#34;</span> is running <span style="color:#66d9ef">then</span>
+		run script <span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">			on run {q}
+</span><span style="color:#e6db74">				tell application \&#34;:Applications:iTerm.app\&#34;
+</span><span style="color:#e6db74">					activate
+</span><span style="color:#e6db74">					try
+</span><span style="color:#e6db74">						select first window
+</span><span style="color:#e6db74">						set onlywindow to false
+</span><span style="color:#e6db74">					on error
+</span><span style="color:#e6db74">						create window with default profile
+</span><span style="color:#e6db74">						select first window
+</span><span style="color:#e6db74">						set onlywindow to true
+</span><span style="color:#e6db74">					end try
+</span><span style="color:#e6db74">					tell the first window
+</span><span style="color:#e6db74">						if onlywindow is false then
+</span><span style="color:#e6db74">							create tab with default profile
+</span><span style="color:#e6db74">						end if
+</span><span style="color:#e6db74">						tell current session to write text q
+</span><span style="color:#e6db74">					end tell
+</span><span style="color:#e6db74">				end tell
+</span><span style="color:#e6db74">			end run
+</span><span style="color:#e6db74">		&#34;</span> with parameters <span style="color:#f92672">{</span>q<span style="color:#f92672">}</span>
+	<span style="color:#66d9ef">else</span>
+		run script <span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">			on run {q}
+</span><span style="color:#e6db74">				tell application \&#34;:Applications:iTerm.app\&#34;
+</span><span style="color:#e6db74">					activate
+</span><span style="color:#e6db74">					try
+</span><span style="color:#e6db74">						select first window
+</span><span style="color:#e6db74">					on error
+</span><span style="color:#e6db74">						create window with default profile
+</span><span style="color:#e6db74">						select first window
+</span><span style="color:#e6db74">					end try
+</span><span style="color:#e6db74">					tell the first window
+</span><span style="color:#e6db74">						tell current session to write text q
+</span><span style="color:#e6db74">					end tell
+</span><span style="color:#e6db74">				end tell
+</span><span style="color:#e6db74">			end run
+</span><span style="color:#e6db74">		&#34;</span> with parameters <span style="color:#f92672">{</span>q<span style="color:#f92672">}</span>
+	end <span style="color:#66d9ef">if</span>
+end alfred_script</code></pre></div></li>
+</ol>
+
+<h3 id="unclutter">Unclutter</h3>
+
+<p>Unclutter 提供了三个随时可用的功能“临时文件、临时随手记、剪贴板历史”，我最常用的是后两者，随时可以把一些临时的记忆碎片备忘在临时随手笔记里，剪贴板历史记录了你最近的剪贴历史，方便快速调用，甚至是对剪贴板进行编辑。</p>
+
+<h2 id="科学上网">科学上网</h2>
+
+<p>科学上网可谓必备技能，这里记录一个简单的步骤及所需服务和组件</p>
+
+<ol>
+<li>一个 socks5t 的代理服务，购买一个国外的 vps，搭建一个即可</li>
+<li>一个与 socks5t 服务通信的本地代理（Mac 上使用 shadowsocksX 或者 shadowsocks，shadowsocksX 是一个图形界面 APP，而 shadowsocks 是一个命令行服务）
+之前搭建了一个 shadowsocks 的代理服务，这次直接用了。</li>
+
+<li><p>使用 privoxy 提供一个 HTTP 代理供给相关比如 curl、docker 等使用（Mac 上运行 <code>brew install privoxy</code> 即可），或者浏览器安装 Proxy SwitchyOmega 类似智能代理，实现浏览器翻墙
+brew services start privoxy
+brew services restart privoxy
+<strong>Mac 安装 shadowsocks</strong>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 检查是否安装 pip</span>
+$ pip --version
+pip <span style="color:#ae81ff">8</span>.1.2 from /usr/local/lib/python2.7/site-packages <span style="color:#f92672">(</span>python <span style="color:#ae81ff">2</span>.7<span style="color:#f92672">)</span>
+
+<span style="color:#75715e"># 如果报错则安装 pip</span>
+
+<span style="color:#75715e"># 首先用 wget 或者浏览器下载 get-pip.py 文件，地址为:</span>
+<span style="color:#75715e"># https://bootstrap.pypa.io/get-pip.py</span>
+
+<span style="color:#75715e"># 然后用 Python 执行下载的文件来安装 pip:</span>
+$ sudo python get-pip.py
+<span style="color:#75715e"># 用 pip 安装 shadowsocks</span>
+
+$ sudo pip install shadowsocks
+
+<span style="color:#75715e"># 验证安装:</span>
+$ which sslocal
+/usr/local/bin/sslocal
+<span style="color:#75715e"># 编辑 shadowsocks 配置文件</span>
+$ sudo vim /etc/shadowsocks.json
+
+<span style="color:#75715e"># 输入以下内容:</span>
+<span style="color:#f92672">{</span>
+<span style="color:#e6db74">&#34;server&#34;</span>:<span style="color:#e6db74">&#34;服务端地址&#34;</span>,
+<span style="color:#e6db74">&#34;server_port&#34;</span>:端口号,
+<span style="color:#e6db74">&#34;local_port&#34;</span>:1080,
+<span style="color:#e6db74">&#34;password&#34;</span>:<span style="color:#e6db74">&#34;密码&#34;</span>,
+<span style="color:#e6db74">&#34;timeout&#34;</span>:600,
+<span style="color:#e6db74">&#34;method&#34;</span>:<span style="color:#e6db74">&#34;aes-256-cfb&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e"># 以上内容根据自身情况自行替换</span>
+<span style="color:#75715e"># 添加 shadowsocks 服务脚本</span>
+<span style="color:#75715e"># 获取 sslocal 目录:</span>
+$ which sslocal
+/usr/local/bin/sslocal
+
+<span style="color:#75715e"># 编辑脚本:</span>
+$ sudo vim /Library/LaunchDaemons/com.shadowsocks.plist
+
+<span style="color:#75715e"># 输入以下内容:</span>
+&lt;?xml version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1.0&#34;</span> encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span>?&gt;
+&lt;!DOCTYPE plist PUBLIC <span style="color:#e6db74">&#34;-//Apple//DTD PLIST 1.0//EN&#34;</span> <span style="color:#e6db74">&#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;</span>&gt;
+&lt;plist version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1.0&#34;</span>&gt;
+&lt;dict&gt;
+&lt;key&gt;Label&lt;/key&gt;
+&lt;string&gt;com.shadowsocks.plist&lt;/string&gt;&lt;!--这个名字必须和文件名一致--&gt;
+&lt;key&gt;ProgramArguments&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;/usr/local/bin/sslocal&lt;/string&gt;
+    &lt;string&gt;-c&lt;/string&gt;
+    &lt;string&gt;/etc/shadowsocks.json&lt;/string&gt;
+    &lt;string&gt;start&lt;/string&gt;
+&lt;/array&gt;
+&lt;key&gt;KeepAlive&lt;/key&gt;&lt;!--后台保持运行--&gt;
+&lt;false/&gt;
+&lt;key&gt;RunAtLoad&lt;/key&gt;&lt;!--加载时候运行--&gt;
+&lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+<span style="color:#75715e"># shadowsocks 开机自启</span>
+<span style="color:#75715e"># 自动启动：</span>
+$ sudo launchctl load /Library/LaunchDaemons/com.shadowsocks.plist
+
+<span style="color:#75715e"># 取消自动启动：</span>
+$ sudo launchctl unload /Library/LaunchDaemons/com.shadowsocks.plist
+
+<span style="color:#75715e"># 立即启动：</span>
+$ sudo launchctl start com.shadowsocks.plist
+
+<span style="color:#75715e"># 立即停止：</span>
+$ sudo launchctl stop com.shadowsocks.plist
+
+<span style="color:#75715e"># 查看：</span>
+$ sudo launchctl list</code></pre></div></li>
+</ol>
+
+<p><strong>Mac 安装 privoxy</strong>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">To have launchd start privoxy now and restart at login:
+  brew services start privoxy
+Or, <span style="color:#66d9ef">if</span> you don<span style="color:#960050;background-color:#1e0010">&#39;</span>t want/need a background service you can just run:
+  privoxy /usr/local/etc/privoxy/config</code></pre></div>
+<p><strong>Mac Chrome 安装 Proxy SwitchyOmega</strong>：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 在连接 shadowsocks 打开的情况下 Chrome</span>
+
+$ open -a <span style="color:#e6db74">&#34;/Applications/Google Chrome.app&#34;</span> --args --proxy-server<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;socks5://127.0.0.1:1080&#34;</span>
+<span style="color:#75715e"># 打开 Chrome 商店： 设置 --&gt; 拓展程序 --&gt; 获取更多拓展程序 或者打开 url: https://chrome.google.com/webstore/category/apps</span>
+
+<span style="color:#75715e"># 搜索 Proxy SwitchyOmega 进行安装</span>
+
+<span style="color:#75715e"># 配置 Proxy SwitchyOmega</span>
+<span style="color:#75715e"># 下载备份好的配置文件:</span>
+
+<span style="color:#75715e"># https://github.com/FelisCatus/SwitchyOmega/wiki/GFWList.bak</span>
+
+<span style="color:#75715e"># 打开 Proxy SwitchyOmega 选项界面</span>
+
+<span style="color:#75715e"># 导入配置文件： 设定 –&gt; 导入/导出 –&gt; 从配置文件恢复 –&gt; 选择刚刚下载好的配置文件(会生成新的情景模式GWFed)</span>
+
+<span style="color:#75715e"># 添加代理服务器： 情景模式 –&gt; GFWed –&gt; 代理服务器 –&gt; 代理协议 socks5 –&gt; 代理服务器 127.0.0.1 –&gt; 代理端口 1080</span>
+
+<span style="color:#75715e"># 启用自动切换模式</span>
+<span style="color:#75715e"># 点击 Chrome 页面上右上角的 Proxy SwitchyOmega 选择自动切换模式。</span></code></pre></div>
+<h3 id="安装-shadowsocks-mac-dmg">安装 shadowsocks-mac-dmg</h3>
+
+<p><a href="https://shadowsocks.org/en/download/clients.html">shadowsocks</a>，安装后进行配置，相关配置必须与服务端 <code>/etc/shadowsocks.json</code> 中的配置一致。
+新电脑还没有翻墙，无法安装谷歌浏览器翻墙扩展 <code>SwitchyOmega</code>，只能搜点 hosts 先翻墙把扩展装上。</p>
+
+<h2 id="娱乐-app">娱乐 APP</h2>
+
+<p>Vox</p>
+
+<h2 id="macosx-系统保护">MacOSX 系统保护</h2>
+
+<p>OSX 是我最喜欢的系统之一，本着安全第一的问题，Mac 并不允许你对一些系统级别的路径做修改，但是也不是无法突破。
+重启系统，当启动的时候我们同时按下cmd+r进入Recovery模式，之后选择实用工具 =&gt; 终端，在终端输入如下命令，接口文件系统的锁定，并且重启电脑：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ csrutil disable
+$ reboot</code></pre></div>
+<p>安全第一，修改完后，记得恢复。</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E5%B7%A5%E5%85%B7/'>工具</a>, <a class='category' href='http://idevz.org/categories/macpro/'>MacPro</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/%E8%A3%85%E6%9C%BA/'>装机</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/07/mac-apps/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>mac apps</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/08/gdb/'>
+        <span class='screen-reader-text'>Next post: </span>gdb<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

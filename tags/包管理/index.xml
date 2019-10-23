@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>包管理 on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/tags/%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+    <description>Recent content in 包管理 on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Thu, 27 Jul 2017 11:16:48 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/tags/%E5%8C%85%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang 包管理</title>
+      <link>http://idevz.org/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Thu, 27 Jul 2017 11:16:48 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
+      <description>Glide 是 Golang 的 Vendor 包管理器，方便你管理 vendor 和 verdor 包。类似 Java 的 Maven，PHP 的 Composer。 Github：https://github.com/Masterminds/glide 在线文档：http://glide.readthedocs.io/en/stable 主要特性： 简单管理依赖 支持 versioning packages，包括 Semantic Versioning 2.0.0 支持 支持 aliasing packages (e.g. for working with github forks) Remove the need for munging import statements 支持所有 go 工具 支持 VCS 工具和 Go 支持：git、bzr、hg、svn 支持定制本地和全局插件 (see docs/plugins.md) 仓库缓存 结构： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 - $GOPATH/src/myProject (Your project) | |&amp;ndash; glide.</description>
+    </item>
+    
+  </channel>
+</rss>

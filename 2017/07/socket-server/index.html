@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='http://www.xtgxiso.com/socket%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/
+https://segmentfault.com/a/1190000003063859
+socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服务举例，协议以换行符举例.我们先看最简单的单进程阻塞模型
+首先一个socket服务的代码如下：
+&lt;?php /** * 单进程阻塞式--同时只能处理一个连接 */ class Xtgxiso_server { public $socket = false; public $onConnect = null; public $onMessage = null; public $onClose = null; function __construct($host=&#34;0.0.0.0&#34;,$port=1215) { $this-&gt;socket = stream_socket_server(&#34;tcp://&#34;.$host.&#34;:&#34;.$port,$errno, $errstr); if (!$this-&gt;socket) die($errstr.&#34;--&#34;.$errno); } public function run(){ while ( 1 ) { echo &#34;waiting...\n&#34;; $conn = stream_socket_accept($this-&gt;socket, -1); if ( !$conn ){ continue; } if($this-&gt;onConnect) { call_user_func($this-&gt;onConnect, $conn); } $receive = &#39;&#39;; $buffer = &#39;&#39;; while ( 1 ) { $buffer = fread($conn, 3); if($buffer === &#39;&#39; || $buffer === false) { if ( $this-&gt;onClose ){ call_user_func($this-&gt;onClose, $conn); } break; } $pos = strpos($buffer, &#34;\n&#34;); if($pos === false) { $receive .'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='socket server • 做一个善于思考的学习者'>
+<meta property='og:description' content='http://www.xtgxiso.com/socket%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/
+https://segmentfault.com/a/1190000003063859
+socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服务举例，协议以换行符举例.我们先看最简单的单进程阻塞模型
+首先一个socket服务的代码如下：
+&lt;?php /** * 单进程阻塞式--同时只能处理一个连接 */ class Xtgxiso_server { public $socket = false; public $onConnect = null; public $onMessage = null; public $onClose = null; function __construct($host=&#34;0.0.0.0&#34;,$port=1215) { $this-&gt;socket = stream_socket_server(&#34;tcp://&#34;.$host.&#34;:&#34;.$port,$errno, $errstr); if (!$this-&gt;socket) die($errstr.&#34;--&#34;.$errno); } public function run(){ while ( 1 ) { echo &#34;waiting...\n&#34;; $conn = stream_socket_accept($this-&gt;socket, -1); if ( !$conn ){ continue; } if($this-&gt;onConnect) { call_user_func($this-&gt;onConnect, $conn); } $receive = &#39;&#39;; $buffer = &#39;&#39;; while ( 1 ) { $buffer = fread($conn, 3); if($buffer === &#39;&#39; || $buffer === false) { if ( $this-&gt;onClose ){ call_user_func($this-&gt;onClose, $conn); } break; } $pos = strpos($buffer, &#34;\n&#34;); if($pos === false) { $receive .'>
+<meta property='og:url' content='http://idevz.org/2017/07/socket-server/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='xxxxx'><meta property='article:published_time' content='2017-07-24T07:40:22&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>socket server • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/07/socket-server/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>socket server</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-07-24T07:40:22&#43;08:00'>2017, Jul 24</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+10 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<p><a href="http://www.xtgxiso.com/socket%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/">http://www.xtgxiso.com/socket%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/</a></p>
+
+<p><a href="https://segmentfault.com/a/1190000003063859">https://segmentfault.com/a/1190000003063859</a></p>
+
+<h1 id="socket服务的模型以及实现">socket服务的模型以及实现</h1>
+
+<h2 id="单进程阻塞模型">单进程阻塞模型</h2>
+
+<p>这里我们只以tcp服务举例，协议以换行符举例.我们先看最简单的单进程阻塞模型</p>
+
+<p>首先一个socket服务的代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * 单进程阻塞式--同时只能处理一个连接
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Xtgxiso_server</span>
+{
+    <span style="color:#66d9ef">public</span> $socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">public</span> $onConnect <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onClose <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+
+    <span style="color:#66d9ef">function</span> __construct($host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,$port<span style="color:#f92672">=</span><span style="color:#ae81ff">1215</span>)
+    {
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_server</span>(<span style="color:#e6db74">&#34;tcp://&#34;</span><span style="color:#f92672">.</span>$host<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">.</span>$port,$errno, $errstr);
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>) <span style="color:#66d9ef">die</span>($errstr<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;--&#34;</span><span style="color:#f92672">.</span>$errno);
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">run</span>(){
+        <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
+            <span style="color:#66d9ef">echo</span>  <span style="color:#e6db74">&#34;waiting...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+            $conn <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_accept</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+            <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">!</span>$conn ){
+                <span style="color:#66d9ef">continue</span>;
+            }
+            <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>)
+            {
+                <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>, $conn);
+            }
+            $receive <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+            $buffer <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+            <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
+                $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">fread</span>($conn, <span style="color:#ae81ff">3</span>);
+                <span style="color:#66d9ef">if</span>($buffer <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">||</span> $buffer <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+                {
+                    <span style="color:#66d9ef">if</span> ( $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> ){
+                        <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>, $conn);
+                    }
+                    <span style="color:#66d9ef">break</span>;
+                }
+                $pos <span style="color:#f92672">=</span> <span style="color:#a6e22e">strpos</span>($buffer, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+                <span style="color:#66d9ef">if</span>($pos <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+                {
+                    $receive <span style="color:#f92672">.=</span> $buffer;
+                    <span style="color:#75715e">//echo &#34;received:&#34;.$buffer.&#34;;not all package,continue recdiveing\n&#34;;
+</span><span style="color:#75715e"></span>                }<span style="color:#66d9ef">else</span>{
+                    $receive <span style="color:#f92672">.=</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">substr</span> ($buffer,<span style="color:#ae81ff">0</span>,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>));
+                    $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">substr</span>($buffer,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+                    <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>)
+                    {
+                        <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>, $conn, $receive);
+                    }
+                    <span style="color:#66d9ef">switch</span> ( $receive ){
+                        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;quit&#34;</span><span style="color:#f92672">:</span>
+                            <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;client close conn</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+                            <span style="color:#a6e22e">fclose</span>($conn);
+                            <span style="color:#66d9ef">break</span> <span style="color:#ae81ff">2</span>;
+                        <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                            <span style="color:#75715e">//echo &#34;all package:\n&#34;;
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">//echo $receive.&#34;\n&#34;;
+</span><span style="color:#75715e"></span>                            <span style="color:#66d9ef">break</span>;
+                    }
+                    $receive<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>;
+                }
+            }
+        }
+        <span style="color:#a6e22e">fclose</span>($socket);
+    }
+}
+
+$server <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Xtgxiso_server</span>();
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onConnect -- accepted &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;conn success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn,$msg){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onMessage --&#34;</span> <span style="color:#f92672">.</span> $msg <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;received &#34;</span><span style="color:#f92672">.</span>$msg<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onClose --&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;onClose &#34;</span><span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">run</span>();
+</code></pre></div>
+<p>大家可以用telnet命令来测试，这也是用换行符协议的原因，方便测试。可以很明显的看到，这个服务同时只能处理一个连接，肯定不会用人用这种方式来实现socket服务的</p>
+
+<h2 id="多进程阻塞模型">多进程阻塞模型</h2>
+
+<p>为了可以同时处理多个连接，我们优化成多进程模式，并且还是预先生成进程，而不是动态创建进程.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * 多进程阻塞式--一个master进程，两个worker进程.
+</span><span style="color:#e6db74"> * 其中一个进程挂掉自动启动新的
+</span><span style="color:#e6db74"> * 同时处理的连接数受限于启动的进程数
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Xtgxiso_server</span>
+{
+    <span style="color:#66d9ef">public</span> $socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">public</span> $onConnect <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onClose <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $process_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">private</span> $pids <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+
+    <span style="color:#66d9ef">function</span> __construct($host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,$port<span style="color:#f92672">=</span><span style="color:#ae81ff">1215</span>){
+        <span style="color:#75715e">//产生子进程分支
+</span><span style="color:#75715e"></span>        $pid <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_fork</span>();
+        <span style="color:#66d9ef">if</span> ($pid <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;could not fork&#34;</span>); <span style="color:#75715e">//pcntl_fork返回-1标明创建子进程失败
+</span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> ($pid) {
+            <span style="color:#66d9ef">exit</span>(); <span style="color:#75715e">//父进程中pcntl_fork返回创建的子进程进程号
+</span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#75715e">// 子进程pcntl_fork返回的时0
+</span><span style="color:#75715e"></span>        }
+        <span style="color:#75715e">// 从当前终端分离
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">posix_setsid</span>() <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;could not detach from terminal&#34;</span>);
+        }
+        <span style="color:#a6e22e">umask</span>(<span style="color:#ae81ff">0</span>);
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_server</span>(<span style="color:#e6db74">&#34;tcp://&#34;</span><span style="color:#f92672">.</span>$host<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">.</span>$port,$errno, $errstr);
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>) <span style="color:#66d9ef">die</span>($errstr<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;--&#34;</span><span style="color:#f92672">.</span>$errno);
+    }
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">start_worker_process</span>(){
+        $pid <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_fork</span>();
+        <span style="color:#66d9ef">switch</span> ($pid) {
+            <span style="color:#66d9ef">case</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+                <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;fork error : </span><span style="color:#e6db74">{</span>$i<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>;
+                <span style="color:#66d9ef">exit</span>;
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>
+                <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
+                    <span style="color:#66d9ef">echo</span>  <span style="color:#e6db74">&#34;waiting...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+                    $conn <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_accept</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+                    <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>) {
+                        <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>, $conn);
+                    }
+                    $receive <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+                    $buffer <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+                    <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
+                        $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">fread</span>($conn, <span style="color:#ae81ff">3</span>);
+                        <span style="color:#66d9ef">if</span>($buffer <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">||</span> $buffer <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+                        {
+                            <span style="color:#66d9ef">if</span> ( $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> ){
+                                <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>, $conn);
+                            }
+                            <span style="color:#66d9ef">break</span>;
+                        }
+                        $pos <span style="color:#f92672">=</span> <span style="color:#a6e22e">strpos</span>($buffer, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+                        <span style="color:#66d9ef">if</span>($pos <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>) {
+                            $receive <span style="color:#f92672">.=</span> $buffer;
+                            <span style="color:#75715e">//echo &#34;received:&#34;.$buffer.&#34;;not all package,continue recdiveing\n&#34;;
+</span><span style="color:#75715e"></span>                        }<span style="color:#66d9ef">else</span>{
+                            $receive <span style="color:#f92672">.=</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">substr</span> ($buffer,<span style="color:#ae81ff">0</span>,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>));
+                            $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">substr</span>($buffer,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+                            <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>) {
+                                <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>, $conn, $receive);
+                            }
+                            <span style="color:#66d9ef">switch</span> ( $receive ){
+                                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;quit&#34;</span><span style="color:#f92672">:</span>
+                                    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;client close conn</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+                                    <span style="color:#a6e22e">fclose</span>($conn);
+                                    <span style="color:#66d9ef">break</span> <span style="color:#ae81ff">2</span>;
+                                <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                                    <span style="color:#75715e">//echo &#34;all package:\n&#34;;
+</span><span style="color:#75715e"></span>                                    <span style="color:#75715e">//echo $receive.&#34;\n&#34;;
+</span><span style="color:#75715e"></span>                                    <span style="color:#66d9ef">break</span>;
+                            }
+                            $receive<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>;
+                        }
+                    }
+                }
+            <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span>[$pid] <span style="color:#f92672">=</span> $pid;
+                <span style="color:#66d9ef">break</span>;
+        }
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">run</span>(){
+
+        <span style="color:#66d9ef">for</span>($i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; $i <span style="color:#f92672">&lt;=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">process_num</span>; $i<span style="color:#f92672">++</span>){
+            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">start_worker_process</span>();
+        }
+
+        <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>){
+            <span style="color:#66d9ef">foreach</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span> <span style="color:#66d9ef">as</span> $i <span style="color:#f92672">=&gt;</span> $pid) {
+                <span style="color:#66d9ef">if</span>($pid) {
+                    $res <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_waitpid</span>($pid, $status,<span style="color:#a6e22e">WNOHANG</span>);
+
+                    <span style="color:#66d9ef">if</span> ( $res <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> $res <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> ){
+                        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">start_worker_process</span>();
+                        <span style="color:#a6e22e">unset</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span>[$pid]);
+                    }
+                }
+            }
+            <span style="color:#a6e22e">sleep</span>(<span style="color:#ae81ff">1</span>);
+        }
+    }
+
+    <span style="color:#66d9ef">function</span> __destruct() {
+        <span style="color:#f92672">@</span><span style="color:#a6e22e">fclose</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>);
+    }
+
+}
+$server <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Xtgxiso_server</span>();
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onConnect -- accepted &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;conn success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn,$msg){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onMessage --&#34;</span> <span style="color:#f92672">.</span> $msg <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;received &#34;</span><span style="color:#f92672">.</span>$msg<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onClose --&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;onClose &#34;</span><span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">run</span>();
+</code></pre></div>
+<p>这样，我们就实现了一个多进程的socket服务，同时处理的连接跟启动时配置的进程数有关，如果其中一个进程死掉，会自动启动新的！</p>
+
+<h2 id="单进程io复用select">单进程IO复用select</h2>
+
+<p>利用多进程来提高并发连接数并不理想，进程消耗太大了,这次我们利用IO复用技术来实现.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * 单进程IO复用select
+</span><span style="color:#e6db74"> * 同时处理多个连接
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Xtgxiso_server</span>
+{
+    <span style="color:#66d9ef">public</span> $socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">public</span> $master <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+    <span style="color:#66d9ef">public</span> $onConnect <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onClose <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+
+    <span style="color:#66d9ef">function</span> __construct($host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,$port<span style="color:#f92672">=</span><span style="color:#ae81ff">1215</span>)
+    {
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_server</span>(<span style="color:#e6db74">&#34;tcp://&#34;</span><span style="color:#f92672">.</span>$host<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">.</span>$port,$errno, $errstr);
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>) <span style="color:#66d9ef">die</span>($errstr<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;--&#34;</span><span style="color:#f92672">.</span>$errno);
+        <span style="color:#a6e22e">stream_set_blocking</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>,<span style="color:#ae81ff">0</span>);
+        $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>;
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">run</span>(){
+        $read <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>;
+        $receive <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+        <span style="color:#66d9ef">echo</span>  <span style="color:#e6db74">&#34;start run...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+        <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> ) {
+            $read <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>;
+            <span style="color:#75715e">//echo  &#34;waiting...\n&#34;;
+</span><span style="color:#75715e"></span>            $mod_fd <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#a6e22e">stream_select</span>($read, $_w <span style="color:#f92672">=</span> <span style="color:#66d9ef">NULL</span>, $_e <span style="color:#f92672">=</span> <span style="color:#66d9ef">NULL</span>, <span style="color:#ae81ff">60</span>);
+            <span style="color:#66d9ef">if</span> ($mod_fd <span style="color:#f92672">===</span> <span style="color:#66d9ef">FALSE</span>) {
+                <span style="color:#66d9ef">break</span>;
+            }
+            <span style="color:#66d9ef">foreach</span> ( $read <span style="color:#66d9ef">as</span> $k <span style="color:#f92672">=&gt;</span> $v ) {
+                <span style="color:#66d9ef">if</span> ( $v <span style="color:#f92672">===</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span> ) {
+                    <span style="color:#75715e">//echo &#34;new conn\n&#34;;
+</span><span style="color:#75715e"></span>                    $conn <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_accept</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>);
+                    <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>) {
+                        <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>, $conn);
+                    }
+                    $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$conn;
+                    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id] <span style="color:#f92672">=</span> $conn;
+                } <span style="color:#66d9ef">else</span> {
+                    <span style="color:#75715e">//echo &#34;read data\n&#34;;
+</span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">!</span><span style="color:#a6e22e">isset</span>($receive[$k]) ){
+                        $receive[$k]<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>;
+                    }
+                    $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">fread</span>($v, <span style="color:#ae81ff">10</span>);
+                    <span style="color:#75715e">//echo $buffer.&#34;\n&#34;;
+</span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">if</span> ( <span style="color:#a6e22e">strlen</span>($buffer) <span style="color:#f92672">===</span> <span style="color:#ae81ff">0</span> ) {
+                        <span style="color:#66d9ef">if</span> ( $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> ){
+                            <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>,$v);
+                        }
+                        <span style="color:#a6e22e">fclose</span>($v);
+                        $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$v;
+                        <span style="color:#a6e22e">unset</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> ( $buffer <span style="color:#f92672">===</span> <span style="color:#66d9ef">FALSE</span> ) {
+                        <span style="color:#66d9ef">if</span> ( $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> ){
+                            <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$key_to_del]);
+                        }
+                        <span style="color:#a6e22e">fclose</span>($v);
+                        $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$v;
+                        <span style="color:#a6e22e">unset</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                    } <span style="color:#66d9ef">else</span> {
+                        $pos <span style="color:#f92672">=</span> <span style="color:#a6e22e">strpos</span>($buffer, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+                        <span style="color:#66d9ef">if</span> ( $pos <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>) {
+                            $receive[$k] <span style="color:#f92672">.=</span> $buffer;
+                            <span style="color:#75715e">//echo &#34;received:&#34;.$buffer.&#34;;not all package,continue recdiveing\n&#34;;
+</span><span style="color:#75715e"></span>                        }<span style="color:#66d9ef">else</span>{
+                            $receive[$k] <span style="color:#f92672">.=</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">substr</span> ($buffer,<span style="color:#ae81ff">0</span>,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>));
+                            $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">substr</span>($buffer,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+                            <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>) {
+                                <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>,$v,$receive[$k]);
+                            }
+                            <span style="color:#66d9ef">switch</span> ( $receive[$k] ){
+                                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;quit&#34;</span><span style="color:#f92672">:</span>
+                                    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;client close conn</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+                                    <span style="color:#a6e22e">fclose</span>($v);
+                                    $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$v;
+                                    <span style="color:#a6e22e">unset</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                                    <span style="color:#66d9ef">break</span>;
+                                <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                                    <span style="color:#75715e">//echo &#34;all package:\n&#34;;
+</span><span style="color:#75715e"></span>                                    <span style="color:#75715e">//echo $receive[$k].&#34;\n&#34;;
+</span><span style="color:#75715e"></span>                                    <span style="color:#66d9ef">break</span>;
+                            }
+                            $receive[$k]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>;
+                        }
+                    }
+                }
+            }
+            <span style="color:#a6e22e">usleep</span>(<span style="color:#ae81ff">10000</span>);
+        }
+    }
+}
+$server <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Xtgxiso_server</span>();
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onConnect -- accepted &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;conn success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn,$msg){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onMessage --&#34;</span> <span style="color:#f92672">.</span> $msg <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;received &#34;</span><span style="color:#f92672">.</span>$msg<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onClose --&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;onClose &#34;</span><span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">run</span>();
+</code></pre></div>
+<p>这样我们同时处理的连接数就不受限于进程数了，相对于靠多进程来提高连接数的方式明显好了很多.</p>
+
+<h2 id="单进程io复用libevent">单进程IO复用libevent</h2>
+
+<p>利用系统select提供的IO复用技术，会有性能问题，这次我们采用比较好的libevent库.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * 单进程IO复用libevent
+</span><span style="color:#e6db74"> * 同时处理多个连接
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Xtgxiso_server</span>
+{
+    <span style="color:#66d9ef">public</span> $socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">public</span> $master <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+    <span style="color:#66d9ef">public</span> $onConnect <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onClose <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $receive <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+
+    <span style="color:#66d9ef">function</span> __construct($host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,$port<span style="color:#f92672">=</span><span style="color:#ae81ff">1215</span>)
+    {
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">extension_loaded</span>(<span style="color:#e6db74">&#39;libevent&#39;</span>)) {
+            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;Please install libevent extension </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+        }
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_server</span>(<span style="color:#e6db74">&#34;tcp://&#34;</span><span style="color:#f92672">.</span>$host<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">.</span>$port,$errno, $errstr);
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>) <span style="color:#66d9ef">die</span>($errstr<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;--&#34;</span><span style="color:#f92672">.</span>$errno);
+        <span style="color:#a6e22e">stream_set_blocking</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>,<span style="color:#ae81ff">0</span>);
+        $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>;
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">run</span>()
+    {
+        $base <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_base_new</span>();
+        $event <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_new</span>();
+        <span style="color:#a6e22e">event_set</span>($event, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>, <span style="color:#a6e22e">EV_READ</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">EV_PERSIST</span>, <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_accept&#39;</span>), $base);
+        <span style="color:#a6e22e">event_base_set</span>($event, $base);
+        <span style="color:#a6e22e">event_add</span>($event);
+        <span style="color:#66d9ef">echo</span>  <span style="color:#e6db74">&#34;start run...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+        <span style="color:#a6e22e">event_base_loop</span>($base);
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_accept</span>($socket, $flag, $base){
+        $connection <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_accept</span>($socket);
+        <span style="color:#a6e22e">stream_set_blocking</span>($connection, <span style="color:#ae81ff">0</span>);
+        $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$connection;
+        <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>) {
+            <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>, $connection);
+        }
+        $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_buffer_new</span>($connection, <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_read&#39;</span>), <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_write&#39;</span>), <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_error&#39;</span>), $id);
+        <span style="color:#a6e22e">event_buffer_base_set</span>($buffer, $base);
+        <span style="color:#a6e22e">event_buffer_timeout_set</span>($buffer, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>);
+        <span style="color:#a6e22e">event_buffer_watermark_set</span>($buffer, <span style="color:#a6e22e">EV_READ</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0xffffff</span>);
+        <span style="color:#a6e22e">event_buffer_priority_set</span>($buffer, <span style="color:#ae81ff">10</span>);
+        <span style="color:#a6e22e">event_buffer_enable</span>($buffer, <span style="color:#a6e22e">EV_READ</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">EV_PERSIST</span>);
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id] <span style="color:#f92672">=</span> $connection;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">buffer</span>[$id] <span style="color:#f92672">=</span> $buffer;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_read</span>($buffer, $id)
+    {
+        <span style="color:#66d9ef">while</span>( <span style="color:#ae81ff">1</span> ) {
+            $read <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_buffer_read</span>($buffer, <span style="color:#ae81ff">3</span>);
+            <span style="color:#66d9ef">if</span>($read <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">||</span> $read <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+            {
+                <span style="color:#66d9ef">break</span>;
+            }
+            $pos <span style="color:#f92672">=</span> <span style="color:#a6e22e">strpos</span>($read, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+            <span style="color:#66d9ef">if</span>($pos <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+            {
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">.=</span> $read;
+                <span style="color:#75715e">//echo &#34;received:&#34;.$read.&#34;;not all package,continue recdiveing\n&#34;;
+</span><span style="color:#75715e"></span>            }<span style="color:#66d9ef">else</span>{
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">.=</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">substr</span> ($read,<span style="color:#ae81ff">0</span>,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>));
+                $read <span style="color:#f92672">=</span> <span style="color:#a6e22e">substr</span>($read,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+                <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>)
+                {
+                    <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>,$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id],$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id]);
+                }
+                <span style="color:#66d9ef">switch</span> ( $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] ){
+                    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;quit&#34;</span><span style="color:#f92672">:</span>
+                        <span style="color:#75715e">//echo &#34;client close conn\n&#34;;
+</span><span style="color:#75715e"></span>                        <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>) {
+                            <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                        }
+                        <span style="color:#a6e22e">fclose</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                        <span style="color:#66d9ef">break</span>;
+                    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                        <span style="color:#75715e">//echo &#34;all package:\n&#34;;
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//echo $this-&gt;receive[$id].&#34;\n&#34;;
+</span><span style="color:#75715e"></span>                        <span style="color:#66d9ef">break</span>;
+                }
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>;
+            }
+        }
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_write</span>($buffer, $id)
+    {
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$id</span><span style="color:#e6db74"> -- &#34;</span> <span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_error</span>($buffer, $error, $id)
+    {
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;ev_error - &#34;</span><span style="color:#f92672">.</span>$error<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+
+}
+
+
+$server <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Xtgxiso_server</span>();
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onConnect -- accepted &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;conn success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn,$msg){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onMessage --&#34;</span> <span style="color:#f92672">.</span> $msg <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;received &#34;</span><span style="color:#f92672">.</span>$msg<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onClose --&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">run</span>();
+</code></pre></div>
+<p>这样的方式，相对来说是一个比较好的socket下的IO复用实现.</p>
+
+<h2 id="多进程io复用libevent">多进程IO复用libevent</h2>
+
+<p>在利用了IO复用的情况下，再结合多进程，实现性能更好的服务.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * 多进程IO复用libevent
+</span><span style="color:#e6db74"> * 同时处理多个连接
+</span><span style="color:#e6db74"> * 惊群效应没处理
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Xtgxiso_server</span>
+{
+    <span style="color:#66d9ef">public</span> $socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">public</span> $master <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+    <span style="color:#66d9ef">public</span> $onConnect <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onClose <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $process_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">private</span> $pids <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+    <span style="color:#66d9ef">public</span> $receive <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+
+    <span style="color:#66d9ef">function</span> __construct($host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,$port<span style="color:#f92672">=</span><span style="color:#ae81ff">1215</span>){
+        <span style="color:#75715e">//产生子进程分支
+</span><span style="color:#75715e"></span>        $pid <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_fork</span>();
+        <span style="color:#66d9ef">if</span> ($pid <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;could not fork&#34;</span>); <span style="color:#75715e">//pcntl_fork返回-1标明创建子进程失败
+</span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> ($pid) {
+            <span style="color:#66d9ef">exit</span>(); <span style="color:#75715e">//父进程中pcntl_fork返回创建的子进程进程号
+</span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#75715e">// 子进程pcntl_fork返回的时0
+</span><span style="color:#75715e"></span>        }
+        <span style="color:#75715e">// 从当前终端分离
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">posix_setsid</span>() <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;could not detach from terminal&#34;</span>);
+        }
+        <span style="color:#a6e22e">umask</span>(<span style="color:#ae81ff">0</span>);
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_server</span>(<span style="color:#e6db74">&#34;tcp://&#34;</span><span style="color:#f92672">.</span>$host<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">.</span>$port, $errno, $errstr);
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>) <span style="color:#66d9ef">die</span>($errstr<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;--&#34;</span><span style="color:#f92672">.</span>$errno);
+        <span style="color:#a6e22e">stream_set_blocking</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>,<span style="color:#ae81ff">0</span>);
+        $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>;
+    }
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">start_worker_process</span>(){
+        $pid <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_fork</span>();
+        <span style="color:#66d9ef">switch</span> ($pid) {
+            <span style="color:#66d9ef">case</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+                <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;fork error : </span><span style="color:#e6db74">{</span>$i<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>;
+                <span style="color:#66d9ef">exit</span>;
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>
+                $base <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_base_new</span>();
+                $event <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_new</span>();
+                <span style="color:#a6e22e">event_set</span>($event, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>, <span style="color:#a6e22e">EV_READ</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">EV_PERSIST</span>, <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_accept&#39;</span>), $base);
+                <span style="color:#a6e22e">event_base_set</span>($event, $base);
+                <span style="color:#a6e22e">event_add</span>($event);
+                <span style="color:#66d9ef">echo</span>   <span style="color:#a6e22e">posix_getpid</span>()<span style="color:#f92672">.</span><span style="color:#e6db74">&#34; start run...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+                <span style="color:#a6e22e">event_base_loop</span>($base);
+            <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span>[$pid] <span style="color:#f92672">=</span> $pid;
+                <span style="color:#66d9ef">break</span>;
+        }
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">run</span>(){
+
+        <span style="color:#66d9ef">for</span>($i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; $i <span style="color:#f92672">&lt;=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">process_num</span>; $i<span style="color:#f92672">++</span>){
+            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">start_worker_process</span>();
+        }
+
+        <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>){
+            <span style="color:#66d9ef">foreach</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span> <span style="color:#66d9ef">as</span> $i <span style="color:#f92672">=&gt;</span> $pid) {
+                <span style="color:#66d9ef">if</span>($pid) {
+                    $res <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_waitpid</span>($pid, $status,<span style="color:#a6e22e">WNOHANG</span>);
+
+                    <span style="color:#66d9ef">if</span> ( $res <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> $res <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> ){
+                        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">start_worker_process</span>();
+                        <span style="color:#a6e22e">unset</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span>[$pid]);
+                    }
+                }
+            }
+            <span style="color:#a6e22e">sleep</span>(<span style="color:#ae81ff">1</span>);
+        }
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_accept</span>($socket, $flag, $base){
+        $connection <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#a6e22e">stream_socket_accept</span>($socket);
+        <span style="color:#66d9ef">echo</span> <span style="color:#a6e22e">posix_getpid</span>()<span style="color:#f92672">.</span><span style="color:#e6db74">&#34; -- accepted &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($connection,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+        <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">!</span>$connection ){<span style="color:#75715e">//惊群效应
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span>;
+        }
+        <span style="color:#a6e22e">stream_set_blocking</span>($connection, <span style="color:#ae81ff">0</span>);
+        $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$connection;
+        <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>) {
+            <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>, $connection);
+        }
+        $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_buffer_new</span>($connection, <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_read&#39;</span>), <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_write&#39;</span>), <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_error&#39;</span>), $id);
+        <span style="color:#a6e22e">event_buffer_base_set</span>($buffer, $base);
+        <span style="color:#a6e22e">event_buffer_timeout_set</span>($buffer, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>);
+        <span style="color:#a6e22e">event_buffer_watermark_set</span>($buffer, <span style="color:#a6e22e">EV_READ</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0xffffff</span>);
+        <span style="color:#a6e22e">event_buffer_priority_set</span>($buffer, <span style="color:#ae81ff">10</span>);
+        <span style="color:#a6e22e">event_buffer_enable</span>($buffer, <span style="color:#a6e22e">EV_READ</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">EV_PERSIST</span>);
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id] <span style="color:#f92672">=</span> $connection;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">buffer</span>[$id] <span style="color:#f92672">=</span> $buffer;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_read</span>($buffer, $id)
+    {
+        <span style="color:#66d9ef">while</span>( <span style="color:#ae81ff">1</span> ) {
+            $read <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_buffer_read</span>($buffer, <span style="color:#ae81ff">3</span>);
+            <span style="color:#66d9ef">if</span>($read <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">||</span> $read <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+            {
+                <span style="color:#66d9ef">break</span>;
+            }
+            $pos <span style="color:#f92672">=</span> <span style="color:#a6e22e">strpos</span>($read, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+            <span style="color:#66d9ef">if</span>($pos <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+            {
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">.=</span> $read;
+                <span style="color:#75715e">//echo &#34;received:&#34;.$read.&#34;;not all package,continue recdiveing\n&#34;;
+</span><span style="color:#75715e"></span>            }<span style="color:#66d9ef">else</span>{
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">.=</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">substr</span> ($read,<span style="color:#ae81ff">0</span>,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>));
+                $read <span style="color:#f92672">=</span> <span style="color:#a6e22e">substr</span>($read,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+                <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>)
+                {
+                    <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>,$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id],$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id]);
+                }
+                <span style="color:#66d9ef">switch</span> ( $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] ){
+                    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;quit&#34;</span><span style="color:#f92672">:</span>
+                        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;client close conn</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+                        <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>) {
+                            <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                        }
+                        <span style="color:#a6e22e">fclose</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                        <span style="color:#66d9ef">break</span>;
+                    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                        <span style="color:#75715e">//echo &#34;all package:\n&#34;;
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//echo $this-&gt;receive[$id].&#34;\n&#34;;
+</span><span style="color:#75715e"></span>                        <span style="color:#66d9ef">break</span>;
+                }
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>;
+            }
+        }
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_write</span>($buffer, $id)
+    {
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$id</span><span style="color:#e6db74"> -- &#34;</span> <span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_error</span>($buffer, $error, $id)
+    {
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;ev_error - &#34;</span><span style="color:#f92672">.</span>$error<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+
+}
+$server <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Xtgxiso_server</span>();
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onConnect -- accepted &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;conn success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn,$msg){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onMessage --&#34;</span> <span style="color:#f92672">.</span> $msg <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;received &#34;</span><span style="color:#f92672">.</span>$msg<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onClose --&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">run</span>();
+</code></pre></div>
+<p>在多进程的情况下，多个进程都在accep会有惊群效应的情况出现,性能瓶颈在stream_socket_server上面，这个会在下一篇介绍！</p>
+
+<h2 id="多进程io复用libevent-端口复用技术">多进程IO复用libevent–端口复用技术</h2>
+
+<p>端口复用技术，这样就可以很好的解决惊群问题和stream_socket_server性能瓶颈的问题.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * 多进程IO复用libevent
+</span><span style="color:#e6db74"> * 同时处理多个连接
+</span><span style="color:#e6db74"> * 端口复用---建议php7
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Xtgxiso_server</span>
+{
+    <span style="color:#66d9ef">public</span> $socket <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">public</span> $master <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+    <span style="color:#66d9ef">public</span> $onConnect <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onMessage <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $onClose <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> $process_num <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">private</span> $pids <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+    <span style="color:#66d9ef">public</span> $receive <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+    <span style="color:#66d9ef">private</span>  $host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;127.0.0.1&#39;</span>;
+    <span style="color:#66d9ef">private</span> $port <span style="color:#f92672">=</span> <span style="color:#ae81ff">1215</span>;
+
+    <span style="color:#66d9ef">function</span> __construct($host<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;0.0.0.0&#34;</span>,$port<span style="color:#f92672">=</span><span style="color:#ae81ff">1215</span>){
+        <span style="color:#75715e">//产生子进程分支
+</span><span style="color:#75715e"></span>        $pid <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_fork</span>();
+        <span style="color:#66d9ef">if</span> ($pid <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;could not fork&#34;</span>); <span style="color:#75715e">//pcntl_fork返回-1标明创建子进程失败
+</span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> ($pid) {
+            <span style="color:#66d9ef">exit</span>(); <span style="color:#75715e">//父进程中pcntl_fork返回创建的子进程进程号
+</span><span style="color:#75715e"></span>        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#75715e">// 子进程pcntl_fork返回的时0
+</span><span style="color:#75715e"></span>        }
+        <span style="color:#75715e">// 从当前终端分离
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">posix_setsid</span>() <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+            <span style="color:#66d9ef">die</span>(<span style="color:#e6db74">&#34;could not detach from terminal&#34;</span>);
+        }
+        <span style="color:#a6e22e">umask</span>(<span style="color:#ae81ff">0</span>);
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">host</span> <span style="color:#f92672">=</span> $host;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">port</span> <span style="color:#f92672">=</span> $port;
+    }
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">start_worker_process</span>(){
+        $pid <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_fork</span>();
+        <span style="color:#66d9ef">switch</span> ($pid) {
+            <span style="color:#66d9ef">case</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+                <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;fork error : </span><span style="color:#e6db74">{</span>$i<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>;
+                <span style="color:#66d9ef">exit</span>;
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>
+                $context_option[<span style="color:#e6db74">&#39;socket&#39;</span>][<span style="color:#e6db74">&#39;so_reuseport&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+                $context <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_context_create</span>($context_option);
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">stream_socket_server</span>(<span style="color:#e6db74">&#34;tcp://&#34;</span><span style="color:#f92672">.</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">host</span><span style="color:#f92672">.</span><span style="color:#e6db74">&#34;:&#34;</span><span style="color:#f92672">.</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">port</span>, $errno, $errstr,<span style="color:#a6e22e">STREAM_SERVER_BIND</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">STREAM_SERVER_LISTEN</span>,$context);
+                <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>) <span style="color:#66d9ef">die</span>($errstr<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;--&#34;</span><span style="color:#f92672">.</span>$errno);
+                <span style="color:#a6e22e">stream_set_blocking</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>,<span style="color:#ae81ff">0</span>);
+                $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>;
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id] <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>;
+                $base <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_base_new</span>();
+                $event <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_new</span>();
+                <span style="color:#a6e22e">event_set</span>($event, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">socket</span>, <span style="color:#a6e22e">EV_READ</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">EV_PERSIST</span>, <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_accept&#39;</span>), $base);
+                <span style="color:#a6e22e">event_base_set</span>($event, $base);
+                <span style="color:#a6e22e">event_add</span>($event);
+                <span style="color:#66d9ef">echo</span>   <span style="color:#a6e22e">posix_getpid</span>()<span style="color:#f92672">.</span><span style="color:#e6db74">&#34; start run...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+                <span style="color:#a6e22e">event_base_loop</span>($base);
+            <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span>[$pid] <span style="color:#f92672">=</span> $pid;
+                <span style="color:#66d9ef">break</span>;
+        }
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">run</span>(){
+
+        <span style="color:#66d9ef">for</span>($i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; $i <span style="color:#f92672">&lt;=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">process_num</span>; $i<span style="color:#f92672">++</span>){
+            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">start_worker_process</span>();
+        }
+
+        <span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>){
+            <span style="color:#66d9ef">foreach</span> ($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span> <span style="color:#66d9ef">as</span> $i <span style="color:#f92672">=&gt;</span> $pid) {
+                <span style="color:#66d9ef">if</span>($pid) {
+                    $res <span style="color:#f92672">=</span> <span style="color:#a6e22e">pcntl_waitpid</span>($pid, $status,<span style="color:#a6e22e">WNOHANG</span>);
+
+                    <span style="color:#66d9ef">if</span> ( $res <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> $res <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> ){
+                        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">start_worker_process</span>();
+                        <span style="color:#a6e22e">unset</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pids</span>[$pid]);
+                    }
+                }
+            }
+            <span style="color:#a6e22e">sleep</span>(<span style="color:#ae81ff">1</span>);
+        }
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_accept</span>($socket, $flag, $base){
+        $connection <span style="color:#f92672">=</span> <span style="color:#f92672">@</span><span style="color:#a6e22e">stream_socket_accept</span>($socket);
+        <span style="color:#66d9ef">echo</span> <span style="color:#a6e22e">posix_getpid</span>()<span style="color:#f92672">.</span><span style="color:#e6db74">&#34; -- accepted &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($connection,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+        <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">!</span>$connection ){
+            <span style="color:#66d9ef">return</span>;
+        }
+        <span style="color:#a6e22e">stream_set_blocking</span>($connection, <span style="color:#ae81ff">0</span>);
+        $id <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$connection;
+        <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>) {
+            <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span>, $connection);
+        }
+        $buffer <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_buffer_new</span>($connection, <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_read&#39;</span>), <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_write&#39;</span>), <span style="color:#66d9ef">array</span>(<span style="color:#66d9ef">__CLASS__</span>, <span style="color:#e6db74">&#39;ev_error&#39;</span>), $id);
+        <span style="color:#a6e22e">event_buffer_base_set</span>($buffer, $base);
+        <span style="color:#a6e22e">event_buffer_timeout_set</span>($buffer, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">30</span>);
+        <span style="color:#a6e22e">event_buffer_watermark_set</span>($buffer, <span style="color:#a6e22e">EV_READ</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0xffffff</span>);
+        <span style="color:#a6e22e">event_buffer_priority_set</span>($buffer, <span style="color:#ae81ff">10</span>);
+        <span style="color:#a6e22e">event_buffer_enable</span>($buffer, <span style="color:#a6e22e">EV_READ</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">EV_PERSIST</span>);
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id] <span style="color:#f92672">=</span> $connection;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">buffer</span>[$id] <span style="color:#f92672">=</span> $buffer;
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_read</span>($buffer, $id)
+    {
+        <span style="color:#66d9ef">while</span>( <span style="color:#ae81ff">1</span> ) {
+            $read <span style="color:#f92672">=</span> <span style="color:#a6e22e">event_buffer_read</span>($buffer, <span style="color:#ae81ff">3</span>);
+            <span style="color:#66d9ef">if</span>($read <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#f92672">||</span> $read <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+            {
+                <span style="color:#66d9ef">break</span>;
+            }
+            $pos <span style="color:#f92672">=</span> <span style="color:#a6e22e">strpos</span>($read, <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+            <span style="color:#66d9ef">if</span>($pos <span style="color:#f92672">===</span> <span style="color:#66d9ef">false</span>)
+            {
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">.=</span> $read;
+                <span style="color:#75715e">//echo &#34;received:&#34;.$read.&#34;;not all package,continue recdiveing\n&#34;;
+</span><span style="color:#75715e"></span>            }<span style="color:#66d9ef">else</span>{
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] <span style="color:#f92672">.=</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">substr</span> ($read,<span style="color:#ae81ff">0</span>,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>));
+                $read <span style="color:#f92672">=</span> <span style="color:#a6e22e">substr</span>($read,$pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+                <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>)
+                {
+                    <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span>,$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id],$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id]);
+                }
+                <span style="color:#66d9ef">switch</span> ( $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id] ){
+                    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;quit&#34;</span><span style="color:#f92672">:</span>
+                        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;client close conn</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+                        <span style="color:#66d9ef">if</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>) {
+                            <span style="color:#a6e22e">call_user_func</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                        }
+                        <span style="color:#a6e22e">fclose</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">master</span>[$id]);
+                        <span style="color:#66d9ef">break</span>;
+                    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+                        <span style="color:#75715e">//echo &#34;all package:\n&#34;;
+</span><span style="color:#75715e"></span>                        <span style="color:#75715e">//echo $this-&gt;receive[$id].&#34;\n&#34;;
+</span><span style="color:#75715e"></span>                        <span style="color:#66d9ef">break</span>;
+                }
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">receive</span>[$id]<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;&#39;</span>;
+            }
+        }
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_write</span>($buffer, $id)
+    {
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$id</span><span style="color:#e6db74"> -- &#34;</span> <span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ev_error</span>($buffer, $error, $id)
+    {
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;ev_error - &#34;</span><span style="color:#f92672">.</span>$error<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+
+}
+$server <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Xtgxiso_server</span>();
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onConnect</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onConnect -- accepted &#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;conn success</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onMessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn,$msg){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onMessage --&#34;</span> <span style="color:#f92672">.</span> $msg <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#a6e22e">fwrite</span>($conn,<span style="color:#e6db74">&#34;received &#34;</span><span style="color:#f92672">.</span>$msg<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">onClose</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>($conn){
+    <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#34;onClose --&#34;</span> <span style="color:#f92672">.</span> <span style="color:#a6e22e">stream_socket_get_name</span>($conn,<span style="color:#66d9ef">true</span>) <span style="color:#f92672">.</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+};
+
+$server<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">run</span>();
+</code></pre></div>
+<p>经过多次服务模型的演变，基本我们实现了一个高性能的服务模型！</p>
+
+<h2 id="总结">总结</h2>
+
+<p>首先，我们来熟悉一下基本知识，再回顾前几篇文章！</p>
+
+<p>1:阻塞/非阻塞–这两个概念是针对 IO 过程中进程的状态来说的</p>
+
+<pre><code>    阻塞 IO 是指调用结果返回之前，当前线程会被挂起
+    非阻塞指在不能立刻得到结果之前，该函数不会阻塞当前线程，而会立刻返回
+</code></pre>
+
+<p>2:同步/异步–这两个概念是针对调用返回结果来说的</p>
+
+<pre><code>    同步，就是在发出一个功能调用时，在没有得到结果之前，该调用就不返回
+    当一个异步过程调用发出后，调用者不能立刻得到结果，实际处理这个调用的部件在完成后，通过状态、通知和回调来通知调用者
+</code></pre>
+
+<p>3:多路复用（IO/Multiplexing）</p>
+
+<pre><code>    为了提高数据信息在网络通信线路中传输的效率，在一条物理通信线路上建立多条逻辑通信信道,同时传输若干路信号的技术就叫做多路复用技术。
+    对于 Socket 来说，应该说能同时处理多个连接的模型都应该被称为多路复用,目前比较常用的有 select/poll/epoll/kqueue 这些 IO 模型.
+
+4:惊群效应
+
+    惊群问题是由于系统中有多个进程在等待同一个资源，当资源可用的时候，系统会唤醒所有或部分处于休眠状态的进程去争抢资源，但是最终只会有一个进程能够成功的响应请求并获得资源，但在这个过程中由于系统要对全部的进程唤醒，导致了需要对这些进程进行不必要的切换，从而会产生系统资源的浪费.
+
+    更多资料可参考如下链接
+
+    http://wenda.workerman.net/?/question/179
+
+    https://www.nginx.com/blog/socket-sharding-nginx-release-1-9-1/
+
+    https://www.nginx.com/blog/socket-sharding-nginx-release-1-9-1/
+
+我们接着回顾下前几篇文章的思绪
+
+    socket服务的模型以及实现(1)–单进程阻塞模型
+
+       单进程阻塞模型，一次只能处理一个连接,效率极低!
+
+    socket服务的模型以及实现(2)–多进程阻塞模型
+
+        多进程阻塞模型，一个进程处理一个连接!
+
+    socket服务的模型以及实现(3)–单进程IO复用select
+
+       单进程IO复用(select),同时处理的连接数不受限于进程数！
+
+    socket服务的模型以及实现(4)–单进程IO复用libevent
+
+       单进程IO复用(libevent),同时处理的连接数比select要好很多！
+
+    socket服务的模型以及实现(5)–多进程IO复用libevent
+
+
+       多进程IO复用(libevent),可以更好的利用多核！
+
+    socket服务的模型以及实现(6)–多进程IO复用libevent–端口复用技术
+
+      增加了端口复用技术，性能更好！
+
+ 通过几上几篇文章，对于我们用PHP写个socket服务有了基本的服务模型认识！
+</code></pre>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/xxxx/'>xxxx</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/xxxxx/'>xxxxx</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Netty in action 学习笔记</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/07/yield/'>
+        <span class='screen-reader-text'>Next post: </span>yield<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

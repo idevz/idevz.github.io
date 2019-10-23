@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://idevz.org/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tech/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tools/</loc>
+    <lastmod>2017-12-05T14:18:10+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/life/</loc>
+    <lastmod>2017-12-05T14:18:10+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/page/about/</loc>
+    <lastmod>2017-12-05T14:18:10+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/</loc>
+    <lastmod>2019-10-23T10:39:29+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/golang/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/</loc>
+    <lastmod>2019-10-23T10:39:29+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2018/12/tour-of-go/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/tour.golang.org/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/servicemesh/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/servicemesh/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/architecture/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/top/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/top/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2019-10-23T10:39:29+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/dlv/</loc>
+    <lastmod>2017-12-12T08:01:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/go-debug/</loc>
+    <lastmod>2017-12-12T08:01:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</loc>
+    <lastmod>2017-12-12T08:01:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/12/gdb_tools/</loc>
+    <lastmod>2017-12-10T23:02:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/xxxx/</loc>
+    <lastmod>2017-12-10T23:02:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/xxxxx/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/metaprogamming/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/metaprogramming/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/authors/</loc>
+    <lastmod>2017-12-10T23:02:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/authors/idevz/</loc>
+    <lastmod>2017-12-10T23:02:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/jit/</loc>
+    <lastmod>2017-12-10T23:02:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/tracing-jit/</loc>
+    <lastmod>2017-12-10T23:02:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AFtracing-jit-compilation/</loc>
+    <lastmod>2017-12-10T23:02:47+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/motan/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/motan-openresty/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/motan-openresty/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/openresty/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/11/opm/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/testnginx/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/testnginx/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/luajit/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/11/luajit/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/11/ffi-debug/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/ffi-%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2017-12-04T19:56:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/c-%E8%BD%AC%E6%8D%A2/</loc>
+    <lastmod>2017-12-03T23:24:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/11/request_id/</loc>
+    <lastmod>2017-12-03T23:24:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E5%AD%97%E8%8A%82%E6%95%B0%E7%BB%84/</loc>
+    <lastmod>2017-12-03T23:24:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/gdb/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/osx/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/vscode/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/proxifier/</loc>
+    <lastmod>2019-10-23T09:23:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/shadowsocksr/</loc>
+    <lastmod>2019-10-23T09:23:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/11/shadowsocksr-proxifier/</loc>
+    <lastmod>2019-10-23T09:23:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/</loc>
+    <lastmod>2019-10-23T09:23:40+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/10/start-motan/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/09/start/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/09/sort/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/09/jit/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/09/generic-types/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/java/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/docker/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/how-to/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/dropzone3/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E4%B8%83%E7%89%9B%E4%BA%91/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/%E4%BD%BF%E7%94%A8-%E4%B8%83%E7%89%9B%E4%BA%91-%E5%81%9A%E5%9B%BE%E5%BA%8A-dropzone3-%E4%B8%83%E7%89%9B%E4%BA%91%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/mem-sys-metries/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/design-pattern/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/volume/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/golang/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/golang-gc-%E7%9B%91%E6%8E%A7/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/monitoring-golang-gc/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/metrics/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0%E6%8A%98%E8%85%BE%E8%AE%B0/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/do-performance-test/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/web.xml/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/gdb/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/gdb/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/effective-go/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/go-at-google/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/data-sharing/</loc>
+    <lastmod>2017-10-23T15:06:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/openresty/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/macpro/</loc>
+    <lastmod>2019-10-23T10:39:29+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</loc>
+    <lastmod>2019-10-23T10:39:29+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E8%A3%85%E6%9C%BA/</loc>
+    <lastmod>2019-10-23T10:39:29+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/rpm-%E5%8C%85/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E5%8C%85%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/tcp/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/tcp/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E7%BD%91%E7%BB%9C/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/react-php/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/yield/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/socket-server/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/netty/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/spring-in-action/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/nginx/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E4%BA%BA%E7%94%9F/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/php/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/php-%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/vanilla/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/lua/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/lua-src/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/lua-%E6%BA%90%E7%A0%81/</loc>
+    <lastmod>2017-10-23T14:54:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/lua-%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E9%AB%98%E6%80%A7%E8%83%BD-lua%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/lua-%E5%85%83%E8%A1%A8/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/ngx-ctx-bug/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/ngx.ctx/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E8%AF%B7%E6%B1%82%E5%86%85%E5%8F%98%E9%87%8F%E5%85%B1%E4%BA%AB/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/lua-%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/lua-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/openresty-%E6%96%87%E6%A1%A3/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/or-doc/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/use-google-much-more-better/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E6%84%9F%E6%82%9F/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/fig/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/cs-md-fixer/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E8%B4%A8%E9%87%8F%E6%A3%80%E6%9F%A5/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/%E5%A6%82%E4%BD%95%E9%80%92%E5%BD%92%E4%B8%8B%E8%BD%BDftp%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/mac-apps/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E7%A8%8B%E5%BA%8F%E5%91%98/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/07/git/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/06/golang-testing/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/06/golang-pprof/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E6%80%A7%E8%83%BD/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/06/confront-the-life/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E4%BA%BA%E7%94%9F/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/mac/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/linux/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/tags/hugo/</loc>
+    <lastmod>2017-06-14T13:12:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2017-06-14T13:12:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</loc>
+    <lastmod>2017-06-14T13:12:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2017/06/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8hugo%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2017-06-14T13:12:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2019-06-13T09:00:19+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <lastmod>2019-04-08T22:05:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/1/01/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/page/</loc>
+    <lastmod>2017-12-05T14:18:10+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://idevz.org/categories/xxxxx/</loc>
+    <lastmod>2018-04-16T08:00:33+08:00</lastmod>
+  </url>
+  
+</urlset>

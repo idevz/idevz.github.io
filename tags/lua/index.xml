@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lua on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/tags/lua/</link>
+    <description>Recent content in Lua on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Fri, 14 Jul 2017 00:27:58 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/tags/lua/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>lua src</title>
+      <link>http://idevz.org/2017/07/lua-src/</link>
+      <pubDate>Fri, 14 Jul 2017 00:27:58 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/lua-src/</guid>
+      <description>lua源代码重要文件及其说明。 https://github.com/lichuang/Lua-Source-Internal |文件名 | 说明| |:&amp;mdash;-|:&amp;mdash;-| |luac.c | lua编译器，可将生成的字节码写入文件| |lua.c | 可独立运行的解释器| |lparser.c | Lua语法解析器| |lcode.c | Lua指令生成器（编码器）。luaK_code负责把编码好的指令(Instruction, 其实就是lua_int32)放到指令数组中。| |lopcodes.c | Lua虚拟机的操作码。lua的虚拟机指令是整齐的，都是32位。除了有算数运算、逻辑运算、跳转(jmp/call)等常见CUP指令外，还有lua特有的操作Table\Closure\Upvalue的指令。| |lvm.c | Lua虚拟机, luaV_execute 是解释器的主循环| |lmem.c | Lua内存管理| |lgc.c | luaC_newobj创建对象并加入gc| |lobject.c | Lua语言中数据结构的C描述，比如closure和table| |ltable.c | table相关的操作|</description>
+    </item>
+    
+  </channel>
+</rss>

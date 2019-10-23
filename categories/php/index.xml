@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHP on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/categories/php/</link>
+    <description>Recent content in PHP on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Tue, 18 Jul 2017 14:55:31 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/categories/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PHP 异步网络编程</title>
+      <link>http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Tue, 18 Jul 2017 14:55:31 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <description>http://www.huyanping.cn/php%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0/
+加上STREAM_CLIENT_ASYNC_CONNECT 后stream_socket_client会立刻返回，不会阻塞等待。 等tcp链接建立完成后，可以调用io复用接口的到链接建立的通知
+#define EV_TIMEOUT 0x01 #define EV_READ 0x02 #define EV_WRITE 0x04 #define EV_SIGNAL 0x08 #define EV_PERSIST 0x10 #define EV_ET 0x20 #define EVLOOP_ONCE 0x01 #define EVLOOP_NONBLOCK 0x02    值 常量名 含义     1 EV_TIMEOUT 超过时间后事件成为激活状态   2 EV_READ FD就绪，可以读取的时候 ，事件成为激活状态   4 EV_WRITE FD就绪，可以写入的时候 ，事件成为激活状态   8 EV_SIGNAL 用于实现信号检测   16 EV_PERSIST 表示事件是持久的   32 EV_ET 表示底层是否支持边沿触发事件   1 EVLOOP_ONCE 如果设置了EVLOOP_ONCE，循环将等待某些事件成为激活的，执行激活的事件直到没有更多的事件可以执行，然会返回。   2 EVLOOP_NONBLOCK 如果设置了EVLOOP_NONBLOCK，循环不会等待事件被触发：循环将仅仅检测是否有事件已经就绪，可以立即触发，如果有，则执行事件的回调。    event_base_free() 释放资源，这不能销毁绑定事件 event_base_loop() 处理事件，根据指定的base来处理事件循环 event_base_loopbreak() 立即取消事件循环，行为各break语句相同 event_base_loopexit() 在指定的时间后退出循环 event_base_new() 创建并且初始事件 event_base_priority_init() 设定事件的优先级 event_base_set() 关联事件到事件base event_buffer_base_set() 关联缓存的事件到event_base event_buffer_disable() 禁用一个缓存的事件 event_buffer_enable() 启用一个指定的缓存的事件 event_buffer_fd_set() 改变一个缓存的文件系统描述 event_buffer_free() 释放缓存事件 event_buffer_new() 建立一个新的缓存事件 event_buffer_priority_set() 缓存事件的优先级设定 event_buffer_read() 读取缓存事件中的数据 event_buffer_set_callback() 给缓存的事件设置或重置回调hansh函数 event_buffer_timeout_set() 给一个缓存的事件设定超时的读写时间 event_buffer_watermark_set 设置读写事件的水印标记 event_buffer_write() 向缓存事件中写入数据 event_add() 向指定的设置中添加一个执行事件 event_del() 从设置的事件中移除事件 event_free() 清空事件句柄 event_new() 创建一个新的事件 event_set() 准备想要在event_add中添加事件 http://www.</description>
+    </item>
+    
+    <item>
+      <title>fig</title>
+      <link>http://idevz.org/2017/07/fig/</link>
+      <pubDate>Mon, 10 Jul 2017 16:15:54 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/fig/</guid>
+      <description>https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-2-coding-style-guide-cn.md PHP-FIG master PSR-0-cn.md PSR-1-basic-coding-standard-cn.md PSR-2-coding-style-guide-cn.md PSR-2-coding-style-guide-meta-cn.md PSR-3-logger-interface-cn.md PSR-4-autoloader-cn.md PSR-4-autoloader-examples.md PSR-4-autoloader-meta.md PSR-7-http-message-interfaces.md README.md</description>
+    </item>
+    
+    <item>
+      <title>cs md fixer</title>
+      <link>http://idevz.org/2017/07/cs-md-fixer/</link>
+      <pubDate>Mon, 10 Jul 2017 16:13:41 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/cs-md-fixer/</guid>
+      <description>使用 PHP-CS-Fixer 自动规范化你的 PHP 代码 https://laravel-china.org/topics/547/use-php-cs-fixer-to-automatically-standardize-your-php-code
+PHPCS
+安装
+有以下方式安装 PHPCS:
+使用 composer:
+composer global require &amp;ldquo;squizlabs/php_codesniffer=*&amp;rdquo; 注意，你可能需要将 ~/.composer/vendor/bin/ 添加到 PATH 环境变量中，否则会报命令找不到。 使用 PEAR:
+pear install PHP_CodeSniffer 下载安装：
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar php phpcs.phar -h curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar php phpcbf.phar -h 然后移动到命令目录：
+mv phpcs.phar /usr/bin/phpcs mv phpcbf.phar /usr/bin/phpcbf // 也许上面需要 sudo chmod +x /usr/bin/phpcs chmod +x /usr/bin/phpcbf 这里的 phpcbf 是代码修复工具。
+使用
+查看帮助：
+phpcs &amp;ndash;help 添加标准：
+phpcs &amp;ndash;config-set installed_paths PATH_TO_SEARCH_STANDARDS 注意：假设标准为 Weibo, 目录为:</description>
+    </item>
+    
+    <item>
+      <title>使用Sublime&#43;Xdebug开发调试PHP</title>
+      <link>http://idevz.org/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</link>
+      <pubDate>Thu, 15 Jun 2017 16:31:02 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</guid>
+      <description>http://guojianxiang.com/posts/2015-09-06-PHP_Debug_Tool-Xdebug.html http://yansu.org/2014/03/20/php-debug-with-xdebug.html
+关于 PHP 开发 调试 安装 原理 抓包 sudo tcpdump -i any port 9100 php -d xdebug.profiler_enable=On -d xdebug.auto_trace=On -d xdebug.show_exception_trace=On -d xdebug.trace_output_name=&amp;quot;ooo&amp;quot; -d xdebug.trace_format=1 -d xdebug.trace_output_dir=$MCODE/scripts/xdebug/trace -d xdebug.profiler_output_dir=$MCODE/scripts/xdebug/profiler motan.php
+❯ qrsctl info z@z UserId: zhoujing_k49@163.com Uid: 1381143175 Email: zhoujing_k49@163.com UserType: stduser(0x4) DeviceNum: 0 InvitationNum: 0
+~ ❯ qrsctl buckets z@z [idevz]
+压图，保证清晰度，也兼顾流量</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>xxxx on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/categories/xxxx/</link>
+    <description>Recent content in xxxx on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Thu, 07 Dec 2017 08:16:46 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/categories/xxxx/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Gdb_tools</title>
+      <link>http://idevz.org/2017/12/gdb_tools/</link>
+      <pubDate>Thu, 07 Dec 2017 08:16:46 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/12/gdb_tools/</guid>
+      <description>lbt 老是无法正常 dump， lb 老是无法正常断点，所以 debug 了下 gdb tools， 发现里面其实是基于 LuaJIT 源码（ljobj.h）里面的 C 结构来读取的。 所以需要研究下 Python 来扩展 GDB 春哥是怎么干的。然后发现一堆深度好文，值得深入学习。</description>
+    </item>
+    
+    <item>
+      <title>opm</title>
+      <link>http://idevz.org/2017/11/opm/</link>
+      <pubDate>Wed, 29 Nov 2017 07:26:28 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/11/opm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>start motan</title>
+      <link>http://idevz.org/2017/10/start-motan/</link>
+      <pubDate>Mon, 16 Oct 2017 11:16:39 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/10/start-motan/</guid>
+      <description>ngx.thread.spawn与coroutine.create的区别 来源：OpenResty Google Groups
+原文地址：https://groups.google.com/forum/#!msg/openresty/6NyxBC9R2UY/zycvr9TMCjIJ
+本文来自于对谷歌邮件组网友提问的整理。
+问题描述
+我试了一下，发现前者好像与当前请求共用一个ngx.ctx，后者则不是。
+我有一个需求，场景可以近似为开房间聊天，客户端用websocket连上来后，通过redis互转消息(因为每个websocket只能在自己的request里收发)
+现在希望第一个用户在创建房间后，在服务器跑一个后台逻辑，如聊天过滤，或者超时踢人之类。我想把这个逻辑写成一个死循环函数跑在协程里，应该用ngx.thread.spawn跑还是普通的coroutine.create呢？
+潜在的要求是：
+1、虽然这个协程是第一个用户创建的，但是当第一个用户退出(websocket断开)后，它还应该正常在跑
+2、需要有一个终结它的地方，即当房间里所有用户都退出后，是不是应该让它自己去检测这个条件然后退出循环？还有别的外部结束办法吗
+春哥解答
+Hello!
+2014-05-14 9:17 GMT-07:00 小冶:
+ 我试了一下，发现前者好像与当前请求共用一个ngx.ctx，后者则不是。
+ 后者也是。不是就是 bug 了。
+ 我有一个需求，场景可以近似为开房间聊天，客户端用websocket连上来后，通过redis互转消息(因为每个websocket只能在自己的request里收发)
+现在希望第一个用户在创建房间后，在服务器跑一个后台逻辑，如聊天过滤，或者超时踢人之类。
+ 超时保护应该尽量直接使用 websocket 的超时设置，见
+https://github.com/openresty/lua-resty-websocket#set_timeout
+注意，无论是 croutine.create() 创建的常规的 Lua coroutine 还是由 ngx.thread.spawn
+创建的“轻量级线程”，都是和创建它们的请求绑定的。如果你要创建和当前请求分离开的后台逻辑，应当使用 ngx.timer.at().
+你可以参考 lua-resty-upstream-healthcheck 库的实现：
+https://github.com/openresty/lua-resty-upstream-healthcheck#readme
+关于 ngx.thread.spawn() 创建的“轻线程”的行为细节，可以参考其官方文档：
+https://github.com/openresty/lua-nginx-module#ngxthreadspawn
+简单地说，“轻线程”是自动往前不断（异步地）执行的，由 ngx_lua 的轻线程调度器自动调度，而不用你自己一次一次地 resume. 而coroutine.create() 创建的常规协程并不会自动往前执行，而需要你自己通过 coroutine.resume()同步地调用。关于后者的细节可以参见 Lua 5.1 官方手册中的对应章节：http://www.lua.org/manual/5.1/manual.html#2.11
+ 我想把这个逻辑写成一个死循环函数跑在协程里，应该用ngx.thread.spawn跑还是普通的coroutine.create呢？
+潜在的要求是：
+1、虽然这个协程是第一个用户创建的，但是当第一个用户退出(websocket断开)后，它还应该正常在跑
+2、需要有一个终结它的地方，即当房间里所有用户都退出后，是不是应该让它自己去检测这个条件然后退出循环？还有别的外部结束办法吗
+ 建议实现为延绵不绝的定时器（可以由 init_worker_by_lua 发起第一个 timer）。尽量不要让单个处理程序（包括 timer</description>
+    </item>
+    
+    <item>
+      <title>start</title>
+      <link>http://idevz.org/2017/09/start/</link>
+      <pubDate>Tue, 05 Sep 2017 07:13:38 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/09/start/</guid>
+      <description>Hbase的架构简单解析 https://forever-zs.github.io/2017/08/22/Hbase/Hbase%E7%9A%84%E6%9E%B6%E6%9E%84%E7%AE%80%E5%8D%95%E8%A7%A3%E6%9E%90/</description>
+    </item>
+    
+    <item>
+      <title>sort</title>
+      <link>http://idevz.org/2017/09/sort/</link>
+      <pubDate>Tue, 05 Sep 2017 07:10:33 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/09/sort/</guid>
+      <description>六大排序算法图解以及python实现 https://forever-zs.github.io/2017/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%85%AD%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%BB%A5%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</description>
+    </item>
+    
+    <item>
+      <title>jit</title>
+      <link>http://idevz.org/2017/09/jit/</link>
+      <pubDate>Tue, 05 Sep 2017 07:08:55 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/09/jit/</guid>
+      <description>JVM杂谈之JIT https://zhuanlan.zhihu.com/p/28476709</description>
+    </item>
+    
+    <item>
+      <title>mem sys metries</title>
+      <link>http://idevz.org/2017/08/mem-sys-metries/</link>
+      <pubDate>Tue, 22 Aug 2017 06:58:06 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/mem-sys-metries/</guid>
+      <description>http://tonybai.com/2017/07/04/setup-go-runtime-metrics-for-yourself/</description>
+    </item>
+    
+    <item>
+      <title>design pattern</title>
+      <link>http://idevz.org/2017/08/design-pattern/</link>
+      <pubDate>Tue, 22 Aug 2017 06:54:44 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/design-pattern/</guid>
+      <description>https://segmentfault.com/a/1190000010706695</description>
+    </item>
+    
+    <item>
+      <title>debugging with jpda and apache tomcat</title>
+      <link>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</link>
+      <pubDate>Tue, 22 Aug 2017 06:52:03 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</guid>
+      <description>https://www.jvmhost.com/articles/debugging-with-jpda-and-apache-tomcat/ http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/remote-debugging.html</description>
+    </item>
+    
+    <item>
+      <title>configuring jersey environments without spring</title>
+      <link>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</link>
+      <pubDate>Tue, 22 Aug 2017 06:51:18 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</guid>
+      <description>https://github.com/skyscreamer/yoga/wiki/Tutorial:-Configuring-Jersey-environments-without-Spring</description>
+    </item>
+    
+    <item>
+      <title>do performance test</title>
+      <link>http://idevz.org/2017/08/do-performance-test/</link>
+      <pubDate>Tue, 15 Aug 2017 11:17:50 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/08/do-performance-test/</guid>
+      <description>http://coolshell.cn/articles/17381.html</description>
+    </item>
+    
+    <item>
+      <title>react php</title>
+      <link>http://idevz.org/2017/07/react-php/</link>
+      <pubDate>Mon, 24 Jul 2017 08:08:43 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/react-php/</guid>
+      <description>https://jingxin.me/blog/blog/2013/03/05/react-dot-php-zhong-de-yi-bu-shi-xian/</description>
+    </item>
+    
+    <item>
+      <title>yield</title>
+      <link>http://idevz.org/2017/07/yield/</link>
+      <pubDate>Mon, 24 Jul 2017 07:54:42 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/yield/</guid>
+      <description>http://log.fyscu.com/index.php/archives/295/
+https://segmentfault.com/a/1190000007760513 https://laravel-china.org/topics/1442/php-using-yield-to-achieve-asynchronous-web-server</description>
+    </item>
+    
+    <item>
+      <title>socket server</title>
+      <link>http://idevz.org/2017/07/socket-server/</link>
+      <pubDate>Mon, 24 Jul 2017 07:40:22 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/07/socket-server/</guid>
+      <description>http://www.xtgxiso.com/socket%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/
+https://segmentfault.com/a/1190000003063859
+socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服务举例，协议以换行符举例.我们先看最简单的单进程阻塞模型
+首先一个socket服务的代码如下：
+&amp;lt;?php /** * 单进程阻塞式--同时只能处理一个连接 */ class Xtgxiso_server { public $socket = false; public $onConnect = null; public $onMessage = null; public $onClose = null; function __construct($host=&amp;#34;0.0.0.0&amp;#34;,$port=1215) { $this-&amp;gt;socket = stream_socket_server(&amp;#34;tcp://&amp;#34;.$host.&amp;#34;:&amp;#34;.$port,$errno, $errstr); if (!$this-&amp;gt;socket) die($errstr.&amp;#34;--&amp;#34;.$errno); } public function run(){ while ( 1 ) { echo &amp;#34;waiting...\n&amp;#34;; $conn = stream_socket_accept($this-&amp;gt;socket, -1); if ( !$conn ){ continue; } if($this-&amp;gt;onConnect) { call_user_func($this-&amp;gt;onConnect, $conn); } $receive = &amp;#39;&amp;#39;; $buffer = &amp;#39;&amp;#39;; while ( 1 ) { $buffer = fread($conn, 3); if($buffer === &amp;#39;&amp;#39; || $buffer === false) { if ( $this-&amp;gt;onClose ){ call_user_func($this-&amp;gt;onClose, $conn); } break; } $pos = strpos($buffer, &amp;#34;\n&amp;#34;); if($pos === false) { $receive .</description>
+    </item>
+    
+  </channel>
+</rss>

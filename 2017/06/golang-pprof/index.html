@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='Golang 性能分析工具 http://studygolang.com/articles/9340
+Pprof pprof 起初是谷歌性能工具 gperftools 中的一个组件。Golang 中实现了 runtime/pprof，net/http/pprof 两个包来实现相关的支持，而 net/http/pprof 包则是对 runtime/pprof 的封装，暴露一个 http 服务来方便的进行性能分析。
+Golang pprof 用法 Golang HTTP Web 服务 基于 net/http 包开发的 Web 服务，只需在入口导入包 import _ &quot;net/http/pprof&quot; 即可通过访问 http://host:port/debug/pprof/ 查看当前服务的各种 profiling 数据。
+Golang 后端服务 基于 Golang 开发的后端服务进程也可以通过导入包 import &quot;net/http&quot; 开启 HTTP 服务端口（比如：http.ListenAndServe(&quot;localhost:6060&quot;, nil)），同时导入包 import _ &quot;net/http/pprof&quot; 同样可以通过访问 http://host:6060/debug/pprof/ 来查看各种 profiling 数据。
+Golang 应用程序 如果只是想对某段 Golang 应用程序代码进行调优，无法使用 net/http/pprof 包来通过 HTTP 服务查看，这时我们就需要使用更底层的 runtime/pprof 包。下面引用 Golang Blog 中的例子来看下 runtime/pprof 包的使用。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='golang pprof • 做一个善于思考的学习者'>
+<meta property='og:description' content='Golang 性能分析工具 http://studygolang.com/articles/9340
+Pprof pprof 起初是谷歌性能工具 gperftools 中的一个组件。Golang 中实现了 runtime/pprof，net/http/pprof 两个包来实现相关的支持，而 net/http/pprof 包则是对 runtime/pprof 的封装，暴露一个 http 服务来方便的进行性能分析。
+Golang pprof 用法 Golang HTTP Web 服务 基于 net/http 包开发的 Web 服务，只需在入口导入包 import _ &quot;net/http/pprof&quot; 即可通过访问 http://host:port/debug/pprof/ 查看当前服务的各种 profiling 数据。
+Golang 后端服务 基于 Golang 开发的后端服务进程也可以通过导入包 import &quot;net/http&quot; 开启 HTTP 服务端口（比如：http.ListenAndServe(&quot;localhost:6060&quot;, nil)），同时导入包 import _ &quot;net/http/pprof&quot; 同样可以通过访问 http://host:6060/debug/pprof/ 来查看各种 profiling 数据。
+Golang 应用程序 如果只是想对某段 Golang 应用程序代码进行调优，无法使用 net/http/pprof 包来通过 HTTP 服务查看，这时我们就需要使用更底层的 runtime/pprof 包。下面引用 Golang Blog 中的例子来看下 runtime/pprof 包的使用。'>
+<meta property='og:url' content='http://idevz.org/2017/06/golang-pprof/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='编程语言'><meta property='article:tag' content='性能'><meta property='article:tag' content='性能工具'><meta property='article:published_time' content='2017-06-19T18:02:34&#43;08:00'/><meta property='article:modified_time' content='2018-04-16T08:00:33&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>golang pprof • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/06/golang-pprof/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>golang pprof</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-06-19T18:02:34&#43;08:00'>2017, Jun 19</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+4 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h1 id="golang-性能分析工具">Golang 性能分析工具</h1>
+
+<p><a href="http://studygolang.com/articles/9340">http://studygolang.com/articles/9340</a></p>
+
+<h2 id="pprof">Pprof</h2>
+
+<p><em>pprof 起初是谷歌性能工具 <a href="https://github.com/gperftools/gperftools">gperftools</a> 中的一个组件。Golang 中实现了 <code>runtime/pprof</code>，<code>net/http/pprof</code> 两个包来实现相关的支持，而 <code>net/http/pprof</code> 包则是对 <code>runtime/pprof</code> 的封装，暴露一个 http 服务来方便的进行性能分析。</em></p>
+
+<h3 id="golang-pprof-用法">Golang pprof 用法</h3>
+
+<h4 id="golang-http-web-服务">Golang HTTP Web 服务</h4>
+
+<p>基于 <code>net/http</code> 包开发的 Web 服务，只需在入口导入包 <code>import _ &quot;net/http/pprof&quot;</code> 即可通过访问 <code>http://host:port/debug/pprof/</code> 查看当前服务的各种 profiling 数据。</p>
+
+<h4 id="golang-后端服务">Golang 后端服务</h4>
+
+<p>基于 Golang 开发的后端服务进程也可以通过导入包 <code>import &quot;net/http&quot;</code> 开启 HTTP 服务端口（比如：<code>http.ListenAndServe(&quot;localhost:6060&quot;, nil)</code>），同时导入包 <code>import _ &quot;net/http/pprof&quot;</code> 同样可以通过访问 <code>http://host:6060/debug/pprof/</code> 来查看各种 profiling 数据。</p>
+
+<h4 id="golang-应用程序">Golang 应用程序</h4>
+
+<p>如果只是想对某段 Golang 应用程序代码进行调优，无法使用 <code>net/http/pprof</code> 包来通过 HTTP 服务查看，这时我们就需要使用更底层的 <code>runtime/pprof</code> 包。下面引用 <a href="https://blog.golang.org/profiling-go-programs">Golang Blog</a> 中的例子来看下 <code>runtime/pprof</code> 包的使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cpuprofile</span> = <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">String</span>(<span style="color:#e6db74">&#34;cpuprofile&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;write cpu profile to file&#34;</span>)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#a6e22e">flag</span>.<span style="color:#a6e22e">Parse</span>()
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">cpuprofile</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
+        <span style="color:#a6e22e">f</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">os</span>.<span style="color:#a6e22e">Create</span>(<span style="color:#f92672">*</span><span style="color:#a6e22e">cpuprofile</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+        }
+        <span style="color:#a6e22e">pprof</span>.<span style="color:#a6e22e">StartCPUProfile</span>(<span style="color:#a6e22e">f</span>)
+        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">pprof</span>.<span style="color:#a6e22e">StopCPUProfile</span>()
+    }</code></pre></div>
+<p><em>例中通过解析参数 <code>cpuprofile</code> 获取了 profiling 结果信息导出的文件名，通过调用 <code>pprof.StartCPUProfile(f)</code>，开始对程序 CPU 使用情况进行采样分析，并最终通过调用 <code>defer pprof.StopCPUProfile()</code> 在程序运行结束前将结果导出到文件 f 中，最终我们就可以通过运行 <code>go tool pprof</code> 命令来解析生成的 profiling 文件。</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ go tool pprof havlak1 havlak1.prof
+Welcome to pprof!  For help, type <span style="color:#e6db74">&#39;help&#39;</span>.
+<span style="color:#f92672">(</span>pprof<span style="color:#f92672">)</span>
+<span style="color:#f92672">(</span>pprof<span style="color:#f92672">)</span> top10
+Total: <span style="color:#ae81ff">2525</span> samples
+     <span style="color:#ae81ff">298</span>  <span style="color:#ae81ff">11</span>.8%  <span style="color:#ae81ff">11</span>.8%      <span style="color:#ae81ff">345</span>  <span style="color:#ae81ff">13</span>.7% runtime.mapaccess1_fast64
+     <span style="color:#ae81ff">268</span>  <span style="color:#ae81ff">10</span>.6%  <span style="color:#ae81ff">22</span>.4%     <span style="color:#ae81ff">2124</span>  <span style="color:#ae81ff">84</span>.1% main.FindLoops
+     <span style="color:#ae81ff">251</span>   <span style="color:#ae81ff">9</span>.9%  <span style="color:#ae81ff">32</span>.4%      <span style="color:#ae81ff">451</span>  <span style="color:#ae81ff">17</span>.9% scanblock
+     <span style="color:#ae81ff">178</span>   <span style="color:#ae81ff">7</span>.0%  <span style="color:#ae81ff">39</span>.4%      <span style="color:#ae81ff">351</span>  <span style="color:#ae81ff">13</span>.9% hash_insert
+     <span style="color:#ae81ff">131</span>   <span style="color:#ae81ff">5</span>.2%  <span style="color:#ae81ff">44</span>.6%      <span style="color:#ae81ff">158</span>   <span style="color:#ae81ff">6</span>.3% sweepspan
+     <span style="color:#ae81ff">119</span>   <span style="color:#ae81ff">4</span>.7%  <span style="color:#ae81ff">49</span>.3%      <span style="color:#ae81ff">350</span>  <span style="color:#ae81ff">13</span>.9% main.DFS
+      <span style="color:#ae81ff">96</span>   <span style="color:#ae81ff">3</span>.8%  <span style="color:#ae81ff">53</span>.1%       <span style="color:#ae81ff">98</span>   <span style="color:#ae81ff">3</span>.9% flushptrbuf
+      <span style="color:#ae81ff">95</span>   <span style="color:#ae81ff">3</span>.8%  <span style="color:#ae81ff">56</span>.9%       <span style="color:#ae81ff">95</span>   <span style="color:#ae81ff">3</span>.8% runtime.aeshash64
+      <span style="color:#ae81ff">95</span>   <span style="color:#ae81ff">3</span>.8%  <span style="color:#ae81ff">60</span>.6%      <span style="color:#ae81ff">101</span>   <span style="color:#ae81ff">4</span>.0% runtime.settype_flush
+      <span style="color:#ae81ff">88</span>   <span style="color:#ae81ff">3</span>.5%  <span style="color:#ae81ff">64</span>.1%      <span style="color:#ae81ff">988</span>  <span style="color:#ae81ff">39</span>.1% runtime.mallocgc</code></pre></div>
+<p>**</p>
+
+<p><a href="http://colobu.com/2017/03/02/a-short-survey-of-golang-pprof/">http://colobu.com/2017/03/02/a-short-survey-of-golang-pprof/</a></p>
+
+<p>4899  subl /usr/local/go/test
+ 4900  subl /usr/local/go/src/testing
+ 4901  $MCODE/z/git/idevz.org
+ 4902  tree ./content
+ 4903  hugox new life/confront-the-life.md
+ 4904  subl /usr/local/go/
+ 4905  ll
+ 4906  $GOPATH/src/github.com/idevz
+ 4907  ll
+ 4908  golearning
+ 4909  l
+ 4910  go tool cover -html=cover.out
+ 4911  go tool pprof golearning.test cpu.out
+ 4912  telnet 10.211.55.15 6060
+ 4913  $GOPATH/src/motan-go/main
+ 4914  ll
+ 4915  ggr magent.go
+ 4916  go run magent.go
+ 4917* losf -i:6060
+ 4918* lsof -i:6060
+ 4919  telnet 10.211.55.15 6060
+ 4920* lsof -i:6060
+ 4921  telnet 10.211.55.15 6060
+ 4922  curl -i -vvv <a href="http://10.211.55.15:6060/debug/pprof/">http://10.211.55.15:6060/debug/pprof/</a>
+ 4923  curl -i -vvv <a href="http://10.211.55.15:6060/debug/pprof/block?debug=1">http://10.211.55.15:6060/debug/pprof/block?debug=1</a>
+ 4924  curl -i -vvv &lsquo;<a href="http://10.211.55.15:6060/debug/pprof/block?debug=1'">http://10.211.55.15:6060/debug/pprof/block?debug=1'</a>
+ 4925  go run magent.go
+ 4926* $GOPATH/src/motan-go/main
+ 4927* $GOPATH/src/github.com/idevz
+ 4928* ll
+ 4929* go tool pprof -web <a href="http://127.0.0.1:6060/debug/pprof/profile">http://127.0.0.1:6060/debug/pprof/profile</a>
+ 4930* ll /Users/idevz/pprof/pprof.127.0.0.1:6060.samples.cpu.001.pb.gz
+ 4931* go tool pprof <a href="http://127.0.0.1:6060/debug/pprof/profile">http://127.0.0.1:6060/debug/pprof/profile</a>
+ 4932* zc1
+ 4933* ll
+ 4934* ping idevz.local
+ 4935* go tool pprof <a href="http://127.0.0.1:6060/debug/pprof/profile">http://127.0.0.1:6060/debug/pprof/profile</a>
+ 4936* tree content
+ 4937* hugox new tech/golang/golang-pprof.md
+ 4938* hugox new tech/golang/golang-testing.md
+ 4939* go get github.com/uber/go-torch
+ 4940* go get github.com/rakyll/gom/cmd/gom
+ 4941* go get github.com/rakyll/gom/
+ 4942* go get github.com/rakyll/gom/cmd/gom
+ 4943  $GOPATH/src/github.com/rakyll/gom/cmd/gom
+ 4944  ll
+ 4945  go install
+ 4946  mv $GOPATH/bin/gom $GOPATH/bin/gomx
+ 4947  /Volumes/g/idevz/code/z/git/go/src/motan-go/main/
+ 4948  go run magent.go
+ 4949* gomx &ndash;target <a href="http://localhost:6060">http://localhost:6060</a></p>
+
+<p>10032  $GOPATH/src/github.com/idevz
+10033  ll
+10034  motan-agent
+10035  l
+10036  ggr showbatch.go
+10037  zc1
+10038  $GOPATH/src/google.golang.org/grpc/benchmark
+10039  ll
+10040  ./client
+10041  ll
+10042  go test main.go
+10043  ggr main.go
+10044  ggr main.go -h
+10045  ggr main.go
+10046  pwd
+10047  /media/psf/g/idevz/code/z/git/go/src/google.golang.org/grpc/benchmark/server
+10048  netstat -natpl
+10049  sudo netstat -natpl
+10050  ggr main.go
+10051  sudo netstat -natpl
+10052  ggr main.go
+10053  sudo netstat -natpl
+10054  ggr main.go
+10055  ggr main.go -server=:41581
+10056  sudo netstat -natpl
+10057  ipc
+10058  ipcs -q
+10059  ggr main.go -server=:41581 -duration=10
+10060  .
+10061  ..
+10062  lll
+10063  ll
+10064  go test -v
+10065  go help test
+10066  go help testflag
+10067  go test -run Main
+10068  pwd
+10069  $GOPATH/src/github.com/idevz/go-learning
+10070  ll
+10071  go test -v
+10072  ../golearning
+10073  go test -v
+10074  go test -v -bench
+10075  go test -v -bench .
+10076  go test -v -bench . -benchmem
+10077  go test -v -bench . -benchmem -cpu 1,2,3,4
+10078  go test -v -bench . -benchmem -cpu 1,2,3,4 -benchtime 5s
+10079  go test -v
+10080  go addt_test.go
+10081  go test
+10082  ll
+10083  go test -cover
+10084  go test -cover -covermode=count
+10085  go test -cover -covermode=count -coverprofile=cover.out
+10086  go tool cover -func=cover.out
+10087  go tool cover -html=cover.out
+10088  mv /tmp/cover709222752/coverage.html .
+10089  go test -v -test.bench . -cpuprofile cpu.out -memprofile mem.out
+10090  ll
+10091  go tool pprof golearning.test mem.out
+10092  ll
+10093  cat mem.out
+10094  cat golearning.test
+10095  ll
+10096  go tool pprof golearning.test mem.out
+10097  go tool pprof golearning.test cpu.out
+10098  go tool pprof golearning.test mem.out
+10099  cat mem.out
+10100  cat cpu.out
+10101  go tool pprof golearning.test cpu.out
+10102  go tool pprof golearning.test cpu.out callgrind&gt;xxx
+10103  go tool pprof golearning.test cpu.out
+10104  sudo netstat -natpl
+10105  ll
+10106  $GOPATH/src/motan-go/main
+10107  ll
+10108  ll magent*
+10109  ll magent.z.*
+10110  rm -r magent.z.*
+10111  ll
+10112  cat magent.INFO
+10113  rm -rf magent.INFO
+10114  ggr magent.go
+10115  sudo netstat -natpl
+10116  ifconfig
+10117  ggr magent.go
+10118  sudo netstat -natpl
+10119  ggr magent.go
+10120  sudo netstat -natpl
+10121  ifconfig
+10122  ggr magent.go
+10123  pwd
+10124  ll
+10125  $MCODE/www/motan-client/examples/
+10126  ll
+10127  php motan.php
+10128* history
+10129  go get github.com/mkevac/debugcharts
+10130  $GOPATH/src/github.com/rakyll/gom/cmd/gom
+10131  go install
+10132  $MCODE/www/motan-client/examples
+10133  php motan.php</p>
+
+<p>硬编码的 output
+10091  go tool pprof golearning.test mem.out
+10092  ll
+10093  cat mem.out
+10094  cat golearning.test
+10095  ll
+10096  go tool pprof golearning.test mem.out
+10097  go tool pprof golearning.test cpu.out
+10098  go tool pprof golearning.test mem.out
+10099  cat mem.out
+10100  cat cpu.out
+10101  go tool pprof golearning.test cpu.out
+10102  go tool pprof golearning.test cpu.out callgrind&gt;xxx
+10103  go tool pprof golearning.test cpu.out
+10104  sudo netstat -natpl
+10105* ll
+10106* $GOPATH/src/motan-go/main
+10107* ll
+10108* ll magent*</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/golang/'>Golang</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/'>编程语言</a>, <a class='tag' href='http://idevz.org/tags/%E6%80%A7%E8%83%BD/'>性能</a>, <a class='tag' href='http://idevz.org/tags/%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7/'>性能工具</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>使用Sublime&#43;Xdebug开发调试PHP</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/06/golang-testing/'>
+        <span class='screen-reader-text'>Next post: </span>golang testing<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

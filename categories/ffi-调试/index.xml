@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>FFI 调试 on 做一个善于思考的学习者</title>
+    <link>http://idevz.org/categories/ffi-%E8%B0%83%E8%AF%95/</link>
+    <description>Recent content in FFI 调试 on 做一个善于思考的学习者</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>© 2017 idevz.org</copyright>
+    <lastBuildDate>Wed, 22 Nov 2017 15:07:58 +0800</lastBuildDate>
+    
+	<atom:link href="http://idevz.org/categories/ffi-%E8%B0%83%E8%AF%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ffi debug</title>
+      <link>http://idevz.org/2017/11/ffi-debug/</link>
+      <pubDate>Wed, 22 Nov 2017 15:07:58 +0800</pubDate>
+      
+      <guid>http://idevz.org/2017/11/ffi-debug/</guid>
+      <description>FFI 包调用，Lua C 交互报错，没有任何信息，只能想法 Debug。
+ltrace 转储一个给定 trace 编号（起始为 1）的 LuaJIT trace 对象的内容。 获取 LuaJIT trace 对象机器码的开始和结束地址区间可以用来转储该 LuaJIT trace 对象的机器码。
+```gdb (gdb)set disassembly-flavor intel (gdb)disas start_addr end_addr
+ltracebymcode 通过 LuaJIT trace 对象的机器码所包含的指定地址为唯一参数，在所有的 LuaJIT trace 对象中检索该 LuaJIT trace 对象。
+lir 通过 trace 编号来转储 LuaJIT trace 对象的 IR Code（CPU 寄存器和快照详细） 信息。 输出格式与 LuaJIT 自己的 -jdump=+rs 一样。
+lmainL 打印 主 LuaJIT 虚拟机的 lua_State 指针值。
+lcurL 打印当前运行的 Lua 线程 lua_State 的指针值。
+lg 打印给定 lua_State 指针值所对应 VM 的 global_State 指针值，默认打印当前运行 VM 的 global_State 指针值。</description>
+    </item>
+    
+  </channel>
+</rss>

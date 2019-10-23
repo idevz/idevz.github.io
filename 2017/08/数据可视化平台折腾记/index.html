@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='缘起 在 Tony Bai 的一篇博文看到了他基于 statsD、graphite 搭建的一个 Go Runtime metrics 平台，非常的赞，受益匪浅；一图胜千言，数据可视化在实际应用中有着举足轻重的意义，所以有必要折腾一套自己定制化的展现平台。
+Tony 博文中是在服务器直接安装的，但是这些工具类的服务，总觉得希望走产品化的方向，一来方便随时使用，二来工具主要是使用，不研究细节实现的东西，折腾环境太浪费时间。所以我希望直接 Docker 打个包，能用即可。基于这个出发点，我在 docker hub 大致搜索了下，不少这方面的项目，结合 GitHub 的检索结果调研取舍后，选定了 github.com/kamon-io/docker-grafana-graphite 作为我折腾的基础。下面记录整个过程。
+Mac Docker Docker 刚出来的时候，我就在 Mac 上折腾过，当时的感觉，太繁琐，尤其是还需要基于 Virtualbox，安装后运行各种不方便，所以当时又果断切回到虚拟机环境，没在继续折腾，这些年 Docker 不论是在微服务架构，还是各平台支持方面都日趋的完善，所以回过头来开始基于 Docker 搞。
+经过这些年的发展，Mac Docker 已相对比较完善，并且运行方便，pkg 直接安装启动。
+使用 Docker 项目 Docker 发布的项目，一般会有这么几个部分：
+ Dockfile  基于 Dockfile 来 build Docker 镜像
+git clone https://github.com/kamon-io/docker-grafana-graphite.git cd docker-grafana-graphite docker build -t idevz-graphite . 过程中会由于依赖包安装的问题，包下载超时等导致 build 失败，如果是比较活跃的 Docker 项目，一般都可以运行得通，所以多次尝试 build 即可创建镜像。
+然后基于 compose 来运行 Docker 服务，运行起来后可以执行命令，如果遇到运行过程中有异常，这时需要登录到 Docker 服务中去排查，'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='数据可视化平台折腾记 • 做一个善于思考的学习者'>
+<meta property='og:description' content='缘起 在 Tony Bai 的一篇博文看到了他基于 statsD、graphite 搭建的一个 Go Runtime metrics 平台，非常的赞，受益匪浅；一图胜千言，数据可视化在实际应用中有着举足轻重的意义，所以有必要折腾一套自己定制化的展现平台。
+Tony 博文中是在服务器直接安装的，但是这些工具类的服务，总觉得希望走产品化的方向，一来方便随时使用，二来工具主要是使用，不研究细节实现的东西，折腾环境太浪费时间。所以我希望直接 Docker 打个包，能用即可。基于这个出发点，我在 docker hub 大致搜索了下，不少这方面的项目，结合 GitHub 的检索结果调研取舍后，选定了 github.com/kamon-io/docker-grafana-graphite 作为我折腾的基础。下面记录整个过程。
+Mac Docker Docker 刚出来的时候，我就在 Mac 上折腾过，当时的感觉，太繁琐，尤其是还需要基于 Virtualbox，安装后运行各种不方便，所以当时又果断切回到虚拟机环境，没在继续折腾，这些年 Docker 不论是在微服务架构，还是各平台支持方面都日趋的完善，所以回过头来开始基于 Docker 搞。
+经过这些年的发展，Mac Docker 已相对比较完善，并且运行方便，pkg 直接安装启动。
+使用 Docker 项目 Docker 发布的项目，一般会有这么几个部分：
+ Dockfile  基于 Dockfile 来 build Docker 镜像
+git clone https://github.com/kamon-io/docker-grafana-graphite.git cd docker-grafana-graphite docker build -t idevz-graphite . 过程中会由于依赖包安装的问题，包下载超时等导致 build 失败，如果是比较活跃的 Docker 项目，一般都可以运行得通，所以多次尝试 build 即可创建镜像。
+然后基于 compose 来运行 Docker 服务，运行起来后可以执行命令，如果遇到运行过程中有异常，这时需要登录到 Docker 服务中去排查，'>
+<meta property='og:url' content='http://idevz.org/2017/08/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0%E6%8A%98%E8%85%BE%E8%AE%B0/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='Metrics'><meta property='article:published_time' content='2017-08-15T11:22:49&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>数据可视化平台折腾记 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='http://idevz.org/2017/08/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0%E6%8A%98%E8%85%BE%E8%AE%B0/'>
+  
+  
+  <link rel='icon' href='http://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head>
+<body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='http://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='http://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>数据可视化平台折腾记</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-08-15T11:22:49&#43;08:00'>2017, Aug 15</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+
+  <div class='container entry-content'>
+  
+
+<h1 id="缘起">缘起</h1>
+
+<p>在 <a href="http://tonybai.com/2017/07/04/setup-go-runtime-metrics-for-yourself/">Tony Bai</a> 的一篇博文看到了他基于 statsD、graphite 搭建的一个 Go Runtime metrics 平台，非常的赞，受益匪浅；一图胜千言，数据可视化在实际应用中有着举足轻重的意义，所以有必要折腾一套自己定制化的展现平台。</p>
+
+<p>Tony 博文中是在服务器直接安装的，但是这些工具类的服务，总觉得希望走产品化的方向，一来方便随时使用，二来工具主要是使用，不研究细节实现的东西，折腾环境太浪费时间。所以我希望直接 Docker 打个包，能用即可。基于这个出发点，我在 docker hub 大致搜索了下，不少这方面的项目，结合 GitHub 的检索结果调研取舍后，选定了 github.com/kamon-io/docker-grafana-graphite 作为我折腾的基础。下面记录整个过程。</p>
+
+<h1 id="mac-docker">Mac Docker</h1>
+
+<p>Docker 刚出来的时候，我就在 Mac 上折腾过，当时的感觉，太繁琐，尤其是还需要基于 Virtualbox，安装后运行各种不方便，所以当时又果断切回到虚拟机环境，没在继续折腾，这些年 Docker 不论是在微服务架构，还是各平台支持方面都日趋的完善，所以回过头来开始基于 Docker 搞。</p>
+
+<p>经过这些年的发展，Mac Docker 已相对比较完善，并且运行方便，pkg 直接安装启动。</p>
+
+<h1 id="使用-docker-项目">使用 Docker 项目</h1>
+
+<p>Docker 发布的项目，一般会有这么几个部分：</p>
+
+<ol>
+<li>Dockfile</li>
+</ol>
+
+<p>基于 Dockfile 来 build Docker 镜像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/kamon-io/docker-grafana-graphite.git
+cd docker-grafana-graphite
+docker build -t idevz-graphite .</code></pre></div>
+<p>过程中会由于依赖包安装的问题，包下载超时等导致 build 失败，如果是比较活跃的 Docker 项目，一般都可以运行得通，所以多次尝试 build 即可创建镜像。</p>
+
+<p>然后基于 compose 来运行 Docker 服务，运行起来后可以执行命令，如果遇到运行过程中有异常，这时需要登录到 Docker 服务中去排查，</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker exec -it kamon-grafana-dashboard /bin/bash</code></pre></div>
+<p>比如检查 supervisor 运行日志： /var/log/supervisor</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Error: Sync-request requires node version <span style="color:#ae81ff">0</span>.12 or later.  If you need to use it with an older version of node
+you can <span style="color:#e6db74">`</span>npm install sync-request@2.2.0<span style="color:#e6db74">`</span>, which was the last version to support older versions of node.
+    at doRequest <span style="color:#f92672">(</span>/usr/local/lib/node_modules/wizzy/node_modules/sync-request/index.js:15:11<span style="color:#f92672">)</span>
+    at /usr/local/lib/node_modules/wizzy/src/remote/grafana/exportSrv.js:388:20
+    at arrayEach <span style="color:#f92672">(</span>/usr/local/lib/node_modules/wizzy/node_modules/lodash/lodash.js:537:11<span style="color:#f92672">)</span>
+    at Function.forEach <span style="color:#f92672">(</span>/usr/local/lib/node_modules/wizzy/node_modules/lodash/lodash.js:9359:14<span style="color:#f92672">)</span>
+    at Request.saveHandler <span style="color:#f92672">[</span>as _callback<span style="color:#f92672">]</span> <span style="color:#f92672">(</span>/usr/local/lib/node_modules/wizzy/src/remote/grafana/exportSrv.js:370:5<span style="color:#f92672">)</span>
+    at Request.self.callback <span style="color:#f92672">(</span>/usr/local/lib/node_modules/wizzy/node_modules/request/request.js:188:22<span style="color:#f92672">)</span>
+    at Request.EventEmitter.emit <span style="color:#f92672">(</span>events.js:98:17<span style="color:#f92672">)</span>
+    at Request.&lt;anonymous&gt; <span style="color:#f92672">(</span>/usr/local/lib/node_modules/wizzy/node_modules/request/request.js:1171:10<span style="color:#f92672">)</span>
+    at Request.EventEmitter.emit <span style="color:#f92672">(</span>events.js:95:17<span style="color:#f92672">)</span>
+    at IncomingMessage.&lt;anonymous&gt; <span style="color:#f92672">(</span>/usr/local/lib/node_modules/wizzy/node_modules/request/request.js:1091:12<span style="color:#f92672">)</span></code></pre></div>
+<p>排查完相应的错误后，使用 supervisorctl 来管理运行中的 supervisor(/usr/bin/supervisord)，比如</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@12eb31acff9a:/var/log/supervisor# supervisorctl
+carbon-cache                     RUNNING    pid <span style="color:#ae81ff">14</span>, uptime <span style="color:#ae81ff">5</span>:10:04
+export-datasources-and-dashboards RUNNING    pid <span style="color:#ae81ff">16230</span>, uptime <span style="color:#ae81ff">0</span>:00:05
+grafana-webapp                   RUNNING    pid <span style="color:#ae81ff">9</span>, uptime <span style="color:#ae81ff">5</span>:10:04
+graphite-webapp                  RUNNING    pid <span style="color:#ae81ff">12</span>, uptime <span style="color:#ae81ff">5</span>:10:04
+nginx                            RUNNING    pid <span style="color:#ae81ff">13</span>, uptime <span style="color:#ae81ff">5</span>:10:04
+statsd                           RUNNING    pid <span style="color:#ae81ff">10</span>, uptime <span style="color:#ae81ff">5</span>:10:04
+supervisor&gt; carbon-cache restart
+*** Unknown syntax: carbon-cache restart
+supervisor&gt; restart carbon-cache
+carbon-cache: stopped
+carbon-cache: started
+supervisor&gt;</code></pre></div>
+<p><a href="http://liyangliang.me/posts/2015/06/using-supervisor/">http://liyangliang.me/posts/2015/06/using-supervisor/</a></p>
+
+<h1 id="问题">问题</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> /Volumes/g/idevz/code/docker/docker-grafana-graphite/ <span style="color:#f92672">[</span>master*<span style="color:#f92672">]</span> docker-compose up -d
+Recreating 33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_kamon-grafana-dashboard ...
+Recreating 33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_kamon-grafana-dashboard ... error
+
+ERROR: <span style="color:#66d9ef">for</span> 33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_33f16a168ff3_kamon-grafana-dashboard  no such image: sha256:75abbea27e68bc19c2720cc4864395ae036abcf02563511eba26776476cdd1f1: No such image: sha256:75abbea27e68bc19c2720cc4864395ae036abcf02563511eba26776476cdd1f1
+
+ERROR: <span style="color:#66d9ef">for</span> grafana_graphite  no such image: sha256:75abbea27e68bc19c2720cc4864395ae036abcf02563511eba26776476cdd1f1: No such image: sha256:75abbea27e68bc19c2720cc4864395ae036abcf02563511eba26776476cdd1f1
+ERROR: Encountered errors <span style="color:#66d9ef">while</span> bringing up the project.</code></pre></div>
+<h1 id="解决">解决</h1>
+
+<p>直接运行 <a href="https://github.com/docker/compose/issues/1113">https://github.com/docker/compose/issues/1113</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> /Volumes/g/idevz/code/docker/docker-grafana-graphite/ <span style="color:#f92672">[</span>master*<span style="color:#f92672">]</span> docker run -v ~/docker/data/graphite/data/whisper:/opt/graphite/storage/whisper -v ~/docker/data/graphite/data/grafana:/opt/grafana/data -v ~/docker/data/graphite/log/graphite:/opt/graphite/storage/log -p <span style="color:#ae81ff">80</span>:80 -p <span style="color:#ae81ff">81</span>:81 -p <span style="color:#ae81ff">8125</span>:8125/udp -p <span style="color:#ae81ff">8126</span>:8126 -p <span style="color:#ae81ff">2003</span>:2003 -it idevz-graphite /bin/sh</code></pre></div>
+<p>然后 docker ps docker stop loving_benz</p>
+
+<p>然后 docker-compose up -d 即可</p>
+
+</div>
+
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/how-to/'>How-To</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/metrics/'>Metrics</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='http://idevz.org/2017/08/do-performance-test/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>do performance test</a>
+    </div><div class='next-entry sep-before'>
+      <a href='http://idevz.org/2017/08/monitoring-golang-gc/'>
+        <span class='screen-reader-text'>Next post: </span>monitoring golang gc<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><div class='copyright'>
+  <p>© 2017 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+
+<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+
