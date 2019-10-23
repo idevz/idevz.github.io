@@ -13,7 +13,7 @@ on alfred_script(q) if application &#34;iTerm2&#34; is running or application &#
 on alfred_script(q) if application &#34;iTerm2&#34; is running or application &#34;iTerm&#34; is running then run script &#34; on run {q} tell application \&#34;:Applications:iTerm.app\&#34; activate try select first window set onlywindow to false on error create window with default profile select first window set onlywindow to true end try tell the first window if onlywindow is false then create tab with default profile end if tell current session to write text q end tell end tell end run &#34; with parameters {q} else run script &#34; on run {q} tell application \&#34;:Applications:iTerm.'>
 <meta property='og:url' content='https://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
-<meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='装机'><meta property='article:published_time' content='2017-07-30T15:43:50&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T13:41:04&#43;08:00'/><meta name='twitter:card' content='summary'>
+<meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='装机'><meta property='article:published_time' content='2017-07-30T15:43:50&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T15:16:03&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 

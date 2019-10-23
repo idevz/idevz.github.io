@@ -4,18 +4,18 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta name='description' content='之前为了应对在跨语言开发过程中，需要折腾各种开发环境，我做了一个工具包 runX 来自动化环境部署的过程， 当全新的 CentOS-8 可用后，我就一直想折腾一把，毕竟 7 的内核版本实在太低了。因为最近又对环境部署和自动化工具有些新的想法， 干脆一气呵成，直接在工具集中把这些想法实现出来，但是考虑到变化比较大，而且 runX 本身其实已经是稳定状态， 所以索性搞一个 runX 的全新升级版 Lego。
 Lego，旨在想搭积木一样来组合各种部署功能，因为在 runX 这几年的使用过程中，发现经常还是会有些复用的功能， 在 k8s-start 项目中我试验了这种积木的思想，发现很受用。重新整理 runX 到 Lego，主要包含以下几个方面：
- 最核心的当然是积木的思想，所有的方法和模块都是可组合的。 新装虚拟机当前可能无法做到完全自动化，但是可以通过组合的方式实现半自动化。  下面是装机初始的一些步骤，相关的代码会逐步整理到 lego 这个项目中。
+ 最核心的当然是积木的思想，所有的方法和模块都是可组合的。 新装虚拟机当前可能无法做到完全自动化，但是可以通过组合的方式实现半自动化。  下面是装机初始的一些步骤，相关的代码会逐步整理到 Lego 这个项目中。
 Base 装机步骤  修改运行级别，CentOS 7 通过修改 /etc/inittab 已经过时，CentOS 8 使用 Target，见下 通网，往后的各种操作都需要联网进行（设置免密登陆，后续操作都可以通过 ssh 完成） 更换阿里云的 yum 源，阿里云已经建了 CentOS 8 的 yum 源，因为安装 Parallels Tools 依赖的包需要 安装 Parallels Tools(否则无法共享目录，以及使用命令行 prlctl 命令控制 pvm) 关机，设置共享文件夹等通用设置（关机后，在 Parallels 图形界面进行设置较为方便，目前尚未研究通过 prlctl 命令来设置） 安装 Parallels Tools 后，就可以将 Mac 宿主机中的 runX 项目挂载到 pvm 中，运行相关自动化脚本，比如一些基础设置（/etc/profile，/etc/sudoers 等）  修改运行级别，关闭图形界面 systemctl set-default multi-user.'>
 <meta name='theme-color' content='#ffcd00'>
 
 <meta property='og:title' content='基于 Parallels 尝鲜 CentOS-8 • 做一个善于思考的学习者'>
 <meta property='og:description' content='之前为了应对在跨语言开发过程中，需要折腾各种开发环境，我做了一个工具包 runX 来自动化环境部署的过程， 当全新的 CentOS-8 可用后，我就一直想折腾一把，毕竟 7 的内核版本实在太低了。因为最近又对环境部署和自动化工具有些新的想法， 干脆一气呵成，直接在工具集中把这些想法实现出来，但是考虑到变化比较大，而且 runX 本身其实已经是稳定状态， 所以索性搞一个 runX 的全新升级版 Lego。
 Lego，旨在想搭积木一样来组合各种部署功能，因为在 runX 这几年的使用过程中，发现经常还是会有些复用的功能， 在 k8s-start 项目中我试验了这种积木的思想，发现很受用。重新整理 runX 到 Lego，主要包含以下几个方面：
- 最核心的当然是积木的思想，所有的方法和模块都是可组合的。 新装虚拟机当前可能无法做到完全自动化，但是可以通过组合的方式实现半自动化。  下面是装机初始的一些步骤，相关的代码会逐步整理到 lego 这个项目中。
+ 最核心的当然是积木的思想，所有的方法和模块都是可组合的。 新装虚拟机当前可能无法做到完全自动化，但是可以通过组合的方式实现半自动化。  下面是装机初始的一些步骤，相关的代码会逐步整理到 Lego 这个项目中。
 Base 装机步骤  修改运行级别，CentOS 7 通过修改 /etc/inittab 已经过时，CentOS 8 使用 Target，见下 通网，往后的各种操作都需要联网进行（设置免密登陆，后续操作都可以通过 ssh 完成） 更换阿里云的 yum 源，阿里云已经建了 CentOS 8 的 yum 源，因为安装 Parallels Tools 依赖的包需要 安装 Parallels Tools(否则无法共享目录，以及使用命令行 prlctl 命令控制 pvm) 关机，设置共享文件夹等通用设置（关机后，在 Parallels 图形界面进行设置较为方便，目前尚未研究通过 prlctl 命令来设置） 安装 Parallels Tools 后，就可以将 Mac 宿主机中的 runX 项目挂载到 pvm 中，运行相关自动化脚本，比如一些基础设置（/etc/profile，/etc/sudoers 等）  修改运行级别，关闭图形界面 systemctl set-default multi-user.'>
 <meta property='og:url' content='https://idevz.github.io/2019/10/%E5%9F%BA%E4%BA%8E-parallels-%E5%B0%9D%E9%B2%9C-centos-8/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
-<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='CentOS-8'><meta property='article:published_time' content='2019-10-19T11:03:16&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T09:23:40&#43;08:00'/><meta name='twitter:card' content='summary'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='CentOS-8'><meta property='article:published_time' content='2019-10-19T11:03:16&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T15:16:03&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
@@ -148,9 +148,9 @@ if (!doNotTrack) {
 <p>之前为了应对在跨语言开发过程中，需要折腾各种开发环境，我做了一个工具包 <a href="https://github.com/idevz/runx">runX</a> 来自动化环境部署的过程，
 当全新的 CentOS-8 可用后，我就一直想折腾一把，毕竟 7 的内核版本实在太低了。因为最近又对环境部署和自动化工具有些新的想法，
 干脆一气呵成，直接在工具集中把这些想法实现出来，但是考虑到变化比较大，而且 <a href="https://github.com/idevz/runx">runX</a> 本身其实已经是稳定状态，
-所以索性搞一个 runX 的全新升级版 Lego。</p>
+所以索性搞一个 runX 的全新升级版 <a href="https://github.com/idevz/lego">Lego</a>。</p>
 
-<p>Lego，旨在想搭积木一样来组合各种部署功能，因为在 <a href="https://github.com/idevz/runx">runX</a> 这几年的使用过程中，发现经常还是会有些复用的功能，
+<p><a href="https://github.com/idevz/lego">Lego</a>，旨在想搭积木一样来组合各种部署功能，因为在 <a href="https://github.com/idevz/runx">runX</a> 这几年的使用过程中，发现经常还是会有些复用的功能，
 在 k8s-start 项目中我试验了这种积木的思想，发现很受用。重新整理 runX 到 Lego，主要包含以下几个方面：</p>
 
 <ol>
@@ -158,7 +158,7 @@ if (!doNotTrack) {
 <li>新装虚拟机当前可能无法做到完全自动化，但是可以通过组合的方式实现半自动化。</li>
 </ol>
 
-<p>下面是装机初始的一些步骤，相关的代码会逐步整理到 <a href="https://github.com/idevz/lego">lego</a> 这个项目中。</p>
+<p>下面是装机初始的一些步骤，相关的代码会逐步整理到 <a href="https://github.com/idevz/lego">Lego</a> 这个项目中。</p>
 
 <h3 id="base-装机步骤">Base 装机步骤</h3>
 
