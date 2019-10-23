@@ -58,10 +58,9 @@ gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运�
       <pubDate>Sun, 30 Jul 2017 15:43:50 +0800</pubDate>
       
       <guid>https://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</guid>
-      <description>好记性不如烂笔头，要是让我写出自己的开发环境是如何搞的，可能还真写不全，长年累月的演变，实在记不住，用了快 5 年的 MacPro 终于要更新了，借此机会记录下自己装机折腾记。
-常用软件安装 新机开苞后，先是各种软件各种装，有了之前折腾软件的经验，无用软件一概不再装。下面是我平时做后端架构开发、技术调研等工作时，常用的一些软件列表：
-开发工具 编程软件 sublimeText  安装 package control，现在已经很方便了，直接参考官网，Sublime 命令行安装 packageControl 指令：
-import urllib.request,os,hashlib; h = &#39;df21e130d211cfc94d9b0905775a7c0f&#39; + &#39;1e3d39e33b79698005270310898eea76&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; + pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %s instead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; ).</description>
+      <description>Alfred 3 虽然 MacX 本身其实就支持 workflow 的定制，也能通过 Spotlight Search 来达到快速启动 APP 的作用，但是我个人还是喜欢 Alfred 的高可定制，强大的社区，多样的 workflow。本次安装是直接用了之前的 workflow。
+修改 &amp;gt; 打开的终端 默认是系统默认的 Terminal，通过修改脚本，改成更高效的 ITerm
+on alfred_script(q) if application &amp;#34;iTerm2&amp;#34; is running or application &amp;#34;iTerm&amp;#34; is running then run script &amp;#34; on run {q} tell application \&amp;#34;:Applications:iTerm.app\&amp;#34; activate try select first window set onlywindow to false on error create window with default profile select first window set onlywindow to true end try tell the first window if onlywindow is false then create tab with default profile end if tell current session to write text q end tell end tell end run &amp;#34; with parameters {q} else run script &amp;#34; on run {q} tell application \&amp;#34;:Applications:iTerm.</description>
     </item>
     
     <item>
