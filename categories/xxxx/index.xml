@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>xxxx on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/categories/xxxx/</link>
+    <link>http://idevz.github.io/categories/xxxx/</link>
     <description>Recent content in xxxx on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Thu, 07 Dec 2017 08:16:46 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/categories/xxxx/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/categories/xxxx/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Gdb_tools</title>
-      <link>http://idevz.org/2017/12/gdb_tools/</link>
+      <link>http://idevz.github.io/2017/12/gdb_tools/</link>
       <pubDate>Thu, 07 Dec 2017 08:16:46 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/12/gdb_tools/</guid>
+      <guid>http://idevz.github.io/2017/12/gdb_tools/</guid>
       <description>lbt 老是无法正常 dump， lb 老是无法正常断点，所以 debug 了下 gdb tools， 发现里面其实是基于 LuaJIT 源码（ljobj.h）里面的 C 结构来读取的。 所以需要研究下 Python 来扩展 GDB 春哥是怎么干的。然后发现一堆深度好文，值得深入学习。</description>
     </item>
     
     <item>
       <title>opm</title>
-      <link>http://idevz.org/2017/11/opm/</link>
+      <link>http://idevz.github.io/2017/11/opm/</link>
       <pubDate>Wed, 29 Nov 2017 07:26:28 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/opm/</guid>
+      <guid>http://idevz.github.io/2017/11/opm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>start motan</title>
-      <link>http://idevz.org/2017/10/start-motan/</link>
+      <link>http://idevz.github.io/2017/10/start-motan/</link>
       <pubDate>Mon, 16 Oct 2017 11:16:39 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/10/start-motan/</guid>
+      <guid>http://idevz.github.io/2017/10/start-motan/</guid>
       <description>ngx.thread.spawn与coroutine.create的区别 来源：OpenResty Google Groups
 原文地址：https://groups.google.com/forum/#!msg/openresty/6NyxBC9R2UY/zycvr9TMCjIJ
 本文来自于对谷歌邮件组网友提问的整理。
@@ -71,101 +71,101 @@ https://github.com/openresty/lua-nginx-module#ngxthreadspawn
     
     <item>
       <title>start</title>
-      <link>http://idevz.org/2017/09/start/</link>
+      <link>http://idevz.github.io/2017/09/start/</link>
       <pubDate>Tue, 05 Sep 2017 07:13:38 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/start/</guid>
+      <guid>http://idevz.github.io/2017/09/start/</guid>
       <description>Hbase的架构简单解析 https://forever-zs.github.io/2017/08/22/Hbase/Hbase%E7%9A%84%E6%9E%B6%E6%9E%84%E7%AE%80%E5%8D%95%E8%A7%A3%E6%9E%90/</description>
     </item>
     
     <item>
       <title>sort</title>
-      <link>http://idevz.org/2017/09/sort/</link>
+      <link>http://idevz.github.io/2017/09/sort/</link>
       <pubDate>Tue, 05 Sep 2017 07:10:33 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/sort/</guid>
+      <guid>http://idevz.github.io/2017/09/sort/</guid>
       <description>六大排序算法图解以及python实现 https://forever-zs.github.io/2017/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%85%AD%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%BB%A5%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</description>
     </item>
     
     <item>
       <title>jit</title>
-      <link>http://idevz.org/2017/09/jit/</link>
+      <link>http://idevz.github.io/2017/09/jit/</link>
       <pubDate>Tue, 05 Sep 2017 07:08:55 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/jit/</guid>
+      <guid>http://idevz.github.io/2017/09/jit/</guid>
       <description>JVM杂谈之JIT https://zhuanlan.zhihu.com/p/28476709</description>
     </item>
     
     <item>
       <title>mem sys metries</title>
-      <link>http://idevz.org/2017/08/mem-sys-metries/</link>
+      <link>http://idevz.github.io/2017/08/mem-sys-metries/</link>
       <pubDate>Tue, 22 Aug 2017 06:58:06 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/mem-sys-metries/</guid>
+      <guid>http://idevz.github.io/2017/08/mem-sys-metries/</guid>
       <description>http://tonybai.com/2017/07/04/setup-go-runtime-metrics-for-yourself/</description>
     </item>
     
     <item>
       <title>design pattern</title>
-      <link>http://idevz.org/2017/08/design-pattern/</link>
+      <link>http://idevz.github.io/2017/08/design-pattern/</link>
       <pubDate>Tue, 22 Aug 2017 06:54:44 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/design-pattern/</guid>
+      <guid>http://idevz.github.io/2017/08/design-pattern/</guid>
       <description>https://segmentfault.com/a/1190000010706695</description>
     </item>
     
     <item>
       <title>debugging with jpda and apache tomcat</title>
-      <link>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</link>
+      <link>http://idevz.github.io/2017/08/debugging-with-jpda-and-apache-tomcat/</link>
       <pubDate>Tue, 22 Aug 2017 06:52:03 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</guid>
+      <guid>http://idevz.github.io/2017/08/debugging-with-jpda-and-apache-tomcat/</guid>
       <description>https://www.jvmhost.com/articles/debugging-with-jpda-and-apache-tomcat/ http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/remote-debugging.html</description>
     </item>
     
     <item>
       <title>configuring jersey environments without spring</title>
-      <link>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</link>
+      <link>http://idevz.github.io/2017/08/configuring-jersey-environments-without-spring/</link>
       <pubDate>Tue, 22 Aug 2017 06:51:18 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</guid>
+      <guid>http://idevz.github.io/2017/08/configuring-jersey-environments-without-spring/</guid>
       <description>https://github.com/skyscreamer/yoga/wiki/Tutorial:-Configuring-Jersey-environments-without-Spring</description>
     </item>
     
     <item>
       <title>do performance test</title>
-      <link>http://idevz.org/2017/08/do-performance-test/</link>
+      <link>http://idevz.github.io/2017/08/do-performance-test/</link>
       <pubDate>Tue, 15 Aug 2017 11:17:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/do-performance-test/</guid>
+      <guid>http://idevz.github.io/2017/08/do-performance-test/</guid>
       <description>http://coolshell.cn/articles/17381.html</description>
     </item>
     
     <item>
       <title>react php</title>
-      <link>http://idevz.org/2017/07/react-php/</link>
+      <link>http://idevz.github.io/2017/07/react-php/</link>
       <pubDate>Mon, 24 Jul 2017 08:08:43 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/react-php/</guid>
+      <guid>http://idevz.github.io/2017/07/react-php/</guid>
       <description>https://jingxin.me/blog/blog/2013/03/05/react-dot-php-zhong-de-yi-bu-shi-xian/</description>
     </item>
     
     <item>
       <title>yield</title>
-      <link>http://idevz.org/2017/07/yield/</link>
+      <link>http://idevz.github.io/2017/07/yield/</link>
       <pubDate>Mon, 24 Jul 2017 07:54:42 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/yield/</guid>
+      <guid>http://idevz.github.io/2017/07/yield/</guid>
       <description>http://log.fyscu.com/index.php/archives/295/
 https://segmentfault.com/a/1190000007760513 https://laravel-china.org/topics/1442/php-using-yield-to-achieve-asynchronous-web-server</description>
     </item>
     
     <item>
       <title>socket server</title>
-      <link>http://idevz.org/2017/07/socket-server/</link>
+      <link>http://idevz.github.io/2017/07/socket-server/</link>
       <pubDate>Mon, 24 Jul 2017 07:40:22 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/socket-server/</guid>
+      <guid>http://idevz.github.io/2017/07/socket-server/</guid>
       <description>http://www.xtgxiso.com/socket%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/
 https://segmentfault.com/a/1190000003063859
 socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服务举例，协议以换行符举例.我们先看最简单的单进程阻塞模型

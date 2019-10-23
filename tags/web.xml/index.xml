@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Web.xml on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/tags/web.xml/</link>
+    <link>http://idevz.github.io/tags/web.xml/</link>
     <description>Recent content in Web.xml on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Sun, 13 Aug 2017 10:26:18 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/tags/web.xml/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/tags/web.xml/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>web xml 详解</title>
-      <link>http://idevz.org/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</link>
+      <link>http://idevz.github.io/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Sun, 13 Aug 2017 10:26:18 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>http://idevz.github.io/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</guid>
       <description>context-param 声明应用范围(整个WEB项目)内的上下文初始化参数。 param-name 设定上下文的参数名称。必须是唯一名称 param-value 设定的参数名称的值
 &amp;lt;context-param&amp;gt; &amp;lt;param-name&amp;gt;contextConfigLocation&amp;lt;/param-name&amp;gt; &amp;lt;param-value&amp;gt;contextConfigLocationValue&amp;gt;&amp;lt;/param-value&amp;gt; &amp;lt;/context-param&amp;gt;  Web 项目的初始化  Web 项目启动时，Servlet 容器（TomCat）会读取 web.xml 文件中的 &amp;lt;listen&amp;gt; 和 &amp;lt;context-param&amp;gt; 配置。 Servlet 容易会创建一个 ServletContext，整个应用范围都将使用这个上下文。 然后 Servlet 容器会将从 &amp;lt;context-param&amp;gt; 读取的配置转化为键值对交给 ServletContext。 Servlet 容器创建 &amp;lt;listener&amp;gt; 中配置的实例，创建相关的事件监听（listener 定义的类可以是自定义的类但必须需要继承 ServletContextListener）。 在监听的类中会有一个 contextInitialized(ServletContextEvent event) 初始化方法，在这个方法中可以通过 event.getServletContext().getInitParameter(&amp;quot;contextConfigLocation&amp;quot;) 来得到 context-param 设定的值。在这个类中还必须有一个 contextDestroyed(ServletContextEvent event) 销毁方法.用于关闭应用前释放资源，比如说数据库连接的关闭。 得到这个 context-param 的值之后,你就可以做一些操作了。注意,这个时候你的 Web 项目还没有完全启动完成。这个动作会比所有的 Servlet 都要早。  Servlet 容器对 Web.xml 的加载过程是 Context-param -&amp;gt; listener -&amp;gt; filter -&amp;gt; Servlet。
 对 Context 的引用  页面中 ${initParam.</description>

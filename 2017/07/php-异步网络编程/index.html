@@ -11,18 +11,18 @@
 <meta property='og:description' content='http://www.huyanping.cn/php%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0/
 加上STREAM_CLIENT_ASYNC_CONNECT 后stream_socket_client会立刻返回，不会阻塞等待。 等tcp链接建立完成后，可以调用io复用接口的到链接建立的通知
 #define EV_TIMEOUT 0x01 #define EV_READ 0x02 #define EV_WRITE 0x04 #define EV_SIGNAL 0x08 #define EV_PERSIST 0x10 #define EV_ET 0x20 #define EVLOOP_ONCE 0x01 #define EVLOOP_NONBLOCK 0x02    值 常量名 含义     1 EV_TIMEOUT 超过时间后事件成为激活状态   2 EV_READ FD就绪，可以读取的时候 ，事件成为激活状态   4 EV_WRITE FD就绪，可以写入的时候 ，事件成为激活状态   8 EV_SIGNAL 用于实现信号检测   16 EV_PERSIST 表示事件是持久的   32 EV_ET 表示底层是否支持边沿触发事件   1 EVLOOP_ONCE 如果设置了EVLOOP_ONCE，循环将等待某些事件成为激活的，执行激活的事件直到没有更多的事件可以执行，然会返回。   2 EVLOOP_NONBLOCK 如果设置了EVLOOP_NONBLOCK，循环不会等待事件被触发：循环将仅仅检测是否有事件已经就绪，可以立即触发，如果有，则执行事件的回调。    event_base_free() 释放资源，这不能销毁绑定事件 event_base_loop() 处理事件，根据指定的base来处理事件循环 event_base_loopbreak() 立即取消事件循环，行为各break语句相同 event_base_loopexit() 在指定的时间后退出循环 event_base_new() 创建并且初始事件 event_base_priority_init() 设定事件的优先级 event_base_set() 关联事件到事件base event_buffer_base_set() 关联缓存的事件到event_base event_buffer_disable() 禁用一个缓存的事件 event_buffer_enable() 启用一个指定的缓存的事件 event_buffer_fd_set() 改变一个缓存的文件系统描述 event_buffer_free() 释放缓存事件 event_buffer_new() 建立一个新的缓存事件 event_buffer_priority_set() 缓存事件的优先级设定 event_buffer_read() 读取缓存事件中的数据 event_buffer_set_callback() 给缓存的事件设置或重置回调hansh函数 event_buffer_timeout_set() 给一个缓存的事件设定超时的读写时间 event_buffer_watermark_set 设置读写事件的水印标记 event_buffer_write() 向缓存事件中写入数据 event_add() 向指定的设置中添加一个执行事件 event_del() 从设置的事件中移除事件 event_free() 清空事件句柄 event_new() 创建一个新的事件 event_set() 准备想要在event_add中添加事件 http://www.'>
-<meta property='og:url' content='http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/'>
+<meta property='og:url' content='http://idevz.github.io/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='PHP 异步编程'><meta property='article:published_time' content='2017-07-18T14:55:31&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title>PHP 异步网络编程 • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/'>
+  <link rel='canonical' href='http://idevz.github.io/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/'>
   
   
-  <link rel='icon' href='http://idevz.org/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -46,15 +46,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.org/'>idevz.org</a>
+        <a href='http://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tech/'>技术</a>
+        <a href='http://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tools/'>工具</a>
+        <a href='http://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.org/life/'>Life</a>
+        <a href='http://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.org/page/about/'>关于</a>
+        <a href='http://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -655,14 +655,14 @@ react.php 中的异步实现</p>
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/php/'>PHP</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.github.io/categories/php/'>PHP</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/php-%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/'>PHP 异步编程</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.github.io/tags/php-%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/'>PHP 异步编程</a></div>
 
   </div>
 </footer>
@@ -672,7 +672,7 @@ react.php 中的异步实现</p>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/'>
+      <a href='http://idevz.github.io/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -682,7 +682,7 @@ react.php 中的异步实现</p>
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>Vanilla 开发日志</a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/'>
+      <a href='http://idevz.github.io/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/'>
         <span class='screen-reader-text'>Next post: </span>Nginx 性能优化<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -701,16 +701,16 @@ react.php 中的异步实现</p>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p>© 2017 idevz.org</p>
+  <p>© 2020 idevz.org</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

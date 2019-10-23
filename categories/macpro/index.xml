@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MacPro on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/categories/macpro/</link>
+    <link>http://idevz.github.io/categories/macpro/</link>
     <description>Recent content in MacPro on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Sun, 30 Jul 2017 15:43:50 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/categories/macpro/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/categories/macpro/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>我的 MacPro 更新记</title>
-      <link>http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</link>
+      <link>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</link>
       <pubDate>Sun, 30 Jul 2017 15:43:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</guid>
+      <guid>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</guid>
       <description>好记性不如烂笔头，要是让我写出自己的开发环境是如何搞的，可能还真写不全，长年累月的演变，实在记不住，用了快 5 年的 MacPro 终于要更新了，借此机会记录下自己装机折腾记。
 常用软件安装 新机开苞后，先是各种软件各种装，有了之前折腾软件的经验，无用软件一概不再装。下面是我平时做后端架构开发、技术调研等工作时，常用的一些软件列表：
 开发工具 编程软件 sublimeText  安装 package control，现在已经很方便了，直接参考官网，Sublime 命令行安装 packageControl 指令：

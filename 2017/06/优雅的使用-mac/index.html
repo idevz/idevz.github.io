@@ -11,18 +11,18 @@ lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&gt; ipv4 or ipv6
 <meta property='og:description' content='起头 MacOSX 是平时工作生活所使用的系统，从 Windows 走过来，乐不思蜀
 lsof Mac 上使用（netstat -an -ptcp）来查看端口使用情况，也可以用 lsof 来查看， 这里是几个基本用法，来自于这篇博文，感谢博主。
 lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&gt; ipv4 or ipv6 protocol --&gt; tcp or udp hostname --&gt; internet host name hostaddr --&gt; ipv4地址 service --&gt; /etc/service中的 service name (可以不只一个) port --&gt; 端口号 (可以不只一个) lsof 查看端口占用 lsof -i:9100 lsof 查看文件被什么进程占用 lsof /etc/hosts COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME Gas\x20Ma 39968 zhoujing2 5r REG 1,4 301 22679474 /private/etc/hosts Google 41670 zhoujing2 25r REG 1,4 301 22679474 /private/etc/hosts Gas Mask 一直报有其他的进程在改 hosts 文件，之前一直不知道为什么，今天用这个命令找到了，居然是 Chrome 。'>
-<meta property='og:url' content='http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/'>
+<meta property='og:url' content='http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tools'><meta property='article:tag' content='程序员'><meta property='article:tag' content='开发工具'><meta property='article:published_time' content='2017-06-15T16:01:08&#43;08:00'/><meta property='article:modified_time' content='2018-04-16T08:00:33&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title>优雅的使用 Mac • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/'>
+  <link rel='canonical' href='http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/'>
   
   
-  <link rel='icon' href='http://idevz.org/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -46,15 +46,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.org/'>idevz.org</a>
+        <a href='http://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tech/'>技术</a>
+        <a href='http://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tools/'>工具</a>
+        <a href='http://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.org/life/'>Life</a>
+        <a href='http://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.org/page/about/'>关于</a>
+        <a href='http://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -162,14 +162,14 @@ lsof -i 用以显示符合条件的进程情况</code></pre></div>
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/'>开发工具</a>, <a class='category' href='http://idevz.org/categories/mac/'>Mac</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.github.io/categories/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/'>开发工具</a>, <a class='category' href='http://idevz.github.io/categories/mac/'>Mac</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/'>程序员</a>, <a class='tag' href='http://idevz.org/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/'>开发工具</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.github.io/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/'>程序员</a>, <a class='tag' href='http://idevz.github.io/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/'>开发工具</a></div>
 
   </div>
 </footer>
@@ -179,7 +179,7 @@ lsof -i 用以显示符合条件的进程情况</code></pre></div>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/'>
+      <a href='http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -189,7 +189,7 @@ lsof -i 用以显示符合条件的进程情况</code></pre></div>
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>优雅的使用 Linux</a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.org/2017/07/git/'>
+      <a href='http://idevz.github.io/2017/07/git/'>
         <span class='screen-reader-text'>Next post: </span>git<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -208,16 +208,16 @@ lsof -i 用以显示符合条件的进程情况</code></pre></div>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p>© 2017 idevz.org</p>
+  <p>© 2020 idevz.org</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

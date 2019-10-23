@@ -17,18 +17,18 @@ Golang 调试编译相关参数 删除调试符号：go build -ldflags “-s -w�
 -s: 去掉符号信息。 -w: 去掉DWARF调试信息。 关闭内联优化：go build -gcflags “-N -l”
 不能直接对 go run 的进程 GDB 调试 go run 命令创建的二进制文件，没有带 debuginfo，所以不能对他使用 GDB 进行调试。 虽然说在 GDB 运行过程中，可以通过 file 指令来载入要调试的程序，但是前提是待调试的程序有 debuginfo。
 全局变量操作  info variables 变量名 p &lsquo;上一步的结果&rsquo;  断点操作 # 添加断点 b # 删除断点 d breakpoints 断点编号 # 查看断点信息 i b (gdb) info goroutines // 查看 goroutines 信息。 (gdb) goroutine 1 bt // 当前 goroutine 调用堆栈。 (gdb) bt // 查看当前调⽤堆栈，可以与当前 goroutine 调用堆栈对比。 (gdb) info frame // 堆栈帧信息。 (gdb) info locals // 查看局部变量。 (gdb) p $len(s) // 获取对象长度($cap) (gdb) whatis i // 查看对象类型。 (gdb) c // 继续执行，触发 breakpoint() 断点。 (gdb) n // 从 breakpoint() 中出来，执行源码下一行代码。 (gdb) info args // 从参数信息中，我们可以看到命名返回参数的值。 (gdb) x/3xw &amp;r // 查看 r 内存数据。(指针 8 &#43; 长度 4) (gdb) x/15xb 0×42121240 // 查看字符串字节数组'>
-<meta property='og:url' content='http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
+<meta property='og:url' content='http://idevz.github.io/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='xxxxx'><meta property='article:published_time' content='2017-07-28T10:12:31&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title>使用 GDB 调试 Golang 程序 • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
+  <link rel='canonical' href='http://idevz.github.io/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
   
   
-  <link rel='icon' href='http://idevz.org/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -52,15 +52,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.org/'>idevz.org</a>
+        <a href='http://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tech/'>技术</a>
+        <a href='http://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tools/'>工具</a>
+        <a href='http://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.org/life/'>Life</a>
+        <a href='http://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.org/page/about/'>关于</a>
+        <a href='http://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -189,14 +189,14 @@ i b</code></pre></div>
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/golang/'>Golang</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.github.io/categories/golang/'>Golang</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/xxxxx/'>xxxxx</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.github.io/tags/xxxxx/'>xxxxx</a></div>
 
   </div>
 </footer>
@@ -206,7 +206,7 @@ i b</code></pre></div>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.org/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/'>
+      <a href='http://idevz.github.io/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -216,7 +216,7 @@ i b</code></pre></div>
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>CentOS 如何打 RPM 包</a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.org/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/'>
+      <a href='http://idevz.github.io/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/'>
         <span class='screen-reader-text'>Next post: </span>Lua 源码读书笔记<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -235,16 +235,16 @@ i b</code></pre></div>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p>© 2017 idevz.org</p>
+  <p>© 2020 idevz.org</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

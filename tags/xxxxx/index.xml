@@ -2,49 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>xxxxx on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/tags/xxxxx/</link>
+    <link>http://idevz.github.io/tags/xxxxx/</link>
     <description>Recent content in xxxxx on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Thu, 07 Dec 2017 08:16:46 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/tags/xxxxx/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/tags/xxxxx/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Gdb_tools</title>
-      <link>http://idevz.org/2017/12/gdb_tools/</link>
+      <link>http://idevz.github.io/2017/12/gdb_tools/</link>
       <pubDate>Thu, 07 Dec 2017 08:16:46 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/12/gdb_tools/</guid>
+      <guid>http://idevz.github.io/2017/12/gdb_tools/</guid>
       <description>lbt 老是无法正常 dump， lb 老是无法正常断点，所以 debug 了下 gdb tools， 发现里面其实是基于 LuaJIT 源码（ljobj.h）里面的 C 结构来读取的。 所以需要研究下 Python 来扩展 GDB 春哥是怎么干的。然后发现一堆深度好文，值得深入学习。</description>
     </item>
     
     <item>
       <title>opm</title>
-      <link>http://idevz.org/2017/11/opm/</link>
+      <link>http://idevz.github.io/2017/11/opm/</link>
       <pubDate>Wed, 29 Nov 2017 07:26:28 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/opm/</guid>
+      <guid>http://idevz.github.io/2017/11/opm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>LuaJIT</title>
-      <link>http://idevz.org/2017/11/luajit/</link>
+      <link>http://idevz.github.io/2017/11/luajit/</link>
       <pubDate>Wed, 29 Nov 2017 07:20:49 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/luajit/</guid>
+      <guid>http://idevz.github.io/2017/11/luajit/</guid>
       <description>As the standard Lua 5.1 interpreter&amp;rsquo;s VM is not fully resumable, the methods ngx.location.capture, ngx.location.capture_multi, ngx.redirect, ngx.exec, and ngx.exit cannot be used within the context of a Lua pcall() or xpcall() or even the first line of the for &amp;hellip; in &amp;hellip; statement when the standard Lua 5.1 interpreter is used and the attempt to yield across metamethod/C-call boundary error will be produced. Please use LuaJIT 2.x, which supports a fully resumable VM, to avoid this.</description>
     </item>
     
     <item>
       <title>ffi debug</title>
-      <link>http://idevz.org/2017/11/ffi-debug/</link>
+      <link>http://idevz.github.io/2017/11/ffi-debug/</link>
       <pubDate>Wed, 22 Nov 2017 15:07:58 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/ffi-debug/</guid>
+      <guid>http://idevz.github.io/2017/11/ffi-debug/</guid>
       <description>FFI 包调用，Lua C 交互报错，没有任何信息，只能想法 Debug。
 ltrace 转储一个给定 trace 编号（起始为 1）的 LuaJIT trace 对象的内容。 获取 LuaJIT trace 对象机器码的开始和结束地址区间可以用来转储该 LuaJIT trace 对象的机器码。
 ```gdb (gdb)set disassembly-flavor intel (gdb)disas start_addr end_addr
@@ -57,10 +57,10 @@ lg 打印给定 lua_State 指针值所对应 VM 的 global_State 指针值，默
     
     <item>
       <title>start motan</title>
-      <link>http://idevz.org/2017/10/start-motan/</link>
+      <link>http://idevz.github.io/2017/10/start-motan/</link>
       <pubDate>Mon, 16 Oct 2017 11:16:39 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/10/start-motan/</guid>
+      <guid>http://idevz.github.io/2017/10/start-motan/</guid>
       <description>ngx.thread.spawn与coroutine.create的区别 来源：OpenResty Google Groups
 原文地址：https://groups.google.com/forum/#!msg/openresty/6NyxBC9R2UY/zycvr9TMCjIJ
 本文来自于对谷歌邮件组网友提问的整理。
@@ -96,92 +96,92 @@ https://github.com/openresty/lua-nginx-module#ngxthreadspawn
     
     <item>
       <title>start</title>
-      <link>http://idevz.org/2017/09/start/</link>
+      <link>http://idevz.github.io/2017/09/start/</link>
       <pubDate>Tue, 05 Sep 2017 07:13:38 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/start/</guid>
+      <guid>http://idevz.github.io/2017/09/start/</guid>
       <description>Hbase的架构简单解析 https://forever-zs.github.io/2017/08/22/Hbase/Hbase%E7%9A%84%E6%9E%B6%E6%9E%84%E7%AE%80%E5%8D%95%E8%A7%A3%E6%9E%90/</description>
     </item>
     
     <item>
       <title>sort</title>
-      <link>http://idevz.org/2017/09/sort/</link>
+      <link>http://idevz.github.io/2017/09/sort/</link>
       <pubDate>Tue, 05 Sep 2017 07:10:33 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/sort/</guid>
+      <guid>http://idevz.github.io/2017/09/sort/</guid>
       <description>六大排序算法图解以及python实现 https://forever-zs.github.io/2017/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%85%AD%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%BB%A5%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</description>
     </item>
     
     <item>
       <title>jit</title>
-      <link>http://idevz.org/2017/09/jit/</link>
+      <link>http://idevz.github.io/2017/09/jit/</link>
       <pubDate>Tue, 05 Sep 2017 07:08:55 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/jit/</guid>
+      <guid>http://idevz.github.io/2017/09/jit/</guid>
       <description>JVM杂谈之JIT https://zhuanlan.zhihu.com/p/28476709</description>
     </item>
     
     <item>
       <title>generic types</title>
-      <link>http://idevz.org/2017/09/generic-types/</link>
+      <link>http://idevz.github.io/2017/09/generic-types/</link>
       <pubDate>Tue, 05 Sep 2017 07:07:13 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/generic-types/</guid>
+      <guid>http://idevz.github.io/2017/09/generic-types/</guid>
       <description>泛型 擦除、边界、通配符、 http://blog.csdn.net/zghwaicsdn/article/details/50674334</description>
     </item>
     
     <item>
       <title>Docker 常用管理命令</title>
-      <link>http://idevz.org/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</link>
+      <link>http://idevz.github.io/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 27 Aug 2017 10:36:24 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</guid>
+      <guid>http://idevz.github.io/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</guid>
       <description>https://segmentfault.com/a/1190000000751601 https://segmentfault.com/a/1190000000759971
 容器生命周期管理 — docker [run|start|stop|restart|kill|rm|pause|unpause] 容器操作运维 — docker [ps|inspect|top|attach|events|logs|wait|export|port] 容器rootfs命令 — docker [commit|cp|diff] 镜像仓库 — docker [login|pull|push|search] 本地镜像管理 — docker [images|rmi|tag|build|history|save|import] 其他命令 — docker [info|version]</description>
     </item>
     
     <item>
       <title>mem sys metries</title>
-      <link>http://idevz.org/2017/08/mem-sys-metries/</link>
+      <link>http://idevz.github.io/2017/08/mem-sys-metries/</link>
       <pubDate>Tue, 22 Aug 2017 06:58:06 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/mem-sys-metries/</guid>
+      <guid>http://idevz.github.io/2017/08/mem-sys-metries/</guid>
       <description>http://tonybai.com/2017/07/04/setup-go-runtime-metrics-for-yourself/</description>
     </item>
     
     <item>
       <title>design pattern</title>
-      <link>http://idevz.org/2017/08/design-pattern/</link>
+      <link>http://idevz.github.io/2017/08/design-pattern/</link>
       <pubDate>Tue, 22 Aug 2017 06:54:44 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/design-pattern/</guid>
+      <guid>http://idevz.github.io/2017/08/design-pattern/</guid>
       <description>https://segmentfault.com/a/1190000010706695</description>
     </item>
     
     <item>
       <title>debugging with jpda and apache tomcat</title>
-      <link>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</link>
+      <link>http://idevz.github.io/2017/08/debugging-with-jpda-and-apache-tomcat/</link>
       <pubDate>Tue, 22 Aug 2017 06:52:03 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</guid>
+      <guid>http://idevz.github.io/2017/08/debugging-with-jpda-and-apache-tomcat/</guid>
       <description>https://www.jvmhost.com/articles/debugging-with-jpda-and-apache-tomcat/ http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/remote-debugging.html</description>
     </item>
     
     <item>
       <title>configuring jersey environments without spring</title>
-      <link>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</link>
+      <link>http://idevz.github.io/2017/08/configuring-jersey-environments-without-spring/</link>
       <pubDate>Tue, 22 Aug 2017 06:51:18 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</guid>
+      <guid>http://idevz.github.io/2017/08/configuring-jersey-environments-without-spring/</guid>
       <description>https://github.com/skyscreamer/yoga/wiki/Tutorial:-Configuring-Jersey-environments-without-Spring</description>
     </item>
     
     <item>
       <title>volume</title>
-      <link>http://idevz.org/2017/08/volume/</link>
+      <link>http://idevz.github.io/2017/08/volume/</link>
       <pubDate>Sat, 19 Aug 2017 11:15:29 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/volume/</guid>
+      <guid>http://idevz.github.io/2017/08/volume/</guid>
       <description>supervisorctl
 docker exec -it kamon-grafana-dashboard /bin/bash
 /var/log/supervisor /usr/bin/supervisord
@@ -191,55 +191,55 @@ Error: Sync-request requires node version 0.12 or later. If you need to use it w
     
     <item>
       <title>do performance test</title>
-      <link>http://idevz.org/2017/08/do-performance-test/</link>
+      <link>http://idevz.github.io/2017/08/do-performance-test/</link>
       <pubDate>Tue, 15 Aug 2017 11:17:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/do-performance-test/</guid>
+      <guid>http://idevz.github.io/2017/08/do-performance-test/</guid>
       <description>http://coolshell.cn/articles/17381.html</description>
     </item>
     
     <item>
       <title>effective go</title>
-      <link>http://idevz.org/2017/08/effective-go/</link>
+      <link>http://idevz.github.io/2017/08/effective-go/</link>
       <pubDate>Sun, 06 Aug 2017 11:48:01 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/effective-go/</guid>
+      <guid>http://idevz.github.io/2017/08/effective-go/</guid>
       <description>https://golang.org/doc/effective_go.html</description>
     </item>
     
     <item>
       <title>go at google</title>
-      <link>http://idevz.org/2017/08/go-at-google/</link>
+      <link>http://idevz.github.io/2017/08/go-at-google/</link>
       <pubDate>Sun, 06 Aug 2017 11:46:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/go-at-google/</guid>
+      <guid>http://idevz.github.io/2017/08/go-at-google/</guid>
       <description>https://talks.golang.org/2012/splash.article</description>
     </item>
     
     <item>
       <title>data sharing</title>
-      <link>http://idevz.org/2017/08/data-sharing/</link>
+      <link>http://idevz.github.io/2017/08/data-sharing/</link>
       <pubDate>Sat, 05 Aug 2017 21:48:09 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/data-sharing/</guid>
+      <guid>http://idevz.github.io/2017/08/data-sharing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lua 源码读书笔记</title>
-      <link>http://idevz.org/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <link>http://idevz.github.io/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sat, 05 Aug 2017 21:28:55 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://idevz.github.io/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
       <description>https://github.com/lichuang/Lua-Source-Internal/blob/master/doc/ch06-%E7%83%AD%E6%9B%B4%E6%96%B0.md</description>
     </item>
     
     <item>
       <title>使用 GDB 调试 Golang 程序</title>
-      <link>http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
+      <link>http://idevz.github.io/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Fri, 28 Jul 2017 10:12:31 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
+      <guid>http://idevz.github.io/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
       <description>/usr/local/go/src/runtime/runtime-gdb.py
 ♧ save breakpoints ~/idevz.motan-go.gdb.brks Saved to file &amp;lsquo;/root/idevz.motan-go.gdb.brks&amp;rsquo;.
 Golang 调试编译相关参数 删除调试符号：go build -ldflags “-s -w”
@@ -250,29 +250,29 @@ Golang 调试编译相关参数 删除调试符号：go build -ldflags “-s -w�
     
     <item>
       <title>react php</title>
-      <link>http://idevz.org/2017/07/react-php/</link>
+      <link>http://idevz.github.io/2017/07/react-php/</link>
       <pubDate>Mon, 24 Jul 2017 08:08:43 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/react-php/</guid>
+      <guid>http://idevz.github.io/2017/07/react-php/</guid>
       <description>https://jingxin.me/blog/blog/2013/03/05/react-dot-php-zhong-de-yi-bu-shi-xian/</description>
     </item>
     
     <item>
       <title>yield</title>
-      <link>http://idevz.org/2017/07/yield/</link>
+      <link>http://idevz.github.io/2017/07/yield/</link>
       <pubDate>Mon, 24 Jul 2017 07:54:42 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/yield/</guid>
+      <guid>http://idevz.github.io/2017/07/yield/</guid>
       <description>http://log.fyscu.com/index.php/archives/295/
 https://segmentfault.com/a/1190000007760513 https://laravel-china.org/topics/1442/php-using-yield-to-achieve-asynchronous-web-server</description>
     </item>
     
     <item>
       <title>socket server</title>
-      <link>http://idevz.org/2017/07/socket-server/</link>
+      <link>http://idevz.github.io/2017/07/socket-server/</link>
       <pubDate>Mon, 24 Jul 2017 07:40:22 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/socket-server/</guid>
+      <guid>http://idevz.github.io/2017/07/socket-server/</guid>
       <description>http://www.xtgxiso.com/socket%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/
 https://segmentfault.com/a/1190000003063859
 socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服务举例，协议以换行符举例.我们先看最简单的单进程阻塞模型
@@ -282,20 +282,20 @@ socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服
     
     <item>
       <title>Nginx 性能优化</title>
-      <link>http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+      <link>http://idevz.github.io/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
       <pubDate>Thu, 20 Jul 2017 10:14:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+      <guid>http://idevz.github.io/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
       <description>Nginx 性能优化 群里有同学发了一篇 《Nginx 性能优化》 的文章，春哥看后，提出以下几点，非常有技术高度的观点，个人认为，这才是技术，才是技术人应该追求的高度。 下面把春哥的原话摘录于此，与君共勉：
 居然不提火焰图 gzip 也居然不提 CPU 损耗 另外，不提 Openfile Cache 和共享内存的锁，也是缺憾 另外，高并发下不提请求内存池的配置，也是缺憾 另外，error log 刷得太猛，也是常见的性能瓶颈 而 error log 是不带 buffer 的，比 access log 会更严重 SSL 的优化也完全没提及 性能优化是一个系统化的学问 不是简单的奇技淫巧的列表 火焰图应该作为总纲 然后分门别类 见招拆招 性能优化是一个系统化的学问 不是简单的奇技淫巧的列表</description>
     </item>
     
     <item>
       <title>我的技术学习之路</title>
-      <link>http://idevz.org/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
+      <link>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
       <pubDate>Wed, 19 Jul 2017 14:38:32 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
+      <guid>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
       <description>PHP Lua OR Golang 虽然写 PHP 时间最长，但是写 PHP 的感觉就是各种 API 各种函数用法的 PHP Doc 查阅，完成功能，并没有更多的思考
 从 OR 开始写 Lua 里面有很多功能，需要自己动手实现，逼着自己思考很多机制的实现，所以做的相对深入
 逼着自己更多的去思考，所以有了上面这些感悟 其实，为什么要等需求来了，才逼着自己的思考呢？为什么在平时学习的时候就往深入写去思考，去刨根问底，去查个水落石出呢？
@@ -304,10 +304,10 @@ socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>https://www.ansible.com/resources/webinars-training/introduction-to-ansible
 使用Ansible部署Kubernetes 1.6高可用集群 https://blog.frognew.com/2017/06/kubernetes-1.6-ha-cluster-by-ansible.html
 HOW-TO Deploy Kubernetes on Openstack with Ansible http://superuser.openstack.org/articles/deploy-kubernetes-openstack-ansible/
@@ -317,19 +317,19 @@ Ansible用命令管理主机(doc) http://getansible.com/begin/ansibleyong_ming_l
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>ip vs ifconfig https://linux.cn/article-4326-1.html</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>Iptables详解 http://blog.csdn.net/reyleon/article/details/12976341
 关于iptables的四表五链 http://blog.51cto.com/godben/1693903 iptables只是Linux防火墙的管理工具而已，位于/sbin/iptables。真正实现防火墙功能的是netfilter，它是Linux内核中实现包过滤的内部结构。
 iptables包含4个表，5个链。其中表是按照对数据包的操作区分的，链是按照不同的Hook点来区分的，表和链实际上是netfilter的两个维度。 4个表:filter,nat,mangle,raw 默认表是filter（没有指定表的时候就是filter表）。表的处理优先级：raw&amp;gt;mangle&amp;gt;nat&amp;gt;filter。 filter：一般的过滤功能 nat:用于nat功能（端口映射，地址映射等） mangle:用于对特定数据包的修改 raw:有限级最高，设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能 5个链：PREROUTING,INPUT,FORWARD,OUTPUT,POSTROUTING。 PREROUTING:数据包进入路由表之前 INPUT:通过路由表后目的地为本机 FORWARDING:通过路由表后，目的地不为本机 OUTPUT:由本机产生，向外转发 POSTROUTIONG:发送到网卡接口之前。  规则表： 1.filter表——三个链：INPUT、FORWARD、OUTPUT 作用：过滤数据包 内核模块：iptables_filter. 2.Nat表——三个链：PREROUTING、POSTROUTING、OUTPUT 作用：用于网络地址转换（IP、端口） 内核模块：iptable_nat 3.Mangle表——五个链：PREROUTING、POSTROUTING、INPUT、OUTPUT、FORWARD 作用：修改数据包的服务类型、TTL、并且可以配置路由实现QOS内核模块：iptable_mangle(别看这个表这么麻烦，咱们设置策略时几乎都不会用到它) 4.Raw表——两个链：OUTPUT、PREROUTING 作用：决定数据包是否被状态跟踪机制处理 内核模块：iptable_raw (这个是REHL4没有的，不过不用怕，用的不多)
@@ -346,10 +346,10 @@ Iptables命令的管理控制选项：
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>MAC networksetup -listallhardwareports networksetup -listallnetworkservices spoof-mac list
 lo 回环接口(loop back) 或者 本地主机(localhost) gif 通用 IP-in-IP隧道(RFC2893) stf 6to4连接(RFC3056) en 以太网或802.11接口 fw IP over FireWire(IEEE-1394), macOS特有 p2p Point-to-Point 协议 awdl airdrop peer to peer(一种mesh network), apple airdrop设备特有 bridge 第2层桥接 vlan 虚拟局域网络
 在iOS设备(支持cellular)上还能看到 pdp_ip 蜂窝数据连接
@@ -359,10 +359,10 @@ en1 = Ethernet 1 vmnet8 = Virtual Interface vmnet1 = Virtual Interface
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>systemd wiki https://wiki.archlinux.org/index.php/systemd_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 journalctl可以根据特定字段过滤输出。如果过滤的字段比较多，需要较长时间才能显示出来。
 示例：

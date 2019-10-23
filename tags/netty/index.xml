@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Netty on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/tags/netty/</link>
+    <link>http://idevz.github.io/tags/netty/</link>
     <description>Recent content in Netty on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Sun, 23 Jul 2017 12:36:20 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/tags/netty/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/tags/netty/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Netty in action 学习笔记</title>
-      <link>http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>http://idevz.github.io/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 23 Jul 2017 12:36:20 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://idevz.github.io/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>Netty 的概念及体系结构 框架详解，涵盖了 Netty 的设计、组件及编程接口
 阻塞和非阻塞的网络 概述阻塞和非阻塞的网络 API，以及对应的 JDK 接口，引入 Netty 作为构建高度可伸缩性、异步、事件驱动的网络编程工具包，首先领略一下 Netty 的基础构建快：Channel、回调、Future、事件及 ChannelHandler。
 如何配置系统以构建运行示例代码 通过一个简单的回送从连接的客户端接收到消息的服务器应用程序来测试系统的运行，介绍 Bootstrap 在运行时组装和配置一个应用的所有组件的过程。

@@ -11,18 +11,18 @@
 <meta property='og:description' content='This document helps you get started developing code for Istio. If you follow this guide and find some problem, please take a few minutes to update this page.
 本文档帮助你开始为 Istio 开发代码。如果你依照本文档发现一些问题，请花几分钟的时间更新本页内容。
  Prerequisites 预先准备  Setting up Go 安装 Go Setting up Docker 安装 Docker Setting up fpm 安装 FPM Other dependencies 其他依赖 Setting up Kubernetes 部署 Kubernetes IBM Cloud Container Service IBM 云容器服务 Google Kubernetes Engine Google Kubernetes 引擎 Minikube 迷你 Kube Setting up environment variables 设置环境变量 Setting up personal access token 设置个人访问令牌  Using the code base 使用代码库  Building the code 构建代码 Building and pushing the containers 构建、推送容器 Building and pushing a specific container 构建、推送一个特定的容器 Building the Istio manifests 构建 Istio 清单 Cleaning outputs 清理输出 Debug an Istio container with Delve 使用 Delve 调试 Istio 容器 Running tests 运行单元测试 Health of tests 健康的测试 Getting coverage numbers 获取覆盖率 Auto-formatting source code 自动格式化源码 Running the linters 运行检测工具 Running race detection tests 运行竞态探测用例 Adding dependencies 添加依赖 About testing 关于单元测试  Working with CircleCI 使用 Circle CI Writing shell scripts 编写 shell 脚本  ShellCheck Shell 检查 Dealing with spaces and arrays 处理空白和数组 Style Guide 类型指导  Writing reference docs 编写引用文档  About proto documentation 关于 proto 文档  Git workflow Git 工作流  Fork the main repository Fork 主仓库 Clone your fork Clone 你的 Fork Enable pre commit hook 激活预提交钩子 Create a branch and make changes 创建分支并做出修改 Keeping your fork in sync 保持你的 Fork 同步(与主仓库) Committing changes to your fork 提交变更到你的 Fork Creating a pull request 创建一个 PR Getting a code review 获得一个代码 Review When to retain commits and when to squash 何时保留提交何时squash  Develop on Feature Branch 在特性分支上开发  This document is intended to be relative to the branch in which it is found.'>
-<meta property='og:url' content='http://idevz.org/1/01/'>
+<meta property='og:url' content='http://idevz.github.io/1/01/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tech'><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title> • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.org/1/01/'>
+  <link rel='canonical' href='http://idevz.github.io/1/01/'>
   
   
-  <link rel='icon' href='http://idevz.org/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -46,15 +46,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.org/'>idevz.org</a>
+        <a href='http://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tech/'>技术</a>
+        <a href='http://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tools/'>工具</a>
+        <a href='http://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.org/life/'>Life</a>
+        <a href='http://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.org/page/about/'>关于</a>
+        <a href='http://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -1303,7 +1303,7 @@ When checking this sync-up PR, do not use squash merge, instead, <strong>use <a 
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.org/1/01/'>
+      <a href='http://idevz.github.io/1/01/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -1313,7 +1313,7 @@ When checking this sync-up PR, do not use squash merge, instead, <strong>use <a 
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span></a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.org/1/01/'>
+      <a href='http://idevz.github.io/1/01/'>
         <span class='screen-reader-text'>Next post: </span><span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -1332,16 +1332,16 @@ When checking this sync-up PR, do not use squash merge, instead, <strong>use <a 
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p>© 2017 idevz.org</p>
+  <p>© 2020 idevz.org</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

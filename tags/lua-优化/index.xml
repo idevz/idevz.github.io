@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lua 优化 on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/tags/lua-%E4%BC%98%E5%8C%96/</link>
+    <link>http://idevz.github.io/tags/lua-%E4%BC%98%E5%8C%96/</link>
     <description>Recent content in Lua 优化 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Thu, 13 Jul 2017 15:03:03 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/tags/lua-%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/tags/lua-%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>高性能 Lua 技巧</title>
-      <link>http://idevz.org/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</link>
+      <link>http://idevz.github.io/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</link>
       <pubDate>Thu, 13 Jul 2017 15:03:03 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</guid>
+      <guid>http://idevz.github.io/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</guid>
       <description>http://www.lua.org/gems/sample.pdf
 http://wuzhiwei.net/lua_performance/
 使用local  在代码运行前，Lua 会把源码预编译成一种中间码，类似于 Java 的虚拟机。这种格式然后会通过 C 的解释器进行解释，整个过程其实就是通过一个 while 循环，里面有很多的 switch &amp;hellip; case 语句，一个case对应一条指令来解析。自 Lua 5.0 之后，Lua 采用了一种类似于寄存器的虚拟机模式。Lua用栈来储存其寄存器。每一个活动的函数，Lua 都会其分配一个栈，这个栈用来储存函数里的活动记录。每一个函数的栈都可以储存至多 250 个寄存器，因为栈的长度是用 8 个比特表示的。有了这么多的寄存器，Lua 的预编译器能把所有的 local 变量储存在其中。这就使得 Lua 在获取 local 变量时其效率十分的高。

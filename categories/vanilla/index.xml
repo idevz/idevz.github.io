@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vanilla on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/categories/vanilla/</link>
+    <link>http://idevz.github.io/categories/vanilla/</link>
     <description>Recent content in Vanilla on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Tue, 18 Jul 2017 14:52:56 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/categories/vanilla/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/categories/vanilla/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Vanilla 开发日志</title>
-      <link>http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
+      <link>http://idevz.github.io/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
       <pubDate>Tue, 18 Jul 2017 14:52:56 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid>
+      <guid>http://idevz.github.io/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid>
       <description>init_worker_by_lua_file 目前 init_worker_by_lua_file 指令被框架自己占用了。而没有留给 init_worker_by_lua_file 自己加东西的地方</description>
     </item>
     
     <item>
       <title>深入理解 Lua 元表</title>
-      <link>http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</link>
+      <link>http://idevz.github.io/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</link>
       <pubDate>Thu, 13 Jul 2017 10:07:21 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</guid>
+      <guid>http://idevz.github.io/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</guid>
       <description>metatable Lua 元表 元表（metatable）作为 Lua 语言的一大经典语言特性，对于 Lua 语言本身有着重要的意义，本文试图随着日常开发中对 metatable 的深入使用，将我对其理解记录于此。
 元表，仅仅关乎元方法 提到元表，就必须要知道元方法，下面是元方法的一个简要列表：
 __add(a, b) --加法 __sub(a, b) --减法 __mul(a, b) --乘法 __div(a, b) --除法 __mod(a, b) --取模 __pow(a, b) --乘幂 __unm(a) --相反数 __concat(a, b) --连接 __len(a) --长度 __eq(a, b) --相等 __lt(a, b) --小于 __le(a, b) --小于等于 __index(a, b) --索引查询 __newindex(a, b, c) --索引更新 __call(a, ...) --执行方法调用 __tostring(a) --字符串输出 __metatable --保护元表 元表就是通过在一个表中通过对元方法的实现，来设定元表对应元方法的行为（比如给表实现自定义的 &amp;ldquo;+&amp;rdquo; 加法行为），再通过 setmetatable 方法的调用，将这些定义好的行为附加给需要的表，下面通过一个简单的例子来说明：

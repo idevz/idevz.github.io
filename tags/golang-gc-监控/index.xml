@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang GC 监控 on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/tags/golang-gc-%E7%9B%91%E6%8E%A7/</link>
+    <link>http://idevz.github.io/tags/golang-gc-%E7%9B%91%E6%8E%A7/</link>
     <description>Recent content in Golang GC 监控 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Tue, 15 Aug 2017 11:23:55 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/tags/golang-gc-%E7%9B%91%E6%8E%A7/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/tags/golang-gc-%E7%9B%91%E6%8E%A7/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>monitoring golang gc</title>
-      <link>http://idevz.org/2017/08/monitoring-golang-gc/</link>
+      <link>http://idevz.github.io/2017/08/monitoring-golang-gc/</link>
       <pubDate>Tue, 15 Aug 2017 11:23:55 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/monitoring-golang-gc/</guid>
+      <guid>http://idevz.github.io/2017/08/monitoring-golang-gc/</guid>
       <description>http://holys.im/2016/07/01/monitor-golang-gc/</description>
     </item>
     

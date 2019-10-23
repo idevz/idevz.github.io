@@ -13,18 +13,18 @@ __add(a, b) --加法 __sub(a, b) --减法 __mul(a, b) --乘法 __div(a, b) --除
 元表，仅仅关乎元方法 提到元表，就必须要知道元方法，下面是元方法的一个简要列表：
 __add(a, b) --加法 __sub(a, b) --减法 __mul(a, b) --乘法 __div(a, b) --除法 __mod(a, b) --取模 __pow(a, b) --乘幂 __unm(a) --相反数 __concat(a, b) --连接 __len(a) --长度 __eq(a, b) --相等 __lt(a, b) --小于 __le(a, b) --小于等于 __index(a, b) --索引查询 __newindex(a, b, c) --索引更新 __call(a, ...) --执行方法调用 __tostring(a) --字符串输出 __metatable --保护元表 元表就是通过在一个表中通过对元方法的实现，来设定元表对应元方法的行为（比如给表实现自定义的 &ldquo;&#43;&rdquo; 加法行为），再通过 setmetatable 方法的调用，将这些定义好的行为附加给需要的表，下面通过一个简单的例子来说明：
 -- my.lua local setmetatable = setmetatable local data = {name=&#34;idevz&#34;,site=&#34;idevz.'>
-<meta property='og:url' content='http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/'>
+<meta property='og:url' content='http://idevz.github.io/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='Lua 元表'><meta property='article:tag' content='OpenResty'><meta property='article:published_time' content='2017-07-13T10:07:21&#43;08:00'/><meta property='article:modified_time' content='2018-04-16T08:00:33&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title>深入理解 Lua 元表 • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/'>
+  <link rel='canonical' href='http://idevz.github.io/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/'>
   
   
-  <link rel='icon' href='http://idevz.org/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -48,15 +48,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.org/'>idevz.org</a>
+        <a href='http://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tech/'>技术</a>
+        <a href='http://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tools/'>工具</a>
+        <a href='http://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.org/life/'>Life</a>
+        <a href='http://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.org/page/about/'>关于</a>
+        <a href='http://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -219,14 +219,14 @@ custom_table_name</code></pre></div>
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/openresty/'>OpenResty</a>, <a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.org/categories/vanilla/'>Vanilla</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.github.io/categories/openresty/'>OpenResty</a>, <a class='category' href='http://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='http://idevz.github.io/categories/vanilla/'>Vanilla</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.org/tags/lua-%E5%85%83%E8%A1%A8/'>Lua 元表</a>, <a class='tag' href='http://idevz.org/tags/openresty/'>OpenResty</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='http://idevz.github.io/tags/lua-%E5%85%83%E8%A1%A8/'>Lua 元表</a>, <a class='tag' href='http://idevz.github.io/tags/openresty/'>OpenResty</a></div>
 
   </div>
 </footer>
@@ -236,7 +236,7 @@ custom_table_name</code></pre></div>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.org/2017/07/ngx-ctx-bug/'>
+      <a href='http://idevz.github.io/2017/07/ngx-ctx-bug/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -246,7 +246,7 @@ custom_table_name</code></pre></div>
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>ngx ctx bug</a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.org/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/'>
+      <a href='http://idevz.github.io/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/'>
         <span class='screen-reader-text'>Next post: </span>高性能 Lua 技巧<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -265,16 +265,16 @@ custom_table_name</code></pre></div>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p>© 2017 idevz.org</p>
+  <p>© 2020 idevz.org</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

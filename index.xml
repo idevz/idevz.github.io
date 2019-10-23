@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>idevz.org on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/</link>
+    <link>http://idevz.github.io/</link>
     <description>Recent content in idevz.org on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     
-	<atom:link href="http://idevz.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>关于</title>
-      <link>http://idevz.org/page/about/</link>
+      <link>http://idevz.github.io/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/page/about/</guid>
+      <guid>http://idevz.github.io/page/about/</guid>
       <description>开心网 &amp;ndash;&amp;gt; 凤凰网 &amp;ndash;&amp;gt; 新浪移动 &amp;ndash;&amp;gt; 微博
 GitHub
 Weibo</description>
@@ -24,10 +24,10 @@ Weibo</description>
     
     <item>
       <title>Tour of Go</title>
-      <link>http://idevz.org/2018/12/tour-of-go/</link>
+      <link>http://idevz.github.io/2018/12/tour-of-go/</link>
       <pubDate>Tue, 11 Dec 2018 11:33:38 +0800</pubDate>
       
-      <guid>http://idevz.org/2018/12/tour-of-go/</guid>
+      <guid>http://idevz.github.io/2018/12/tour-of-go/</guid>
       <description>basics Packages, Variables, and Functions Packages Every Go program is made up of packages.
 Programs start running in package main.
 This program is using the packages with import paths fmt and math/rand.
@@ -37,10 +37,10 @@ Note: The environment in which these programs are executed is deterministic, so 
     
     <item>
       <title>Service mesh — 一种新的模式而不是新技术</title>
-      <link>http://idevz.org/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
+      <link>http://idevz.github.io/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Tue, 13 Nov 2018 22:11:56 +0800</pubDate>
       
-      <guid>http://idevz.org/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
+      <guid>http://idevz.github.io/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
       <description>原著信息： Service Mesh – A New Pattern, Not A New Technology?
 by:Marco Palladino
 What is Service Mesh and Where Did it Come From? Over the past few months, you may have noticed the explosion of industry chatter and articles surrounding service mesh and the future of software architecture. These discussions have been highly polarizing, with tribes forming around specific vendors. While this partisan trend is to be expected, the common thread among these discussions is the rapid transformation of how APIs are used in the enterprise, and what this means for the topology of our traffic.</description>
@@ -48,10 +48,10 @@ What is Service Mesh and Where Did it Come From? Over the past few months, you m
     
     <item>
       <title>微服务架构的 What，Why，和 How</title>
-      <link>http://idevz.org/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</link>
+      <link>http://idevz.github.io/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</link>
       <pubDate>Tue, 18 Sep 2018 22:11:56 +0800</pubDate>
       
-      <guid>http://idevz.org/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</guid>
+      <guid>http://idevz.github.io/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</guid>
       <description>原著信息： The What, Why, and How of a Microservices Architecture
 by:Jetinder Singh
 For many years now we have been building systems and getting better at it. Several technologies, architectural patterns, and best practices have emerged over those years. Microservices is one of those architectural patterns which has emerged from the world of domain-driven design, continuous delivery, platform and infrastructure automation, scalable systems, polyglot programming and persistence.
@@ -61,19 +61,19 @@ What is a Microservices Architecture in a Nutshell?</description>
     
     <item>
       <title>我们应该知道的 Top</title>
-      <link>http://idevz.org/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</link>
+      <link>http://idevz.github.io/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</link>
       <pubDate>Tue, 27 Mar 2018 15:08:51 +0800</pubDate>
       
-      <guid>http://idevz.org/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</guid>
+      <guid>http://idevz.github.io/2018/03/%E6%88%91%E4%BB%AC%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84-top/</guid>
       <description>Top 不止有 top（启动默认选项） 全局默认值    选项 - 意义 默认值     A - Alt display Off (full-screen)   * d - Delay time 1.5 seconds   * H - Threads mode Off (summarize as tasks)   I - Irix mode On (no, `solaris&amp;rsquo; smp)   * p - PID monitoring Off (show all processes)   * s - Secure mode Off (unsecured)   B - Bold enable On (yes, bold globally)    概要区默认值    选项 - 意义 默认值     l - Load Avg/Uptime On (thus program name)   t - Task/Cpu states On (1+1 lines, see `1&amp;rsquo;)   m - Mem/Swap usage On (2 lines worth)   1 - Single Cpu Off (thus multiple cpus)    任务区默认值    选项 - 意义 默认值     b - Bold hilite Off (use `reverse&amp;rsquo;)   * c - Command line Off (name, not cmdline)   * i - Idle tasks On (show all tasks)   J - Num align right On (not left justify)   j - Str align right Off (not right justify)   R - Reverse sort On (pids high-to-low)   * S - Cumulative time Off (no, dead children)   * u - User filter Off (show euid only)   * U - User filter Off (show any uid)   V - Forest view On (show as branches)   x - Column hilite Off (no, sort field)   y - Row hilite On (yes, running tasks)   z - color/mono On (show colors)    不一样的启动 ❯ top -h z@master1 procps-ng version 3.</description>
     </item>
     
     <item>
       <title>使用Vs Code 调试 Golang 程序</title>
-      <link>http://idevz.org/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
+      <link>http://idevz.github.io/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Mon, 11 Dec 2017 20:18:44 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
+      <guid>http://idevz.github.io/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
       <description>安装 dlv 因为我使用虚拟机开发，Mac 宿主机与 CentOS 虚拟机的 GOPATH 都指向了同一个路径，所以我的 Golang bin 路径是重合的 所以我需要在两个机器上都有一份各自的 dlv，好在 Mac 有 brew，所以 Mac brew 安装的 dlv 就可以避免抢占 GOPATH 路径了。下面记录几个安装中的小问题。
 Mac 安装 dlv brew install 未必会好使，因为 brew 安装是非 root 安装，而 dlv 需要添加系统认证证书，可能会遇到如下安装不成功的报错。
 ==&amp;gt; Installing delve from go-delve/delve ==&amp;gt; Downloading https://github.com/derekparker/delve/archive/v1.0.0-rc.2.tar.gz Already downloaded: /Users/idevz/Library/Caches/Homebrew/delve-1.0.0-rc.2.tar.gz security: SecKeychainSearchCopyNext: The specified item could not be found in the keychain. ==&amp;gt; Generating dlv-cert ==&amp;gt; openssl req -new -newkey rsa:2048 -x509 -days 3650 -nodes -config dlv-cert.</description>
@@ -81,28 +81,28 @@ Mac 安装 dlv brew install 未必会好使，因为 brew 安装是非 root 安�
     
     <item>
       <title>Gdb_tools</title>
-      <link>http://idevz.org/2017/12/gdb_tools/</link>
+      <link>http://idevz.github.io/2017/12/gdb_tools/</link>
       <pubDate>Thu, 07 Dec 2017 08:16:46 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/12/gdb_tools/</guid>
+      <guid>http://idevz.github.io/2017/12/gdb_tools/</guid>
       <description>lbt 老是无法正常 dump， lb 老是无法正常断点，所以 debug 了下 gdb tools， 发现里面其实是基于 LuaJIT 源码（ljobj.h）里面的 C 结构来读取的。 所以需要研究下 Python 来扩展 GDB 春哥是怎么干的。然后发现一堆深度好文，值得深入学习。</description>
     </item>
     
     <item>
       <title>元编程</title>
-      <link>http://idevz.org/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</link>
+      <link>http://idevz.github.io/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Mon, 04 Dec 2017 19:27:27 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</guid>
+      <guid>http://idevz.github.io/2017/12/%E5%85%83%E7%BC%96%E7%A8%8B/</guid>
       <description>https://en.wikipedia.org/wiki/Metaprogramming</description>
     </item>
     
     <item>
       <title>跟踪及时编译技术（Tracing JIT Compilation）</title>
-      <link>http://idevz.org/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AFtracing-jit-compilation/</link>
+      <link>http://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AFtracing-jit-compilation/</link>
       <pubDate>Mon, 04 Dec 2017 15:40:34 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AFtracing-jit-compilation/</guid>
+      <guid>http://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91%E6%8A%80%E6%9C%AFtracing-jit-compilation/</guid>
       <description>跟踪及时编译（Tracing JIT Compilation） 是一种虚拟机在程序运行时用来优化程序执行性能的技术，实现方式是通过对频繁执行操作的线性序列的统计并将其编译为本地机器码，并且执行他们。 这与传统基于每个方法进行编译优化的 JIT 编译有着本质的不同。
 JIT 概览 及时编译（Just-in-time compilation） 是一种在运行时将部分程序编译为机器码来提升程序执行速度的技术。一种对不同 JIT 编译技术分类的方法是通过他们编译的范围。 基于方法的 JIT 编译器每次将一个方法编译成机器码，而 Tracing JIT 编译器将经常执行的循环序列作为它们编译的单元。 Tracing JIT 编译器基于这样的一个假设，即，程序在某些比较热的循环（“hot loops”）花费执行的大部分时间，并且后续的循环迭代往往执行相同的代码路径。拥有 Tracing JIT 编译器的虚拟机通常除了一个 Tracing JIT 编译器他们还有要么一个解释器，或者一个基于方法的编译器这样混合模式的执行环境。
 Tracing JIT 编译器的技术细节 Tracing JIT 编译器 在运行时经过多个阶段。 首先，收集循环的 profiling 信息。在一个热循环被确认后，将进入一个记录着该循环所有执行操作的特殊的跟踪模式（tracing mode），将所有操作序列记为一条 trace。随后这条 trace 将被优化并编译成机器码（trace）。 当这个循环再一次被执行的时候，被调用的将会是编译过的 trace 而不是相关的程序。
@@ -113,28 +113,28 @@ Tracing JIT 编译器的技术细节 Tracing JIT 编译器 在运行时经过多
     
     <item>
       <title>定制化属于你的Motan-OpenResty</title>
-      <link>http://idevz.org/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</link>
+      <link>http://idevz.github.io/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</link>
       <pubDate>Thu, 30 Nov 2017 16:31:20 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</guid>
+      <guid>http://idevz.github.io/2017/11/%E5%AE%9A%E5%88%B6%E5%8C%96%E5%B1%9E%E4%BA%8E%E4%BD%A0%E7%9A%84motan-openresty/</guid>
       <description></description>
     </item>
     
     <item>
       <title>opm</title>
-      <link>http://idevz.org/2017/11/opm/</link>
+      <link>http://idevz.github.io/2017/11/opm/</link>
       <pubDate>Wed, 29 Nov 2017 07:26:28 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/opm/</guid>
+      <guid>http://idevz.github.io/2017/11/opm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OpenResty 自动化测试框架 Test::Nginx 详解</title>
-      <link>http://idevz.org/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/</link>
+      <link>http://idevz.github.io/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Wed, 29 Nov 2017 07:25:54 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>http://idevz.github.io/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/</guid>
       <description>https://openresty.gitbooks.io/programming-openresty/content/testing/
 数据驱动的自动化测试 自动化测试在软件开发和维护过程中扮演着一个至关重要的角色，OpenResty 为编写直观的声明式测试用例基于 Test::Nginx 提供了一个数据驱动的测试框架，使我们可以方便的为 Lua 包、Nginx 模块、OpenResty 应用等编写测试用例。 数据驱动的方式使得我们可以使用不同方式来运行相同的测试用例，从而帮助我们在不同场景下或者使用不同的扩展工具发现各种问题。测试驱动开发（TDD）是 OpenResty 保障高代码质量的基石。
 源自 Perl 世界 Test::Base 的 Test::Nginx Test::Nginx 所使用说明文档格式、或者语言的测试用例其实更像一种来自于 Perl 世界 Test::Base 测试框架所提供更通用的测试语言的一种方言。从面向对象编程这个场景来看，Test::Nginx 仅仅是 Test::Base 的一个子类，也正因为如此，所以 Test::Nginx 继承了 Test::Base 框架所提供的所有特性。外加 Test::Nginx 提供了更方便的原语和符号集合来简化在 Nginx 和 OpenResty 上下文中做测试。Test::Nginx 通过 Perl 世界的 CPAN 进行发布。
@@ -144,19 +144,19 @@ Test::Base Test::Nginx Test::Nginx::Socket Test::Nginx::Socket::Lua Test::Nginx:
     
     <item>
       <title>LuaJIT</title>
-      <link>http://idevz.org/2017/11/luajit/</link>
+      <link>http://idevz.github.io/2017/11/luajit/</link>
       <pubDate>Wed, 29 Nov 2017 07:20:49 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/luajit/</guid>
+      <guid>http://idevz.github.io/2017/11/luajit/</guid>
       <description>As the standard Lua 5.1 interpreter&amp;rsquo;s VM is not fully resumable, the methods ngx.location.capture, ngx.location.capture_multi, ngx.redirect, ngx.exec, and ngx.exit cannot be used within the context of a Lua pcall() or xpcall() or even the first line of the for &amp;hellip; in &amp;hellip; statement when the standard Lua 5.1 interpreter is used and the attempt to yield across metamethod/C-call boundary error will be produced. Please use LuaJIT 2.x, which supports a fully resumable VM, to avoid this.</description>
     </item>
     
     <item>
       <title>ffi debug</title>
-      <link>http://idevz.org/2017/11/ffi-debug/</link>
+      <link>http://idevz.github.io/2017/11/ffi-debug/</link>
       <pubDate>Wed, 22 Nov 2017 15:07:58 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/ffi-debug/</guid>
+      <guid>http://idevz.github.io/2017/11/ffi-debug/</guid>
       <description>FFI 包调用，Lua C 交互报错，没有任何信息，只能想法 Debug。
 ltrace 转储一个给定 trace 编号（起始为 1）的 LuaJIT trace 对象的内容。 获取 LuaJIT trace 对象机器码的开始和结束地址区间可以用来转储该 LuaJIT trace 对象的机器码。
 ```gdb (gdb)set disassembly-flavor intel (gdb)disas start_addr end_addr
@@ -169,10 +169,10 @@ lg 打印给定 lua_State 指针值所对应 VM 的 global_State 指针值，默
     
     <item>
       <title>request_id</title>
-      <link>http://idevz.org/2017/11/request_id/</link>
+      <link>http://idevz.github.io/2017/11/request_id/</link>
       <pubDate>Tue, 21 Nov 2017 13:16:39 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/request_id/</guid>
+      <guid>http://idevz.github.io/2017/11/request_id/</guid>
       <description>缘起：请求调用中，有个 bigint 的 Request_id 需要传递，在 Lua 中也需要使用。 这个 Request_id 在 Java、C 或者 Golang 类似的强类型语言中是 int64 的一个无符号整数，在其他语言比如 PHP 或者 Lua 中，作为字符串使用。 需要解决的问题： 当一个请求到 Lua 后，CoSocket 接收到的是一个字节数组。 1.接收到请求后，需要把这个字节数组转化为 字符串。 2.响应请求的时候，需要把这个字符串转化为字节数组，返回去。 以上两步操作都是大端序。
 因为 Lua 只有 Number 类型，而 Number 是双精度浮点型，能处理的最大 Int 小于 int64 的最大值 2^64 -1，所以需要把这部分操作用 C 语言实现，保证在 Lua 中处理的都是字符串。
 实现以下 2 个功能： 1.Lua cosokect receive 一个 8 个字节的字节数组，将此数组传递给 C 函数，C 函数将这个字节数组转换为 int64 的整型，再转换成对应的字符串返回。 2.接收一个 Request_id 的字符串，将这个字符串转换成 int64 的整数，再转换成一个 8 个字节的字符串返回给 Lua，Lua 将这个 id TCP 返回给调用方。</description>
@@ -180,10 +180,10 @@ lg 打印给定 lua_State 指针值所对应 VM 的 global_State 指针值，默
     
     <item>
       <title>Mac OSX Vscode GDB 调试环境搭建</title>
-      <link>http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <link>http://idevz.github.io/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
       <pubDate>Fri, 17 Nov 2017 17:05:23 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <guid>http://idevz.github.io/2017/11/mac-osx-vscode-gdb-%E8%B0%83%E8%AF%95%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
       <description>gdb 在 Mac OSX 使用 GDB 配合 Vscode 来开发简直是强强联合，不能赞更多。 通过常规的 brew install gdb 安装最新的 GDB，编译一个简单的测试文件 start.c 来进行测试：
 gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运行 r 指令启动一个 GDB debug session
 (gdb) r Starting program: /Users/idevz/code/clang/start Unable to find Mach task port for process-id 627: (os/kern) failure (0x5). (please check gdb is codesigned - see taskgated(8)) 报错分析 找不到 Mach Task 进程 ID，来自 OSX 内核的错误，需要检查 gdb 的 codesigned，Mach 是苹果从 NeXTSTEP 带来的微内核，是 OSX 和 IOS 的核心。 从报错来看，应该是由于新安装的 GDB 没有进行 codesigned 签名认证，没有权限开启 Debug。所以我们需要给 GDB 程序添加 codesigned 签名认证。 详细的了解可以参考苹果的开发手册，如下。</description>
@@ -191,10 +191,10 @@ gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运�
     
     <item>
       <title>shadowsocksr proxifier</title>
-      <link>http://idevz.org/2017/11/shadowsocksr-proxifier/</link>
+      <link>http://idevz.github.io/2017/11/shadowsocksr-proxifier/</link>
       <pubDate>Sun, 12 Nov 2017 08:16:54 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/shadowsocksr-proxifier/</guid>
+      <guid>http://idevz.github.io/2017/11/shadowsocksr-proxifier/</guid>
       <description>如何安装 shadowsocksr wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh chmod +x shadowsocksR.sh ./shadowsocksR.sh 2&amp;gt;&amp;amp;1 | tee shadowsocksR.log 安装iptabl systemctl stop firewalld.service systemctl disable firewalld.service systemctl start iptables.service /sbin/iptables -I INPUT -p tcp --dport 8000 -j ACCEPT 执行以上安装命令，即可 安装 shadowsocksr，然后配置相关的 代理服务器，即可实现翻墙。
 如何使用 proxifier 来指定某些 APP 通过 ssocks 翻墙 浏览器比如 Chrome 可以通过安装 MyShadowSocks 这样的浏览器插件来实现科学上网，其他 APP 呢？或者全局上网代理控制呢？ 这就需要使用 proxifier 来进行设置.
 点击 Proxies 给 Proxifier 添加 代理服务器， 点击 Roules 给 Proxifier 添加请求规则 设置 Proxifier 的 DNS 为 “Resolve hostnames through proxy” 直接使用代理服务器的 DNS 解析，否则仍然不可用。 这样就可以实现科学上网了。</description>
@@ -202,10 +202,10 @@ gcc -g start.c -o start gdb start 运行 gdb 命令进入 GDB交互界面，运�
     
     <item>
       <title>start motan</title>
-      <link>http://idevz.org/2017/10/start-motan/</link>
+      <link>http://idevz.github.io/2017/10/start-motan/</link>
       <pubDate>Mon, 16 Oct 2017 11:16:39 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/10/start-motan/</guid>
+      <guid>http://idevz.github.io/2017/10/start-motan/</guid>
       <description>ngx.thread.spawn与coroutine.create的区别 来源：OpenResty Google Groups
 原文地址：https://groups.google.com/forum/#!msg/openresty/6NyxBC9R2UY/zycvr9TMCjIJ
 本文来自于对谷歌邮件组网友提问的整理。
@@ -241,10 +241,10 @@ https://github.com/openresty/lua-nginx-module#ngxthreadspawn
     
     <item>
       <title>微服务的服务网格</title>
-      <link>http://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</link>
+      <link>http://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</link>
       <pubDate>Mon, 18 Sep 2017 22:11:56 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</guid>
+      <guid>http://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</guid>
       <description>原著信息： Service Mesh for Microservices
 by:Kasun Indrasiri
 Microservices architecture has been evolving a lot during the last couple of years and there are quite a few new concepts and patterns are emerging. ‘Service Mesh’ concept is getting quite popular. In this post, I’m planning to cover the key concepts related to Service Mesh and how it is used in real-world microservices implementations.
@@ -254,10 +254,10 @@ Why ‘Service Mesh’?</description>
     
     <item>
       <title>微服务分层架构</title>
-      <link>http://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</link>
+      <link>http://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Sat, 16 Sep 2017 22:11:56 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</guid>
+      <guid>http://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</guid>
       <description>原著信息： Microservices Layered Architecture
 by:Kasun Indrasiri
 With Microservices architecture, a single software application/functionality is implemented as a combination of multiple microservices and their interactions. Hence the communications between services and their coordination are vital for a successful realization of microservices architecture.
@@ -267,102 +267,102 @@ It is important to understand that, the tasks that an ESB does in an ESB based S
     
     <item>
       <title>start</title>
-      <link>http://idevz.org/2017/09/start/</link>
+      <link>http://idevz.github.io/2017/09/start/</link>
       <pubDate>Tue, 05 Sep 2017 07:13:38 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/start/</guid>
+      <guid>http://idevz.github.io/2017/09/start/</guid>
       <description>Hbase的架构简单解析 https://forever-zs.github.io/2017/08/22/Hbase/Hbase%E7%9A%84%E6%9E%B6%E6%9E%84%E7%AE%80%E5%8D%95%E8%A7%A3%E6%9E%90/</description>
     </item>
     
     <item>
       <title>sort</title>
-      <link>http://idevz.org/2017/09/sort/</link>
+      <link>http://idevz.github.io/2017/09/sort/</link>
       <pubDate>Tue, 05 Sep 2017 07:10:33 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/sort/</guid>
+      <guid>http://idevz.github.io/2017/09/sort/</guid>
       <description>六大排序算法图解以及python实现 https://forever-zs.github.io/2017/08/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E5%85%AD%E5%A4%A7%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%9B%BE%E8%A7%A3%E4%BB%A5%E5%8F%8Apython%E5%AE%9E%E7%8E%B0/</description>
     </item>
     
     <item>
       <title>jit</title>
-      <link>http://idevz.org/2017/09/jit/</link>
+      <link>http://idevz.github.io/2017/09/jit/</link>
       <pubDate>Tue, 05 Sep 2017 07:08:55 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/jit/</guid>
+      <guid>http://idevz.github.io/2017/09/jit/</guid>
       <description>JVM杂谈之JIT https://zhuanlan.zhihu.com/p/28476709</description>
     </item>
     
     <item>
       <title>generic types</title>
-      <link>http://idevz.org/2017/09/generic-types/</link>
+      <link>http://idevz.github.io/2017/09/generic-types/</link>
       <pubDate>Tue, 05 Sep 2017 07:07:13 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/09/generic-types/</guid>
+      <guid>http://idevz.github.io/2017/09/generic-types/</guid>
       <description>泛型 擦除、边界、通配符、 http://blog.csdn.net/zghwaicsdn/article/details/50674334</description>
     </item>
     
     <item>
       <title>Docker 常用管理命令</title>
-      <link>http://idevz.org/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</link>
+      <link>http://idevz.github.io/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Sun, 27 Aug 2017 10:36:24 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</guid>
+      <guid>http://idevz.github.io/2017/08/docker-%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4/</guid>
       <description>https://segmentfault.com/a/1190000000751601 https://segmentfault.com/a/1190000000759971
 容器生命周期管理 — docker [run|start|stop|restart|kill|rm|pause|unpause] 容器操作运维 — docker [ps|inspect|top|attach|events|logs|wait|export|port] 容器rootfs命令 — docker [commit|cp|diff] 镜像仓库 — docker [login|pull|push|search] 本地镜像管理 — docker [images|rmi|tag|build|history|save|import] 其他命令 — docker [info|version]</description>
     </item>
     
     <item>
       <title>使用 七牛云 做图床 Dropzone3 七牛云文件上传插件使用</title>
-      <link>http://idevz.org/2017/08/%E4%BD%BF%E7%94%A8-%E4%B8%83%E7%89%9B%E4%BA%91-%E5%81%9A%E5%9B%BE%E5%BA%8A-dropzone3-%E4%B8%83%E7%89%9B%E4%BA%91%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/</link>
+      <link>http://idevz.github.io/2017/08/%E4%BD%BF%E7%94%A8-%E4%B8%83%E7%89%9B%E4%BA%91-%E5%81%9A%E5%9B%BE%E5%BA%8A-dropzone3-%E4%B8%83%E7%89%9B%E4%BA%91%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sun, 27 Aug 2017 10:25:45 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/%E4%BD%BF%E7%94%A8-%E4%B8%83%E7%89%9B%E4%BA%91-%E5%81%9A%E5%9B%BE%E5%BA%8A-dropzone3-%E4%B8%83%E7%89%9B%E4%BA%91%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://idevz.github.io/2017/08/%E4%BD%BF%E7%94%A8-%E4%B8%83%E7%89%9B%E4%BA%91-%E5%81%9A%E5%9B%BE%E5%BA%8A-dropzone3-%E4%B8%83%E7%89%9B%E4%BA%91%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8F%92%E4%BB%B6%E4%BD%BF%E7%94%A8/</guid>
       <description>下载安装 Dropzone 3 官网下载
 下载安装 Dropzone 3 七牛云上传非官方插件（没有官方插件） 下载，另外如果要使用此插件，不能使用 Mac App Store 安装的 Dropzone 3</description>
     </item>
     
     <item>
       <title>mem sys metries</title>
-      <link>http://idevz.org/2017/08/mem-sys-metries/</link>
+      <link>http://idevz.github.io/2017/08/mem-sys-metries/</link>
       <pubDate>Tue, 22 Aug 2017 06:58:06 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/mem-sys-metries/</guid>
+      <guid>http://idevz.github.io/2017/08/mem-sys-metries/</guid>
       <description>http://tonybai.com/2017/07/04/setup-go-runtime-metrics-for-yourself/</description>
     </item>
     
     <item>
       <title>design pattern</title>
-      <link>http://idevz.org/2017/08/design-pattern/</link>
+      <link>http://idevz.github.io/2017/08/design-pattern/</link>
       <pubDate>Tue, 22 Aug 2017 06:54:44 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/design-pattern/</guid>
+      <guid>http://idevz.github.io/2017/08/design-pattern/</guid>
       <description>https://segmentfault.com/a/1190000010706695</description>
     </item>
     
     <item>
       <title>debugging with jpda and apache tomcat</title>
-      <link>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</link>
+      <link>http://idevz.github.io/2017/08/debugging-with-jpda-and-apache-tomcat/</link>
       <pubDate>Tue, 22 Aug 2017 06:52:03 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/debugging-with-jpda-and-apache-tomcat/</guid>
+      <guid>http://idevz.github.io/2017/08/debugging-with-jpda-and-apache-tomcat/</guid>
       <description>https://www.jvmhost.com/articles/debugging-with-jpda-and-apache-tomcat/ http://wiki.jikexueyuan.com/project/intellij-idea-tutorial/remote-debugging.html</description>
     </item>
     
     <item>
       <title>configuring jersey environments without spring</title>
-      <link>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</link>
+      <link>http://idevz.github.io/2017/08/configuring-jersey-environments-without-spring/</link>
       <pubDate>Tue, 22 Aug 2017 06:51:18 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/configuring-jersey-environments-without-spring/</guid>
+      <guid>http://idevz.github.io/2017/08/configuring-jersey-environments-without-spring/</guid>
       <description>https://github.com/skyscreamer/yoga/wiki/Tutorial:-Configuring-Jersey-environments-without-Spring</description>
     </item>
     
     <item>
       <title>volume</title>
-      <link>http://idevz.org/2017/08/volume/</link>
+      <link>http://idevz.github.io/2017/08/volume/</link>
       <pubDate>Sat, 19 Aug 2017 11:15:29 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/volume/</guid>
+      <guid>http://idevz.github.io/2017/08/volume/</guid>
       <description>supervisorctl
 docker exec -it kamon-grafana-dashboard /bin/bash
 /var/log/supervisor /usr/bin/supervisord
@@ -372,19 +372,19 @@ Error: Sync-request requires node version 0.12 or later. If you need to use it w
     
     <item>
       <title>monitoring golang gc</title>
-      <link>http://idevz.org/2017/08/monitoring-golang-gc/</link>
+      <link>http://idevz.github.io/2017/08/monitoring-golang-gc/</link>
       <pubDate>Tue, 15 Aug 2017 11:23:55 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/monitoring-golang-gc/</guid>
+      <guid>http://idevz.github.io/2017/08/monitoring-golang-gc/</guid>
       <description>http://holys.im/2016/07/01/monitor-golang-gc/</description>
     </item>
     
     <item>
       <title>数据可视化平台折腾记</title>
-      <link>http://idevz.org/2017/08/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0%E6%8A%98%E8%85%BE%E8%AE%B0/</link>
+      <link>http://idevz.github.io/2017/08/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0%E6%8A%98%E8%85%BE%E8%AE%B0/</link>
       <pubDate>Tue, 15 Aug 2017 11:22:49 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0%E6%8A%98%E8%85%BE%E8%AE%B0/</guid>
+      <guid>http://idevz.github.io/2017/08/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%B9%B3%E5%8F%B0%E6%8A%98%E8%85%BE%E8%AE%B0/</guid>
       <description>缘起 在 Tony Bai 的一篇博文看到了他基于 statsD、graphite 搭建的一个 Go Runtime metrics 平台，非常的赞，受益匪浅；一图胜千言，数据可视化在实际应用中有着举足轻重的意义，所以有必要折腾一套自己定制化的展现平台。
 Tony 博文中是在服务器直接安装的，但是这些工具类的服务，总觉得希望走产品化的方向，一来方便随时使用，二来工具主要是使用，不研究细节实现的东西，折腾环境太浪费时间。所以我希望直接 Docker 打个包，能用即可。基于这个出发点，我在 docker hub 大致搜索了下，不少这方面的项目，结合 GitHub 的检索结果调研取舍后，选定了 github.com/kamon-io/docker-grafana-graphite 作为我折腾的基础。下面记录整个过程。
 Mac Docker Docker 刚出来的时候，我就在 Mac 上折腾过，当时的感觉，太繁琐，尤其是还需要基于 Virtualbox，安装后运行各种不方便，所以当时又果断切回到虚拟机环境，没在继续折腾，这些年 Docker 不论是在微服务架构，还是各平台支持方面都日趋的完善，所以回过头来开始基于 Docker 搞。
@@ -397,19 +397,19 @@ git clone https://github.com/kamon-io/docker-grafana-graphite.git cd docker-graf
     
     <item>
       <title>do performance test</title>
-      <link>http://idevz.org/2017/08/do-performance-test/</link>
+      <link>http://idevz.github.io/2017/08/do-performance-test/</link>
       <pubDate>Tue, 15 Aug 2017 11:17:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/do-performance-test/</guid>
+      <guid>http://idevz.github.io/2017/08/do-performance-test/</guid>
       <description>http://coolshell.cn/articles/17381.html</description>
     </item>
     
     <item>
       <title>web xml 详解</title>
-      <link>http://idevz.org/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</link>
+      <link>http://idevz.github.io/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Sun, 13 Aug 2017 10:26:18 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>http://idevz.github.io/2017/08/web-xml-%E8%AF%A6%E8%A7%A3/</guid>
       <description>context-param 声明应用范围(整个WEB项目)内的上下文初始化参数。 param-name 设定上下文的参数名称。必须是唯一名称 param-value 设定的参数名称的值
 &amp;lt;context-param&amp;gt; &amp;lt;param-name&amp;gt;contextConfigLocation&amp;lt;/param-name&amp;gt; &amp;lt;param-value&amp;gt;contextConfigLocationValue&amp;gt;&amp;lt;/param-value&amp;gt; &amp;lt;/context-param&amp;gt;  Web 项目的初始化  Web 项目启动时，Servlet 容器（TomCat）会读取 web.xml 文件中的 &amp;lt;listen&amp;gt; 和 &amp;lt;context-param&amp;gt; 配置。 Servlet 容易会创建一个 ServletContext，整个应用范围都将使用这个上下文。 然后 Servlet 容器会将从 &amp;lt;context-param&amp;gt; 读取的配置转化为键值对交给 ServletContext。 Servlet 容器创建 &amp;lt;listener&amp;gt; 中配置的实例，创建相关的事件监听（listener 定义的类可以是自定义的类但必须需要继承 ServletContextListener）。 在监听的类中会有一个 contextInitialized(ServletContextEvent event) 初始化方法，在这个方法中可以通过 event.getServletContext().getInitParameter(&amp;quot;contextConfigLocation&amp;quot;) 来得到 context-param 设定的值。在这个类中还必须有一个 contextDestroyed(ServletContextEvent event) 销毁方法.用于关闭应用前释放资源，比如说数据库连接的关闭。 得到这个 context-param 的值之后,你就可以做一些操作了。注意,这个时候你的 Web 项目还没有完全启动完成。这个动作会比所有的 Servlet 都要早。  Servlet 容器对 Web.xml 的加载过程是 Context-param -&amp;gt; listener -&amp;gt; filter -&amp;gt; Servlet。
 对 Context 的引用  页面中 ${initParam.</description>
@@ -417,55 +417,55 @@ git clone https://github.com/kamon-io/docker-grafana-graphite.git cd docker-graf
     
     <item>
       <title>gdb</title>
-      <link>http://idevz.org/2017/08/gdb/</link>
+      <link>http://idevz.github.io/2017/08/gdb/</link>
       <pubDate>Sun, 06 Aug 2017 11:49:27 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/gdb/</guid>
+      <guid>http://idevz.github.io/2017/08/gdb/</guid>
       <description>https://wizardforcel.gitbooks.io/100-gdb-tips/attach-process.html</description>
     </item>
     
     <item>
       <title>effective go</title>
-      <link>http://idevz.org/2017/08/effective-go/</link>
+      <link>http://idevz.github.io/2017/08/effective-go/</link>
       <pubDate>Sun, 06 Aug 2017 11:48:01 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/effective-go/</guid>
+      <guid>http://idevz.github.io/2017/08/effective-go/</guid>
       <description>https://golang.org/doc/effective_go.html</description>
     </item>
     
     <item>
       <title>go at google</title>
-      <link>http://idevz.org/2017/08/go-at-google/</link>
+      <link>http://idevz.github.io/2017/08/go-at-google/</link>
       <pubDate>Sun, 06 Aug 2017 11:46:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/go-at-google/</guid>
+      <guid>http://idevz.github.io/2017/08/go-at-google/</guid>
       <description>https://talks.golang.org/2012/splash.article</description>
     </item>
     
     <item>
       <title>data sharing</title>
-      <link>http://idevz.org/2017/08/data-sharing/</link>
+      <link>http://idevz.github.io/2017/08/data-sharing/</link>
       <pubDate>Sat, 05 Aug 2017 21:48:09 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/data-sharing/</guid>
+      <guid>http://idevz.github.io/2017/08/data-sharing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Lua 源码读书笔记</title>
-      <link>http://idevz.org/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <link>http://idevz.github.io/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sat, 05 Aug 2017 21:28:55 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://idevz.github.io/2017/08/lua-%E6%BA%90%E7%A0%81%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
       <description>https://github.com/lichuang/Lua-Source-Internal/blob/master/doc/ch06-%E7%83%AD%E6%9B%B4%E6%96%B0.md</description>
     </item>
     
     <item>
       <title>我的 MacPro 更新记</title>
-      <link>http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</link>
+      <link>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</link>
       <pubDate>Sun, 30 Jul 2017 15:43:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</guid>
+      <guid>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84-macpro-%E6%9B%B4%E6%96%B0%E8%AE%B0/</guid>
       <description>好记性不如烂笔头，要是让我写出自己的开发环境是如何搞的，可能还真写不全，长年累月的演变，实在记不住，用了快 5 年的 MacPro 终于要更新了，借此机会记录下自己装机折腾记。
 常用软件安装 新机开苞后，先是各种软件各种装，有了之前折腾软件的经验，无用软件一概不再装。下面是我平时做后端架构开发、技术调研等工作时，常用的一些软件列表：
 开发工具 编程软件 sublimeText  安装 package control，现在已经很方便了，直接参考官网，Sublime 命令行安装 packageControl 指令：
@@ -474,10 +474,10 @@ import urllib.request,os,hashlib; h = &#39;df21e130d211cfc94d9b0905775a7c0f&#39;
     
     <item>
       <title>使用 GDB 调试 Golang 程序</title>
-      <link>http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
+      <link>http://idevz.github.io/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Fri, 28 Jul 2017 10:12:31 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
+      <guid>http://idevz.github.io/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
       <description>/usr/local/go/src/runtime/runtime-gdb.py
 ♧ save breakpoints ~/idevz.motan-go.gdb.brks Saved to file &amp;lsquo;/root/idevz.motan-go.gdb.brks&amp;rsquo;.
 Golang 调试编译相关参数 删除调试符号：go build -ldflags “-s -w”
@@ -488,10 +488,10 @@ Golang 调试编译相关参数 删除调试符号：go build -ldflags “-s -w�
     
     <item>
       <title>CentOS 如何打 RPM 包</title>
-      <link>http://idevz.org/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</link>
+      <link>http://idevz.github.io/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</link>
       <pubDate>Thu, 27 Jul 2017 19:55:52 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</guid>
+      <guid>http://idevz.github.io/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</guid>
       <description>打包前的准备 安装相关打包工具  sudo yum install rpmdevtools rpmlint rpmbuild --version
 ❯ rpmbuild --version z@z RPM 版本 4.11.3  新建用户 RPM 在打包的过程中会将文件临时安装到系统中，为了保证构建程序不破坏系统环境，要使用普通用户打包：
 sudo useradd rpmuser sudo passwd rpmuser su - rpmuser 初始化打包环境 rpmdev-setuptree是rpmdevtools中带的初始化环境脚本，执行后会在用户主目录下创建rpmbuild目录和.rpmmacros文件，同时生成所需的子目录和默认的控制参数，执行：
@@ -502,47 +502,47 @@ rpmdev-setuptree 生成的目录结构:
     
     <item>
       <title>Golang 包管理</title>
-      <link>http://idevz.org/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</link>
+      <link>http://idevz.github.io/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</link>
       <pubDate>Thu, 27 Jul 2017 11:16:48 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
+      <guid>http://idevz.github.io/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/</guid>
       <description>Glide 是 Golang 的 Vendor 包管理器，方便你管理 vendor 和 verdor 包。类似 Java 的 Maven，PHP 的 Composer。 Github：https://github.com/Masterminds/glide 在线文档：http://glide.readthedocs.io/en/stable 主要特性： 简单管理依赖 支持 versioning packages，包括 Semantic Versioning 2.0.0 支持 支持 aliasing packages (e.g. for working with github forks) Remove the need for munging import statements 支持所有 go 工具 支持 VCS 工具和 Go 支持：git、bzr、hg、svn 支持定制本地和全局插件 (see docs/plugins.md) 仓库缓存 结构： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 - $GOPATH/src/myProject (Your project) | |&amp;ndash; glide.</description>
     </item>
     
     <item>
       <title>tcp</title>
-      <link>http://idevz.org/2017/07/tcp/</link>
+      <link>http://idevz.github.io/2017/07/tcp/</link>
       <pubDate>Tue, 25 Jul 2017 14:59:48 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/tcp/</guid>
+      <guid>http://idevz.github.io/2017/07/tcp/</guid>
       <description>http://blog.csdn.net/hguisu/article/details/12521597 http://www.cnblogs.com/phpgo/tag/Socket%E7%BC%96%E7%A8%8B/ http://www.cnblogs.com/kakawater/p/6088948.html</description>
     </item>
     
     <item>
       <title>react php</title>
-      <link>http://idevz.org/2017/07/react-php/</link>
+      <link>http://idevz.github.io/2017/07/react-php/</link>
       <pubDate>Mon, 24 Jul 2017 08:08:43 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/react-php/</guid>
+      <guid>http://idevz.github.io/2017/07/react-php/</guid>
       <description>https://jingxin.me/blog/blog/2013/03/05/react-dot-php-zhong-de-yi-bu-shi-xian/</description>
     </item>
     
     <item>
       <title>yield</title>
-      <link>http://idevz.org/2017/07/yield/</link>
+      <link>http://idevz.github.io/2017/07/yield/</link>
       <pubDate>Mon, 24 Jul 2017 07:54:42 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/yield/</guid>
+      <guid>http://idevz.github.io/2017/07/yield/</guid>
       <description>http://log.fyscu.com/index.php/archives/295/
 https://segmentfault.com/a/1190000007760513 https://laravel-china.org/topics/1442/php-using-yield-to-achieve-asynchronous-web-server</description>
     </item>
     
     <item>
       <title>socket server</title>
-      <link>http://idevz.org/2017/07/socket-server/</link>
+      <link>http://idevz.github.io/2017/07/socket-server/</link>
       <pubDate>Mon, 24 Jul 2017 07:40:22 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/socket-server/</guid>
+      <guid>http://idevz.github.io/2017/07/socket-server/</guid>
       <description>http://www.xtgxiso.com/socket%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%A8%A1%E5%9E%8B%E4%B8%8B%E7%9A%84%E7%BC%96%E7%A8%8B%E6%96%B9%E5%BC%8F%E5%90%8C%E6%AD%A5%E5%92%8C%E5%BC%82%E6%AD%A5/
 https://segmentfault.com/a/1190000003063859
 socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服务举例，协议以换行符举例.我们先看最简单的单进程阻塞模型
@@ -552,10 +552,10 @@ socket服务的模型以及实现 单进程阻塞模型 这里我们只以tcp服
     
     <item>
       <title>Netty in action 学习笔记</title>
-      <link>http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>http://idevz.github.io/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 23 Jul 2017 12:36:20 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://idevz.github.io/2017/07/netty-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>Netty 的概念及体系结构 框架详解，涵盖了 Netty 的设计、组件及编程接口
 阻塞和非阻塞的网络 概述阻塞和非阻塞的网络 API，以及对应的 JDK 接口，引入 Netty 作为构建高度可伸缩性、异步、事件驱动的网络编程工具包，首先领略一下 Netty 的基础构建快：Channel、回调、Future、事件及 ChannelHandler。
 如何配置系统以构建运行示例代码 通过一个简单的回送从连接的客户端接收到消息的服务器应用程序来测试系统的运行，介绍 Bootstrap 在运行时组装和配置一个应用的所有组件的过程。
@@ -568,10 +568,10 @@ Netty 的线程模型 提供了关于线程模型的一般概述，并详细介�
     
     <item>
       <title>Spring in action 学习笔记</title>
-      <link>http://idevz.org/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <link>http://idevz.github.io/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 23 Jul 2017 08:59:22 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://idevz.github.io/2017/07/spring-in-action-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
       <description>Spring 核心  Spring 容器 依赖注入（dependency injection，DI） 面向切面编程（aspect-oriented programming）  Spring 概览 Spring 最早由 Rod Johnson 创建，并在《Expert One-On-One：J2EE Design and Development》中进行了介绍，起初 Spring 的诞生主要是为了替代更加重量级的企业级 JAVA 技术，尤其是 EJB， 相对于 EJB 来说，Spring 提供了更加轻量级和简单的编程模型，Spring 增强了简单老式 JAVA 对象（Plain Old JAVA Object，POJO）的功能，使其具备了之前只有 EJB 和其他企业级 JAVA 规范才有的功能。其最根本的使命就是：简化 JAVA 开发。
 Spring 采取了以下 4 种关键策略来降低 JAVA 开发的复杂性：
  基于 POJO 的轻量级和最小侵入性编程。 通过依赖注入和面向接口实现松耦合。 基于切面和惯例进行声明式编程。 通过切面和模板减少样板式代码。  DI 和 AOP 样例 SPring 竭力避免因自身的 API 而弄乱你的应用代码，Spring 不会强迫你实现 Spring 规范的接口，或继承 Spring 规范的类。非侵入式的编程。最坏的场景是一个类或许会使用 Spring 的注解，但依旧是 POJO。而 Spring 通过 DI 来装配 POJO，帮助应用对象彼此之间保持松散耦合。</description>
@@ -579,20 +579,20 @@ Spring 采取了以下 4 种关键策略来降低 JAVA 开发的复杂性：
     
     <item>
       <title>Nginx 性能优化</title>
-      <link>http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
+      <link>http://idevz.github.io/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</link>
       <pubDate>Thu, 20 Jul 2017 10:14:50 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
+      <guid>http://idevz.github.io/2017/07/nginx-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</guid>
       <description>Nginx 性能优化 群里有同学发了一篇 《Nginx 性能优化》 的文章，春哥看后，提出以下几点，非常有技术高度的观点，个人认为，这才是技术，才是技术人应该追求的高度。 下面把春哥的原话摘录于此，与君共勉：
 居然不提火焰图 gzip 也居然不提 CPU 损耗 另外，不提 Openfile Cache 和共享内存的锁，也是缺憾 另外，高并发下不提请求内存池的配置，也是缺憾 另外，error log 刷得太猛，也是常见的性能瓶颈 而 error log 是不带 buffer 的，比 access log 会更严重 SSL 的优化也完全没提及 性能优化是一个系统化的学问 不是简单的奇技淫巧的列表 火焰图应该作为总纲 然后分门别类 见招拆招 性能优化是一个系统化的学问 不是简单的奇技淫巧的列表</description>
     </item>
     
     <item>
       <title>我的技术学习之路</title>
-      <link>http://idevz.org/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
+      <link>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</link>
       <pubDate>Wed, 19 Jul 2017 14:38:32 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
+      <guid>http://idevz.github.io/2017/07/%E6%88%91%E7%9A%84%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</guid>
       <description>PHP Lua OR Golang 虽然写 PHP 时间最长，但是写 PHP 的感觉就是各种 API 各种函数用法的 PHP Doc 查阅，完成功能，并没有更多的思考
 从 OR 开始写 Lua 里面有很多功能，需要自己动手实现，逼着自己思考很多机制的实现，所以做的相对深入
 逼着自己更多的去思考，所以有了上面这些感悟 其实，为什么要等需求来了，才逼着自己的思考呢？为什么在平时学习的时候就往深入写去思考，去刨根问底，去查个水落石出呢？
@@ -601,10 +601,10 @@ Spring 采取了以下 4 种关键策略来降低 JAVA 开发的复杂性：
     
     <item>
       <title>PHP 异步网络编程</title>
-      <link>http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+      <link>http://idevz.github.io/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Tue, 18 Jul 2017 14:55:31 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+      <guid>http://idevz.github.io/2017/07/php-%E5%BC%82%E6%AD%A5%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
       <description>http://www.huyanping.cn/php%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%AE%80%E8%BF%B0/
 加上STREAM_CLIENT_ASYNC_CONNECT 后stream_socket_client会立刻返回，不会阻塞等待。 等tcp链接建立完成后，可以调用io复用接口的到链接建立的通知
 #define EV_TIMEOUT 0x01 #define EV_READ 0x02 #define EV_WRITE 0x04 #define EV_SIGNAL 0x08 #define EV_PERSIST 0x10 #define EV_ET 0x20 #define EVLOOP_ONCE 0x01 #define EVLOOP_NONBLOCK 0x02    值 常量名 含义     1 EV_TIMEOUT 超过时间后事件成为激活状态   2 EV_READ FD就绪，可以读取的时候 ，事件成为激活状态   4 EV_WRITE FD就绪，可以写入的时候 ，事件成为激活状态   8 EV_SIGNAL 用于实现信号检测   16 EV_PERSIST 表示事件是持久的   32 EV_ET 表示底层是否支持边沿触发事件   1 EVLOOP_ONCE 如果设置了EVLOOP_ONCE，循环将等待某些事件成为激活的，执行激活的事件直到没有更多的事件可以执行，然会返回。   2 EVLOOP_NONBLOCK 如果设置了EVLOOP_NONBLOCK，循环不会等待事件被触发：循环将仅仅检测是否有事件已经就绪，可以立即触发，如果有，则执行事件的回调。    event_base_free() 释放资源，这不能销毁绑定事件 event_base_loop() 处理事件，根据指定的base来处理事件循环 event_base_loopbreak() 立即取消事件循环，行为各break语句相同 event_base_loopexit() 在指定的时间后退出循环 event_base_new() 创建并且初始事件 event_base_priority_init() 设定事件的优先级 event_base_set() 关联事件到事件base event_buffer_base_set() 关联缓存的事件到event_base event_buffer_disable() 禁用一个缓存的事件 event_buffer_enable() 启用一个指定的缓存的事件 event_buffer_fd_set() 改变一个缓存的文件系统描述 event_buffer_free() 释放缓存事件 event_buffer_new() 建立一个新的缓存事件 event_buffer_priority_set() 缓存事件的优先级设定 event_buffer_read() 读取缓存事件中的数据 event_buffer_set_callback() 给缓存的事件设置或重置回调hansh函数 event_buffer_timeout_set() 给一个缓存的事件设定超时的读写时间 event_buffer_watermark_set 设置读写事件的水印标记 event_buffer_write() 向缓存事件中写入数据 event_add() 向指定的设置中添加一个执行事件 event_del() 从设置的事件中移除事件 event_free() 清空事件句柄 event_new() 创建一个新的事件 event_set() 准备想要在event_add中添加事件 http://www.</description>
@@ -612,28 +612,28 @@ Spring 采取了以下 4 种关键策略来降低 JAVA 开发的复杂性：
     
     <item>
       <title>Vanilla 开发日志</title>
-      <link>http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
+      <link>http://idevz.github.io/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
       <pubDate>Tue, 18 Jul 2017 14:52:56 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid>
+      <guid>http://idevz.github.io/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid>
       <description>init_worker_by_lua_file 目前 init_worker_by_lua_file 指令被框架自己占用了。而没有留给 init_worker_by_lua_file 自己加东西的地方</description>
     </item>
     
     <item>
       <title>lua src</title>
-      <link>http://idevz.org/2017/07/lua-src/</link>
+      <link>http://idevz.github.io/2017/07/lua-src/</link>
       <pubDate>Fri, 14 Jul 2017 00:27:58 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/lua-src/</guid>
+      <guid>http://idevz.github.io/2017/07/lua-src/</guid>
       <description>lua源代码重要文件及其说明。 https://github.com/lichuang/Lua-Source-Internal |文件名 | 说明| |:&amp;mdash;-|:&amp;mdash;-| |luac.c | lua编译器，可将生成的字节码写入文件| |lua.c | 可独立运行的解释器| |lparser.c | Lua语法解析器| |lcode.c | Lua指令生成器（编码器）。luaK_code负责把编码好的指令(Instruction, 其实就是lua_int32)放到指令数组中。| |lopcodes.c | Lua虚拟机的操作码。lua的虚拟机指令是整齐的，都是32位。除了有算数运算、逻辑运算、跳转(jmp/call)等常见CUP指令外，还有lua特有的操作Table\Closure\Upvalue的指令。| |lvm.c | Lua虚拟机, luaV_execute 是解释器的主循环| |lmem.c | Lua内存管理| |lgc.c | luaC_newobj创建对象并加入gc| |lobject.c | Lua语言中数据结构的C描述，比如closure和table| |ltable.c | table相关的操作|</description>
     </item>
     
     <item>
       <title>高性能 Lua 技巧</title>
-      <link>http://idevz.org/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</link>
+      <link>http://idevz.github.io/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</link>
       <pubDate>Thu, 13 Jul 2017 15:03:03 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</guid>
+      <guid>http://idevz.github.io/2017/07/%E9%AB%98%E6%80%A7%E8%83%BD-lua-%E6%8A%80%E5%B7%A7/</guid>
       <description>http://www.lua.org/gems/sample.pdf
 http://wuzhiwei.net/lua_performance/
 使用local  在代码运行前，Lua 会把源码预编译成一种中间码，类似于 Java 的虚拟机。这种格式然后会通过 C 的解释器进行解释，整个过程其实就是通过一个 while 循环，里面有很多的 switch &amp;hellip; case 语句，一个case对应一条指令来解析。自 Lua 5.0 之后，Lua 采用了一种类似于寄存器的虚拟机模式。Lua用栈来储存其寄存器。每一个活动的函数，Lua 都会其分配一个栈，这个栈用来储存函数里的活动记录。每一个函数的栈都可以储存至多 250 个寄存器，因为栈的长度是用 8 个比特表示的。有了这么多的寄存器，Lua 的预编译器能把所有的 local 变量储存在其中。这就使得 Lua 在获取 local 变量时其效率十分的高。
@@ -645,10 +645,10 @@ main &amp;lt;run.lua:0,0&amp;gt; (7 instructions, 28 bytes at 0x8b9530) 0+ param
     
     <item>
       <title>深入理解 Lua 元表</title>
-      <link>http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</link>
+      <link>http://idevz.github.io/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</link>
       <pubDate>Thu, 13 Jul 2017 10:07:21 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</guid>
+      <guid>http://idevz.github.io/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/</guid>
       <description>metatable Lua 元表 元表（metatable）作为 Lua 语言的一大经典语言特性，对于 Lua 语言本身有着重要的意义，本文试图随着日常开发中对 metatable 的深入使用，将我对其理解记录于此。
 元表，仅仅关乎元方法 提到元表，就必须要知道元方法，下面是元方法的一个简要列表：
 __add(a, b) --加法 __sub(a, b) --减法 __mul(a, b) --乘法 __div(a, b) --除法 __mod(a, b) --取模 __pow(a, b) --乘幂 __unm(a) --相反数 __concat(a, b) --连接 __len(a) --长度 __eq(a, b) --相等 __lt(a, b) --小于 __le(a, b) --小于等于 __index(a, b) --索引查询 __newindex(a, b, c) --索引更新 __call(a, ...) --执行方法调用 __tostring(a) --字符串输出 __metatable --保护元表 元表就是通过在一个表中通过对元方法的实现，来设定元表对应元方法的行为（比如给表实现自定义的 &amp;ldquo;+&amp;rdquo; 加法行为），再通过 setmetatable 方法的调用，将这些定义好的行为附加给需要的表，下面通过一个简单的例子来说明：
@@ -657,10 +657,10 @@ __add(a, b) --加法 __sub(a, b) --减法 __mul(a, b) --乘法 __div(a, b) --除
     
     <item>
       <title>ngx ctx bug</title>
-      <link>http://idevz.org/2017/07/ngx-ctx-bug/</link>
+      <link>http://idevz.github.io/2017/07/ngx-ctx-bug/</link>
       <pubDate>Wed, 12 Jul 2017 14:55:29 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/ngx-ctx-bug/</guid>
+      <guid>http://idevz.github.io/2017/07/ngx-ctx-bug/</guid>
       <description>复现 在 &amp;ldquo;init_worker_by_lua&amp;rdquo; 阶段定义方法 init_vanilla，在 content_by_lua 阶段来调用，使用 local registry = debug.getregistry(); print_r(registry.ngx_lua_ctx_tables) 查看当前存储的所有 key，发现前后两个请求的数据会同时保存在 ngx.ctx 中，按理说 ngx.ctx 表就是用来共享请求内变量的，应该是每个请求有自己的一份，为什么在一个请求中能获取到其他请求的 ngx.ctx ？这个需要细节了解下 ngx.ctx 的实现机制，再回来解析这个问题。
 init_vanilla 函数的实现
 init_vanilla = function (ngx) Registry.namespace = ngx_var.APP_NAME local REQ_Registry = require(&amp;#39;registry&amp;#39;):new() REQ_Registry[&amp;#39;REQ_URI&amp;#39;] = ngx_var.uri REQ_Registry[&amp;#39;REQ_ARGS&amp;#39;] = ngx_var.args REQ_Registry[&amp;#39;REQ_ARGS_ARR&amp;#39;] = ngx_req.get_uri_args() REQ_Registry[&amp;#39;REQ_HEADERS&amp;#39;] = ngx_req.get_headers() REQ_Registry[&amp;#39;APP_CACHE_PURGE&amp;#39;] = REQ_Registry[&amp;#39;REQ_ARGS_ARR&amp;#39;][&amp;#39;vapurge&amp;#39;] ngx.ctx.REQ_Registry = REQ_Registry if Registry[&amp;#39;VANILLA_INIT&amp;#39;] then return end Registry[&amp;#39;VA_ENV&amp;#39;] = ngx_var.VA_ENV Registry[&amp;#39;APP_NAME&amp;#39;] = Registry.namespace Registry[&amp;#39;APP_ROOT&amp;#39;] = ngx_var.document_root Registry[&amp;#39;APP_HOST&amp;#39;] = ngx_var.</description>
@@ -668,19 +668,19 @@ init_vanilla = function (ngx) Registry.namespace = ngx_var.APP_NAME local REQ_Re
     
     <item>
       <title>Lua 实现面向对象</title>
-      <link>http://idevz.org/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
+      <link>http://idevz.github.io/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</link>
       <pubDate>Tue, 11 Jul 2017 16:38:42 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</guid>
+      <guid>http://idevz.github.io/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/</guid>
       <description>http://blog.csdn.net/q312998164/article/details/39402771 http://blog.sina.com.cn/s/blog_6b9d508001015qd3.html</description>
     </item>
     
     <item>
       <title>or doc</title>
-      <link>http://idevz.org/2017/07/or-doc/</link>
+      <link>http://idevz.github.io/2017/07/or-doc/</link>
       <pubDate>Mon, 10 Jul 2017 20:40:30 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/or-doc/</guid>
+      <guid>http://idevz.github.io/2017/07/or-doc/</guid>
       <description>worker-level data sharing Data Sharing within an Nginx Worker
 ngx.timer.at (fake) connection
 bad request
@@ -691,10 +691,10 @@ GET /index/get HTTP/1.1 &amp;gt; User-Agent: curl/7.29.0 &amp;gt; Host: 10.211.5
     
     <item>
       <title>use google much more better</title>
-      <link>http://idevz.org/2017/07/use-google-much-more-better/</link>
+      <link>http://idevz.github.io/2017/07/use-google-much-more-better/</link>
       <pubDate>Mon, 10 Jul 2017 16:28:49 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/use-google-much-more-better/</guid>
+      <guid>http://idevz.github.io/2017/07/use-google-much-more-better/</guid>
       <description>http://www.googleguide.com/advanced_operators_reference.html
 http://article.yeeyan.org/view/6774/2620
 https://www.zhihu.com/question/20161362
@@ -705,19 +705,19 @@ http://i.idevz.org/91d36cd9e5bef1030380894911782358_b.png
     
     <item>
       <title>fig</title>
-      <link>http://idevz.org/2017/07/fig/</link>
+      <link>http://idevz.github.io/2017/07/fig/</link>
       <pubDate>Mon, 10 Jul 2017 16:15:54 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/fig/</guid>
+      <guid>http://idevz.github.io/2017/07/fig/</guid>
       <description>https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-2-coding-style-guide-cn.md PHP-FIG master PSR-0-cn.md PSR-1-basic-coding-standard-cn.md PSR-2-coding-style-guide-cn.md PSR-2-coding-style-guide-meta-cn.md PSR-3-logger-interface-cn.md PSR-4-autoloader-cn.md PSR-4-autoloader-examples.md PSR-4-autoloader-meta.md PSR-7-http-message-interfaces.md README.md</description>
     </item>
     
     <item>
       <title>cs md fixer</title>
-      <link>http://idevz.org/2017/07/cs-md-fixer/</link>
+      <link>http://idevz.github.io/2017/07/cs-md-fixer/</link>
       <pubDate>Mon, 10 Jul 2017 16:13:41 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/cs-md-fixer/</guid>
+      <guid>http://idevz.github.io/2017/07/cs-md-fixer/</guid>
       <description>使用 PHP-CS-Fixer 自动规范化你的 PHP 代码 https://laravel-china.org/topics/547/use-php-cs-fixer-to-automatically-standardize-your-php-code
 PHPCS
 安装
@@ -735,10 +735,10 @@ phpcs &amp;ndash;config-set installed_paths PATH_TO_SEARCH_STANDARDS 注意：�
     
     <item>
       <title>如何快速学习一个开源项目</title>
-      <link>http://idevz.org/2017/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
+      <link>http://idevz.github.io/2017/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Thu, 06 Jul 2017 15:40:23 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
+      <guid>http://idevz.github.io/2017/07/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</guid>
       <description>如何熟悉一个开源项目？ 你有个任务，需要用到某个开源项目;或者老大交代你一个事情，让你去了解某个东西。怎么下手呢？如何开始呢？我的习惯是这样：
 1.首先，查找和阅读该项目的博客和资料，通过google你能找到某个项目大体介绍的博客，快速阅读一下就能对项目的目的、功能、基本使用有个大概的了解。
 2.阅读项目的文档，重点关注类似Getting started、Example之类的文档，从中学习如何下载、安装、甚至基本使用该项目所需要的知识。
@@ -752,10 +752,10 @@ phpcs &amp;ndash;config-set installed_paths PATH_TO_SEARCH_STANDARDS 注意：�
     
     <item>
       <title>如何递归下载FTP中文目录</title>
-      <link>http://idevz.org/2017/07/%E5%A6%82%E4%BD%95%E9%80%92%E5%BD%92%E4%B8%8B%E8%BD%BDftp%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95/</link>
+      <link>http://idevz.github.io/2017/07/%E5%A6%82%E4%BD%95%E9%80%92%E5%BD%92%E4%B8%8B%E8%BD%BDftp%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95/</link>
       <pubDate>Thu, 06 Jul 2017 11:07:17 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/%E5%A6%82%E4%BD%95%E9%80%92%E5%BD%92%E4%B8%8B%E8%BD%BDftp%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95/</guid>
+      <guid>http://idevz.github.io/2017/07/%E5%A6%82%E4%BD%95%E9%80%92%E5%BD%92%E4%B8%8B%E8%BD%BDftp%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95/</guid>
       <description>如何递归下载FTP中文目录 如题，有些时候我们希望能递归下载一个 FTP 目录，有些时候这些目录中还包括中文路径，有些工具并不识别 FTP 的中文目录，这里实践了两种方式，简单记录如下：
 wget 使用 wget -r 参数可以实现对一个 FTP 路径的递归下载，如果路径中存在中文路径，下载后路径名将被编码，不再是原来的中文，这时候我们可以添加 --restrict-file-names=nocontrol 选项来解决这个问题。
 Filezilla Filezilla 是这里推荐的一种更便捷的方式，我们可以通过在 Filezilla 的站点管理里将 FTP 连接的字符集设置为 GBK 来解决对 FTP 服务器中文目录的显示及访问问题，同时直接用 Filezilla 来做 FTP 同步操作。非常便捷。</description>
@@ -763,38 +763,38 @@ Filezilla Filezilla 是这里推荐的一种更便捷的方式，我们可以通
     
     <item>
       <title>mac apps</title>
-      <link>http://idevz.org/2017/07/mac-apps/</link>
+      <link>http://idevz.github.io/2017/07/mac-apps/</link>
       <pubDate>Thu, 06 Jul 2017 11:05:32 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/mac-apps/</guid>
+      <guid>http://idevz.github.io/2017/07/mac-apps/</guid>
       <description>Filezilla http://i.idevz.org/filezilla.png</description>
     </item>
     
     <item>
       <title>git</title>
-      <link>http://idevz.org/2017/07/git/</link>
+      <link>http://idevz.github.io/2017/07/git/</link>
       <pubDate>Tue, 04 Jul 2017 11:01:34 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/git/</guid>
+      <guid>http://idevz.github.io/2017/07/git/</guid>
       <description> 起头 Git 是
 错误搜集 Permission denied (publickey) 错误信息：  /Path/ [master] git pull Permission denied (publickey). fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists. 处理方法： git config remote.origin.url http://xxxx.php.git # 将 ssh 协议地址更新为 http 地址</description>
     </item>
     
     <item>
       <title>golang testing</title>
-      <link>http://idevz.org/2017/06/golang-testing/</link>
+      <link>http://idevz.github.io/2017/06/golang-testing/</link>
       <pubDate>Mon, 19 Jun 2017 18:04:30 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/06/golang-testing/</guid>
+      <guid>http://idevz.github.io/2017/06/golang-testing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>golang pprof</title>
-      <link>http://idevz.org/2017/06/golang-pprof/</link>
+      <link>http://idevz.github.io/2017/06/golang-pprof/</link>
       <pubDate>Mon, 19 Jun 2017 18:02:34 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/06/golang-pprof/</guid>
+      <guid>http://idevz.github.io/2017/06/golang-pprof/</guid>
       <description>Golang 性能分析工具 http://studygolang.com/articles/9340
 Pprof pprof 起初是谷歌性能工具 gperftools 中的一个组件。Golang 中实现了 runtime/pprof，net/http/pprof 两个包来实现相关的支持，而 net/http/pprof 包则是对 runtime/pprof 的封装，暴露一个 http 服务来方便的进行性能分析。
 Golang pprof 用法 Golang HTTP Web 服务 基于 net/http 包开发的 Web 服务，只需在入口导入包 import _ &amp;quot;net/http/pprof&amp;quot; 即可通过访问 http://host:port/debug/pprof/ 查看当前服务的各种 profiling 数据。
@@ -804,10 +804,10 @@ Golang 应用程序 如果只是想对某段 Golang 应用程序代码进行调�
     
     <item>
       <title>confront the life</title>
-      <link>http://idevz.org/2017/06/confront-the-life/</link>
+      <link>http://idevz.github.io/2017/06/confront-the-life/</link>
       <pubDate>Mon, 19 Jun 2017 15:00:19 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/06/confront-the-life/</guid>
+      <guid>http://idevz.github.io/2017/06/confront-the-life/</guid>
       <description>直面人生 安逸，忘却，解决不了现实问题，放纵过后依然必须面对人生，该解决的问题，一个都不会少
 慢慢走着走着就迷路了 可以出去当 CTO 的时候，我跟皓哥说我要在技术上，继续沉淀。沉得住气。
 不要什么都想做 做自己擅长的东西，做到极致，善于发现并利用自己的长处
@@ -816,10 +816,10 @@ Golang 应用程序 如果只是想对某段 Golang 应用程序代码进行调�
     
     <item>
       <title>使用Sublime&#43;Xdebug开发调试PHP</title>
-      <link>http://idevz.org/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</link>
+      <link>http://idevz.github.io/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</link>
       <pubDate>Thu, 15 Jun 2017 16:31:02 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</guid>
+      <guid>http://idevz.github.io/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</guid>
       <description>http://guojianxiang.com/posts/2015-09-06-PHP_Debug_Tool-Xdebug.html http://yansu.org/2014/03/20/php-debug-with-xdebug.html
 关于 PHP 开发 调试 安装 原理 抓包 sudo tcpdump -i any port 9100 php -d xdebug.profiler_enable=On -d xdebug.auto_trace=On -d xdebug.show_exception_trace=On -d xdebug.trace_output_name=&amp;quot;ooo&amp;quot; -d xdebug.trace_format=1 -d xdebug.trace_output_dir=$MCODE/scripts/xdebug/trace -d xdebug.profiler_output_dir=$MCODE/scripts/xdebug/profiler motan.php
 ❯ qrsctl info z@z UserId: zhoujing_k49@163.com Uid: 1381143175 Email: zhoujing_k49@163.com UserType: stduser(0x4) DeviceNum: 0 InvitationNum: 0
@@ -829,10 +829,10 @@ Golang 应用程序 如果只是想对某段 Golang 应用程序代码进行调�
     
     <item>
       <title>优雅的使用 Mac</title>
-      <link>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</link>
+      <link>http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</link>
       <pubDate>Thu, 15 Jun 2017 16:01:08 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</guid>
+      <guid>http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-mac/</guid>
       <description>起头 MacOSX 是平时工作生活所使用的系统，从 Windows 走过来，乐不思蜀
 lsof Mac 上使用（netstat -an -ptcp）来查看端口使用情况，也可以用 lsof 来查看， 这里是几个基本用法，来自于这篇博文，感谢博主。
 lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&amp;gt; ipv4 or ipv6 protocol --&amp;gt; tcp or udp hostname --&amp;gt; internet host name hostaddr --&amp;gt; ipv4地址 service --&amp;gt; /etc/service中的 service name (可以不只一个) port --&amp;gt; 端口号 (可以不只一个) lsof 查看端口占用 lsof -i:9100 lsof 查看文件被什么进程占用 lsof /etc/hosts COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME Gas\x20Ma 39968 zhoujing2 5r REG 1,4 301 22679474 /private/etc/hosts Google 41670 zhoujing2 25r REG 1,4 301 22679474 /private/etc/hosts Gas Mask 一直报有其他的进程在改 hosts 文件，之前一直不知道为什么，今天用这个命令找到了，居然是 Chrome 。</description>
@@ -840,10 +840,10 @@ lsof -i[46] [protocol][@hostname|hostaddr][:service|port] 46 --&amp;gt; ipv4 or 
     
     <item>
       <title>优雅的使用 Linux</title>
-      <link>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</link>
+      <link>http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</link>
       <pubDate>Thu, 15 Jun 2017 16:01:02 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</guid>
+      <guid>http://idevz.github.io/2017/06/%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8-linux/</guid>
       <description>起头 Linux 是我最喜欢的操作系统之一，平时用的最多的是 CentOS，Linux 的强悍不是我只言片语能描述清楚的，这篇博文将以事件记录的形式随时收集记录我平时所遇到的一些工具、命令、故障等。
 网络工具包 host、nslookup、dig 等 平时经常用的几个命令 host，nslookup，dig 等，新装的 CentOS 虚拟机运行 host 命令既然报 “找不到这个命令”
 sudo yum install host，并没有这个包的安装，谷歌后发现 host 命令属于网络工具包中的一个。
@@ -854,19 +854,19 @@ Ubuntu:# sudo apt-get install dnsutils Debian: # apt-get install dnsutils Fedora
     
     <item>
       <title>静态网站生成器hugo使用</title>
-      <link>http://idevz.org/2017/06/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8hugo%E4%BD%BF%E7%94%A8/</link>
+      <link>http://idevz.github.io/2017/06/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8hugo%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Tue, 13 Jun 2017 19:20:38 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/06/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8hugo%E4%BD%BF%E7%94%A8/</guid>
+      <guid>http://idevz.github.io/2017/06/%E9%9D%99%E6%80%81%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%99%A8hugo%E4%BD%BF%E7%94%A8/</guid>
       <description>快速入门 hugo 是一个入门特别简单的静态网站生成器，基本跟着 QuickStart 文档 一步步做就行，这里主要简要阐述下过程中遇到的问题</description>
     </item>
     
     <item>
       <title>Service mesh — 一种新的模式而不是新技术</title>
-      <link>http://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
+      <link>http://idevz.github.io/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Wed, 13 Nov 2013 22:11:56 +0800</pubDate>
       
-      <guid>http://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
+      <guid>http://idevz.github.io/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
       <description>原著信息： How to Make Your Open Source Project Really Awesome
 by:Clojure Werkz
 https://www.iteye.com/news/27656</description>
@@ -874,10 +874,10 @@ https://www.iteye.com/news/27656</description>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>源文件：
 问题背景（要求100字以内，不然产品页面显示不全讲师介绍的信息）：
 Kubernetes 作为当前事实的云操作系统，其核心基础地位不言而喻，用好它绝对称得上一项基本技能，就好比工程师不会用电脑就无法干活一样。如何做到呢？我认为从源码编译搭建一个自己的 Kubernetes 环境绝对是一个探究 Kubernetes 体系的好方法，就让我们以此开始 Kubernetes 之旅吧。
@@ -901,10 +901,10 @@ Kubernetes 作为当前事实的云操作系统，其核心基础地位不言而
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>http://10.211.55.110:10252/debug/pprof/ 每个组件都快可以 pprof
 源文件：
 【老师调整文稿之前，请看一遍红色字体的内容，便于前期对齐思路，后续高效协作】 1.《每日一课文字稿模版》可供参考（建议写之前，老师看一遍）： https://shimo.im/docs/Dd6YGpJC3jcQYX9K/ 《文稿1 | 前端 Router 是怎么实现的？ 》
@@ -921,19 +921,19 @@ Kubernetes 对用户扩展有着极高的灵活性，我们可以通过各种方
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>helm.md</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>想象一下，如果我想将 nginx 部署到 Kubernetes 集群，我可能会在终端中输入类似这样的命令：
 $ kubectl run &amp;ndash;image=nginx &amp;ndash;replicas=3 Copy 然后回车。几秒钟后，你就会看到三个 nginx pod 分布在所有的工作节点上。这一切就像变魔术一样，但你并不知道这一切的背后究竟发生了什么事情。
 Kubernetes 的神奇之处在于：它可以通过用户友好的 API 来处理跨基础架构的 deployments，而背后的复杂性被隐藏在简单的抽象中。但为了充分理解它为我们提供的价值，我们需要理解它的内部原理。
@@ -946,37 +946,37 @@ Kubernetes 的神奇之处在于：它可以通过用户友好的 API 来处理�
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>http://python.jobbole.com/89041/</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>iterator-in-python.md http://python.jobbole.com/89181/</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>python-socket.md http://python.jobbole.com/89290/</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>Motan主要功能： 服务发现：服务发布、订阅、通知 高可用策略：失败重试、快速失败、异常隔离 负载均衡：低并发优先、一致性Hash、随机请求、轮询等 扩展性：支持SPI扩展 其他：调用统计、访问日志、流量控制等
 服务治理型 特点：SOA解决方案，服务发现及治理 缺点：语言耦合度高，跨语言支持难度较大 典型代表：Dubbo、Dubbox、ICE、Motan
 跨语言调用型： 特点：语言无关的协议、适合不同语言服务调用 缺点：没有服务发现机制，一般需要通过代理方式调用 典型代表：Thrift、GRPC、Hessian、Hprose、Finagle
@@ -991,10 +991,10 @@ Cluster 模块 Filter chains
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>Description = &amp;ldquo;&amp;rdquo; Tags = [&amp;ldquo;ServiceMesh&amp;rdquo;] Categories = [&amp;ldquo;技术&amp;rdquo;, &amp;ldquo;微服务&amp;rdquo;,&amp;ldquo;ServiceMesh&amp;rdquo;] title = &amp;ldquo;Service mesh — 一种新的模式而不是新技术&amp;rdquo; date = &amp;ldquo;2013-11-13T22:11:56+08:00&amp;rdquo; draft = false toc = true
 原著信息： A Million WebSockets and Go
 **by:Sergey Kamardin
@@ -1003,10 +1003,10 @@ https://changkun.us/archives/2018/07/254/</description>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>Description = &amp;ldquo;&amp;rdquo; Tags = [&amp;ldquo;ServiceMesh&amp;rdquo;] Categories = [&amp;ldquo;技术&amp;rdquo;, &amp;ldquo;微服务&amp;rdquo;,&amp;ldquo;ServiceMesh&amp;rdquo;] title = &amp;ldquo;从头开始使用内存分配器的可视化指南(Golang)&amp;rdquo; date = &amp;ldquo;2013-11-13T22:11:56+08:00&amp;rdquo; draft = false toc = true
 原著信息： A visual guide to Go Memory Allocator from scratch (Golang)
 by:Ankur Anand
@@ -1015,10 +1015,10 @@ When I first started trying to understand the memory allocator of Go, it was mad
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>Description = &amp;ldquo;&amp;rdquo; Tags = [&amp;ldquo;ServiceMesh&amp;rdquo;] Categories = [&amp;ldquo;技术&amp;rdquo;, &amp;ldquo;工具&amp;rdquo;,&amp;ldquo;Hugo&amp;rdquo;] title = &amp;ldquo;如何将 Hugo 网站托管到 GitHub&amp;rdquo; date = &amp;ldquo;2018-11-13T22:11:56+08:00&amp;rdquo; draft = false toc = true
 原著信息： Host on GitHub
 by:gohugo.io
@@ -1028,10 +1028,10 @@ GitHub provides free and fast static hosting over SSL for personal, organization
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>This document helps you get started developing code for Istio. If you follow this guide and find some problem, please take a few minutes to update this page.
 本文档帮助你开始为 Istio 开发代码。如果你依照本文档发现一些问题，请花几分钟的时间更新本页内容。
  Prerequisites 预先准备  Setting up Go 安装 Go Setting up Docker 安装 Docker Setting up fpm 安装 FPM Other dependencies 其他依赖 Setting up Kubernetes 部署 Kubernetes IBM Cloud Container Service IBM 云容器服务 Google Kubernetes Engine Google Kubernetes 引擎 Minikube 迷你 Kube Setting up environment variables 设置环境变量 Setting up personal access token 设置个人访问令牌  Using the code base 使用代码库  Building the code 构建代码 Building and pushing the containers 构建、推送容器 Building and pushing a specific container 构建、推送一个特定的容器 Building the Istio manifests 构建 Istio 清单 Cleaning outputs 清理输出 Debug an Istio container with Delve 使用 Delve 调试 Istio 容器 Running tests 运行单元测试 Health of tests 健康的测试 Getting coverage numbers 获取覆盖率 Auto-formatting source code 自动格式化源码 Running the linters 运行检测工具 Running race detection tests 运行竞态探测用例 Adding dependencies 添加依赖 About testing 关于单元测试  Working with CircleCI 使用 Circle CI Writing shell scripts 编写 shell 脚本  ShellCheck Shell 检查 Dealing with spaces and arrays 处理空白和数组 Style Guide 类型指导  Writing reference docs 编写引用文档  About proto documentation 关于 proto 文档  Git workflow Git 工作流  Fork the main repository Fork 主仓库 Clone your fork Clone 你的 Fork Enable pre commit hook 激活预提交钩子 Create a branch and make changes 创建分支并做出修改 Keeping your fork in sync 保持你的 Fork 同步(与主仓库) Committing changes to your fork 提交变更到你的 Fork Creating a pull request 创建一个 PR Getting a code review 获得一个代码 Review When to retain commits and when to squash 何时保留提交何时squash  Develop on Feature Branch 在特性分支上开发  This document is intended to be relative to the branch in which it is found.</description>
@@ -1039,10 +1039,10 @@ GitHub provides free and fast static hosting over SSL for personal, organization
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>Description = &amp;ldquo;&amp;rdquo; Tags = [&amp;ldquo;ServiceMesh&amp;rdquo;] Categories = [&amp;ldquo;技术&amp;rdquo;, &amp;ldquo;微服务&amp;rdquo;,&amp;ldquo;ServiceMesh&amp;rdquo;] title = &amp;ldquo;Service mesh — 一种新的模式而不是新技术&amp;rdquo; date = &amp;ldquo;2013-11-13T22:11:56+08:00&amp;rdquo; draft = false toc = true
 原著信息： lua-nginx-module
 commitID:61e4d0a
@@ -1054,10 +1054,10 @@ This module is not distributed with the Nginx source.</description>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>+++ Description = &amp;ldquo;&amp;rdquo; Tags = [&amp;ldquo;微服务&amp;rdquo;, &amp;ldquo;servicemesh&amp;rdquo;,&amp;ldquo;APIGateWay&amp;rdquo;] Categories = [&amp;ldquo;技术&amp;rdquo;, &amp;ldquo;微服务&amp;rdquo;, &amp;ldquo;servicemesh&amp;rdquo;,&amp;ldquo;APIGateWay&amp;rdquo;] title = &amp;ldquo;ServiceMesh Vs APIGateWay&amp;rdquo; date = &amp;ldquo;2017-09-20T22:11:56+08:00&amp;rdquo; draft = false toc = true
 +++
 原著信息： Service Mesh vs API Gateway
@@ -1067,10 +1067,10 @@ In one of my previous articles on service mesh, there were a couple of questions
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>https://www.ansible.com/resources/webinars-training/introduction-to-ansible
 使用Ansible部署Kubernetes 1.6高可用集群 https://blog.frognew.com/2017/06/kubernetes-1.6-ha-cluster-by-ansible.html
 HOW-TO Deploy Kubernetes on Openstack with Ansible http://superuser.openstack.org/articles/deploy-kubernetes-openstack-ansible/
@@ -1080,19 +1080,19 @@ Ansible用命令管理主机(doc) http://getansible.com/begin/ansibleyong_ming_l
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>ip vs ifconfig https://linux.cn/article-4326-1.html</description>
     </item>
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>Iptables详解 http://blog.csdn.net/reyleon/article/details/12976341
 关于iptables的四表五链 http://blog.51cto.com/godben/1693903 iptables只是Linux防火墙的管理工具而已，位于/sbin/iptables。真正实现防火墙功能的是netfilter，它是Linux内核中实现包过滤的内部结构。
 iptables包含4个表，5个链。其中表是按照对数据包的操作区分的，链是按照不同的Hook点来区分的，表和链实际上是netfilter的两个维度。 4个表:filter,nat,mangle,raw 默认表是filter（没有指定表的时候就是filter表）。表的处理优先级：raw&amp;gt;mangle&amp;gt;nat&amp;gt;filter。 filter：一般的过滤功能 nat:用于nat功能（端口映射，地址映射等） mangle:用于对特定数据包的修改 raw:有限级最高，设置raw时一般是为了不再让iptables做数据包的链接跟踪处理，提高性能 5个链：PREROUTING,INPUT,FORWARD,OUTPUT,POSTROUTING。 PREROUTING:数据包进入路由表之前 INPUT:通过路由表后目的地为本机 FORWARDING:通过路由表后，目的地不为本机 OUTPUT:由本机产生，向外转发 POSTROUTIONG:发送到网卡接口之前。  规则表： 1.filter表——三个链：INPUT、FORWARD、OUTPUT 作用：过滤数据包 内核模块：iptables_filter. 2.Nat表——三个链：PREROUTING、POSTROUTING、OUTPUT 作用：用于网络地址转换（IP、端口） 内核模块：iptable_nat 3.Mangle表——五个链：PREROUTING、POSTROUTING、INPUT、OUTPUT、FORWARD 作用：修改数据包的服务类型、TTL、并且可以配置路由实现QOS内核模块：iptable_mangle(别看这个表这么麻烦，咱们设置策略时几乎都不会用到它) 4.Raw表——两个链：OUTPUT、PREROUTING 作用：决定数据包是否被状态跟踪机制处理 内核模块：iptable_raw (这个是REHL4没有的，不过不用怕，用的不多)
@@ -1109,10 +1109,10 @@ Iptables命令的管理控制选项：
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>MAC networksetup -listallhardwareports networksetup -listallnetworkservices spoof-mac list
 lo 回环接口(loop back) 或者 本地主机(localhost) gif 通用 IP-in-IP隧道(RFC2893) stf 6to4连接(RFC3056) en 以太网或802.11接口 fw IP over FireWire(IEEE-1394), macOS特有 p2p Point-to-Point 协议 awdl airdrop peer to peer(一种mesh network), apple airdrop设备特有 bridge 第2层桥接 vlan 虚拟局域网络
 在iOS设备(支持cellular)上还能看到 pdp_ip 蜂窝数据连接
@@ -1122,10 +1122,10 @@ en1 = Ethernet 1 vmnet8 = Virtual Interface vmnet1 = Virtual Interface
     
     <item>
       <title></title>
-      <link>http://idevz.org/1/01/</link>
+      <link>http://idevz.github.io/1/01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://idevz.org/1/01/</guid>
+      <guid>http://idevz.github.io/1/01/</guid>
       <description>systemd wiki https://wiki.archlinux.org/index.php/systemd_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 journalctl可以根据特定字段过滤输出。如果过滤的字段比较多，需要较长时间才能显示出来。
 示例：

@@ -15,18 +15,18 @@ Test::Base Test::Nginx Test::Nginx::Socket Test::Nginx::Socket::Lua Test::Nginx:
 源自 Perl 世界 Test::Base 的 Test::Nginx Test::Nginx 所使用说明文档格式、或者语言的测试用例其实更像一种来自于 Perl 世界 Test::Base 测试框架所提供更通用的测试语言的一种方言。从面向对象编程这个场景来看，Test::Nginx 仅仅是 Test::Base 的一个子类，也正因为如此，所以 Test::Nginx 继承了 Test::Base 框架所提供的所有特性。外加 Test::Nginx 提供了更方便的原语和符号集合来简化在 Nginx 和 OpenResty 上下文中做测试。Test::Nginx 通过 Perl 世界的 CPAN 进行发布。
 Test::Nginx 为不同的测试需求提供了各种不一样的测试类，大致列举如下：
 Test::Base Test::Nginx Test::Nginx::Socket Test::Nginx::Socket::Lua Test::Nginx::Socket::Lua::Stream 不同于 Nginx 官方维护的 Test::Nginx 要注意的一点，OpenResty 提供的 Test::Nginx 与由 Maxim Dounin 创建 和 Nginx 官方维护的 Test::Nginx 套件没有任何关系，Nginx 官方所维护的 Test::Nginx 要求用户通过直接编写 Perl 代码来完成相关的测试，所以这跟 OpenResty 提供的 Test::Nginx 有本质的不同在于首先，它不再是数据驱动的测试，其次他需要用户具有 Perl 语言开发的能力。'>
-<meta property='og:url' content='http://idevz.org/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/'>
+<meta property='og:url' content='http://idevz.github.io/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='Test::Nginx'><meta property='article:tag' content='自动化测试'><meta property='article:tag' content='代码质量'><meta property='article:published_time' content='2017-11-29T07:25:54&#43;08:00'/><meta property='article:modified_time' content='2019-04-08T22:05:43&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title>OpenResty 自动化测试框架 Test::Nginx 详解 • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.org/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/'>
+  <link rel='canonical' href='http://idevz.github.io/2017/11/openresty-%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6-testnginx-%E8%AF%A6%E8%A7%A3/'>
   
   
-  <link rel='icon' href='http://idevz.org/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -50,15 +50,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.org/'>idevz.org</a>
+        <a href='http://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tech/'>技术</a>
+        <a href='http://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tools/'>工具</a>
+        <a href='http://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.org/life/'>Life</a>
+        <a href='http://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.org/page/about/'>关于</a>
+        <a href='http://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -178,14 +178,14 @@ Test::Nginx::Socket::Lua::Stream</code></pre></div>
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, </div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, </div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span>, <a class='tag' href='http://idevz.org/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/'>自动化测试</a>, <a class='tag' href='http://idevz.org/tags/%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/'>代码质量</a></div>
+<span class='screen-reader-text'>Tags: </span>, <a class='tag' href='http://idevz.github.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/'>自动化测试</a>, <a class='tag' href='http://idevz.github.io/tags/%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F/'>代码质量</a></div>
 
   </div>
 </footer>
@@ -195,7 +195,7 @@ Test::Nginx::Socket::Lua::Stream</code></pre></div>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.org/2017/11/luajit/'>
+      <a href='http://idevz.github.io/2017/11/luajit/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -205,7 +205,7 @@ Test::Nginx::Socket::Lua::Stream</code></pre></div>
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>LuaJIT</a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.org/2017/11/opm/'>
+      <a href='http://idevz.github.io/2017/11/opm/'>
         <span class='screen-reader-text'>Next post: </span>opm<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -224,16 +224,16 @@ Test::Nginx::Socket::Lua::Stream</code></pre></div>
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p>© 2017 idevz.org</p>
+  <p>© 2020 idevz.org</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Go Debug on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/categories/go-debug/</link>
+    <link>http://idevz.github.io/categories/go-debug/</link>
     <description>Recent content in Go Debug on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Mon, 11 Dec 2017 20:18:44 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/categories/go-debug/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/categories/go-debug/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>使用Vs Code 调试 Golang 程序</title>
-      <link>http://idevz.org/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
+      <link>http://idevz.github.io/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</link>
       <pubDate>Mon, 11 Dec 2017 20:18:44 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
+      <guid>http://idevz.github.io/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</guid>
       <description>安装 dlv 因为我使用虚拟机开发，Mac 宿主机与 CentOS 虚拟机的 GOPATH 都指向了同一个路径，所以我的 Golang bin 路径是重合的 所以我需要在两个机器上都有一份各自的 dlv，好在 Mac 有 brew，所以 Mac brew 安装的 dlv 就可以避免抢占 GOPATH 路径了。下面记录几个安装中的小问题。
 Mac 安装 dlv brew install 未必会好使，因为 brew 安装是非 root 安装，而 dlv 需要添加系统认证证书，可能会遇到如下安装不成功的报错。
 ==&amp;gt; Installing delve from go-delve/delve ==&amp;gt; Downloading https://github.com/derekparker/delve/archive/v1.0.0-rc.2.tar.gz Already downloaded: /Users/idevz/Library/Caches/Homebrew/delve-1.0.0-rc.2.tar.gz security: SecKeychainSearchCopyNext: The specified item could not be found in the keychain. ==&amp;gt; Generating dlv-cert ==&amp;gt; openssl req -new -newkey rsa:2048 -x509 -days 3650 -nodes -config dlv-cert.</description>

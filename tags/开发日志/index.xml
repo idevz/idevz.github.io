@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>开发日志 on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
+    <link>http://idevz.github.io/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
     <description>Recent content in 开发日志 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Tue, 18 Jul 2017 14:52:56 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/tags/%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Vanilla 开发日志</title>
-      <link>http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
+      <link>http://idevz.github.io/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</link>
       <pubDate>Tue, 18 Jul 2017 14:52:56 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid>
+      <guid>http://idevz.github.io/2017/07/vanilla-%E5%BC%80%E5%8F%91%E6%97%A5%E5%BF%97/</guid>
       <description>init_worker_by_lua_file 目前 init_worker_by_lua_file 指令被框架自己占用了。而没有留给 init_worker_by_lua_file 自己加东西的地方</description>
     </item>
     

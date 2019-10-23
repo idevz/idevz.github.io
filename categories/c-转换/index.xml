@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>C 转换 on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/categories/c-%E8%BD%AC%E6%8D%A2/</link>
+    <link>http://idevz.github.io/categories/c-%E8%BD%AC%E6%8D%A2/</link>
     <description>Recent content in C 转换 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Tue, 21 Nov 2017 13:16:39 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/categories/c-%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/categories/c-%E8%BD%AC%E6%8D%A2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>request_id</title>
-      <link>http://idevz.org/2017/11/request_id/</link>
+      <link>http://idevz.github.io/2017/11/request_id/</link>
       <pubDate>Tue, 21 Nov 2017 13:16:39 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/request_id/</guid>
+      <guid>http://idevz.github.io/2017/11/request_id/</guid>
       <description>缘起：请求调用中，有个 bigint 的 Request_id 需要传递，在 Lua 中也需要使用。 这个 Request_id 在 Java、C 或者 Golang 类似的强类型语言中是 int64 的一个无符号整数，在其他语言比如 PHP 或者 Lua 中，作为字符串使用。 需要解决的问题： 当一个请求到 Lua 后，CoSocket 接收到的是一个字节数组。 1.接收到请求后，需要把这个字节数组转化为 字符串。 2.响应请求的时候，需要把这个字符串转化为字节数组，返回去。 以上两步操作都是大端序。
 因为 Lua 只有 Number 类型，而 Number 是双精度浮点型，能处理的最大 Int 小于 int64 的最大值 2^64 -1，所以需要把这部分操作用 C 语言实现，保证在 Lua 中处理的都是字符串。
 实现以下 2 个功能： 1.Lua cosokect receive 一个 8 个字节的字节数组，将此数组传递给 C 函数，C 函数将这个字节数组转换为 int64 的整型，再转换成对应的字符串返回。 2.接收一个 Request_id 的字符串，将这个字符串转换成 int64 的整数，再转换成一个 8 个字节的字符串返回给 Lua，Lua 将这个 id TCP 返回给调用方。</description>

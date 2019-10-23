@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>LuaJIT on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/categories/luajit/</link>
+    <link>http://idevz.github.io/categories/luajit/</link>
     <description>Recent content in LuaJIT on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Wed, 29 Nov 2017 07:20:49 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/categories/luajit/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/categories/luajit/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>LuaJIT</title>
-      <link>http://idevz.org/2017/11/luajit/</link>
+      <link>http://idevz.github.io/2017/11/luajit/</link>
       <pubDate>Wed, 29 Nov 2017 07:20:49 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/11/luajit/</guid>
+      <guid>http://idevz.github.io/2017/11/luajit/</guid>
       <description>As the standard Lua 5.1 interpreter&amp;rsquo;s VM is not fully resumable, the methods ngx.location.capture, ngx.location.capture_multi, ngx.redirect, ngx.exec, and ngx.exit cannot be used within the context of a Lua pcall() or xpcall() or even the first line of the for &amp;hellip; in &amp;hellip; statement when the standard Lua 5.1 interpreter is used and the attempt to yield across metamethod/C-call boundary error will be produced. Please use LuaJIT 2.x, which supports a fully resumable VM, to avoid this.</description>
     </item>
     

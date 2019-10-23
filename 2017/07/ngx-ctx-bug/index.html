@@ -11,18 +11,18 @@ init_vanilla = function (ngx) Registry.namespace = ngx_var.APP_NAME local REQ_Re
 <meta property='og:description' content='复现 在 &ldquo;init_worker_by_lua&rdquo; 阶段定义方法 init_vanilla，在 content_by_lua 阶段来调用，使用 local registry = debug.getregistry(); print_r(registry.ngx_lua_ctx_tables) 查看当前存储的所有 key，发现前后两个请求的数据会同时保存在 ngx.ctx 中，按理说 ngx.ctx 表就是用来共享请求内变量的，应该是每个请求有自己的一份，为什么在一个请求中能获取到其他请求的 ngx.ctx ？这个需要细节了解下 ngx.ctx 的实现机制，再回来解析这个问题。
 init_vanilla 函数的实现
 init_vanilla = function (ngx) Registry.namespace = ngx_var.APP_NAME local REQ_Registry = require(&#39;registry&#39;):new() REQ_Registry[&#39;REQ_URI&#39;] = ngx_var.uri REQ_Registry[&#39;REQ_ARGS&#39;] = ngx_var.args REQ_Registry[&#39;REQ_ARGS_ARR&#39;] = ngx_req.get_uri_args() REQ_Registry[&#39;REQ_HEADERS&#39;] = ngx_req.get_headers() REQ_Registry[&#39;APP_CACHE_PURGE&#39;] = REQ_Registry[&#39;REQ_ARGS_ARR&#39;][&#39;vapurge&#39;] ngx.ctx.REQ_Registry = REQ_Registry if Registry[&#39;VANILLA_INIT&#39;] then return end Registry[&#39;VA_ENV&#39;] = ngx_var.VA_ENV Registry[&#39;APP_NAME&#39;] = Registry.namespace Registry[&#39;APP_ROOT&#39;] = ngx_var.document_root Registry[&#39;APP_HOST&#39;] = ngx_var.'>
-<meta property='og:url' content='http://idevz.org/2017/07/ngx-ctx-bug/'>
+<meta property='og:url' content='http://idevz.github.io/2017/07/ngx-ctx-bug/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
 <meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='ngx.ctx'><meta property='article:tag' content='请求内变量共享'><meta property='article:published_time' content='2017-07-12T14:55:29&#43;08:00'/><meta property='article:modified_time' content='2018-04-16T08:00:33&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title>ngx ctx bug • 做一个善于思考的学习者</title>
-  <link rel='canonical' href='http://idevz.org/2017/07/ngx-ctx-bug/'>
+  <link rel='canonical' href='http://idevz.github.io/2017/07/ngx-ctx-bug/'>
   
   
-  <link rel='icon' href='http://idevz.org/favicon.ico'>
-<link rel='stylesheet' href='http://idevz.org/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='http://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='http://idevz.github.io/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -46,15 +46,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='http://idevz.org/'>idevz.org</a>
+        <a href='http://idevz.github.io/'>idevz.org</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tech/'>技术</a>
+        <a href='http://idevz.github.io/tech/'>技术</a>
       </li><li class='item'>
-        <a href='http://idevz.org/tools/'>工具</a>
+        <a href='http://idevz.github.io/tools/'>工具</a>
       </li><li class='item'>
-        <a href='http://idevz.org/life/'>Life</a>
+        <a href='http://idevz.github.io/life/'>Life</a>
       </li><li class='item'>
-        <a href='http://idevz.org/page/about/'>关于</a>
+        <a href='http://idevz.github.io/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -331,14 +331,14 @@ if (!doNotTrack) {
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.org/categories/openresty/'>OpenResty</a>, <a class='category' href='http://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='http://idevz.github.io/categories/openresty/'>OpenResty</a>, <a class='category' href='http://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span>, <a class='tag' href='http://idevz.org/tags/%E8%AF%B7%E6%B1%82%E5%86%85%E5%8F%98%E9%87%8F%E5%85%B1%E4%BA%AB/'>请求内变量共享</a></div>
+<span class='screen-reader-text'>Tags: </span>, <a class='tag' href='http://idevz.github.io/tags/%E8%AF%B7%E6%B1%82%E5%86%85%E5%8F%98%E9%87%8F%E5%85%B1%E4%BA%AB/'>请求内变量共享</a></div>
 
   </div>
 </footer>
@@ -348,7 +348,7 @@ if (!doNotTrack) {
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='http://idevz.org/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/'>
+      <a href='http://idevz.github.io/2017/07/lua-%E5%AE%9E%E7%8E%B0%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -358,7 +358,7 @@ if (!doNotTrack) {
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>Lua 实现面向对象</a>
     </div><div class='next-entry sep-before'>
-      <a href='http://idevz.org/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/'>
+      <a href='http://idevz.github.io/2017/07/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-lua-%E5%85%83%E8%A1%A8/'>
         <span class='screen-reader-text'>Next post: </span>深入理解 Lua 元表<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -377,16 +377,16 @@ if (!doNotTrack) {
 
       <footer id='footer' class='footer'>
         <div class='container sep-before'><div class='copyright'>
-  <p>© 2017 idevz.org</p>
+  <p>© 2020 idevz.org</p>
 </div>
 
         </div>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="http://idevz.org/assets/js/"</script>
+  </div><script>window.__assets_js_src="http://idevz.github.io/assets/js/"</script>
 
-<script src='http://idevz.org/assets/js/main.67d669ac.js'></script>
+<script src='http://idevz.github.io/assets/js/main.67d669ac.js'></script>
 
 </body>
 

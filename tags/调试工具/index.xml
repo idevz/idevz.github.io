@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>调试工具 on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/tags/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</link>
+    <link>http://idevz.github.io/tags/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 调试工具 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Thu, 15 Jun 2017 16:31:02 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/tags/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/tags/%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>使用Sublime&#43;Xdebug开发调试PHP</title>
-      <link>http://idevz.org/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</link>
+      <link>http://idevz.github.io/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</link>
       <pubDate>Thu, 15 Jun 2017 16:31:02 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</guid>
+      <guid>http://idevz.github.io/2017/06/%E4%BD%BF%E7%94%A8sublime-xdebug%E5%BC%80%E5%8F%91%E8%B0%83%E8%AF%95php/</guid>
       <description>http://guojianxiang.com/posts/2015-09-06-PHP_Debug_Tool-Xdebug.html http://yansu.org/2014/03/20/php-debug-with-xdebug.html
 关于 PHP 开发 调试 安装 原理 抓包 sudo tcpdump -i any port 9100 php -d xdebug.profiler_enable=On -d xdebug.auto_trace=On -d xdebug.show_exception_trace=On -d xdebug.trace_output_name=&amp;quot;ooo&amp;quot; -d xdebug.trace_format=1 -d xdebug.trace_output_dir=$MCODE/scripts/xdebug/trace -d xdebug.profiler_output_dir=$MCODE/scripts/xdebug/profiler motan.php
 ❯ qrsctl info z@z UserId: zhoujing_k49@163.com Uid: 1381143175 Email: zhoujing_k49@163.com UserType: stduser(0x4) DeviceNum: 0 InvitationNum: 0

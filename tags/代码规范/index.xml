@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>代码规范 on 做一个善于思考的学习者</title>
-    <link>http://idevz.org/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</link>
+    <link>http://idevz.github.io/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</link>
     <description>Recent content in 代码规范 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>© 2017 idevz.org</copyright>
+    <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Mon, 10 Jul 2017 16:13:41 +0800</lastBuildDate>
     
-	<atom:link href="http://idevz.org/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://idevz.github.io/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>cs md fixer</title>
-      <link>http://idevz.org/2017/07/cs-md-fixer/</link>
+      <link>http://idevz.github.io/2017/07/cs-md-fixer/</link>
       <pubDate>Mon, 10 Jul 2017 16:13:41 +0800</pubDate>
       
-      <guid>http://idevz.org/2017/07/cs-md-fixer/</guid>
+      <guid>http://idevz.github.io/2017/07/cs-md-fixer/</guid>
       <description>使用 PHP-CS-Fixer 自动规范化你的 PHP 代码 https://laravel-china.org/topics/547/use-php-cs-fixer-to-automatically-standardize-your-php-code
 PHPCS
 安装
