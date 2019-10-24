@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='原著信息： Service Mesh for Microservices
+by:Kasun Indrasiri
+Microservices architecture has been evolving a lot during the last couple of years and there are quite a few new concepts and patterns are emerging. ‘Service Mesh’ concept is getting quite popular. In this post, I’m planning to cover the key concepts related to Service Mesh and how it is used in real-world microservices implementations.
+微服务架构在过去几年中发展很多，出现了相当多的新的概念和模式。“Service Mesh” 的概念越来越受欢迎。本文，我计划涵盖 Service Mesh 的关键概念以及如何在实际的微服务实现中使用。
+Why ‘Service Mesh’?'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='微服务的服务网格 • 做一个善于思考的学习者'>
+<meta property='og:description' content='原著信息： Service Mesh for Microservices
+by:Kasun Indrasiri
+Microservices architecture has been evolving a lot during the last couple of years and there are quite a few new concepts and patterns are emerging. ‘Service Mesh’ concept is getting quite popular. In this post, I’m planning to cover the key concepts related to Service Mesh and how it is used in real-world microservices implementations.
+微服务架构在过去几年中发展很多，出现了相当多的新的概念和模式。“Service Mesh” 的概念越来越受欢迎。本文，我计划涵盖 Service Mesh 的关键概念以及如何在实际的微服务实现中使用。
+Why ‘Service Mesh’?'>
+<meta property='og:url' content='https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='微服务'><meta property='article:tag' content='servicemesh'><meta property='article:published_time' content='2017-09-18T22:11:56&#43;08:00'/><meta property='article:modified_time' content='2019-04-08T22:05:43&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>微服务的服务网格 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/'>
+  
+  
+  <link rel='icon' href='https://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='https://idevz.github.io/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head><body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='https://idevz.github.io/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/life/'>Life</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>微服务的服务网格</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-09-18T22:11:56&#43;08:00'>2017, Sep 18</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+8 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+<details class='container entry-toc'>
+  <summary class='title'>
+    <span>Table of Contents</span>
+  </summary>
+  <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#why-service-mesh">Why ‘Service Mesh’?</a></li>
+<li><a href="#为什么需要-service-mesh">为什么需要 “Service Mesh”？</a></li>
+<li><a href="#what-is-a-service-mesh">What is a ‘Service Mesh’?</a></li>
+<li><a href="#service-mesh-是什么">&ldquo;Service Mesh&rdquo; 是什么？</a></li>
+<li><a href="#business-logic">Business Logic</a></li>
+<li><a href="#业务逻辑">业务逻辑</a></li>
+<li><a href="#primitive-network-functions">Primitive Network Functions</a></li>
+<li><a href="#原始网络功能">原始网络功能</a></li>
+<li><a href="#application-network-functions">Application Network Functions</a></li>
+<li><a href="#应用网络功能">应用网络功能</a></li>
+<li><a href="#service-mesh-control-plane">Service Mesh Control Plane</a></li>
+<li><a href="#service-mesh-控制平面">Service Mesh 控制平面</a></li>
+<li><a href="#functionalities-of-a-service-mesh">Functionalities of a Service Mesh</a></li>
+<li><a href="#service-mesh-的功能点">Service Mesh 的功能点</a></li>
+<li><a href="#service-mesh-implementations">Service Mesh Implementations</a></li>
+<li><a href="#servivce-mesh-实现">Servivce Mesh 实现</a></li>
+<li><a href="#service-mesh-pros-and-cons">Service Mesh — Pros and Cons</a></li>
+<li><a href="#service-mesh-优点和缺点">Service Mesh — 优点和缺点</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#结论">结论</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+</details>
+
+
+  <div class='container entry-content'>
+  
+
+<p><strong>原著信息：</strong>
+<a href="https://medium.com/microservices-in-practice/service-mesh-for-microservices-2953109a3c9a">Service Mesh for Microservices</a></p>
+
+<p><strong>by:</strong>Kasun Indrasiri</p>
+
+<p>Microservices architecture has been evolving a lot during the last couple of years and there are quite a few new concepts and patterns are emerging. ‘Service Mesh’ concept is getting quite popular. In this post, I’m planning to cover the key concepts related to Service Mesh and how it is used in real-world microservices implementations.</p>
+
+<p>微服务架构在过去几年中发展很多，出现了相当多的新的概念和模式。“Service Mesh” 的概念越来越受欢迎。本文，我计划涵盖 Service Mesh 的关键概念以及如何在实际的微服务实现中使用。</p>
+
+<h3 id="why-service-mesh">Why ‘Service Mesh’?</h3>
+
+<p>As with many emerging technologies, there was a lot of hype around the Microservices Architecture. Most people think that microservices is the answer to all the problems they had with previous architecture such as SOA/ESB. However, when we observe the real world microservices implementations, we can see that most of the <a href="https://medium.com/microservices-in-practice/microservices-layered-architecture-88a7fc38d3f1">functionalities that a centralized bus (ESB) supports are now implemented at microservices level</a>. So, we are more or less solving the same set of fundamental problems, but we are solving them at different dimensions with Microservices.</p>
+
+<p><center><img src="https://ws4.sinaimg.cn/large/006tKfTcly1g0qq3r5uu2j31630dswfl.jpg" alt="From centralized integration/ESB to Microservices" />
+</center></p>
+
+<h3 id="为什么需要-service-mesh">为什么需要 “Service Mesh”？</h3>
+
+<p>跟很多新兴技术一样，微服务架构也有很多炒作。大多数人认为微服务是解决之前架构诸如 SOA / ESB 所遇到的所有问题。然而，当我们观察现实世界微服务的实现时，我们可以看到大多数中央总线（ESB）支持的功能现在都在<a href="https://medium.com/microservices-in-practice/microservices-layered-architecture-88a7fc38d3f1">微服务层面实现</a>。因此，我们或多或少正在解决相同的本质问题，只是我们在微服务的不同维度解决它们。</p>
+
+<p>For example, let’s take a scenario where you need to call multiple downstream services in resilient manner and expose the functionality as a another (composite) service. As shown in figure 1, with the ESB architecture, you can easily leverage the inbuilt capabilities of ESB, for building virtual/composite services and functionalities such as circuit breakers, timeouts and service discovery etc., which are useful during inter-service communication.</p>
+
+<p>例如，让我们思考这样一个场景，你需要以弹性的方式调用多个下游服务，且将这个功能导出为另外一个（复合）服务。如下图 1 所示，通过 ESB 架构，你可以轻松利用 ESB 的内建能力来创建 虚拟 / 复合服务和功能，诸如熔断器、超时和服务发现等这些在内部服务间通信中非常有用。</p>
+
+<p>When you implement the same scenario using Microservices, then you no longer have a centralized integration/ESB layer but a set of (composite and atomic) microservices. So, you have to implement all these functionalities at the microservices level.</p>
+
+<p>当你使用微服务来实现相同的场景时，你不再拥有集中式 集成 / ESB 层，而是一组（组合 和 原子）微服务。因此，你必须在微服务层面来实现所有这些功能。</p>
+
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g0r3bl9ft0j30l50az74h.jpg" alt="1_BJFhfCfraN25GEY02VPq4g" /></p>
+
+<p><center><img src="https://idevz.github.io/images/1_BJFhfCfraN25GEY02VPq4g.png" alt="Figure 1:Microservice components and service-to-service communication" /></center></p>
+
+<p>Therefore a given microservice which communicates with other services(figure 2), comprises of:</p>
+
+<ul>
+<li><p><strong>Business Logic</strong> that implements the business functionalities, computations and service composition/integration logic.</p></li>
+
+<li><p><strong>Network Functions</strong> that take care of the inter-service communication mechanisms (basic service invocation through a given protocol, apply resiliency and stability patterns, service discovery etc.) These network functions are built on top of the underlying OS level network stack.</p></li>
+</ul>
+
+<p>因此一个给定的与其他服务有交互的微服务（如图 2 所示）由以下几点组成：</p>
+
+<ul>
+<li><strong>业务逻辑</strong> 实现业务功能，计算以及服务 组合 / 集成 逻辑。</li>
+<li><strong>网络功能</strong> 负责服务间通信机制（通过给定的协议进行基本服务调用，弹性请求以及稳定性模式，服务发现等。）这些网络功能基于操作系统底层网络栈构建。</li>
+</ul>
+
+<p>Now think about the effort involved in implementing such microservice. Implementing the functionalities related service-to-service communication from scratch is a nightmare. Rather focusing on the business logic, you will have to spend a lot of time on building service-to-service communication functionalities. And this is even worse if you use multiple technologies to build microservices (such as multiple programming languages as shown in figure 1), because you need to duplicate the same efforts across different languages (e.g. Circuit breaker has to be implemented on Java, Node, Python etc.).</p>
+
+<p>现在想想实现这种微服务所需的努力。从头开始实现服务到服务通信相关的功能是一场噩梦。而专注于业务逻辑，你将不得不花费大量时间来构建服务到服务间通信的功能。如果你使用多种技术来构建微服务（比如图 1 所示多语言的情况），那就更糟了，因为你需要在不同的语言中重复实现相同的功能（例如需要在 Java、Node、Python 等语言实现断路器。）</p>
+
+<blockquote>
+<p>The most complex challenge in realizing microservice architecture is not building the services themselves, but the communication between services.</p>
+
+<p>在实现微服务架构中最复杂的挑战不是构建服务本身，而是服务间的交互。</p>
+</blockquote>
+
+<p>Since most of the inter-service communication requirements are quite generic across all microservices implementations, we can think about offloading all such tasks to a different layer, so that we can keep the service code independent. That’s where ‘service mesh’ comes into the picture.</p>
+
+<p>由于大多数服务间通信需求在所有微服务实现中都非常通用，我们可以思考将所有这些任务都下沉到一个单独的层，以便我们可以保持服务代码独立。这就是图中 “Service Mesh” 所处的位置。</p>
+
+<h3 id="what-is-a-service-mesh">What is a ‘Service Mesh’?</h3>
+
+<p>In a nutshell, a Service Mesh is an inter-service communication infrastructure.</p>
+
+<p>With a service mesh,</p>
+
+<ul>
+<li>A given Microservice won’t directly communicate with the other microservices.</li>
+<li>Rather all service-to-service communications will take places on-top of a software component called service mesh (or side-car proxy).</li>
+<li>Service Mesh provides built-in support for some network functions such as resiliency, service discovery etc.</li>
+<li>Therefore, service developers can focus more on the business logic while most of the work related to network communication is offloaded to the service mesh.</li>
+<li>For instance, you don’t need to worry about circuit breaking when your microservice call another service anymore. That already comes as part of service mesh.</li>
+<li>Service-mesh is language agnostic: Since the microservice to service mesh proxy communication is always on top to standard protocols such as HTTP1.x/2.x, gRPC etc., you can write your microservice from any technology and they will still work with the service mesh.</li>
+</ul>
+
+<p><center><img src="https://idevz.github.io/images/1_DIV3ZADt68hff9_mDIKLug.png" alt="Service to service communication with Service Mesh" /></center></p>
+
+<p>Let’s try to further understand the service interactions and responsibilities which are shown in figure 3.</p>
+
+<h3 id="service-mesh-是什么">&ldquo;Service Mesh&rdquo; 是什么？</h3>
+
+<p>简而言之，Service Mesh 是一种服务间通信基础设施。</p>
+
+<p>通过 Service Mesh，</p>
+
+<ul>
+<li>给定的微服务不会直接与其他微服务通信。</li>
+<li>相反，所有服务到服务的通信都将在被称为 Service Mesh（或者 Side-Car 代理）的软件组件内进行。</li>
+<li>Service Mesh 为一些网络功能诸如 弹性、服务发现等提供内建的支持。</li>
+<li>因此，服务开发者可以更加专注于业务逻辑，同时将与网络通信相关的大部分工作被下沉到 Service Mesh。</li>
+<li>例如，当你的服务依赖另一个服务时，你不需要再担心断路的问题，这已经作为 Service Mesh 的一部分提供了。</li>
+<li>Service Mesh 是语言无关的，从微服务到 Service Mesh 代理通信通常基于标准协议诸如 HTTP1.x/2.x,gRPC 等，你可以使用任何技术编写你自己的微服务，一样可以跟 Service Mesh 很好的工作。</li>
+</ul>
+
+<p>让我们尝试进一步理解下图三中的服务交互和职责。</p>
+
+<h3 id="business-logic">Business Logic</h3>
+
+<p>The service implementation should contain the realization of the business functionalities of a given service. This includes logic related to it’s business functions, computations, integration with other services/systems(including legacy, proprietary and SaaS) or service compositions, complex routing logics, mapping logic between different message types etc.</p>
+
+<h3 id="业务逻辑">业务逻辑</h3>
+
+<p>服务实现应包含给定服务的业务功能的实现。这包括商业功能相关的逻辑、计算、与其他服务 / 系统（包括遗留，专有和 软件即服务）或者服务组合，复杂的路由逻辑，不同消息类型间的映射逻辑等相关的逻辑。</p>
+
+<h3 id="primitive-network-functions">Primitive Network Functions</h3>
+
+<p>Although we offload most of the network functions to service mesh, a given service must contain the basic high-level network interactions to connect with the service mesh/side-car proxy. Hence, a given service implementation will have to use a given network library(unlike the ESB world, where you just have to use a very simple abstraction)to initiate network calls (to service mesh only). In most cases, microservices development framework embed the required network libraries to be used for these functions.</p>
+
+<h3 id="原始网络功能">原始网络功能</h3>
+
+<p>尽管我们将大部分网络功能下沉到了 Service Mesh，给定的服务必须包含与 Service Mesh / Side-Car 代理进行连接的基本的高级网络接口。因此，给定的服务实现必须使用给定的网络包（不像 ESB 世界中，你仅需要使用非常简单的抽象）来初始化网络调用（仅连接 Service Mesh）。在大多数场景下，微服务开发框架内嵌了这些功能需要用到的网络包。</p>
+
+<h3 id="application-network-functions">Application Network Functions</h3>
+
+<p>There are application functionalities which tightly coupled to the network, such as circuit breaking, timeouts, service discovery etc. Those are explicitly separated from the service code/business logic, and service mesh facilitate those functionalities out of the box.</p>
+
+<h3 id="应用网络功能">应用网络功能</h3>
+
+<p>存在与网络紧密耦合的应用功能，诸如熔断，超时，服务发现等。这些功能明确地与服务代码 / 业务逻辑隔离，并且 Service Mesh 促使这些功能开箱即用。</p>
+
+<blockquote>
+<p>Most of the initial microservices implementations simply ignore the gravity of the network functions offered from a central ESB layer, and they implemented all such functionalities from scratch at each microservice level. Now they have started realizing the importance of having a similar shared functionality as a distributed mesh.</p>
+
+<p>大多数初始微服务实现只是忽略了从中央 ESB 层提供的网络功能的重要性，并且它们在每个微服务级别都从头实现这些功能。现在他们开始意识到具有分布式网格类似的共享功能的重要性。</p>
+</blockquote>
+
+<h3 id="service-mesh-control-plane">Service Mesh Control Plane</h3>
+
+<p>All service mesh proxies are centrally managed by a control pane. This is quite useful when supporting service mesh capabilities such as access control, observability, service discovery etc.</p>
+
+<h3 id="service-mesh-控制平面">Service Mesh 控制平面</h3>
+
+<p>所有 Service Mesh 代理都被一个控制平面集中管理。在支持 Service Mesh 功能比如访问控制、可见性、服务发现等时，这非常有用。</p>
+
+<h3 id="functionalities-of-a-service-mesh">Functionalities of a Service Mesh</h3>
+
+<p>As we have seen earlier, the service mesh offers a set of application network functions while some (primitive) network functions are still implemented the microservices level itself. There is no hard and fast rule on what functionalities should be offered from a service mesh. These are the most common features offered from a service mesh.</p>
+
+<ul>
+<li><strong>Resiliency for inter-service communications:</strong> Circuit-breaking, retries and timeouts, fault injection, fault handling, load balancing and failover.</li>
+<li><strong>Service Discovery:</strong> Discovery of service endpoints through a dedicated service registry.</li>
+<li><strong>Routing:</strong> Primitive routing capabilities, but no routing logics related to the business functionality of the service.</li>
+<li><strong>Observability:</strong> Metrics, monitoring, distributed logging, distributed tracing.</li>
+<li><strong>Security:</strong> Transport level security (TLS) and key management.</li>
+<li><strong>Access Control:</strong> Simple blacklist and whitelist based access control.</li>
+<li><strong>Deployment:</strong> Native support for containers. Docker and Kubernetes.</li>
+<li><strong>Interservice communication protocols:</strong> HTTP1.x, HTTP2, gRPC</li>
+</ul>
+
+<h3 id="service-mesh-的功能点">Service Mesh 的功能点</h3>
+
+<p>正如我们之前所见，Service Mesh 提供了一组应用程序网络功能，而一些（原始）网络功能仍然在微服务层面自身来实现。没有硬性规定什么功能应该由 Service Mesh 来提供。以下这些是 Service Mesh 所提供的最常见功能。</p>
+
+<ul>
+<li><strong>服务间通信的弹性：</strong>熔断、重试和超时、故障注入、错误处理、负载均衡和故障转移。</li>
+<li><strong>服务发现：</strong>通过专有的服务注册中心来发现服务节点。</li>
+<li><strong>请求路由：</strong>原始路由功能，但没有与服务的业务功能相关的路由逻辑。</li>
+<li><strong>可观察性：</strong>度量、监控、分布式日志记录、分布式追踪。</li>
+<li><strong>安全：</strong>传输层安全（TLS）和秘钥管理。</li>
+<li><strong>访问控制：</strong>基于简单黑白名单的访问控制。</li>
+<li><strong>部署：</strong>容器的本地支持。Docker 和 Kubernetes。</li>
+<li><strong>服务间通信协议：</strong> HTTP1.X，HTTP2, gRPC</li>
+</ul>
+
+<h3 id="service-mesh-implementations">Service Mesh Implementations</h3>
+
+<p><a href="https://linkerd.io/">Linkerd</a> and <a href="https://istio.io/">Istio</a> are two popular open source service mesh implementations. They both follow a similar architecture, but different implementation mechanisms. You can find a very good comparison between these two service mesh implementations at <a href="https://abhishek-tiwari.com/a-sidecar-for-your-service-mesh/">1</a>.</p>
+
+<h3 id="servivce-mesh-实现">Servivce Mesh 实现</h3>
+
+<p><a href="https://linkerd.io/">Linkerd</a> 和 <a href="https://istio.io/">istio</a> 是两个流行的开源 Service Mesh 实现。它们都遵循类似的架构，但是实现机制不同。你可以在 <a href="https://abhishek-tiwari.com/a-sidecar-for-your-service-mesh/">1</a> 找到这两种 Service Mesh 实现之间非常好的对比。</p>
+
+<h3 id="service-mesh-pros-and-cons">Service Mesh — Pros and Cons</h3>
+
+<p>Let’s have a quick look at the pros and cons of service meshes.</p>
+
+<p>Pros</p>
+
+<ul>
+<li><p>Commodity features are implemented outside microservice code and they are reusable.</p></li>
+
+<li><p>Solves most of the problems in Microservices architecture which we used to have ad-hoc solutions: Distributed tracing, logging, security, access control etc.</p></li>
+
+<li><p>More freedom when it comes to selecting a microservices implementation language: You don’t need to worry about whether a given language supports or has libraries to build network application functions.</p></li>
+</ul>
+
+<p>Cons</p>
+
+<ul>
+<li>Complexity: Having a service mesh drastically increase the number of runtime instances that you have in a given microservice implementation.</li>
+<li>Adding extra hops: Each service call has to go through an extra hop(through service mesh sidecar proxy).</li>
+<li>Service Meshes address a subset of problems: Service mesh only address a subset of inter-service communication problems, but there are a lot of complex problems such as complex routing, transformation/type mapping, integrating with other services and systems, to be solved at your microservice’s business logic.</li>
+<li>Immature: Service mesh technologies are relatively new to be declared as full production ready for large-scale deployments.</li>
+</ul>
+
+<h3 id="service-mesh-优点和缺点">Service Mesh — 优点和缺点</h3>
+
+<p>让我们来快速浏览一下 Service Meshes 的优缺点。</p>
+
+<p>优点</p>
+
+<ul>
+<li>通用的特性在微服务代码之外实现，使得它们可以被复用。</li>
+<li>解决了过去微服务架构中大多数我们使用过临时方案解决的问题：分布式跟踪，日志记录，安全，访问控制等。</li>
+<li>当选择微服务实现语言时更自由：你不需要担心给定语言是否支持或者已经有构建网络应用程序功能的库。</li>
+</ul>
+
+<p>缺点</p>
+
+<ul>
+<li>复杂度：使用 Service Mesh 会大大增加微服务实现中运行时实例的数目。</li>
+<li>增加了额外的一跳：每个服务调用必须通过额外的一跳（通过 Service Mesh sidecar 代理）。</li>
+<li>Service Mesh 解决问题的一个子集：Service Mesh 仅仅处理了内部服务通信问题的一个子集，但是还有一些很复杂的问题诸如复杂的路由，转换 / 类型映射，与其它服务和系统集成等问题将在你微服务的业务逻辑中解决。</li>
+<li>不成熟：Service Mesh 技术对大规模部署，宣布全面生产可用还相对较新。</li>
+</ul>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>In summary, service mesh addresses some of the key challenges when it comes to the realization of microservice architecture. It gives you more freedom to select a diverse set of microservices implementation technologies as well as to focus more on business logic rather investing more time on network functions between services. However, service mesh won’t solve any of the business logic related or service integration/composition related problems.</p>
+
+<h3 id="结论">结论</h3>
+
+<p>总之，Service Mesh 解决了微服务架构落地的一些关键挑战。为你提供了更多自由来选择各种微服务实现技术，以及更多的专注于业务逻辑而不是在服务间网络功能上投入更多时间。但是，Service Mesh 不能解决任何业务逻辑相关或者服务集成 / 组合相关的问题。</p>
+
+</div>
+<div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <figcaption class='container'>
+      <center> <img src='https://tva1.sinaimg.cn/large/006y8mN6ly1g88b56alx4j30by0byglv.jpg' height="200" width="200"
+          alt='' /></center>
+      <span>
+        微信公众号 / Vanilla-OpenResty
+      </span>
+    </figcaption>
+  </figure>
+</div>
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.github.io/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/'>微服务</a>, <a class='category' href='https://idevz.github.io/categories/servicemesh/'>servicemesh</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/'>微服务</a>, <a class='tag' href='https://idevz.github.io/tags/servicemesh/'>ServiceMesh</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>微服务分层架构</a>
+    </div><div class='next-entry sep-before'>
+      <a href='https://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/'>
+        <span class='screen-reader-text'>Next post: </span>跟踪及时编译 / Tracing JIT<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:zhoujing_k49@163.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p>© 2020 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="https://idevz.github.io/assets/js/"</script>
+
+<script src='https://idevz.github.io/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

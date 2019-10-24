@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='打包前的准备 安装相关打包工具  sudo yum install rpmdevtools rpmlint rpmbuild --version
+❯ rpmbuild --version z@z RPM 版本 4.11.3  新建用户 RPM 在打包的过程中会将文件临时安装到系统中，为了保证构建程序不破坏系统环境，要使用普通用户打包：
+sudo useradd rpmuser sudo passwd rpmuser su - rpmuser 初始化打包环境 rpmdev-setuptree是rpmdevtools中带的初始化环境脚本，执行后会在用户主目录下创建rpmbuild目录和.rpmmacros文件，同时生成所需的子目录和默认的控制参数，执行：
+rpmdev-setuptree 生成的目录结构:
+`-- rpmbuild |-- BUILD |-- RPMS |-- SOURCES |-- SPECS `-- SRPMS 默认的全局控制宏文件.rpmmacros内容：
+%_topdir %(echo $HOME)/rpmbuild %_smp_mflags %( \  [ -z &#34;$RPM_BUILD_NCPUS&#34; ] \\\  &amp;&amp; RPM_BUILD_NCPUS=&#34;`/usr/bin/nproc 2&gt;/dev/null || \\\ /usr/bin/getconf _NPROCESSORS_ONLN`&#34;; \\\  if [ &#34;$RPM_BUILD_NCPUS&#34; -gt 16 ]; then \\\  echo &#34;-j16&#34;; \\\  elif [ &#34;$RPM_BUILD_NCPUS&#34; -gt 3 ]; then \\\  echo &#34;-j$RPM_BUILD_NCPUS&#34;; \\\  else \\\  echo &#34;-j3&#34;; \\\  fi ) %__arch_install_post \  [ &#34;%{buildarch}&#34; = &#34;noarch&#34; ] || QA_CHECK_RPATHS=1 ; \  case &#34;${QA_CHECK_RPATHS:-}&#34; in [1yY]*) /usr/lib/rpm/check-rpaths ;; esac \  /usr/lib/rpm/check-buildroot 安装编译软件 制作rpm包要先编译在打二进制包，所以要装 gcc、make 等工具，如果是给 Golang 的项目打 RPM 包，还需要有 go 环境'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='CentOS 如何打 RPM 包 • 做一个善于思考的学习者'>
+<meta property='og:description' content='打包前的准备 安装相关打包工具  sudo yum install rpmdevtools rpmlint rpmbuild --version
+❯ rpmbuild --version z@z RPM 版本 4.11.3  新建用户 RPM 在打包的过程中会将文件临时安装到系统中，为了保证构建程序不破坏系统环境，要使用普通用户打包：
+sudo useradd rpmuser sudo passwd rpmuser su - rpmuser 初始化打包环境 rpmdev-setuptree是rpmdevtools中带的初始化环境脚本，执行后会在用户主目录下创建rpmbuild目录和.rpmmacros文件，同时生成所需的子目录和默认的控制参数，执行：
+rpmdev-setuptree 生成的目录结构:
+`-- rpmbuild |-- BUILD |-- RPMS |-- SOURCES |-- SPECS `-- SRPMS 默认的全局控制宏文件.rpmmacros内容：
+%_topdir %(echo $HOME)/rpmbuild %_smp_mflags %( \  [ -z &#34;$RPM_BUILD_NCPUS&#34; ] \\\  &amp;&amp; RPM_BUILD_NCPUS=&#34;`/usr/bin/nproc 2&gt;/dev/null || \\\ /usr/bin/getconf _NPROCESSORS_ONLN`&#34;; \\\  if [ &#34;$RPM_BUILD_NCPUS&#34; -gt 16 ]; then \\\  echo &#34;-j16&#34;; \\\  elif [ &#34;$RPM_BUILD_NCPUS&#34; -gt 3 ]; then \\\  echo &#34;-j$RPM_BUILD_NCPUS&#34;; \\\  else \\\  echo &#34;-j3&#34;; \\\  fi ) %__arch_install_post \  [ &#34;%{buildarch}&#34; = &#34;noarch&#34; ] || QA_CHECK_RPATHS=1 ; \  case &#34;${QA_CHECK_RPATHS:-}&#34; in [1yY]*) /usr/lib/rpm/check-rpaths ;; esac \  /usr/lib/rpm/check-buildroot 安装编译软件 制作rpm包要先编译在打二进制包，所以要装 gcc、make 等工具，如果是给 Golang 的项目打 RPM 包，还需要有 go 环境'>
+<meta property='og:url' content='https://idevz.github.io/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='RPM 包'><meta property='article:published_time' content='2017-07-27T19:55:52&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>CentOS 如何打 RPM 包 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='https://idevz.github.io/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/'>
+  
+  
+  <link rel='icon' href='https://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='https://idevz.github.io/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head><body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='https://idevz.github.io/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/life/'>Life</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>CentOS 如何打 RPM 包</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-07-27T19:55:52&#43;08:00'>2017, Jul 27</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+4 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+<details class='container entry-toc'>
+  <summary class='title'>
+    <span>Table of Contents</span>
+  </summary>
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#打包前的准备">打包前的准备</a>
+<ul>
+<li><a href="#安装相关打包工具">安装相关打包工具</a></li>
+<li><a href="#新建用户">新建用户</a></li>
+<li><a href="#初始化打包环境">初始化打包环境</a></li>
+<li><a href="#安装编译软件">安装编译软件</a></li>
+</ul></li>
+<li><a href="#开始打包">开始打包</a>
+<ul>
+<li><a href="#准备源码">准备源码</a></li>
+<li><a href="#编写-spec-文件">编写 SPEC 文件</a></li>
+<li><a href="#开始打-rpm-包">开始打 RPM 包</a></li>
+</ul></li>
+<li><a href="#打包遇到的问题">打包遇到的问题</a></li>
+<li><a href="#参考资料">参考资料：</a></li>
+</ul>
+</nav>
+</details>
+
+
+  <div class='container entry-content'>
+  
+
+<h1 id="打包前的准备">打包前的准备</h1>
+
+<h2 id="安装相关打包工具">安装相关打包工具</h2>
+
+<ul>
+<li><code>sudo yum install rpmdevtools rpmlint</code></li>
+
+<li><p><code>rpmbuild --version</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">❯ rpmbuild --version                                                                                                                                                                                                                                                        z@z
+RPM 版本 <span style="color:#ae81ff">4</span>.11.3</code></pre></div></li>
+</ul>
+
+<h2 id="新建用户">新建用户</h2>
+
+<p>RPM 在打包的过程中会将文件临时安装到系统中，为了保证构建程序不破坏系统环境，要使用普通用户打包：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo useradd rpmuser
+sudo passwd rpmuser
+su - rpmuser</code></pre></div>
+<h2 id="初始化打包环境">初始化打包环境</h2>
+
+<p>rpmdev-setuptree是rpmdevtools中带的初始化环境脚本，执行后会在用户主目录下创建rpmbuild目录和.rpmmacros文件，同时生成所需的子目录和默认的控制参数，执行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rpmdev-setuptree</code></pre></div>
+<p>生成的目录结构:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#e6db74">`</span>-- rpmbuild
+    |-- BUILD
+    |-- RPMS
+    |-- SOURCES
+    |-- SPECS
+    <span style="color:#e6db74">`</span>-- SRPMS</code></pre></div>
+<p>默认的全局控制宏文件.rpmmacros内容：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">%_topdir %<span style="color:#f92672">(</span>echo $HOME<span style="color:#f92672">)</span>/rpmbuild
+
+%_smp_mflags %<span style="color:#f92672">(</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$RPM_BUILD_NCPUS<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span> <span style="color:#ae81ff">\\\
+</span><span style="color:#ae81ff"></span>        <span style="color:#f92672">&amp;&amp;</span> RPM_BUILD_NCPUS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;`/usr/bin/nproc 2&gt;/dev/null || \\\
+</span><span style="color:#e6db74">                             /usr/bin/getconf _NPROCESSORS_ONLN`&#34;</span>; <span style="color:#ae81ff">\\\
+</span><span style="color:#ae81ff"></span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$RPM_BUILD_NCPUS<span style="color:#e6db74">&#34;</span> -gt <span style="color:#ae81ff">16</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> <span style="color:#ae81ff">\\\
+</span><span style="color:#ae81ff"></span>        echo <span style="color:#e6db74">&#34;-j16&#34;</span>; <span style="color:#ae81ff">\\\
+</span><span style="color:#ae81ff"></span>    <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$RPM_BUILD_NCPUS<span style="color:#e6db74">&#34;</span> -gt <span style="color:#ae81ff">3</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span> <span style="color:#ae81ff">\\\
+</span><span style="color:#ae81ff"></span>        echo <span style="color:#e6db74">&#34;-j</span>$RPM_BUILD_NCPUS<span style="color:#e6db74">&#34;</span>; <span style="color:#ae81ff">\\\
+</span><span style="color:#ae81ff"></span>    <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">\\\
+</span><span style="color:#ae81ff"></span>        echo <span style="color:#e6db74">&#34;-j3&#34;</span>; <span style="color:#ae81ff">\\\
+</span><span style="color:#ae81ff"></span>    <span style="color:#66d9ef">fi</span> <span style="color:#f92672">)</span>
+
+%__arch_install_post <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;%{buildarch}&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;noarch&#34;</span> <span style="color:#f92672">]</span> <span style="color:#f92672">||</span> QA_CHECK_RPATHS<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ; <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>QA_CHECK_RPATHS<span style="color:#66d9ef">:-</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> in <span style="color:#f92672">[</span>1yY<span style="color:#f92672">]</span>*<span style="color:#f92672">)</span> /usr/lib/rpm/check-rpaths ;; <span style="color:#66d9ef">esac</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    /usr/lib/rpm/check-buildroot</code></pre></div>
+<h2 id="安装编译软件">安装编译软件</h2>
+
+<p>制作rpm包要先编译在打二进制包，所以要装 gcc、make 等工具，如果是给 Golang 的项目打 RPM 包，还需要有 go 环境</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum install gcc gcc-c++ make</code></pre></div>
+<h1 id="开始打包">开始打包</h1>
+
+<h2 id="准备源码">准备源码</h2>
+
+<p>将源码包和补丁等放入rpmbuild/SOURCE目录</p>
+
+<h2 id="编写-spec-文件">编写 SPEC 文件</h2>
+
+<p>SPEC文件控制整个rpm的打包过程，包含了打包的全部信息和控制参数，可以使用 rpmdev-newspec 命令来创建一个初始的SPEC文件，SPEC文件需放入rpmbuild/SPECS目录</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rpmdev-newspec  package-name.spec</code></pre></div>
+<p>SPEC 脚本文件名需以包名一致，/etc/rpmdevtools/spectemplate-* 下有许多常用软件 RPM 打包的 SPEC 文件模板。</p>
+
+<p>SPEC 脚本主要定义了打包过程中的几个阶段的配置：</p>
+
+<ol>
+<li>信息定义阶段 ：定义软件包的名字、版本等信息和打包过程中用到的变量等</li>
+<li>制作准备阶段 ：解压源码包、补丁包并打补丁</li>
+<li>编译阶段 ：设置编译参数并编译源码</li>
+<li>安装阶段 ：定义安装过程所执行的命令,包括安装前、安装后、卸载前、卸载后执行的操作</li>
+<li>清理阶段 ：清理打包过程中用到的目录文件等</li>
+<li>文件设置阶段 ：要打包的文件和目录，并设置文件权限等</li>
+</ol>
+
+<p>下面是打包 motan-go 所使用 SPEC 文件（motan-go.spec）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-spec" data-lang="spec"># 自定义宏
+%define bindir /data1/weibo/motan-go
+
+# 1.信息定义阶段
+
+### 软件名字，要与spec的文件名一致 openresty
+Name:           motan-go
+### 软件主版本号
+Version:        1.0
+### 发行编号，每打包一次值递增，主版本号发布新版后需重置该值
+Release:        4%{?dist}
+### 一行简短的软件简介，结尾不要加标点
+Summary:        Motan is Weibo RPC
+Group:          Weibo Motan G.
+### 软件许可
+License:        Apache License 2.0
+### 软件项目主页
+URL:           http://git.intra.weibo.com/openapi_rd/motan-go/
+### 放置在SOUIRCES目录的软件源码包名，可以指定多个:source1、source2等
+Source0:        %{name}.%{version}.tar.gz  
+### 补丁名，也可以写多个 patch1、patch2等 
+#patch0:            0.patch 
+### 在 install 阶段的测试安装目录，方便写files
+buildroot:      %_topdir/BUILDROOT
+BuildRequires:  go
+### 安装软件包时所需的依赖包列表，可以指定版本如 bash &gt;= 1.1.1
+Requires:       readline-devel,pcre-devel,openssl-devel
+### 程序的详细多行描述，每行必须小于等于 80 个字符，空行表示开始新段
+%description
+Motan java.go.php
+
+# 2.准备阶段
+%prep
+## 静默模式解压并进入解压后的目录,也常用：%autosetup -n %{name}
+%setup -q -n motan-go   
+### 需要打补丁，在这里写打补丁的命令                         
+#%patch0 -p1
+
+# 3. 编译阶段
+%build
+
+### 编译参数
+#./configure
+#使用多核处理器并行编译 
+#make %{?_smp_mflags}  
+cd main/
+go build magent.go
+
+# 4.安装阶段
+%install
+### 删除之前的残留文件
+rm -rf %{buildroot}
+mkdir -p %{buildroot}/%{bindir}/bin
+install -m755 main/magent %{buildroot}/%{bindir}/bin/
+install -d -m755 %{buildroot}/%{bindir}/bin/
+cp -pvr motan.yaml %{buildroot}/%{bindir}/
+
+## rpm安装前制行的脚本
+%pre
+### $1==1 代表的是第一次安装，2代表是升级，0代表是卸载
+#if [ $1 == 1 ];then     
+#     /usr/sbin/useradd -r %{nginx_user} 2&gt; /dev/null 
+#fi
+
+## rpm安装后制行的脚本
+%post
+
+###卸载前执行的脚本
+%preun
+###卸载后执行的脚本
+%postun
+
+# 5.清理阶段
+%clean
+### 删除buildroot目录
+rm -rf %{buildroot}
+
+#  6.文件设置阶段
+%files
+### 设定默认权限，如果下面没有指定权限，则继承默认
+%defattr (-,root,root,0755)
+###要打包的文件和目录，在执行完rpmbuild -bi后，参考%{rootbuild}下生成的文件和目录
+%{bindir}/bin/magent
+/data1/weibo/motan-go
+
+###  变更日志 格式固定，生成请用命令： rpmdev-bumpspec --comment=COMMENT --userstring=NAME+EMAIL_STRING SPECFILES
+#%changelog
+#* Thu Dec 31 2015 will &lt;will@52os.net&gt; - 1.9.7.1-4
+#- openresty init
+
+%define __debug_install_post %{_rpmconfigdir}/find-debuginfo.sh %{?_find_debuginfo_opts} &#34;%{_builddir}/%{?buildsubdir}&#34; %{nil}</code></pre></div>
+<p>编写完 SEPC 文件后，可以通过 rpmlint 检查是否有配置错误</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rpmlint motan-go.spec</code></pre></div>
+<p>如果有错误或者警告，使用 &ldquo;-i&rdquo; 选项可以查看更详细的信息</p>
+
+<h2 id="开始打-rpm-包">开始打 RPM 包</h2>
+
+<p>rpmbuild命令会根据spec文件来生成rpm包，主要用到以下几个参数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rpmbuild  --help 
+-bp 执行到%prep阶段结束
+-bc 执行到%build阶段结束
+-bi 执行到%install阶段结束 
+-bl 检测%files文件是否有丢失
+-ba 创建src.rpm和二进制包 
+-bs 只创建src.rpm源码包 
+-bb 只创建二进制rpm包</code></pre></div>
+<p>常用的参数就这几个，其它的自己看man手册，开始打包：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rpmbuild -bp motan-go.spec
+rpmbuild -bc motan-go.spec
+rpmbuild -bi motan-go.spec
+rpmbuild -bl motan-go.spec
+rpmbuild -ba motan-go.spec</code></pre></div>
+<p>分阶段测试,方便排错，如果哪个阶段有错误，可以使用&ndash;short-circuit跳过之前成功的阶段，节省时间</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rpmbuild -bi --short-circuit  ngx_openresty.spec</code></pre></div>
+<h1 id="打包遇到的问题">打包遇到的问题</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">extracting debug info from /home/rpmuser/rpmbuild/BUILDROOT/motan-go-1.0-4.el7.centos.x86_64/data1/weibo/motan-go/bin/magent
+*** ERROR: No build ID note found in /home/rpmuser/rpmbuild/BUILDROOT/motan-go-1.0-4.el7.centos.x86_64/data1/weibo/motan-go/bin/magent
+错误：/var/tmp/rpm-tmp.ozJYbO <span style="color:#f92672">(</span>%install<span style="color:#f92672">)</span> 退出状态不好</code></pre></div>
+<p>解法：
+在 SPEC 文件中添加一行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-spec" data-lang="spec">%define __debug_install_post %{_rpmconfigdir}/find-debuginfo.sh %{?_find_debuginfo_opts} &#34;%{_builddir}/%{?buildsubdir}&#34; %{nil}</code></pre></div>
+<p>rpm 执行安装包</p>
+
+<p>二进制包（Binary）以及源代码包（Source）两种。二进制包可以直接安装在计算机中，而源代码包将会由 RPM自动编译、安装。源代码包经常以src.rpm作为后缀名。</p>
+
+<p>常用命令组合：</p>
+
+<p>－ivh：安装显示安装进度&ndash;install&ndash;verbose&ndash;hash</p>
+
+<p>－Uvh：升级软件包&ndash;Update；</p>
+
+<p>－qpl： 列出RPM软件包内的文件信息[Query Package list]；</p>
+
+<p>－qpi：列出RPM软件包的描述信息[Query Package install package(s)]；</p>
+
+<p>－qf：查找指定文件属于哪个RPM软件包[Query File]；</p>
+
+<p>－Va：校验所有的 RPM软件包，查找丢失的文件[View Lost]；</p>
+
+<p>－e：删除包</p>
+
+<p>rpm -q samba //查询程序是否安装</p>
+
+<p>rpm -ivh /media/cdrom/RedHat/RPMS/samba-3.0.10-1.4E.i386.rpm //按路径安装并显示进度</p>
+
+<p>rpm -ivh &ndash;relocate /=/opt/gaim gaim-1.3.0-1.fc4.i386.rpm    //指定安装目录</p>
+
+<p>rpm -ivh &ndash;test gaim-1.3.0-1.fc4.i386.rpm　　　 //用来检查依赖关系；并不是真正的安装；</p>
+
+<p>rpm -Uvh &ndash;oldpackage gaim-1.3.0-1.fc4.i386.rpm //新版本降级为旧版本</p>
+
+<p>rpm -qa | grep httpd　　　　　 ＃[搜索指定rpm包是否安装]&ndash;all搜索<em>httpd</em></p>
+
+<p>rpm -ql httpd　　　　　　　　　＃[搜索rpm包]&ndash;list所有文件安装目录</p>
+
+<p>rpm -qpi Linux-1.4-6.i368.rpm　＃[查看rpm包]&ndash;query&ndash;package&ndash;install package信息</p>
+
+<p>rpm -qpf Linux-1.4-6.i368.rpm　＃[查看rpm包]&ndash;file</p>
+
+<p>rpm -qpR file.rpm　　　　　　　＃[查看包]依赖关系</p>
+
+<p>rpm2cpio file.rpm |cpio -div    ＃[抽出文件]</p>
+
+<p>rpm -ivh file.rpm 　＃[安装新的rpm]&ndash;install&ndash;verbose&ndash;hash</p>
+
+<p>rpm -ivhhttp://mirrors.kernel.org/fedora/core/4/i386/os/Fedora/RPMS/gaim-1.3.0-1.fc4.i386.rpm</p>
+
+<p>rpm -Uvh file.rpm    ＃[升级一个rpm]&ndash;upgrade</p>
+
+<p>rpm -e file.rpm      ＃[删除一个rpm包]&ndash;erase</p>
+
+<p>常用参数：</p>
+
+<p>Install/Upgrade/Erase options:</p>
+
+<p>-i, &ndash;install                     install package(s)</p>
+
+<p>-v, &ndash;verbose                     provide more detailed output</p>
+
+<p>-h, &ndash;hash                        print hash marks as package installs (good with -v)</p>
+
+<p>-e, &ndash;erase                       erase (uninstall) package</p>
+
+<p>-U, &ndash;upgrade=+      upgrade package(s)</p>
+
+<p>－-replacepkge                    无论软件包是否已被安装，都强行安装软件包</p>
+
+<p>&ndash;test                            安装测试，并不实际安装</p>
+
+<p>&ndash;nodeps                          忽略软件包的依赖关系强行安装</p>
+
+<p>&ndash;force                           忽略软件包及文件的冲突</p>
+
+<p>Query options (with -q or &ndash;query):</p>
+
+<p>-a, &ndash;all                         query/verify all packages</p>
+
+<p>-p, &ndash;package                     query/verify a package file</p>
+
+<p>-l, &ndash;list                        list files in package</p>
+
+<p>-d, &ndash;docfiles                    list all documentation files</p>
+
+<p>-f, &ndash;file                        query/verify package(s) owning file</p>
+
+<p>RPM源代码包装安装</p>
+
+<p>.src.rpm结尾的文件，这些文件是由软件的源代码包装而成的，用户要安装这类RPM软件包，必须使用命令：</p>
+
+<p>rpm　&ndash;recompile　vim-4.6-4.src.rpm   ＃这个命令会把源代码解包并编译、安装它，如果用户使用命令：</p>
+
+<p>rpm　&ndash;rebuild　vim-4.6-4.src.rpm　　＃在安装完成后，还会把编译生成的可执行文件重新包装成i386.rpm 的RPM软件包。</p>
+
+<p>[root@localhost src]# rpm -ivh awstats-6.8-1.noarch.rpm</p>
+
+<p>error: Failed dependencies:</p>
+
+<p>perl(LWP::UserAgent) is needed by awstats-6.8-1.noarch</p>
+
+<p>[root@localhost src]#</p>
+
+<p>使用rpm 属性相依套件的档案</p>
+
+<p>[root@localhost src]# rpm -qpR awstats-6.8-1.noarch.rpm</p>
+
+<p>/bin/sh</p>
+
+<p>/usr/bin/perl</p>
+
+<p>config(awstats) = 6.8-1</p>
+
+<p>perl &gt;= 0:5.005</p>
+
+<p>perl(LWP::UserAgent)</p>
+
+<p>perl(POSIX)</p>
+
+<p>perl(Socket)</p>
+
+<p>perl(Time::Local)</p>
+
+<p>perl(strict)</p>
+
+<p>perl(vars)</p>
+
+<p>rpmlib(CompressedFileNames) &lt;= 3.0.4-1</p>
+
+<p>rpmlib(PayloadFilesHavePrefix) &lt;= 4.0-1</p>
+
+<h1 id="参考资料">参考资料：</h1>
+
+<p><a href="https://www.52os.net/articles/howto-create-and-sign-rpm-package.html">centos下制作RPM包并签名</a>
+<a href="http://www.dahouduan.com/2015/06/15/Linux-centos-make-rpm/">Centos 6 制作 rpm 包</a></p>
+
+</div>
+<div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <figcaption class='container'>
+      <center> <img src='https://tva1.sinaimg.cn/large/006y8mN6ly1g88b56alx4j30by0byglv.jpg' height="200" width="200"
+          alt='' /></center>
+      <span>
+        微信公众号 / Vanilla-OpenResty
+      </span>
+    </figcaption>
+  </figure>
+</div>
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.github.io/categories/how-to/'>How-To</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.github.io/tags/rpm-%E5%8C%85/'>RPM 包</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='https://idevz.github.io/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>Service mesh — 一种新的模式而不是新技术</a>
+    </div><div class='next-entry sep-before'>
+      <a href='https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/'>
+        <span class='screen-reader-text'>Next post: </span>微服务分层架构<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:zhoujing_k49@163.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p>© 2020 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="https://idevz.github.io/assets/js/"</script>
+
+<script src='https://idevz.github.io/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

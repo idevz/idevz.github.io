@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='跟踪及时编译（Tracing JIT Compilation） 是一种虚拟机在程序运行时用来优化程序执行性能的技术，实现方式是通过对频繁执行操作的线性序列的统计并将其编译为本地机器码，并且执行他们。 这与传统基于每个方法进行编译优化的 JIT 编译有着本质的不同。
+JIT 概览 及时编译（Just-in-time compilation） 是一种在运行时将部分程序编译为机器码来提升程序执行速度的技术。一种对不同 JIT 编译技术分类的方法是通过他们编译的范围。 基于方法的 JIT 编译器每次将一个方法编译成机器码，而 Tracing JIT 编译器将经常执行的循环序列作为它们编译的单元。 Tracing JIT 编译器基于这样的一个假设，即，程序在某些比较热的循环（“hot loops”）花费执行的大部分时间，并且后续的循环迭代往往执行相同的代码路径。拥有 Tracing JIT 编译器的虚拟机通常除了一个 Tracing JIT 编译器他们还有要么一个解释器，或者一个基于方法的编译器这样混合模式的执行环境。
+Tracing JIT 编译器的技术细 Tracing JIT 编译器 在运行时经过多个阶段。 首先，收集循环的 profiling 信息。在一个热循环被确认后，将进入一个记录着该循环所有执行操作的特殊的跟踪模式（tracing mode），将所有操作序列记为一条 trace。随后这条 trace 将被优化并编译成机器码（trace）。 当这个循环再一次被执行的时候，被调用的将会是编译过的 trace 而不是相关的程序。
+  相关各执行阶段解释如下:
+ 
+--- title: idevz.org menu: main weight: -270 --- ### 关键字：  #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[技术](/tech)  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[OpenResty](/categories/openresty) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Service - Mesh](/categories/servicemesh) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[微服务](/categories/微服务/) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[PHP](/categories/php) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Golang](/categories/golang) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Vanilla](/categories/vanilla) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[How-To](/categories/how-to) #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[工具](/tools)  #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Life](/life) -- 分析（Profiling）阶段 Profiling 的目的在于识别出热循环（hot loops）。通常是通过统计每个循环的迭代次数来实现的，在一个循环执行的次数超过某些阈值，这个循环将被认为是热的，随机将进入 Tracing 模式。'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='跟踪及时编译 / Tracing JIT • idevz'>
+<meta property='og:description' content='跟踪及时编译（Tracing JIT Compilation） 是一种虚拟机在程序运行时用来优化程序执行性能的技术，实现方式是通过对频繁执行操作的线性序列的统计并将其编译为本地机器码，并且执行他们。 这与传统基于每个方法进行编译优化的 JIT 编译有着本质的不同。
+JIT 概览 及时编译（Just-in-time compilation） 是一种在运行时将部分程序编译为机器码来提升程序执行速度的技术。一种对不同 JIT 编译技术分类的方法是通过他们编译的范围。 基于方法的 JIT 编译器每次将一个方法编译成机器码，而 Tracing JIT 编译器将经常执行的循环序列作为它们编译的单元。 Tracing JIT 编译器基于这样的一个假设，即，程序在某些比较热的循环（“hot loops”）花费执行的大部分时间，并且后续的循环迭代往往执行相同的代码路径。拥有 Tracing JIT 编译器的虚拟机通常除了一个 Tracing JIT 编译器他们还有要么一个解释器，或者一个基于方法的编译器这样混合模式的执行环境。
+Tracing JIT 编译器的技术细 Tracing JIT 编译器 在运行时经过多个阶段。 首先，收集循环的 profiling 信息。在一个热循环被确认后，将进入一个记录着该循环所有执行操作的特殊的跟踪模式（tracing mode），将所有操作序列记为一条 trace。随后这条 trace 将被优化并编译成机器码（trace）。 当这个循环再一次被执行的时候，被调用的将会是编译过的 trace 而不是相关的程序。
+  相关各执行阶段解释如下:
+ 
+--- title: idevz.org menu: main weight: -270 --- ### 关键字：  #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[技术](/tech)  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[OpenResty](/categories/openresty) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Service - Mesh](/categories/servicemesh) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[微服务](/categories/微服务/) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[PHP](/categories/php) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Golang](/categories/golang) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Vanilla](/categories/vanilla) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[How-To](/categories/how-to) #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[工具](/tools)  #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Life](/life) -- 分析（Profiling）阶段 Profiling 的目的在于识别出热循环（hot loops）。通常是通过统计每个循环的迭代次数来实现的，在一个循环执行的次数超过某些阈值，这个循环将被认为是热的，随机将进入 Tracing 模式。'>
+<meta property='og:url' content='https://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://idevz.github.io/images/abstract-arrows-facebook-cover.jpg'><meta property='article:section' content='tech'><meta property='article:tag' content='Tracing JIT'><meta property='article:published_time' content='2017-12-04T15:40:34&#43;08:00'/><meta property='article:modified_time' content='2017-12-10T23:02:47&#43;08:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@idevz'><meta property='twitter:image' content='https://idevz.github.io/images/abstract-arrows-facebook-cover.jpg'><meta property='twitter:image:alt' content='Tracing JIT Compilation'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>跟踪及时编译 / Tracing JIT • idevz</title>
+  <link rel='canonical' href='https://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/'>
+  
+  
+  <link rel='icon' href='https://idevz.github.io/favicon.ico'>
+<link rel='stylesheet' href='https://idevz.github.io/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head><body class='page type-tech has-cover'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='https://idevz.github.io/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/life/'>Life</a>
+      </li><li class='item'>
+        <a href='https://idevz.github.io/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>跟踪及时编译 / Tracing JIT</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-12-04T15:40:34&#43;08:00'>2017, Dec 04</time>
+</span>
+
+  <span class='byline'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M21,21V20c0-2.76-4-5-9-5s-9,2.24-9,5v1"/>
+  <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
+  
+</svg>
+<span class='screen-reader-text'> by </span><a href='https://idevz.github.io/authors/idevz'>idevz</a></span>
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+3 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  <div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <img src='https://idevz.github.io/images/abstract-arrows-facebook-cover.jpg' alt='Tracing JIT Compilation'/>
+    
+      
+      <figcaption class='container'>
+        <span>Tracing JIT Compilation</span>
+      </figcaption>
+      
+    
+  </figure>
+</div>
+  
+<details class='container entry-toc'>
+  <summary class='title'>
+    <span>Table of Contents</span>
+  </summary>
+  <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#jit-概览">JIT 概览</a></li>
+<li><a href="#tracing-jit-编译器的技术细">Tracing JIT 编译器的技术细</a>
+<ul>
+<li><a href="#分析-profiling-阶段">分析（Profiling）阶段</a></li>
+<li><a href="#跟踪-tracing-阶段">跟踪（Tracing） 阶段</a></li>
+<li><a href="#优化-optimization-和-机器码生成-code-generation-阶段">优化（Optimization）和 机器码生成（Code-Generation）阶段</a></li>
+<li><a href="#执行-execution">执行（Execution）</a></li>
+<li><a href="#trace-实例">Trace 实例</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+</details>
+
+
+  <div class='container entry-content'>
+  
+
+<p><strong>跟踪及时编译（Tracing JIT Compilation）</strong> 是一种虚拟机在程序运行时用来优化程序执行性能的技术，实现方式是通过对频繁执行操作的线性序列的统计并将其编译为本地机器码，并且执行他们。
+这与传统基于每个方法进行编译优化的 JIT 编译有着本质的不同。</p>
+
+<h2 id="jit-概览">JIT 概览</h2>
+
+<p><strong>及时编译（Just-in-time compilation）</strong> 是一种在运行时将部分程序编译为机器码来提升程序执行速度的技术。一种对不同 JIT 编译技术分类的方法是通过他们编译的范围。
+基于方法的 JIT 编译器每次将一个方法编译成机器码，而 Tracing JIT 编译器将经常执行的循环序列作为它们编译的单元。 Tracing JIT 编译器基于这样的一个假设，即，程序在某些比较热的循环（“hot loops”）花费执行的大部分时间，并且后续的循环迭代往往执行相同的代码路径。拥有 Tracing JIT 编译器的虚拟机通常除了一个 Tracing JIT 编译器他们还有要么一个解释器，或者一个基于方法的编译器这样混合模式的执行环境。</p>
+
+<h2 id="tracing-jit-编译器的技术细">Tracing JIT 编译器的技术细</h2>
+
+<p><strong>Tracing JIT 编译器</strong> 在运行时经过多个阶段。
+首先，收集循环的 profiling 信息。在一个热循环被确认后，将进入一个记录着该循环所有执行操作的特殊的跟踪模式（tracing mode），将所有操作序列记为一条 trace。随后这条 trace 将被优化并编译成机器码（trace）。
+当这个循环再一次被执行的时候，被调用的将会是编译过的 trace 而不是相关的程序。</p>
+
+<p><br/>
+<div class='align-center'>
+  <blockquote>
+<p><em>相关各执行阶段解释如下:</em></p>
+</blockquote>
+</div></p>
+
+<!-- <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">---
+title: idevz.org
+menu: main
+weight: -270
+---
+
+<span style="color:#75715e">### 关键字：
+</span><span style="color:#75715e"></span>
+
+
+<span style="color:#75715e">#### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[技术](/tech)
+</span><span style="color:#75715e"></span>
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[OpenResty](/categories/openresty)
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Service - Mesh](/categories/servicemesh)
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[微服务](/categories/微服务/)
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[PHP](/categories/php)
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Golang](/categories/golang)
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Vanilla](/categories/vanilla)
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[How-To](/categories/how-to)
+
+
+
+<span style="color:#75715e">#### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[工具](/tools)
+</span><span style="color:#75715e"></span>
+
+
+#### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Life](/life)</code></pre></div> -->
+
+<h3 id="分析-profiling-阶段">分析（Profiling）阶段</h3>
+
+<p><strong>Profiling</strong> 的目的在于识别出热循环（hot loops）。通常是通过统计每个循环的迭代次数来实现的，在一个循环执行的次数超过某些阈值，这个循环将被认为是热的，随机将进入 Tracing 模式。</p>
+
+<h3 id="跟踪-tracing-阶段">跟踪（Tracing） 阶段</h3>
+
+<p><strong>在</strong> Tracing 阶段，循环正常执行的同时，每个执行的操作将会以一种<a href="https://en.wikipedia.org/wiki/Intermediate_representation">中间表示（intermediate representation / IR code）</a>的形式被记录到一条 trace中。
+Tracing 跟随函数调用，所以函数也将被内联到 trace 中，Tracing 操作会一直进行直到循环的结束跳出回到循环开始。
+由于 trace 根据一条条具体的循环执行路径记录，后续对该 trace 的执行可能出现分叉，即不再是之前的执行路径，为了识别这样分叉发生的地方，特殊的保护指令（guard instructions）被插入到 trace 中，一个典型的例子就是 if 语句。
+保护指令就是对原始条件是否依然满足的一个快速的检查，如果检查失败，则当前 trace 的执行被终止。
+因为 Tracing 过程是在执行阶段完成的，所以使得 trace 可以包含很多运行时的信息（比如：类型信息）。这些信息将被后面的优化阶段用来提升代码执行效率。</p>
+
+<h3 id="优化-optimization-和-机器码生成-code-generation-阶段">优化（Optimization）和 机器码生成（Code-Generation）阶段</h3>
+
+<p><strong>Trace</strong> 是非常容易被优化的，因为他们仅仅表示仅仅一条执行路径，意味着没有控制流需要处理。典型的优化包括 <a href="https://en.wikipedia.org/wiki/Common_subexpression_elimination">常量子表达式消除（constant-subexpression elimination）</a>, <a href="https://en.wikipedia.org/wiki/Dead-code_elimination">死代码消除（dead-code elimination）</a>, <a href="https://en.wikipedia.org/wiki/Register_allocation">寄存器分配（register allocation）</a>, <a href="https://en.wikipedia.org/wiki/Loop-invariant_code_motion">不变代码移动（invariant-code motion）</a>, <a href="https://en.wikipedia.org/wiki/Constant_folding">常量合并（constant folding）</a>, 和<a href="https://en.wikipedia.org/wiki/Escape_analysis">指针逃逸分析（escape analysis）</a>等。</p>
+
+<p><strong>优化后，</strong> trace 将生成机器码，同优化阶段类似，生成机器码的过程很简单，因为 trace 的线性性质（linear nature）。</p>
+
+<h3 id="执行-execution">执行（Execution）</h3>
+
+<p><strong>在</strong> trace 被编译成机器码之后，将会被后续的循环迭代执行，直到保护指令检查失败。</p>
+
+<h3 id="trace-实例">Trace 实例</h3>
+
+<p><strong>OpenResty</strong> 将 LuaJIT 嵌入 Nginx 中以获取 Lua 高效的开发以及 LuaJIT 与 Nginx 组合带来的高性能，微博开源跨语言 RPC 框架 Motan-OpenResty 基于此开发，下面我们就从 Motan-OpenResty 中来列举几个 Trace 的实例。</p>
+
+<p><strong><em>GDB 进入 Motan-OpenResty Debug 模式：</em></strong></p>
+
+<p>执行 <code>ltrace</code> 命令获取当前被 JIT 编译的所有 trace 条数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gdb ltrace
+Found <span style="color:#ae81ff">45</span> traces.</code></pre></div>
+<p>执行 <code>ltrace number</code> ltrace 命令后加上对应编号，将获取该条 trace 对象的详细信息，下面我们就来详细分析下第一条 trace。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gdb ltrace <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">(</span>GCtrace*<span style="color:#f92672">)</span>0xb51510
+machine code size: <span style="color:#ae81ff">242</span>
+machine code start addr: 0x7ffff7fe7f07
+machine code end addr: 0x7ffff7fe7ff9
+@/media/psf/g/idevz/code/www/vanilla/framework/motan/config/parse.lua:9</code></pre></div>
+<p>我们来看看这部分被 LuaJIT 编译优化过的代码（节选： <a href="https://github.com/weibocom/motan-openresty/blob/master/config/parse.lua#L9">Motan-OpenResty/config/parse.lua:9</a>）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#75715e">-- Copyright (C) idevz (idevz.org)</span>
+
+
+<span style="color:#66d9ef">local</span> _M <span style="color:#f92672">=</span> {}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">_M</span>.<span style="color:#a6e22e">ini</span>(lines, name)
+    <span style="color:#66d9ef">local</span> t <span style="color:#f92672">=</span> {}
+    <span style="color:#66d9ef">local</span> section
+    <span style="color:#66d9ef">for</span> line <span style="color:#66d9ef">in</span> lines(name) <span style="color:#66d9ef">do</span>
+        <span style="color:#66d9ef">local</span> s <span style="color:#f92672">=</span> line:match(<span style="color:#e6db74">&#34;^%[([^%]]+)%]$&#34;</span>)
+        <span style="color:#66d9ef">if</span> s <span style="color:#66d9ef">then</span>
+            section <span style="color:#f92672">=</span> s
+            t[section] <span style="color:#f92672">=</span> t[section] <span style="color:#f92672">or</span> {}
+            <span style="color:#66d9ef">goto</span> CONTINUE
+        <span style="color:#66d9ef">end</span></code></pre></div>
+<p>Motan-OpenResty 在启动的时候，第一步是进行一系列的配置解析和加载，我们自己实现了 ini 格式的配置加载，第一条被 LuaJIT 选中的就是这个 parse 操作的第一个 <code>for</code> 循环，这必须是第一条最热的代码路径。</p>
+
+<p>上面 <code>ltrace 1</code> 命令输出的机器码开始地址和结束地址可以用来获取当前 trace 生成的机器码，如下（节选部分）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gdb set disassembly-flavor intel
+gdb disas 0x7ffff7fe7f07,0x7ffff7fe7ff9
+Dump of assembler code from 0x7ffff7fe7f07 to 0x7ffff7fe7ff9:
+   0x00007ffff7fe7f07:	mov    DWORD PTR ds:0xb1be68,0x1
+   0x00007ffff7fe7f12:	cmp    DWORD PTR <span style="color:#f92672">[</span>rdx+0x3c<span style="color:#f92672">]</span>,0xfffffffb
+   0x00007ffff7fe7f16:	jne    0x7ffff7fd8010
+   
+   ... ...
+
+   0x00007ffff7fe7fe4:	mov    eax,0x3
+   0x00007ffff7fe7fe9:	mov    ebx,0xb1bf00
+   0x00007ffff7fe7fee:	mov    r14d,0xb1ca38
+   0x00007ffff7fe7ff4:	jmp    0x7ffff74fa4c2 &lt;lj_vm_exit_interp&gt;
+End of assembler dump.</code></pre></div>
+<p>我们也可以通过 <code>lir</code> 命令来获取 trace JIT 过程中的中间表示码（intermediate representation / IR code）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gdb lir <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">(</span>GCtrace*<span style="color:#f92672">)</span>0xb51510
+IR count: <span style="color:#ae81ff">13</span>
+
+---- TRACE <span style="color:#ae81ff">1</span> start parse.lua:9
+---- TRACE <span style="color:#ae81ff">1</span> IR
+....              SNAP   <span style="color:#75715e">#0   [ ---- ---- ---- ---- ---- ---- ---- ---- ---- ]</span>
+<span style="color:#ae81ff">0001</span> rbp   &gt;  str SLOAD  <span style="color:#75715e">#8    T</span>
+<span style="color:#ae81ff">0002</span>          int FLOAD  0xb21fb0  tab.hmask
+<span style="color:#ae81ff">0003</span>       &gt;  int EQ     <span style="color:#ae81ff">0002</span>  +1
+<span style="color:#ae81ff">0004</span> rbx      p32 FLOAD  0xb21fb0  tab.node
+<span style="color:#ae81ff">0005</span>       &gt;  p32 HREFK  <span style="color:#ae81ff">0004</span>  <span style="color:#e6db74">&#34;__index&#34;</span>
+<span style="color:#ae81ff">0006</span> rbx   &gt;  tab HLOAD  <span style="color:#ae81ff">0005</span>
+<span style="color:#ae81ff">0007</span>          int FLOAD  <span style="color:#ae81ff">0006</span>  tab.hmask
+<span style="color:#ae81ff">0008</span>       &gt;  int EQ     <span style="color:#ae81ff">0007</span>  +15
+<span style="color:#ae81ff">0009</span> rbx      p32 FLOAD  <span style="color:#ae81ff">0006</span>  tab.node
+<span style="color:#ae81ff">0010</span>       &gt;  p32 HREFK  <span style="color:#ae81ff">0009</span>  <span style="color:#e6db74">&#34;match&#34;</span> @3
+<span style="color:#ae81ff">0011</span>       &gt;  fun HLOAD  <span style="color:#ae81ff">0010</span>
+<span style="color:#ae81ff">0012</span>       &gt;  fun EQ     <span style="color:#ae81ff">0011</span>  string.gmatch
+....              SNAP   <span style="color:#75715e">#1   [ ---- ---- ---- ---- ---- ---- ---- ---- ---- 0xb51510 [0x00003348] string.gmatch|0001 &#34;^\%[\([^\%]]+\)\%]\$&#34; ]</span></code></pre></div>
+<p>至此，我们应该对 Trace JIT 编译技术，对 LuaJIT 有个整体的了解了。</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Tracing_just-in-time_compilation">https://en.wikipedia.org/wiki/Tracing_just-in-time_compilation</a></p>
+
+</div>
+<div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <figcaption class='container'>
+      <center> <img src='https://tva1.sinaimg.cn/large/006y8mN6ly1g88b56alx4j30by0byglv.jpg' height="200" width="200"
+          alt='' /></center>
+      <span>
+        微信公众号 / Vanilla-OpenResty
+      </span>
+    </figcaption>
+  </figure>
+</div>
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.github.io/categories/jit/'>JIT</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.github.io/tags/tracing-jit/'>Tracing JIT</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>微服务的服务网格</a>
+    </div><div class='next-entry sep-before'>
+      <a href='https://idevz.github.io/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
+        <span class='screen-reader-text'>Next post: </span>使用Vs Code 调试 Golang 程序<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:zhoujing_k49@163.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p>© 2020 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="https://idevz.github.io/assets/js/"</script>
+
+<script src='https://idevz.github.io/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+
