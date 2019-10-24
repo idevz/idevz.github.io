@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tracing JIT on 做一个善于思考的学习者</title>
-    <link>https://idevz.github.io/tags/tracing-jit/</link>
+    <link>https://idevz.org/tags/tracing-jit/</link>
     <description>Recent content in Tracing JIT on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Mon, 04 Dec 2017 15:40:34 +0800</lastBuildDate>
     
-	<atom:link href="https://idevz.github.io/tags/tracing-jit/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.org/tags/tracing-jit/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>跟踪及时编译 / Tracing JIT</title>
-      <link>https://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/</link>
+      <link>https://idevz.org/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/</link>
       <pubDate>Mon, 04 Dec 2017 15:40:34 +0800</pubDate>
       
-      <guid>https://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/</guid>
+      <guid>https://idevz.org/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/</guid>
       <description>跟踪及时编译（Tracing JIT Compilation） 是一种虚拟机在程序运行时用来优化程序执行性能的技术，实现方式是通过对频繁执行操作的线性序列的统计并将其编译为本地机器码，并且执行他们。 这与传统基于每个方法进行编译优化的 JIT 编译有着本质的不同。
 JIT 概览 及时编译（Just-in-time compilation） 是一种在运行时将部分程序编译为机器码来提升程序执行速度的技术。一种对不同 JIT 编译技术分类的方法是通过他们编译的范围。 基于方法的 JIT 编译器每次将一个方法编译成机器码，而 Tracing JIT 编译器将经常执行的循环序列作为它们编译的单元。 Tracing JIT 编译器基于这样的一个假设，即，程序在某些比较热的循环（“hot loops”）花费执行的大部分时间，并且后续的循环迭代往往执行相同的代码路径。拥有 Tracing JIT 编译器的虚拟机通常除了一个 Tracing JIT 编译器他们还有要么一个解释器，或者一个基于方法的编译器这样混合模式的执行环境。
 Tracing JIT 编译器的技术细 Tracing JIT 编译器 在运行时经过多个阶段。 首先，收集循环的 profiling 信息。在一个热循环被确认后，将进入一个记录着该循环所有执行操作的特殊的跟踪模式（tracing mode），将所有操作序列记为一条 trace。随后这条 trace 将被优化并编译成机器码（trace）。 当这个循环再一次被执行的时候，被调用的将会是编译过的 trace 而不是相关的程序。

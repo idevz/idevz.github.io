@@ -13,18 +13,18 @@ Base 装机步骤  修改运行级别，CentOS 7 通过修改 /etc/inittab 已�
 Lego，旨在想搭积木一样来组合各种部署功能，因为在 runX 这几年的使用过程中，发现经常还是会有些复用的功能， 在 k8s-start 项目中我试验了这种积木的思想，发现很受用。重新整理 runX 到 Lego，主要包含以下几个方面：
  最核心的当然是积木的思想，所有的方法和模块都是可组合的。 新装虚拟机当前可能无法做到完全自动化，但是可以通过组合的方式实现半自动化。  下面是装机初始的一些步骤，相关的代码会逐步整理到 Lego 这个项目中。
 Base 装机步骤  修改运行级别，CentOS 7 通过修改 /etc/inittab 已经过时，CentOS 8 使用 Target，见下 通网，往后的各种操作都需要联网进行（设置免密登陆，后续操作都可以通过 ssh 完成） 更换阿里云的 yum 源，阿里云已经建了 CentOS 8 的 yum 源，因为安装 Parallels Tools 依赖的包需要 安装 Parallels Tools(否则无法共享目录，以及使用命令行 prlctl 命令控制 pvm) 关机，设置共享文件夹等通用设置（关机后，在 Parallels 图形界面进行设置较为方便，目前尚未研究通过 prlctl 命令来设置） 安装 Parallels Tools 后，就可以将 Mac 宿主机中的 runX 项目挂载到 pvm 中，运行相关自动化脚本，比如一些基础设置（/etc/profile，/etc/sudoers 等）  修改运行级别，关闭图形界面 systemctl set-default multi-user.'>
-<meta property='og:url' content='https://idevz.github.io/2019/10/%E5%9F%BA%E4%BA%8E-parallels-%E5%B0%9D%E9%B2%9C-centos-8/'>
+<meta property='og:url' content='https://idevz.org/2019/10/%E5%9F%BA%E4%BA%8E-parallels-%E5%B0%9D%E9%B2%9C-centos-8/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
-<meta property='og:type' content='article'><meta property='og:image' content='https://idevz.github.io/images/Looks-High-Tech-Facebook-Profile-Timeline-Cover.jpg'><meta property='article:section' content='tech'><meta property='article:tag' content='CentOS-8'><meta property='article:published_time' content='2019-10-19T11:03:16&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T15:21:33&#43;08:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@idevz'><meta property='twitter:image' content='https://idevz.github.io/images/Looks-High-Tech-Facebook-Profile-Timeline-Cover.jpg'><meta property='twitter:image:alt' content='Taste CentOS-8 Through Parallels'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://idevz.org/images/Looks-High-Tech-Facebook-Profile-Timeline-Cover.jpg'><meta property='article:section' content='tech'><meta property='article:tag' content='CentOS-8'><meta property='article:published_time' content='2019-10-19T11:03:16&#43;08:00'/><meta property='article:modified_time' content='2019-10-23T15:21:33&#43;08:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@idevz'><meta property='twitter:image' content='https://idevz.org/images/Looks-High-Tech-Facebook-Profile-Timeline-Cover.jpg'><meta property='twitter:image:alt' content='Taste CentOS-8 Through Parallels'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title>基于 Parallels 尝鲜 CentOS-8 • idevz</title>
-  <link rel='canonical' href='https://idevz.github.io/2019/10/%E5%9F%BA%E4%BA%8E-parallels-%E5%B0%9D%E9%B2%9C-centos-8/'>
+  <link rel='canonical' href='https://idevz.org/2019/10/%E5%9F%BA%E4%BA%8E-parallels-%E5%B0%9D%E9%B2%9C-centos-8/'>
   
   
-  <link rel='icon' href='https://idevz.github.io/favicon.ico'>
-<link rel='stylesheet' href='https://idevz.github.io/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='https://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='https://idevz.org/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -47,15 +47,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='https://idevz.github.io/'>idevz.org</a>
+        <a href='https://idevz.org/'>idevz.org</a>
       </li><li class='item'>
-        <a href='https://idevz.github.io/tech/'>技术</a>
+        <a href='https://idevz.org/tech/'>技术</a>
       </li><li class='item'>
-        <a href='https://idevz.github.io/tools/'>工具</a>
+        <a href='https://idevz.org/tools/'>工具</a>
       </li><li class='item'>
-        <a href='https://idevz.github.io/life/'>Life</a>
+        <a href='https://idevz.org/life/'>Life</a>
       </li><li class='item'>
-        <a href='https://idevz.github.io/page/about/'>关于</a>
+        <a href='https://idevz.org/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -99,7 +99,7 @@ if (!doNotTrack) {
   <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
   
 </svg>
-<span class='screen-reader-text'> by </span><a href='https://idevz.github.io/authors/idevz'>idevz</a></span>
+<span class='screen-reader-text'> by </span><a href='https://idevz.org/authors/idevz'>idevz</a></span>
   
 <span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
@@ -119,7 +119,7 @@ if (!doNotTrack) {
 
   <div class='entry-cover'>
   <figure class='container cover-normal'>
-    <img src='https://idevz.github.io/images/Looks-High-Tech-Facebook-Profile-Timeline-Cover.jpg' alt='Taste CentOS-8 Through Parallels'/>
+    <img src='https://idevz.org/images/Looks-High-Tech-Facebook-Profile-Timeline-Cover.jpg' alt='Taste CentOS-8 Through Parallels'/>
     
       
       <figcaption class='container'>
@@ -301,14 +301,14 @@ chmod <span style="color:#ae81ff">600</span> ~/.ssh/authorized_keys</code></pre>
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.github.io/categories/centos-8/'>CentOS-8</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.org/categories/centos-8/'>CentOS-8</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.github.io/tags/centos-8/'>CentOS-8</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.org/tags/centos-8/'>CentOS-8</a></div>
 
   </div>
 </footer>
@@ -318,7 +318,7 @@ chmod <span style="color:#ae81ff">600</span> ~/.ssh/authorized_keys</code></pre>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='https://idevz.github.io/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/'>
+      <a href='https://idevz.org/2018/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -372,9 +372,9 @@ chmod <span style="color:#ae81ff">600</span> ~/.ssh/authorized_keys</code></pre>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="https://idevz.github.io/assets/js/"</script>
+  </div><script>window.__assets_js_src="https://idevz.org/assets/js/"</script>
 
-<script src='https://idevz.github.io/assets/js/main.67d669ac.js'></script>
+<script src='https://idevz.org/assets/js/main.67d669ac.js'></script>
 
 </body>
 

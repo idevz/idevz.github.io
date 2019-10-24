@@ -17,18 +17,18 @@ Tracing JIT 编译器的技术细 Tracing JIT 编译器 在运行时经过多个
   相关各执行阶段解释如下:
  
 --- title: idevz.org menu: main weight: -270 --- ### 关键字：  #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[技术](/tech)  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[OpenResty](/categories/openresty) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Service - Mesh](/categories/servicemesh) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[微服务](/categories/微服务/) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[PHP](/categories/php) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Golang](/categories/golang) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Vanilla](/categories/vanilla) &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[How-To](/categories/how-to) #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[工具](/tools)  #### &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[Life](/life) -- 分析（Profiling）阶段 Profiling 的目的在于识别出热循环（hot loops）。通常是通过统计每个循环的迭代次数来实现的，在一个循环执行的次数超过某些阈值，这个循环将被认为是热的，随机将进入 Tracing 模式。'>
-<meta property='og:url' content='https://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/'>
+<meta property='og:url' content='https://idevz.org/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
-<meta property='og:type' content='article'><meta property='og:image' content='https://idevz.github.io/images/abstract-arrows-facebook-cover.jpg'><meta property='article:section' content='tech'><meta property='article:tag' content='Tracing JIT'><meta property='article:published_time' content='2017-12-04T15:40:34&#43;08:00'/><meta property='article:modified_time' content='2017-12-10T23:02:47&#43;08:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@idevz'><meta property='twitter:image' content='https://idevz.github.io/images/abstract-arrows-facebook-cover.jpg'><meta property='twitter:image:alt' content='Tracing JIT Compilation'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://idevz.org/images/abstract-arrows-facebook-cover.jpg'><meta property='article:section' content='tech'><meta property='article:tag' content='Tracing JIT'><meta property='article:published_time' content='2017-12-04T15:40:34&#43;08:00'/><meta property='article:modified_time' content='2017-12-10T23:02:47&#43;08:00'/><meta name='twitter:card' content='summary_large_image'><meta name='twitter:creator' content='@idevz'><meta property='twitter:image' content='https://idevz.org/images/abstract-arrows-facebook-cover.jpg'><meta property='twitter:image:alt' content='Tracing JIT Compilation'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
   <title>跟踪及时编译 / Tracing JIT • idevz</title>
-  <link rel='canonical' href='https://idevz.github.io/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/'>
+  <link rel='canonical' href='https://idevz.org/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/'>
   
   
-  <link rel='icon' href='https://idevz.github.io/favicon.ico'>
-<link rel='stylesheet' href='https://idevz.github.io/assets/css/main.6a060eb7.css'><style>
+  <link rel='icon' href='https://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='https://idevz.org/assets/css/main.6a060eb7.css'><style>
 :root{--color-accent:#ffcd00;}
 </style>
 
@@ -51,15 +51,15 @@ if (!doNotTrack) {
   <div class='container'>
     
     <ul><li class='item'>
-        <a href='https://idevz.github.io/'>idevz.org</a>
+        <a href='https://idevz.org/'>idevz.org</a>
       </li><li class='item'>
-        <a href='https://idevz.github.io/tech/'>技术</a>
+        <a href='https://idevz.org/tech/'>技术</a>
       </li><li class='item'>
-        <a href='https://idevz.github.io/tools/'>工具</a>
+        <a href='https://idevz.org/tools/'>工具</a>
       </li><li class='item'>
-        <a href='https://idevz.github.io/life/'>Life</a>
+        <a href='https://idevz.org/life/'>Life</a>
       </li><li class='item'>
-        <a href='https://idevz.github.io/page/about/'>关于</a>
+        <a href='https://idevz.org/page/about/'>关于</a>
       </li></ul>
   </div>
 </nav><div class='header-widgets'>
@@ -103,7 +103,7 @@ if (!doNotTrack) {
   <path d="M16,6.37A4,4,0,1,1,12.63,3,4,4,0,0,1,16,6.37Z"/>
   
 </svg>
-<span class='screen-reader-text'> by </span><a href='https://idevz.github.io/authors/idevz'>idevz</a></span>
+<span class='screen-reader-text'> by </span><a href='https://idevz.org/authors/idevz'>idevz</a></span>
   
 <span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
@@ -123,7 +123,7 @@ if (!doNotTrack) {
 
   <div class='entry-cover'>
   <figure class='container cover-normal'>
-    <img src='https://idevz.github.io/images/abstract-arrows-facebook-cover.jpg' alt='Tracing JIT Compilation'/>
+    <img src='https://idevz.org/images/abstract-arrows-facebook-cover.jpg' alt='Tracing JIT Compilation'/>
     
       
       <figcaption class='container'>
@@ -324,14 +324,14 @@ IR count: <span style="color:#ae81ff">13</span>
   <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
   
 </svg>
-<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.github.io/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.github.io/categories/jit/'>JIT</a></div>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.org/categories/jit/'>JIT</a></div>
 <div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
   <line x1="7" y1="7" x2="7" y2="7"/>
   
 </svg>
-<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.github.io/tags/tracing-jit/'>Tracing JIT</a></div>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.org/tags/tracing-jit/'>Tracing JIT</a></div>
 
   </div>
 </footer>
@@ -341,7 +341,7 @@ IR count: <span style="color:#ae81ff">13</span>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/'>
+      <a href='https://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -351,7 +351,7 @@ IR count: <span style="color:#ae81ff">13</span>
  Previous</span>
         <span class='screen-reader-text'>Previous post: </span>微服务的服务网格</a>
     </div><div class='next-entry sep-before'>
-      <a href='https://idevz.github.io/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
+      <a href='https://idevz.org/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
         <span class='screen-reader-text'>Next post: </span>使用Vs Code 调试 Golang 程序<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
@@ -405,9 +405,9 @@ IR count: <span style="color:#ae81ff">13</span>
       </footer>
 
     </div>
-  </div><script>window.__assets_js_src="https://idevz.github.io/assets/js/"</script>
+  </div><script>window.__assets_js_src="https://idevz.org/assets/js/"</script>
 
-<script src='https://idevz.github.io/assets/js/main.67d669ac.js'></script>
+<script src='https://idevz.org/assets/js/main.67d669ac.js'></script>
 
 </body>
 

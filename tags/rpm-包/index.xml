@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>RPM 包 on 做一个善于思考的学习者</title>
-    <link>https://idevz.github.io/tags/rpm-%E5%8C%85/</link>
+    <link>https://idevz.org/tags/rpm-%E5%8C%85/</link>
     <description>Recent content in RPM 包 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Thu, 27 Jul 2017 19:55:52 +0800</lastBuildDate>
     
-	<atom:link href="https://idevz.github.io/tags/rpm-%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.org/tags/rpm-%E5%8C%85/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>CentOS 如何打 RPM 包</title>
-      <link>https://idevz.github.io/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</link>
+      <link>https://idevz.org/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</link>
       <pubDate>Thu, 27 Jul 2017 19:55:52 +0800</pubDate>
       
-      <guid>https://idevz.github.io/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</guid>
+      <guid>https://idevz.org/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/</guid>
       <description>打包前的准备 安装相关打包工具  sudo yum install rpmdevtools rpmlint rpmbuild --version
 ❯ rpmbuild --version z@z RPM 版本 4.11.3  新建用户 RPM 在打包的过程中会将文件临时安装到系统中，为了保证构建程序不破坏系统环境，要使用普通用户打包：
 sudo useradd rpmuser sudo passwd rpmuser su - rpmuser 初始化打包环境 rpmdev-setuptree是rpmdevtools中带的初始化环境脚本，执行后会在用户主目录下创建rpmbuild目录和.rpmmacros文件，同时生成所需的子目录和默认的控制参数，执行：

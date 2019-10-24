@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>微服务 on 做一个善于思考的学习者</title>
-    <link>https://idevz.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+    <link>https://idevz.org/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
     <description>Recent content in 微服务 on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
     <lastBuildDate>Tue, 18 Sep 2018 22:11:56 +0800</lastBuildDate>
     
-	<atom:link href="https://idevz.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://idevz.org/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>微服务架构的 What，Why，和 How</title>
-      <link>https://idevz.github.io/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</link>
+      <link>https://idevz.org/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</link>
       <pubDate>Tue, 18 Sep 2018 22:11:56 +0800</pubDate>
       
-      <guid>https://idevz.github.io/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</guid>
+      <guid>https://idevz.org/2018/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E7%9A%84-whatwhy%E5%92%8C-how/</guid>
       <description>原著信息： The What, Why, and How of a Microservices Architecture
 by:Jetinder Singh
 For many years now we have been building systems and getting better at it. Several technologies, architectural patterns, and best practices have emerged over those years. Microservices is one of those architectural patterns which has emerged from the world of domain-driven design, continuous delivery, platform and infrastructure automation, scalable systems, polyglot programming and persistence.
@@ -27,10 +27,10 @@ What is a Microservices Architecture in a Nutshell?</description>
     
     <item>
       <title>微服务的服务网格</title>
-      <link>https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</link>
+      <link>https://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</link>
       <pubDate>Mon, 18 Sep 2017 22:11:56 +0800</pubDate>
       
-      <guid>https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</guid>
+      <guid>https://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/</guid>
       <description>原著信息： Service Mesh for Microservices
 by:Kasun Indrasiri
 Microservices architecture has been evolving a lot during the last couple of years and there are quite a few new concepts and patterns are emerging. ‘Service Mesh’ concept is getting quite popular. In this post, I’m planning to cover the key concepts related to Service Mesh and how it is used in real-world microservices implementations.
@@ -40,10 +40,10 @@ Why ‘Service Mesh’?</description>
     
     <item>
       <title>微服务分层架构</title>
-      <link>https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</link>
+      <link>https://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</link>
       <pubDate>Sat, 16 Sep 2017 22:11:56 +0800</pubDate>
       
-      <guid>https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</guid>
+      <guid>https://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/</guid>
       <description>原著信息： Microservices Layered Architecture
 by:Kasun Indrasiri
 With Microservices architecture, a single software application/functionality is implemented as a combination of multiple microservices and their interactions. Hence the communications between services and their coordination are vital for a successful realization of microservices architecture.
