@@ -105,7 +105,7 @@ if (!doNotTrack) {
   <polyline points="12 6 12 12 15 15"/>
   
 </svg>
-3 mins read
+4 mins read
 </span>
 
 
@@ -117,6 +117,31 @@ if (!doNotTrack) {
 
   
   
+<details class='container entry-toc'>
+  <summary class='title'>
+    <span>Table of Contents</span>
+  </summary>
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#打包前的准备">打包前的准备</a>
+<ul>
+<li><a href="#安装相关打包工具">安装相关打包工具</a></li>
+<li><a href="#新建用户">新建用户</a></li>
+<li><a href="#初始化打包环境">初始化打包环境</a></li>
+<li><a href="#安装编译软件">安装编译软件</a></li>
+</ul></li>
+<li><a href="#开始打包">开始打包</a>
+<ul>
+<li><a href="#准备源码">准备源码</a></li>
+<li><a href="#编写-spec-文件">编写 SPEC 文件</a></li>
+<li><a href="#开始打-rpm-包">开始打 RPM 包</a></li>
+</ul></li>
+<li><a href="#打包遇到的问题">打包遇到的问题</a></li>
+<li><a href="#参考资料">参考资料：</a></li>
+</ul>
+</nav>
+</details>
+
 
   <div class='container entry-content'>
   
@@ -318,13 +343,151 @@ rpmbuild -ba motan-go.spec</code></pre></div>
 <p>解法：
 在 SPEC 文件中添加一行</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-spec" data-lang="spec">%define __debug_install_post %{_rpmconfigdir}/find-debuginfo.sh %{?_find_debuginfo_opts} &#34;%{_builddir}/%{?buildsubdir}&#34; %{nil}</code></pre></div>
+<p>rpm 执行安装包</p>
+
+<p>二进制包（Binary）以及源代码包（Source）两种。二进制包可以直接安装在计算机中，而源代码包将会由 RPM自动编译、安装。源代码包经常以src.rpm作为后缀名。</p>
+
+<p>常用命令组合：</p>
+
+<p>－ivh：安装显示安装进度&ndash;install&ndash;verbose&ndash;hash</p>
+
+<p>－Uvh：升级软件包&ndash;Update；</p>
+
+<p>－qpl： 列出RPM软件包内的文件信息[Query Package list]；</p>
+
+<p>－qpi：列出RPM软件包的描述信息[Query Package install package(s)]；</p>
+
+<p>－qf：查找指定文件属于哪个RPM软件包[Query File]；</p>
+
+<p>－Va：校验所有的 RPM软件包，查找丢失的文件[View Lost]；</p>
+
+<p>－e：删除包</p>
+
+<p>rpm -q samba //查询程序是否安装</p>
+
+<p>rpm -ivh /media/cdrom/RedHat/RPMS/samba-3.0.10-1.4E.i386.rpm //按路径安装并显示进度</p>
+
+<p>rpm -ivh &ndash;relocate /=/opt/gaim gaim-1.3.0-1.fc4.i386.rpm    //指定安装目录</p>
+
+<p>rpm -ivh &ndash;test gaim-1.3.0-1.fc4.i386.rpm　　　 //用来检查依赖关系；并不是真正的安装；</p>
+
+<p>rpm -Uvh &ndash;oldpackage gaim-1.3.0-1.fc4.i386.rpm //新版本降级为旧版本</p>
+
+<p>rpm -qa | grep httpd　　　　　 ＃[搜索指定rpm包是否安装]&ndash;all搜索<em>httpd</em></p>
+
+<p>rpm -ql httpd　　　　　　　　　＃[搜索rpm包]&ndash;list所有文件安装目录</p>
+
+<p>rpm -qpi Linux-1.4-6.i368.rpm　＃[查看rpm包]&ndash;query&ndash;package&ndash;install package信息</p>
+
+<p>rpm -qpf Linux-1.4-6.i368.rpm　＃[查看rpm包]&ndash;file</p>
+
+<p>rpm -qpR file.rpm　　　　　　　＃[查看包]依赖关系</p>
+
+<p>rpm2cpio file.rpm |cpio -div    ＃[抽出文件]</p>
+
+<p>rpm -ivh file.rpm 　＃[安装新的rpm]&ndash;install&ndash;verbose&ndash;hash</p>
+
+<p>rpm -ivhhttp://mirrors.kernel.org/fedora/core/4/i386/os/Fedora/RPMS/gaim-1.3.0-1.fc4.i386.rpm</p>
+
+<p>rpm -Uvh file.rpm    ＃[升级一个rpm]&ndash;upgrade</p>
+
+<p>rpm -e file.rpm      ＃[删除一个rpm包]&ndash;erase</p>
+
+<p>常用参数：</p>
+
+<p>Install/Upgrade/Erase options:</p>
+
+<p>-i, &ndash;install                     install package(s)</p>
+
+<p>-v, &ndash;verbose                     provide more detailed output</p>
+
+<p>-h, &ndash;hash                        print hash marks as package installs (good with -v)</p>
+
+<p>-e, &ndash;erase                       erase (uninstall) package</p>
+
+<p>-U, &ndash;upgrade=+      upgrade package(s)</p>
+
+<p>－-replacepkge                    无论软件包是否已被安装，都强行安装软件包</p>
+
+<p>&ndash;test                            安装测试，并不实际安装</p>
+
+<p>&ndash;nodeps                          忽略软件包的依赖关系强行安装</p>
+
+<p>&ndash;force                           忽略软件包及文件的冲突</p>
+
+<p>Query options (with -q or &ndash;query):</p>
+
+<p>-a, &ndash;all                         query/verify all packages</p>
+
+<p>-p, &ndash;package                     query/verify a package file</p>
+
+<p>-l, &ndash;list                        list files in package</p>
+
+<p>-d, &ndash;docfiles                    list all documentation files</p>
+
+<p>-f, &ndash;file                        query/verify package(s) owning file</p>
+
+<p>RPM源代码包装安装</p>
+
+<p>.src.rpm结尾的文件，这些文件是由软件的源代码包装而成的，用户要安装这类RPM软件包，必须使用命令：</p>
+
+<p>rpm　&ndash;recompile　vim-4.6-4.src.rpm   ＃这个命令会把源代码解包并编译、安装它，如果用户使用命令：</p>
+
+<p>rpm　&ndash;rebuild　vim-4.6-4.src.rpm　　＃在安装完成后，还会把编译生成的可执行文件重新包装成i386.rpm 的RPM软件包。</p>
+
+<p>[root@localhost src]# rpm -ivh awstats-6.8-1.noarch.rpm</p>
+
+<p>error: Failed dependencies:</p>
+
+<p>perl(LWP::UserAgent) is needed by awstats-6.8-1.noarch</p>
+
+<p>[root@localhost src]#</p>
+
+<p>使用rpm 属性相依套件的档案</p>
+
+<p>[root@localhost src]# rpm -qpR awstats-6.8-1.noarch.rpm</p>
+
+<p>/bin/sh</p>
+
+<p>/usr/bin/perl</p>
+
+<p>config(awstats) = 6.8-1</p>
+
+<p>perl &gt;= 0:5.005</p>
+
+<p>perl(LWP::UserAgent)</p>
+
+<p>perl(POSIX)</p>
+
+<p>perl(Socket)</p>
+
+<p>perl(Time::Local)</p>
+
+<p>perl(strict)</p>
+
+<p>perl(vars)</p>
+
+<p>rpmlib(CompressedFileNames) &lt;= 3.0.4-1</p>
+
+<p>rpmlib(PayloadFilesHavePrefix) &lt;= 4.0-1</p>
+
 <h1 id="参考资料">参考资料：</h1>
 
 <p><a href="https://www.52os.net/articles/howto-create-and-sign-rpm-package.html">centos下制作RPM包并签名</a>
 <a href="http://www.dahouduan.com/2015/06/15/Linux-centos-make-rpm/">Centos 6 制作 rpm 包</a></p>
 
 </div>
-
+<div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <figcaption class='container'>
+      <center> <img src='https://tva1.sinaimg.cn/large/006y8mN6ly1g88b56alx4j30by0byglv.jpg' height="200" width="200"
+          alt='' /></center>
+      <span>
+        微信公众号 / Vanilla-OpenResty
+      </span>
+    </figcaption>
+  </figure>
+</div>
   
 <footer class='entry-footer'>
   <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
@@ -349,7 +512,7 @@ rpmbuild -ba motan-go.spec</code></pre></div>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='https://idevz.github.io/2017/07/golang-%E5%8C%85%E7%AE%A1%E7%90%86/'>
+      <a href='https://idevz.github.io/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -357,10 +520,10 @@ rpmbuild -ba motan-go.spec</code></pre></div>
   
 </svg>
  Previous</span>
-        <span class='screen-reader-text'>Previous post: </span>Golang 包管理</a>
+        <span class='screen-reader-text'>Previous post: </span>Service mesh — 一种新的模式而不是新技术</a>
     </div><div class='next-entry sep-before'>
-      <a href='https://idevz.github.io/2017/07/%E4%BD%BF%E7%94%A8-gdb-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
-        <span class='screen-reader-text'>Next post: </span>使用 GDB 调试 Golang 程序<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+      <a href='https://idevz.github.io/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/'>
+        <span class='screen-reader-text'>Next post: </span>微服务分层架构<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="4" y1="12" x2="20" y2="12"/>
   <polyline points="14 6 20 12 14 18"/>
@@ -377,7 +540,35 @@ rpmbuild -ba motan-go.spec</code></pre></div>
       </main>
 
       <footer id='footer' class='footer'>
-        <div class='container sep-before'><div class='copyright'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:zhoujing_k49@163.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
   <p>© 2020 idevz.org</p>
 </div>
 
