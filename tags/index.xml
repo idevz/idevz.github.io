@@ -7,10 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
-    <lastBuildDate>Sat, 19 Oct 2019 11:03:16 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 15:34:57 +0800</lastBuildDate>
     
 	<atom:link href="https://idevz.org/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>bash</title>
+      <link>https://idevz.org/tags/bash/</link>
+      <pubDate>Fri, 25 Oct 2019 15:34:57 +0800</pubDate>
+      
+      <guid>https://idevz.org/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://idevz.org/tags/linux/</link>
+      <pubDate>Fri, 25 Oct 2019 15:34:57 +0800</pubDate>
+      
+      <guid>https://idevz.org/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shell</title>
+      <link>https://idevz.org/tags/shell/</link>
+      <pubDate>Fri, 25 Oct 2019 15:34:57 +0800</pubDate>
+      
+      <guid>https://idevz.org/tags/shell/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CentOS-8</title>
@@ -22,7 +49,7 @@
     </item>
     
     <item>
-      <title>ServiceMesh</title>
+      <title>servicemesh</title>
       <link>https://idevz.org/tags/servicemesh/</link>
       <pubDate>Tue, 13 Nov 2018 22:11:56 +0800</pubDate>
       

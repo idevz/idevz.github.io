@@ -62,16 +62,5 @@ With Microservices architecture, a single software application/functionality is 
 It is important to understand that, the tasks that an ESB does in an ESB based SOA implementation, don’t simply disappear when you switch to Microservices Architecture.</description>
     </item>
     
-    <item>
-      <title>Service mesh — 一种新的模式而不是新技术</title>
-      <link>https://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Wed, 13 Nov 2013 22:11:56 +0800</pubDate>
-      
-      <guid>https://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
-      <description>原著信息： How to Make Your Open Source Project Really Awesome
-by:Clojure Werkz
-https://www.iteye.com/news/27656</description>
-    </item>
-    
   </channel>
 </rss>

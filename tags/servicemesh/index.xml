@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ServiceMesh on 做一个善于思考的学习者</title>
+    <title>servicemesh on 做一个善于思考的学习者</title>
     <link>https://idevz.org/tags/servicemesh/</link>
-    <description>Recent content in ServiceMesh on 做一个善于思考的学习者</description>
+    <description>Recent content in servicemesh on 做一个善于思考的学习者</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
@@ -34,17 +34,6 @@ by:Kasun Indrasiri
 Microservices architecture has been evolving a lot during the last couple of years and there are quite a few new concepts and patterns are emerging. ‘Service Mesh’ concept is getting quite popular. In this post, I’m planning to cover the key concepts related to Service Mesh and how it is used in real-world microservices implementations.
 微服务架构在过去几年中发展很多，出现了相当多的新的概念和模式。“Service Mesh” 的概念越来越受欢迎。本文，我计划涵盖 Service Mesh 的关键概念以及如何在实际的微服务实现中使用。
 Why ‘Service Mesh’?</description>
-    </item>
-    
-    <item>
-      <title>Service mesh — 一种新的模式而不是新技术</title>
-      <link>https://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Wed, 13 Nov 2013 22:11:56 +0800</pubDate>
-      
-      <guid>https://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
-      <description>原著信息： How to Make Your Open Source Project Really Awesome
-by:Clojure Werkz
-https://www.iteye.com/news/27656</description>
     </item>
     
   </channel>

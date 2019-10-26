@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>© 2020 idevz.org</copyright>
-    <lastBuildDate>Sat, 19 Oct 2019 11:03:16 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 25 Oct 2019 15:34:57 +0800</lastBuildDate>
     
 	<atom:link href="https://idevz.org/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>linux</title>
+      <link>https://idevz.org/categories/linux/</link>
+      <pubDate>Fri, 25 Oct 2019 15:34:57 +0800</pubDate>
+      
+      <guid>https://idevz.org/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>技术</title>
+      <link>https://idevz.org/categories/%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Fri, 25 Oct 2019 15:34:57 +0800</pubDate>
+      
+      <guid>https://idevz.org/categories/%E6%8A%80%E6%9C%AF/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>CentOS-8</title>
@@ -18,15 +36,6 @@
       <pubDate>Sat, 19 Oct 2019 11:03:16 +0800</pubDate>
       
       <guid>https://idevz.org/categories/centos-8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>技术</title>
-      <link>https://idevz.org/categories/%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Sat, 19 Oct 2019 11:03:16 +0800</pubDate>
-      
-      <guid>https://idevz.org/categories/%E6%8A%80%E6%9C%AF/</guid>
       <description></description>
     </item>
     

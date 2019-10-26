@@ -19,7 +19,7 @@ rpmdev-setuptree 生成的目录结构:
 %_topdir %(echo $HOME)/rpmbuild %_smp_mflags %( \  [ -z &#34;$RPM_BUILD_NCPUS&#34; ] \\\  &amp;&amp; RPM_BUILD_NCPUS=&#34;`/usr/bin/nproc 2&gt;/dev/null || \\\ /usr/bin/getconf _NPROCESSORS_ONLN`&#34;; \\\  if [ &#34;$RPM_BUILD_NCPUS&#34; -gt 16 ]; then \\\  echo &#34;-j16&#34;; \\\  elif [ &#34;$RPM_BUILD_NCPUS&#34; -gt 3 ]; then \\\  echo &#34;-j$RPM_BUILD_NCPUS&#34;; \\\  else \\\  echo &#34;-j3&#34;; \\\  fi ) %__arch_install_post \  [ &#34;%{buildarch}&#34; = &#34;noarch&#34; ] || QA_CHECK_RPATHS=1 ; \  case &#34;${QA_CHECK_RPATHS:-}&#34; in [1yY]*) /usr/lib/rpm/check-rpaths ;; esac \  /usr/lib/rpm/check-buildroot 安装编译软件 制作rpm包要先编译在打二进制包，所以要装 gcc、make 等工具，如果是给 Golang 的项目打 RPM 包，还需要有 go 环境'>
 <meta property='og:url' content='https://idevz.org/2017/07/centos-%E5%A6%82%E4%BD%95%E6%89%93-rpm-%E5%8C%85/'>
 <meta property='og:site_name' content='做一个善于思考的学习者'>
-<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='RPM 包'><meta property='article:published_time' content='2017-07-27T19:55:52&#43;08:00'/><meta property='article:modified_time' content='2017-10-23T14:54:43&#43;08:00'/><meta name='twitter:card' content='summary'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='RPM 包'><meta property='article:published_time' content='2017-07-27T19:55:52&#43;08:00'/><meta property='article:modified_time' content='2019-10-24T11:25:11&#43;08:00'/><meta name='twitter:card' content='summary'>
 
 <meta name="generator" content="Hugo 0.60.0-DEV" />
 
@@ -512,7 +512,7 @@ rpmbuild -ba motan-go.spec</code></pre></div>
 
 <nav class='entry-nav'>
   <div class='container'><div class='prev-entry sep-before'>
-      <a href='https://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/'>
+      <a href='https://idevz.org/1/01/'>
         <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
   
   <line x1="20" y1="12" x2="4" y2="12"/>
@@ -520,7 +520,7 @@ rpmbuild -ba motan-go.spec</code></pre></div>
   
 </svg>
  Previous</span>
-        <span class='screen-reader-text'>Previous post: </span>Service mesh — 一种新的模式而不是新技术</a>
+        <span class='screen-reader-text'>Previous post: </span></a>
     </div><div class='next-entry sep-before'>
       <a href='https://idevz.org/2017/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84/'>
         <span class='screen-reader-text'>Next post: </span>微服务分层架构<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>

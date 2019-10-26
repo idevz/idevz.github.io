@@ -23,6 +23,19 @@ Weibo</description>
     </item>
     
     <item>
+      <title>Shell&#39;s Set X and Function Return</title>
+      <link>https://idevz.org/2019/10/shells-set-x-and-function-return/</link>
+      <pubDate>Fri, 25 Oct 2019 15:34:57 +0800</pubDate>
+      
+      <guid>https://idevz.org/2019/10/shells-set-x-and-function-return/</guid>
+      <description>日常难免会有些 shell 脚本编写的事情，众所周知这事儿门槛很低，再不济把要执行的命令挨排垒进去也可以作为 一个自动化脚本，但有些复杂的功能或者考虑到代码的复用就需要分些模块、封装些函数了。如何更优雅的 处理函数的返回值便成为一个比较有意思的问题。
+shell 脚本没什么特别的技法可言，更多的只能是靠逐步积累。这次在编写 [Lego][lego] 项目命令检查函数时， 需要获取一个返回值，我期待这个返回值不仅仅表达成功与否这个 2 元的结果。但我自己又习惯 在每个脚本前面都加上 set -e 选项，它的意义在于：如果命令失败（即返回一个非零的退出状态），那么脚本将退出。
+避免非零值的返回导致整个程序退出的唯一方法就是将其与 &amp;amp;&amp;amp; 或 || 命令放到一起。下面给出一个示例：
+call_some_function &amp;#34;${args}&amp;#34; || ret=$? if [ &amp;#34;${ret}&amp;#34; = &amp;#39;false&amp;#39; ]; then echo &amp;#34;vvvvvxxx&amp;#34; fi 这里对 Linux 或者 Unix 系统标准的错误码（返回码）做一个简单的梳理：
+   Exit Code Number Meaning Example Comments     0 命令成功完成 exit 0 当命令正确完成、返回或者退出的时候，返回码为 0   1 通常的未知错误 / Catchall for general errors let &amp;ldquo;var1 = 1&amp;frasl;0&amp;rdquo; Miscellaneous errors, such as &amp;ldquo;divide by zero&amp;rdquo; and other impermissible operations   2 误用shell命令 / Misuse of shell builtins (according to Bash documentation) empty_function() {} Missing keyword or command, or permission problem (and diff return code on a failed   126 命令无法执行 / Command invoked cannot execute /dev/null Permission problem or command is not an executable   127 没有找到命令 / &amp;ldquo;command not found&amp;rdquo; illegal_command Possible problem with $PATH or a typo   128 无效的退出参数 / Invalid argument to exit exit 3.</description>
+    </item>
+    
+    <item>
       <title>基于 Parallels 尝鲜 CentOS-8</title>
       <link>https://idevz.org/2019/10/%E5%9F%BA%E4%BA%8E-parallels-%E5%B0%9D%E9%B2%9C-centos-8/</link>
       <pubDate>Sat, 19 Oct 2019 11:03:16 +0800</pubDate>
@@ -135,17 +148,6 @@ sudo useradd rpmuser sudo passwd rpmuser su - rpmuser 初始化打包环境 rpmd
 rpmdev-setuptree 生成的目录结构:
 `-- rpmbuild |-- BUILD |-- RPMS |-- SOURCES |-- SPECS `-- SRPMS 默认的全局控制宏文件.rpmmacros内容：
 %_topdir %(echo $HOME)/rpmbuild %_smp_mflags %( \  [ -z &amp;#34;$RPM_BUILD_NCPUS&amp;#34; ] \\\  &amp;amp;&amp;amp; RPM_BUILD_NCPUS=&amp;#34;`/usr/bin/nproc 2&amp;gt;/dev/null || \\\ /usr/bin/getconf _NPROCESSORS_ONLN`&amp;#34;; \\\  if [ &amp;#34;$RPM_BUILD_NCPUS&amp;#34; -gt 16 ]; then \\\  echo &amp;#34;-j16&amp;#34;; \\\  elif [ &amp;#34;$RPM_BUILD_NCPUS&amp;#34; -gt 3 ]; then \\\  echo &amp;#34;-j$RPM_BUILD_NCPUS&amp;#34;; \\\  else \\\  echo &amp;#34;-j3&amp;#34;; \\\  fi ) %__arch_install_post \  [ &amp;#34;%{buildarch}&amp;#34; = &amp;#34;noarch&amp;#34; ] || QA_CHECK_RPATHS=1 ; \  case &amp;#34;${QA_CHECK_RPATHS:-}&amp;#34; in [1yY]*) /usr/lib/rpm/check-rpaths ;; esac \  /usr/lib/rpm/check-buildroot 安装编译软件 制作rpm包要先编译在打二进制包，所以要装 gcc、make 等工具，如果是给 Golang 的项目打 RPM 包，还需要有 go 环境</description>
-    </item>
-    
-    <item>
-      <title>Service mesh — 一种新的模式而不是新技术</title>
-      <link>https://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</link>
-      <pubDate>Wed, 13 Nov 2013 22:11:56 +0800</pubDate>
-      
-      <guid>https://idevz.org/2013/11/service-mesh-%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E6%A8%A1%E5%BC%8F%E8%80%8C%E4%B8%8D%E6%98%AF%E6%96%B0%E6%8A%80%E6%9C%AF/</guid>
-      <description>原著信息： How to Make Your Open Source Project Really Awesome
-by:Clojure Werkz
-https://www.iteye.com/news/27656</description>
     </item>
     
     <item>
