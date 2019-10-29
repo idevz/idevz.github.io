@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang='en'><head>
+  <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta name='description' content='这里记录下 Rust 开发环境的搭建过程，主要是 Rustup 和 Cargo 的安装。
+Rustup 是 Rust 安装器和版本管理工具，而 Cargo 是 Rust 的构建工具和包管理器。
+Rust 有各种平台支持，和快速版本迭代机制，因而不同时期存在大量不同的 Rust 构建版本。 Rustup 用于管理不同平台下的 Rust 构建版本并使其互相兼容， 支持安装由 Beta 和 Nightly 频道发布的版本， 并支持其他用于交叉编译的编译版本。
+curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh 这条命令将下载并安装 Rust 的官方编译器以及他的包管理工具 Cargo。 cargo、rustc、rustup 和其它命令将会被添加到 Cargo 位于 $HOME/.cargo/bin 的 bin 目录下。 这个路径可以通过 CARGO_HOME 环境变量来修改。
+Rustup 元数据和工具链将被安装到 Rustup 位于 $HOME/.rustup 的家目录下。该路径可以通过 RUNSTUP_HOME 环境变量来修改。
+可以通过运行 rustup update 来升级 Rust。也可以通过运行 rustup self uninstall 命令来卸载 Rust 及其各种组件、 工具链，之前所有的更改都将被恢复。以下是安装结果：'>
+<meta name='theme-color' content='#ffcd00'>
+
+<meta property='og:title' content='Rust 开发环境 • 做一个善于思考的学习者'>
+<meta property='og:description' content='这里记录下 Rust 开发环境的搭建过程，主要是 Rustup 和 Cargo 的安装。
+Rustup 是 Rust 安装器和版本管理工具，而 Cargo 是 Rust 的构建工具和包管理器。
+Rust 有各种平台支持，和快速版本迭代机制，因而不同时期存在大量不同的 Rust 构建版本。 Rustup 用于管理不同平台下的 Rust 构建版本并使其互相兼容， 支持安装由 Beta 和 Nightly 频道发布的版本， 并支持其他用于交叉编译的编译版本。
+curl --proto &#39;=https&#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh 这条命令将下载并安装 Rust 的官方编译器以及他的包管理工具 Cargo。 cargo、rustc、rustup 和其它命令将会被添加到 Cargo 位于 $HOME/.cargo/bin 的 bin 目录下。 这个路径可以通过 CARGO_HOME 环境变量来修改。
+Rustup 元数据和工具链将被安装到 Rustup 位于 $HOME/.rustup 的家目录下。该路径可以通过 RUNSTUP_HOME 环境变量来修改。
+可以通过运行 rustup update 来升级 Rust。也可以通过运行 rustup self uninstall 命令来卸载 Rust 及其各种组件、 工具链，之前所有的更改都将被恢复。以下是安装结果：'>
+<meta property='og:url' content='https://idevz.org/2017/12/rust-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/'>
+<meta property='og:site_name' content='做一个善于思考的学习者'>
+<meta property='og:type' content='article'><meta property='article:section' content='tech'><meta property='article:tag' content='xxxxx'><meta property='article:published_time' content='2017-12-11T11:33:38&#43;08:00'/><meta property='article:modified_time' content='2017-12-11T11:33:38&#43;08:00'/><meta name='twitter:card' content='summary'>
+
+<meta name="generator" content="Hugo 0.60.0-DEV" />
+
+  <title>Rust 开发环境 • 做一个善于思考的学习者</title>
+  <link rel='canonical' href='https://idevz.org/2017/12/rust-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/'>
+  
+  
+  <link rel='icon' href='https://idevz.org/favicon.ico'>
+<link rel='stylesheet' href='https://idevz.org/assets/css/main.6a060eb7.css'><style>
+:root{--color-accent:#ffcd00;}
+</style>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-71947507-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+
+</head><body class='page type-tech'>
+
+  <div class='site'><a class='screen-reader-text' href='#content'>Skip to Content</a><div class='main'><nav id='main-menu' class='menu main-menu' aria-label='Main Menu'>
+  <div class='container'>
+    
+    <ul><li class='item'>
+        <a href='https://idevz.org/'>idevz.org</a>
+      </li><li class='item'>
+        <a href='https://idevz.org/tech/'>技术</a>
+      </li><li class='item'>
+        <a href='https://idevz.org/tools/'>工具</a>
+      </li><li class='item'>
+        <a href='https://idevz.org/life/'>Life</a>
+      </li><li class='item'>
+        <a href='https://idevz.org/page/about/'>关于</a>
+      </li></ul>
+  </div>
+</nav><div class='header-widgets'>
+        <div class='container'></div>
+      </div>
+
+      <header id='header' class='header site-header'>
+        <div class='container sep-after'>
+          <div class='header-info'><p class='site-title title'>做一个善于思考的学习者</p><p class='desc site-desc'>Every Day Create Your History.</p>
+          </div>
+        </div>
+      </header>
+
+      <main id='content'>
+
+
+<article lang='en' class='entry'>
+  <header class='header entry-header'>
+  <div class='container sep-after'>
+    <div class='header-info'>
+      <h1 class='title'>Rust 开发环境</h1>
+      
+
+    </div>
+    <div class='entry-meta'>
+  <span class='posted-on'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+  <line x1="16" y1="2" x2="16" y2="6"/>
+  <line x1="8" y1="2" x2="8" y2="6"/>
+  <line x1="3" y1="10" x2="21" y2="10"/>
+  
+</svg>
+<span class='screen-reader-text'>Posted on </span>
+  <time class='entry-date' datetime='2017-12-11T11:33:38&#43;08:00'>2017, Dec 11</time>
+</span>
+
+  
+  
+<span class='reading-time'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 15 15"/>
+  
+</svg>
+2 mins read
+</span>
+
+
+</div>
+
+
+  </div>
+</header>
+
+  
+  
+<details class='container entry-toc'>
+  <summary class='title'>
+    <span>Table of Contents</span>
+  </summary>
+  
+</details>
+
+
+  <div class='container entry-content'>
+  <p>这里记录下 Rust 开发环境的搭建过程，主要是 Rustup 和 Cargo 的安装。</p>
+
+<p><strong>Rustup</strong> 是 Rust 安装器和版本管理工具，而
+<strong>Cargo</strong> 是 Rust 的构建工具和包管理器。</p>
+
+<p>Rust 有各种平台<a href="https://forge.rust-lang.org/release/platform-support.html">支持</a>，和快速版本迭代机制，因而不同时期存在大量不同的 Rust 构建版本。
+Rustup 用于管理不同平台下的 Rust 构建版本并使其互相兼容， 支持安装由 Beta 和 Nightly 频道发布的版本，
+并支持其他用于交叉编译的编译版本。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl --proto <span style="color:#e6db74">&#39;=https&#39;</span> --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></pre></div>
+<p>这条命令将下载并安装 Rust 的官方编译器以及他的包管理工具 Cargo。
+cargo、rustc、rustup 和其它命令将会被添加到 Cargo 位于 <code>$HOME/.cargo/bin</code> 的 bin 目录下。
+这个路径可以通过 CARGO_HOME 环境变量来修改。</p>
+
+<p>Rustup 元数据和工具链将被安装到 Rustup 位于 <code>$HOME/.rustup</code> 的家目录下。该路径可以通过 RUNSTUP_HOME 环境变量来修改。</p>
+
+<p>可以通过运行 <code>rustup update</code> 来升级 Rust。也可以通过运行 <code>rustup self uninstall</code> 命令来卸载 Rust 及其各种组件、
+工具链，之前所有的更改都将被恢复。以下是安装结果：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> ~/ ll $HOME/.cargo/bin
+total 90M
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 cargo
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 cargo-clippy
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 cargo-fmt
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 cargo-miri
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 clippy-driver
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 rls
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 rust-gdb
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 rust-lldb
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 rustc
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 rustdoc
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 rustfmt
+-rwxr-xr-x <span style="color:#ae81ff">12</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.9M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:23 rustup
+ ~/ ll $HOME/.rustup
+total <span style="color:#ae81ff">4</span>.0K
+drwxr-xr-x <span style="color:#ae81ff">2</span> zhoujing2 staff  <span style="color:#ae81ff">64</span> Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 downloads
+-rw-r--r-- <span style="color:#ae81ff">1</span> zhoujing2 staff <span style="color:#ae81ff">121</span> Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 settings.toml
+drwxr-xr-x <span style="color:#ae81ff">2</span> zhoujing2 staff  <span style="color:#ae81ff">64</span> Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 tmp
+drwxr-xr-x <span style="color:#ae81ff">3</span> zhoujing2 staff  <span style="color:#ae81ff">96</span> Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 toolchains
+drwxr-xr-x <span style="color:#ae81ff">3</span> zhoujing2 staff  <span style="color:#ae81ff">96</span> Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 update-hashes
+ ~/ ll $HOME/.rustup/toolchains/stable-x86_64-apple-darwin/bin
+total 33M
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff  14M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 cargo
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff 396K Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 cargo-clippy
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff <span style="color:#ae81ff">1</span>.5M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 cargo-fmt
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff <span style="color:#ae81ff">5</span>.6M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 clippy-driver
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff  <span style="color:#ae81ff">604</span> Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 rust-gdb
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff <span style="color:#ae81ff">1</span>.8K Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 rust-gdbgui
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff <span style="color:#ae81ff">1</span>.4K Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 rust-lldb
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff 364K Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 rustc
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff <span style="color:#ae81ff">5</span>.2M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 rustdoc
+-rwxr-xr-x <span style="color:#ae81ff">1</span> zhoujing2 staff <span style="color:#ae81ff">6</span>.5M Oct <span style="color:#ae81ff">28</span> <span style="color:#ae81ff">22</span>:45 rustfmt</code></pre></div>
+</div>
+<div class='entry-cover'>
+  <figure class='container cover-normal'>
+    <figcaption class='container'>
+      <center> <img src='https://tva1.sinaimg.cn/large/006y8mN6ly1g88b56alx4j30by0byglv.jpg' height="200" width="200"
+          alt='' /></center>
+      <span>
+        微信公众号 / Vanilla-OpenResty
+      </span>
+    </figcaption>
+  </figure>
+</div>
+  
+<footer class='entry-footer'>
+  <div class='container sep-before'><div class='categories'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M22,19a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V5A2,2,0,0,1,4,3H9l2,3h9a2,2,0,0,1,2,2Z"/>
+  
+</svg>
+<span class='screen-reader-text'>Categories: </span><a class='category' href='https://idevz.org/categories/%E6%8A%80%E6%9C%AF/'>技术</a>, <a class='category' href='https://idevz.org/categories/xxxx/'>xxxx</a></div>
+<div class='tags'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M20.59,13.41l-7.17,7.17a2,2,0,0,1-2.83,0L2,12V2H12l8.59,8.59A2,2,0,0,1,20.59,13.41Z"/>
+  <line x1="7" y1="7" x2="7" y2="7"/>
+  
+</svg>
+<span class='screen-reader-text'>Tags: </span><a class='tag' href='https://idevz.org/tags/xxxxx/'>xxxxx</a></div>
+
+  </div>
+</footer>
+
+
+</article>
+
+<nav class='entry-nav'>
+  <div class='container'><div class='prev-entry sep-before'>
+      <a href='https://idevz.org/2017/12/%E8%B7%9F%E8%B8%AA%E5%8F%8A%E6%97%B6%E7%BC%96%E8%AF%91-/-tracing-jit/'>
+        <span aria-hidden='true'><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="20" y1="12" x2="4" y2="12"/>
+  <polyline points="10 18 4 12 10 6"/>
+  
+</svg>
+ Previous</span>
+        <span class='screen-reader-text'>Previous post: </span>跟踪及时编译 / Tracing JIT</a>
+    </div><div class='next-entry sep-before'>
+      <a href='https://idevz.org/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/'>
+        <span class='screen-reader-text'>Next post: </span>使用Vs Code 调试 Golang 程序<span aria-hidden='true'>Next <svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <line x1="4" y1="12" x2="20" y2="12"/>
+  <polyline points="14 6 20 12 14 18"/>
+  
+</svg>
+</span>
+      </a>
+    </div></div>
+</nav>
+
+
+
+
+      </main>
+
+      <footer id='footer' class='footer'>
+        <div class='container sep-before'><section class='widget widget-social_menu sep-after'><nav aria-label='Social Menu'>
+    <ul><li>
+        <a href='https://github.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Github account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='https://twitter.com/idevz' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Open Twitter account in new tab</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+  
+</svg>
+</a>
+      </li><li>
+        <a href='mailto:zhoujing_k49@163.com' target='_blank' rel='noopener'>
+          <span class='screen-reader-text'>Contact via Email</span><svg class='icon' viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+  
+  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+  <polyline points="22,6 12,13 2,6"/>
+  
+</svg>
+</a>
+      </li></ul>
+  </nav>
+</section><div class='copyright'>
+  <p>© 2020 idevz.org</p>
+</div>
+
+        </div>
+      </footer>
+
+    </div>
+  </div><script>window.__assets_js_src="https://idevz.org/assets/js/"</script>
+
+<script src='https://idevz.org/assets/js/main.67d669ac.js'></script>
+
+</body>
+
+</html>
+

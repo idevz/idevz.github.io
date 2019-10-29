@@ -28,12 +28,22 @@
   </url>
   
   <url>
+    <loc>https://idevz.org/authors/</loc>
+    <lastmod>2019-10-25T15:34:57+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://idevz.org/tags/bash/</loc>
     <lastmod>2019-10-25T15:34:57+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://idevz.org/categories/</loc>
+    <lastmod>2019-10-25T15:34:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://idevz.org/authors/idevz/</loc>
     <lastmod>2019-10-25T15:34:57+08:00</lastmod>
   </url>
   
@@ -53,7 +63,7 @@
   </url>
   
   <url>
-    <loc>https://idevz.org/2019/10/shells-set-x-and-function-return/</loc>
+    <loc>https://idevz.org/2019/10/shell-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B0%8F%E8%AE%B0/</loc>
     <lastmod>2019-10-25T15:34:57+08:00</lastmod>
   </url>
   
@@ -68,22 +78,12 @@
   </url>
   
   <url>
-    <loc>https://idevz.org/authors/</loc>
-    <lastmod>2019-10-24T11:25:11+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://idevz.org/tags/centos-8/</loc>
-    <lastmod>2019-10-24T11:25:11+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://idevz.org/categories/centos-8/</loc>
     <lastmod>2019-10-24T11:25:11+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://idevz.org/authors/idevz/</loc>
+    <loc>https://idevz.org/tags/centos-8/</loc>
     <lastmod>2019-10-24T11:25:11+08:00</lastmod>
   </url>
   
@@ -150,6 +150,21 @@
   <url>
     <loc>https://idevz.org/2017/12/%E4%BD%BF%E7%94%A8vs-code-%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/</loc>
     <lastmod>2017-12-12T08:01:04+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://idevz.org/2017/12/rust-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
+    <lastmod>2017-12-11T11:33:38+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://idevz.org/categories/xxxx/</loc>
+    <lastmod>2017-12-11T11:33:38+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://idevz.org/tags/xxxxx/</loc>
+    <lastmod>2017-12-11T11:33:38+08:00</lastmod>
   </url>
   
   <url>

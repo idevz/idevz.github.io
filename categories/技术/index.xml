@@ -13,15 +13,15 @@
     
     
     <item>
-      <title>Shell&#39;s Set X and Function Return</title>
-      <link>https://idevz.org/2019/10/shells-set-x-and-function-return/</link>
+      <title>Shell 函数返回值小记</title>
+      <link>https://idevz.org/2019/10/shell-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B0%8F%E8%AE%B0/</link>
       <pubDate>Fri, 25 Oct 2019 15:34:57 +0800</pubDate>
       
-      <guid>https://idevz.org/2019/10/shells-set-x-and-function-return/</guid>
+      <guid>https://idevz.org/2019/10/shell-%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC%E5%B0%8F%E8%AE%B0/</guid>
       <description>日常难免会有些 shell 脚本编写的事情，众所周知这事儿门槛很低，再不济把要执行的命令挨排垒进去也可以作为 一个自动化脚本，但有些复杂的功能或者考虑到代码的复用就需要分些模块、封装些函数了。如何更优雅的 处理函数的返回值便成为一个比较有意思的问题。
-shell 脚本没什么特别的技法可言，更多的只能是靠逐步积累。这次在编写 [Lego][lego] 项目命令检查函数时， 需要获取一个返回值，我期待这个返回值不仅仅表达成功与否这个 2 元的结果。但我自己又习惯 在每个脚本前面都加上 set -e 选项，它的意义在于：如果命令失败（即返回一个非零的退出状态），那么脚本将退出。
-避免非零值的返回导致整个程序退出的唯一方法就是将其与 &amp;amp;&amp;amp; 或 || 命令放到一起。下面给出一个示例：
-call_some_function &amp;#34;${args}&amp;#34; || ret=$? if [ &amp;#34;${ret}&amp;#34; = &amp;#39;false&amp;#39; ]; then echo &amp;#34;vvvvvxxx&amp;#34; fi 这里对 Linux 或者 Unix 系统标准的错误码（返回码）做一个简单的梳理：
+在 Shell 函数中优雅返回 shell 脚本没什么特别的技法可言，更多的只能是靠逐步积累。这次在编写 Lego 项目命令检查函数时， 需要获取一个返回值，我期待这个返回值不仅仅表达成功与否这个 2 元的结果。但我自己又习惯 在每个脚本前面都加上 set -e 选项，它的意义在于：如果命令失败（即返回一个非零的退出状态），那么脚本将退出。
+通常避免非零值的返回导致整个程序退出的方法要么把调用过程放到 $() 中，要么就是将其与 &amp;amp;&amp;amp; 或 || 命令放到一起，而在这后面获取函数调用的返回值，这样就保证及时返回值为非 0，程序还是能按条件往下执行。下面对后者给出一个示例：
+call_some_function &amp;#34;${args}&amp;#34; || ret=$? if [ &amp;#34;${ret}&amp;#34; = &amp;#39;false&amp;#39; ]; then echo &amp;#34;do something&amp;#34; fi 返回码小结 类 Unix 系统对返回码做了统一的规范，无论是 exit 还是 return 命令，都是统一的返回规则，这里对 这些标准的错误码（返回码）做一个简单的梳理，值得注意的是如果返回码超出规定的 0 ~ 255 这个范围，则会随机返回一个这期间的数字：
    Exit Code Number Meaning Example Comments     0 命令成功完成 exit 0 当命令正确完成、返回或者退出的时候，返回码为 0   1 通常的未知错误 / Catchall for general errors let &amp;ldquo;var1 = 1&amp;frasl;0&amp;rdquo; Miscellaneous errors, such as &amp;ldquo;divide by zero&amp;rdquo; and other impermissible operations   2 误用shell命令 / Misuse of shell builtins (according to Bash documentation) empty_function() {} Missing keyword or command, or permission problem (and diff return code on a failed   126 命令无法执行 / Command invoked cannot execute /dev/null Permission problem or command is not an executable   127 没有找到命令 / &amp;ldquo;command not found&amp;rdquo; illegal_command Possible problem with $PATH or a typo   128 无效的退出参数 / Invalid argument to exit exit 3.</description>
     </item>
     
@@ -84,6 +84,20 @@ kube-dashboard 服务导出 这里我使用 ingress（ 选用 Nginx-ingress-cont
       <description>安装 dlv 因为我使用虚拟机开发，Mac 宿主机与 CentOS 虚拟机的 GOPATH 都指向了同一个路径，所以我的 Golang bin 路径是重合的 所以我需要在两个机器上都有一份各自的 dlv，好在 Mac 有 brew，所以 Mac brew 安装的 dlv 就可以避免抢占 GOPATH 路径了。下面记录几个安装中的小问题。
 Mac 安装 dlv brew install 未必会好使，因为 brew 安装是非 root 安装，而 dlv 需要添加系统认证证书，可能会遇到如下安装不成功的报错。
 ==&amp;gt; Installing delve from go-delve/delve ==&amp;gt; Downloading https://github.com/derekparker/delve/archive/v1.0.0-rc.2.tar.gz Already downloaded: /Users/idevz/Library/Caches/Homebrew/delve-1.0.0-rc.2.tar.gz security: SecKeychainSearchCopyNext: The specified item could not be found in the keychain. ==&amp;gt; Generating dlv-cert ==&amp;gt; openssl req -new -newkey rsa:2048 -x509 -days 3650 -nodes -config dlv-cert.</description>
+    </item>
+    
+    <item>
+      <title>Rust 开发环境</title>
+      <link>https://idevz.org/2017/12/rust-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Mon, 11 Dec 2017 11:33:38 +0800</pubDate>
+      
+      <guid>https://idevz.org/2017/12/rust-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>这里记录下 Rust 开发环境的搭建过程，主要是 Rustup 和 Cargo 的安装。
+Rustup 是 Rust 安装器和版本管理工具，而 Cargo 是 Rust 的构建工具和包管理器。
+Rust 有各种平台支持，和快速版本迭代机制，因而不同时期存在大量不同的 Rust 构建版本。 Rustup 用于管理不同平台下的 Rust 构建版本并使其互相兼容， 支持安装由 Beta 和 Nightly 频道发布的版本， 并支持其他用于交叉编译的编译版本。
+curl --proto &amp;#39;=https&amp;#39; --tlsv1.2 -sSf https://sh.rustup.rs | sh 这条命令将下载并安装 Rust 的官方编译器以及他的包管理工具 Cargo。 cargo、rustc、rustup 和其它命令将会被添加到 Cargo 位于 $HOME/.cargo/bin 的 bin 目录下。 这个路径可以通过 CARGO_HOME 环境变量来修改。
+Rustup 元数据和工具链将被安装到 Rustup 位于 $HOME/.rustup 的家目录下。该路径可以通过 RUNSTUP_HOME 环境变量来修改。
+可以通过运行 rustup update 来升级 Rust。也可以通过运行 rustup self uninstall 命令来卸载 Rust 及其各种组件、 工具链，之前所有的更改都将被恢复。以下是安装结果：</description>
     </item>
     
     <item>
